@@ -58,7 +58,7 @@ Backend Setup
 [![lucidchart](https://img.shields.io/badge/lucidchart-0A66C2?style=for-the-badge&logo=lucid&logoColor=white)](https://lucid.app/lucidchart/d49af5da-dac0-415d-8025-a3d08d5acb68/edit?viewport_loc=-1716%2C-579%2C3452%2C1913%2C0_0&invitationId=inv_b38963b4-2026-4883-a2e4-4458ec54997f)
 
 - **class Diagram:**
-[![lucidchart](https://img.shields.io/badge/lucidchart-0A66C2?style=for-the-badge&logo=lucid&logoColor=white)](https://lucid.app/lucidchart/869674eb-1075-4559-aaf7-98026eb039cc/edit?viewport_loc=167%2C-213%2C2054%2C1138%2C0_0&invitationId=inv_3019bf93-31d9-4282-b0d2-b1e2961dfc73)
+[![lucidchart](https://img.shields.io/badge/lucidchart-0A66C2?style=for-the-badge&logo=lucid&logoColor=white)]([https://lucid.app/lucidchart/869674eb-1075-4559-aaf7-98026eb039cc/edit?viewport_loc=167%2C-213%2C2054%2C1138%2C0_0&invitationId=inv_3019bf93-31d9-4282-b0d2-b1e2961dfc73](https://lucid.app/lucidchart/3dab8682-f982-4179-9e8f-3b877cced677/edit?viewport_loc=-2323%2C-1356%2C4097%2C2270%2CHWEp-vi-RSFO&invitationId=inv_852cf927-3df2-4c9d-af83-c67a2a56163c))
 
 
 
