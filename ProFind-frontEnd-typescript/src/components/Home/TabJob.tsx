@@ -1,4 +1,7 @@
-const Tab = ({
+import { useEffect, useRef } from "react";
+import type { Position } from "../../models/model";
+
+const TabJob = ({
 	item,
 	setPosition,
 	selectedDomaine,
@@ -12,12 +15,13 @@ const Tab = ({
 	const ref = useRef<HTMLLIElement>(null);
 
 	useEffect(() => {
-		if (selectedDomaine == item) {
+		if (selectedDomaine == item && ref.current) {
+			const refeCurrent = ref.current.getBoundingClientRect();
 			setPosition({
-				width: ref.current.getBoundingClientRect().width,
+				width: refeCurrent.width,
 				left: ref.current.offsetLeft,
 				opacity: 1,
-				height: ref.current.getBoundingClientRect().height,
+				height: refeCurrent.height,
 			});
 		}
 	}, [selectedDomaine]);
@@ -31,9 +35,10 @@ const Tab = ({
 				setSelectedDomaine(item);
 			}}
 			ref={ref}
-			to={item.path}
 		>
 			{item}
 		</li>
 	);
 };
+
+export default TabJob;
