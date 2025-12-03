@@ -2,19 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\OfferCollection;
+use App\Http\Resources\OfferResource;
+use App\Jobs\testTask;
 use App\Models\Offer;
+use App\Traits\ApiResponse;
 use Exception;
 use Illuminate\Container\Attributes\Auth;
 use Illuminate\Http\Request;
 
 class OfferController extends Controller
 {
+    use ApiResponse;
 
     public function index()
     {
         try {
-            $offers = Offer::lazy();
-            return response()->json($offers, 200);
+            $offers = Offer::paginate(10);
+            return $this->successResponse(data: OfferCollection::make($offers));
         } catch (Exception $e) {
             return response()->json($e->getMessage());
         }

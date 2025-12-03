@@ -9,16 +9,19 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::controller(OfferController::class)->group(function () {
+Route::prefix('v1')->group(function () {
 
-    Route::post('/offers', 'store');
-    Route::get('/offers',  'index');
-    Route::get('/offers/{offerId}',  'show');
-    Route::get('/offers/{offerId}/apply',  'applyOffer');
-    Route::get('/offers/{offerId}/save',  'saveOffer');
-});
+    Route::controller(OfferController::class)->group(function () {
 
-Route::controller(CompanyController::class)->group(function () {
+        Route::post('/offers', 'store');
+        Route::get('/offers',  'index');
+        Route::get('/offers/{offerId}',  'show');
+        Route::get('/offers/{offerId}/apply',  'applyOffer');
+        Route::get('/offers/{offerId}/save',  'saveOffer');
+    });
 
-    Route::get('/companies',  'index');
+    Route::controller(CompanyController::class)->group(function () {
+
+        Route::get('/companies',  'index');
+    });
 });
