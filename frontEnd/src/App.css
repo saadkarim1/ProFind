@@ -57,6 +57,12 @@ body {
 	backdrop-filter: blur(80px);
 }
 
-/* img {
-	filter: grayscale(100%);
+/* .footer::before {
+	content: "Profind";
+	position: absolute;
+	color: #fff;
+	font-size: 300px;
+	font-weight: 500;
+	bottom: -180px;
+	letter-spacing: 10px;
 } */
