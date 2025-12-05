@@ -45,9 +45,9 @@ const JobCard = () => {
 								<svg
 									xmlns='http://www.w3.org/2000/svg'
 									viewBox='0 0 24 24'
-									stroke-width='2'
-									stroke-linecap='round'
-									stroke-linejoin='round'
+									strokeWidth='2'
+									strokeLinecap='round'
+									strokeLinejoin='round'
 									className={`lucide lucide-arrow-big-up-dash-icon lucide-arrow-big-up-dash w-6 h-6    ${
 										postInteractions.up
 											? "fill-[#0082FA] stroke-[#0082FA]"
@@ -71,9 +71,9 @@ const JobCard = () => {
 								<svg
 									xmlns='http://www.w3.org/2000/svg'
 									viewBox='0 0 24 24'
-									stroke-width='2'
-									stroke-linecap='round'
-									stroke-linejoin='round'
+									strokeWidth='2'
+									strokeLinecap='round'
+									strokeLinejoin='round'
 									className={`lucide lucide-bookmark-icon lucide-bookmark w-6 h-6 ${
 										postInteractions.save
 											? "fill-[#00ba7c] stroke-[#00ba7c]"
@@ -90,9 +90,9 @@ const JobCard = () => {
 								<svg
 									xmlns='http://www.w3.org/2000/svg'
 									viewBox='0 0 24 24'
-									stroke-width='2'
-									stroke-linecap='round'
-									stroke-linejoin='round'
+									strokeWidth='2'
+									strokeLinecap='round'
+									strokeLinejoin='round'
 									className={`lucide lucide-link-icon lucide-link fill-none w-6 h-6 ${
 										postInteractions.share
 											? "stroke-[#AC1DE4]"

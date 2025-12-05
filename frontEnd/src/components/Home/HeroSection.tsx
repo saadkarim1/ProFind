@@ -1,6 +1,9 @@
 import { IoMdArrowRoundForward } from "react-icons/io";
 
-const HeroSection = () => {
+type Props = {
+	scrollToFeaturedJobs: (e: React.MouseEvent<HTMLButtonElement>) => void;
+};
+const HeroSection: React.FC<Props> = ({ scrollToFeaturedJobs }) => {
 	return (
 		<section className='relative '>
 			<div className='secondaryContainer'>
@@ -31,10 +34,12 @@ const HeroSection = () => {
 				</div>
 
 				<button
-					// onClick={handleScroll}
-					className='group cursor-pointer font-normal text-lg flex items-center justify-center space-x-2 rounded-full bg-[#0082FA] text-white p-2'
+					onClick={(e) => scrollToFeaturedJobs(e)}
+					className='group cursor-pointer font-normal text-lg flex items-center justify-center space-x-2 rounded-full bg-[#0082FA] text-white p-1.5'
 				>
-					<span className='pl-1'>explore job offers</span>
+					<a href='#featured-jobs' className='pl-1'>
+						explore job offers
+					</a>
 					<span className='bg-white rounded-full flex items-center justify-center p-2 text-[26px] text-[#0082FA]'>
 						<IoMdArrowRoundForward className='group-hover:rotate-90 transition-transform duration-400 ease-in-out' />
 					</span>

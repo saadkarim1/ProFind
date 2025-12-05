@@ -1,4 +1,4 @@
-body {
+html {
 	background-color: #f5f5f5;
 }
 
@@ -57,12 +57,13 @@ body {
 	backdrop-filter: blur(80px);
 }
 
-/* .footer::before {
-	content: "Profind";
-	position: absolute;
-	color: #fff;
-	font-size: 300px;
-	font-weight: 500;
-	bottom: -180px;
-	letter-spacing: 10px;
-} */
+.no-arrow {
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	padding-right: 15px; /* Adjust as needed */
+}
+
+.no-arrow::-ms-expand {
+	display: none;
+}

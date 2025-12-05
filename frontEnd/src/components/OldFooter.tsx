@@ -2,10 +2,13 @@ import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { Link } from "react-router";
 
-const Footer = () => {
+const OldFooter = () => {
 	return (
-		<footer className='w-full rounded-3xl bg-white'>
-			<div className='w-[80%] mx-auto bg-[white] rounded-2xl  py-8'>
+		<footer className='footer relative w-[98%] mx-auto mb-4 rounded-3xl  overflow-hidden bg-[#0082fa] h-[60vh] pt-10 flex items-start justify-center'>
+			<span className='absolute -bottom-30 text-[240px] font-bold text-white tracking-widest'>
+				ProFind
+			</span>
+			<div className='w-[70%] mx-auto bg-white rounded-2xl  p-8'>
 				<div className='flex items-center justify-between'>
 					<div className='w-[50%] space-y-2'>
 						<Link to={"/"} className='flex items-center space-x-0.5'>
@@ -65,4 +68,4 @@ const Footer = () => {
 	);
 };
 
-export default Footer;
+export default OldFooter;
