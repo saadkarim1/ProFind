@@ -1,13 +1,12 @@
 import { useState } from "react";
-import { FaLock } from "react-icons/fa";
-import { IoLockClosed, IoLockOpen } from "react-icons/io5";
+import { FiLock, FiUnlock } from "react-icons/fi";
 import { LuMailOpen, LuUser } from "react-icons/lu";
 import { Link } from "react-router";
 
 const Login = () => {
 	const [showPassword, setShowPassword] = useState<boolean>(false);
 	return (
-		<section className='h-screen w-full space-y-2 flex items-center flex-col justify-center'>
+		<section className='h-screen w-full space-y-4 flex items-center flex-col justify-center'>
 			<div className='bg-white w-[30%]  rounded-xl flex flex-col items-center justify-center p-8 space-y-4 drop-shadow-[0_5px_8px_rgba(0,0,0,0.25)]'>
 				<div className='z-10 rounded-xl w-fit h-fit bg-gray-200 text-3xl p-3'>
 					<LuUser />
@@ -21,7 +20,7 @@ const Login = () => {
 						<LuMailOpen />
 					</div>
 					<input
-						type='text'
+						type='email'
 						placeholder='Email'
 						className='focus:outline-none rounded-r-full  '
 					/>
@@ -31,7 +30,7 @@ const Login = () => {
 						onClick={() => setShowPassword(!showPassword)}
 						className='z-10 rounded-full w-fit h-fit cursor-pointer text-[#0082FA] text-2xl p-2.5'
 					>
-						{showPassword ? <IoLockOpen /> : <IoLockClosed />}
+						{showPassword ? <FiUnlock /> : <FiLock />}
 					</div>
 					<input
 						type={showPassword ? "text" : "password"}
@@ -40,15 +39,8 @@ const Login = () => {
 					/>
 				</div>
 				<button className='w-full cursor-pointer font-normal text-lg rounded-full bg-[#0082FA] text-white py-2.5 px-3'>
-					All job offers
+					Login
 				</button>
-				{/* <div className='flex'>
-					<span>
-						<hr className='h-0.5 text-black ' />
-					</span>
-					<span>Or continue with</span>
-					<hr />
-				</div> */}
 				<p className='text-gray-500'>Or continue with</p>
 				<div className='flex w-full space-x-2'>
 					<div className='rounded-lg p-1 bg-white border cursor-pointer border-gray-300 w-[50%] flex items-center justify-center'>

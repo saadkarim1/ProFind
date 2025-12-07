@@ -1,8 +1,8 @@
 import { Outlet, useLocation } from "react-router";
-import NavBar from "../components/NavBar";
-import Footer from "../components/Footer";
+import NavBar from "@/components/NavBar";
+import Footer from "@/components/Footer";
 import { Activity } from "react";
-import OldFooter from "../components/OldFooter";
+// import OldFooter from "../components/OldFooter";
 
 const Layout = () => {
 	const { pathname } = useLocation();

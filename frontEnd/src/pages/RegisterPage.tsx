@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { IoLockClosed, IoLockOpen } from "react-icons/io5";
+import { FiLock, FiUnlock } from "react-icons/fi";
 import { LuMailOpen, LuUser } from "react-icons/lu";
 import { Link } from "react-router";
 
 const Register = () => {
 	const [showPassword, setShowPassword] = useState<boolean>(false);
 	return (
-		<section className='h-screen w-full flex flex-col space-y-2 items-center justify-center'>
+		<section className='h-screen w-full flex flex-col space-y-4 items-center justify-center pt-30'>
 			<div className='bg-white w-[30%]  rounded-xl flex flex-col items-center justify-center p-6 space-y-4 drop-shadow-[0_5px_8px_rgba(0,0,0,0.25)]'>
 				<div className='z-10 rounded-xl w-fit h-fit bg-gray-200 text-3xl p-3'>
 					<LuUser />
@@ -30,7 +30,7 @@ const Register = () => {
 						<LuMailOpen />
 					</div>
 					<input
-						type='text'
+						type='email'
 						placeholder='Email'
 						className='focus:outline-none rounded-r-full  '
 					/>
@@ -40,7 +40,7 @@ const Register = () => {
 						onClick={() => setShowPassword(!showPassword)}
 						className='z-10 rounded-full w-fit h-fit cursor-pointer text-[#0082FA] text-2xl p-2.5'
 					>
-						{showPassword ? <IoLockOpen /> : <IoLockClosed />}
+						{showPassword ? <FiUnlock /> : <FiLock />}
 					</div>
 					<input
 						type={showPassword ? "text" : "password"}
@@ -49,7 +49,7 @@ const Register = () => {
 					/>
 				</div>
 				<button className='w-[80%] cursor-pointer font-normal text-lg rounded-full bg-[#0082FA] text-white py-2.5 px-3'>
-					All job offers
+					Sign in
 				</button>
 				<p className='text-gray-500'>Or continue with</p>
 				<div className='flex w-full space-x-2'>

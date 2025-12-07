@@ -1,4 +1,3 @@
-import React from "react";
 import { TiLocation } from "react-icons/ti";
 
 const suggestion: string[] = [
@@ -35,15 +34,15 @@ const SearchBar = () => {
 					find Job
 				</div>
 			</div>
-			<p className='w-full items-center flex space-x-1.5 justify-center'>
+			<div className='w-full items-center flex space-x-1.5 justify-center'>
 				<span className='text-gray-500 font-medium'>Seggustion: </span>
 				{suggestion.map((s) => (
-					<div className='flex items-center'>
-						<div className='h-1 w-1 bg-gray-500 rounded-full mx-1'></div>{" "}
-						<span>{s}</span>
-					</div>
+					<>
+						<span className='h-1 w-1 bg-gray-500 rounded-full mx-1'></span>{" "}
+						<p>{s}</p>
+					</>
 				))}
-			</p>
+			</div>
 		</section>
 	);
 };
