@@ -5,15 +5,20 @@ type PostInteractions = {
 	save: boolean;
 	share: boolean;
 };
-
-const JobCard = () => {
+const JobCardTwo = () => {
 	const [postInteractions, setPostInteractions] = useState<PostInteractions>({
 		up: false,
 		save: false,
 		share: false,
 	});
+	const [isSelected, setIsSelected] = useState<boolean>(false);
 	return (
-		<div className='rounded-4xl p-1 bg-[#99C3FF] shadow-3xl cursor-pointer'>
+		<div
+			onClick={() => setIsSelected((prev) => !prev)}
+			className={`rounded-4xl p-1 ${
+				isSelected ? "bg-[#99C3FF]" : "bg-white"
+			} shadow-3xl cursor-pointer transition-colors duration-200 ease-in-out`}
+		>
 			<div className='w-full rounded-[30px] bg-white p-3 flex flex-col justify-between space-y-3'>
 				<div className='flex items-center space-x-2'>
 					<div className='flex items-center justify-center h-11 w-11  capitalize text-[#0082FA] font-bold text-3xl bg-[#D6E7FF] rounded-full'>
@@ -105,9 +110,8 @@ const JobCard = () => {
 					</div>
 				</div>
 			</div>
-			<p className='text-center text-[#0044A3] font-medium'>Click to apply</p>
 		</div>
 	);
 };
 
-export default JobCard;
+export default JobCardTwo;

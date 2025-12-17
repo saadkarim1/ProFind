@@ -54,7 +54,11 @@ html {
 	height: 100%;
 	width: 100%;
 	position: absolute;
-	backdrop-filter: blur(80px);
+	/* backdrop-filter: blur(50px); */
+	-webkit-backdrop-filter: blur(50px);
+	backdrop-filter: blur(60px);
+	background: rgba(255, 255, 255, 0.1);
+	/* backdrop-filter: blur(10px); */
 }
 
 .no-arrow {
@@ -66,4 +70,25 @@ html {
 
 .no-arrow::-ms-expand {
 	display: none;
+}
+
+.label {
+	position: relative;
+	width: fit-content;
+}
+.label::before {
+	content: "*";
+	color: red;
+	position: absolute;
+	top: 0;
+	right: -7px;
+}
+
+.navbar {
+	background: rgba(255, 255, 255, 0.63);
+	border-radius: 16px;
+	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+	backdrop-filter: blur(7.9px);
+	-webkit-backdrop-filter: blur(8px);
+	border: 1px solid rgba(255, 255, 255, 1);
 }

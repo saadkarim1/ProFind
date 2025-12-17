@@ -1,6 +1,6 @@
 import { TiLocation } from "react-icons/ti";
 
-const suggestion: string[] = [
+const suggestions: string[] = [
 	"Designer",
 	"Fullstack developer",
 	"Film maker",
@@ -36,11 +36,11 @@ const SearchBar = () => {
 			</div>
 			<div className='w-full items-center flex space-x-1.5 justify-center'>
 				<span className='text-gray-500 font-medium'>Seggustion: </span>
-				{suggestion.map((s) => (
-					<>
-						<span className='h-1 w-1 bg-gray-500 rounded-full mx-1'></span>{" "}
+				{suggestions.map((s) => (
+					<div key={s} className="flex items-center">
+						<div className='h-1 w-1 bg-gray-500 rounded-full mx-1'></div>{" "}
 						<p>{s}</p>
-					</>
+					</div>
 				))}
 			</div>
 		</section>

@@ -25,29 +25,27 @@ const LoginPopup = ({ showLoginPopup, setShowLoginPopup }: LoginPopupProps) => {
 			</button>
 			<ul
 				className={`absolute bg-white text-black  w-[14vw] top-full right-0 rounded-xl text-md text-center space-y-2 p-3 mt-3 shadow-md ${
-					showLoginPopup ? "scale-100 opacity-100" : "scale-90 opacity-0"
+					showLoginPopup ? "scale-100 opacity-100" : "scale-0 opacity-0"
 				} transition  duration-200 ease-in-out origin-top `}
 			>
-				<li className='hover:bg-sky-100 flex items-center space-x-2 p-2 rounded-lg'>
-					<LuUser className='text-xl' />
-					<Link
-						to={"/login"}
-						onClick={() => setShowLoginPopup(false)}
-						className=''
-					>
+				<Link
+					to={"/login"}
+					className='group hover:bg-sky-100 hover:text-black text-[#878787] flex items-center space-x-2 p-2 rounded-lg'
+				>
+					<LuUser className='text-xl group-hover:text-sky-600' />
+					<p onClick={() => setShowLoginPopup(false)} className=''>
 						Candidate area
-					</Link>
-				</li>
-				<li className='hover:bg-sky-100 flex items-center space-x-2 p-2 rounded-lg'>
-					<MdWorkOutline className='text-xl' />
-					<Link
-						to={"/register"}
-						onClick={() => setShowLoginPopup(false)}
-						className=''
-					>
+					</p>
+				</Link>
+				<Link
+					to={"/recruiter/login"}
+					className='group hover:bg-sky-100 hover:text-black text-[#878787] flex items-center space-x-2 p-2 rounded-lg'
+				>
+					<MdWorkOutline className='text-xl group-hover:text-sky-600' />
+					<p onClick={() => setShowLoginPopup(false)} className=''>
 						Recruiter area
-					</Link>
-				</li>
+					</p>
+				</Link>
 			</ul>
 		</div>
 	);

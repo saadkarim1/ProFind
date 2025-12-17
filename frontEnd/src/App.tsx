@@ -10,6 +10,9 @@ import ProfilePage from "./pages/ProfilePage";
 import ApplicationsPage from "./pages/ApplicationsPage";
 import SavedPage from "./pages/SavedPage";
 import SettingsPage from "./pages/SettingsPage";
+import ProfileLayout from "./pages/ProfileLayout";
+import SummaryPage from "./pages/SummaryPage";
+import RecruiterLoginPage from "./pages/RecruiterLoginPage";
 
 function App() {
 	return (
@@ -21,10 +24,47 @@ function App() {
 					<Route path='/about' element={<AboutPage />}></Route>
 					<Route path='/login' element={<LoginPage />}></Route>
 					<Route path='/register' element={<RegisterPage />}></Route>
-					<Route path='/profile' element={<ProfilePage />}></Route>
-					<Route path='/my-applications' element={<ApplicationsPage />}></Route>
-					<Route path='/saved' element={<SavedPage />}></Route>
-					<Route path='/settings' element={<SettingsPage />}></Route>
+					<Route path='/recruiter/login' element={<RecruiterLoginPage />}></Route>
+					<Route
+						path='/profile'
+						element={
+							<ProfileLayout>
+								<ProfilePage />
+							</ProfileLayout>
+						}
+					></Route>
+					<Route
+						path='/career-information'
+						element={
+							<ProfileLayout>
+								<SummaryPage />
+							</ProfileLayout>
+						}
+					></Route>
+					<Route
+						path='/my-applications'
+						element={
+							<ProfileLayout>
+								<ApplicationsPage />
+							</ProfileLayout>
+						}
+					></Route>
+					<Route
+						path='/saved'
+						element={
+							<ProfileLayout>
+								<SavedPage />
+							</ProfileLayout>
+						}
+					></Route>
+					<Route
+						path='/settings'
+						element={
+							<ProfileLayout>
+								<SettingsPage />
+							</ProfileLayout>
+						}
+					></Route>
 				</Route>
 			</Routes>
 		</>
