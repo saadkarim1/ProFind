@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 import { IoMenu } from "react-icons/io5";
-import { ProfileList } from "@/models/model";
+import { RecruiterProfileList, UserProfileList } from "@/models/model";
 import { Activity, useState } from "react";
 
 type ProfilePopupProps = {
@@ -12,7 +12,7 @@ const ProfilePopup = ({
 	showProfilePopup,
 	setShowProfilePopup,
 }: ProfilePopupProps) => {
-	const [isJobSeeker, setIsJobSeeker] = useState<boolean>(false);
+	const [isJobSeeker, setIsJobSeeker] = useState<boolean>(true);
 	return (
 		<>
 			{/* <div className='text-[#0082FA] text-3xl px-4'> */}
@@ -43,7 +43,7 @@ const ProfilePopup = ({
 							showProfilePopup ? "scale-100 opacity-100" : "scale-0 opacity-0"
 						} transition  duration-300 ease-in-out origin-top `}
 					>
-						{ProfileList.map((item) => (
+						{RecruiterProfileList.map((item) => (
 							<Link
 								key={item.name}
 								to={item.path}
@@ -62,7 +62,7 @@ const ProfilePopup = ({
 							showProfilePopup ? "scale-100 opacity-100" : "scale-0 opacity-0"
 						} transition  duration-300 ease-in-out origin-top `}
 					>
-						{ProfileList.map((item) => (
+						{UserProfileList.map((item) => (
 							<Link
 								key={item.name}
 								to={item.path}

@@ -18,6 +18,10 @@ const links: Link[] = [
 		path_name: "Jobs",
 	},
 	{
+		path: "/offers",
+		path_name: "Offers",
+	},
+	{
 		path: "/about",
 		path_name: "About",
 	},
@@ -28,6 +32,7 @@ const NavBar = () => {
 	const [showProfilePopup, setShowProfilePopup] = useState<boolean>(false);
 	const [showLoginPopup, setShowLoginPopup] = useState<boolean>(false);
 	const [isAuthenticated, setIsAuthenticated] = useState<boolean>(true);
+	// const [isJobSeeker, setIsJobSeeker] = useState<boolean>(false);
 
 	return (
 		<nav className='z-999 fixed w-[80%] mx-auto inset-x-0 pt-3'>
@@ -38,17 +43,21 @@ const NavBar = () => {
 				</Link>
 
 				<ul className='flex items-center justify-center font-medium space-x-10 text-[18px] w-[33%]'>
-					{links.map((link) => (
-						<Link
-							key={link.path_name}
-							to={link.path}
-							className={`${
-								pathname === link.path ? "text-[#0082FA]" : "text-black"
-							} `}
-						>
-							{link.path_name}
-						</Link>
-					))}
+					{links.map((link) => {
+						if (link.path_name) {
+							return (
+								<Link
+									key={link.path_name}
+									to={link.path}
+									className={`${
+										pathname === link.path ? "text-[#0082FA]" : "text-black"
+									} `}
+								>
+									{link.path_name}
+								</Link>
+							);
+						}
+					})}
 				</ul>
 				<div className='w-[33%] flex items-center justify-end'>
 					<Activity mode={isAuthenticated ? "hidden" : "visible"}>

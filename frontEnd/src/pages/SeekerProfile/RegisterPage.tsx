@@ -7,7 +7,7 @@ import { Link } from "react-router";
 const Register = () => {
 	const [showPassword, setShowPassword] = useState<boolean>(false);
 	return (
-		<section className='h-screen w-full flex flex-col space-y-4 items-center justify-center pt-20'>
+		<section className='w-full flex flex-col space-y-4 items-center justify-center'>
 			<div className='bg-white w-[30%] rounded-xl flex flex-col items-center justify-center p-8 space-y-4 drop-shadow-[0_5px_8px_rgba(0,0,0,0.25)]'>
 				<div className='z-10 rounded-xl w-fit h-fit bg-gray-200 text-3xl p-3'>
 					<TbLogin />

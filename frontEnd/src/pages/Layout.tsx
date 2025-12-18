@@ -9,7 +9,7 @@ const Layout = () => {
 	return (
 		<div>
 			<NavBar />
-			<main>
+			<main className={`${pathname !== "/" && "pt-30"} `}>
 				<Outlet />
 			</main>
 			<Activity

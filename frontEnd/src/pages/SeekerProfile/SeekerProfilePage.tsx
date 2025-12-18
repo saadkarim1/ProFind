@@ -8,7 +8,7 @@ import { MdOutlinePhoneAndroid } from "react-icons/md";
 import { TiDocumentText } from "react-icons/ti";
 import { CgSoftwareDownload } from "react-icons/cg";
 
-const ProfilePage = () => {
+const SeekerProfilePage = () => {
 	return (
 		<div className='h-fit grid w-[74%] grid-cols-2 gap-4'>
 			<div className='col-span-2 h-fit rounded-3xl border-2 border-[#e9e9e9] bg-white'>
@@ -40,7 +40,7 @@ const ProfilePage = () => {
 				<div className='text-[14px] font-normal w-full flex items-center justify-between'>
 					<h2 className='font-medium text-lg'>All Personal Information</h2>
 					<Link
-						to={"/career-information"}
+						to={"/seeker/career-information"}
 						className='flex items-center space-x-1 text-[#0082FA] text-[16px] cursor-pointer'
 					>
 						<RiEditFill className='text-xl' />
@@ -84,7 +84,7 @@ const ProfilePage = () => {
 				</div>
 			</div>
 			<div className='rounded-3xl border-2 border-[#e9e9e9] bg-white p-6'>
-				<h2 className='font-medium text-lg'>About me</h2>
+				<h2 className='font-medium text-lg'>Skills</h2>
 				<div className='flex flex-wrap mt-2 gap-2'>
 					<div className='border-2 border-[#e9e9e9] rounded-full text-[14px] py-1 px-2'>
 						Typescript
@@ -127,4 +127,4 @@ const ProfilePage = () => {
 	);
 };
 
-export default ProfilePage;
+export default SeekerProfilePage;

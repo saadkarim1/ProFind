@@ -19,18 +19,28 @@ type Section = {
 	name: string;
 	icon: IconType;
 };
-export const ProfileList: Section[] = [
-	{ path: "/profile", name: "profile", icon: LuUser },
+export const UserProfileList: Section[] = [
+	{ path: "/seeker", name: "profile", icon: LuUser },
 	{
-		path: "/career-information",
+		path: "/seeker/career-information",
 		name: "summary",
 		icon: IoDocumentTextOutline,
 	},
 	{
-		path: "/my-applications",
+		path: "/seeker/my-applications",
 		name: "My applications",
 		icon: MdWorkOutline,
 	},
-	{ path: "/saved", name: "saved", icon: IoBookmarkOutline },
-	{ path: "/settings", name: "settings", icon: IoSettingsOutline },
+	{ path: "/seeker/saved", name: "saved", icon: IoBookmarkOutline },
+	{ path: "/seeker/settings", name: "settings", icon: IoSettingsOutline },
+];
+
+export const RecruiterProfileList: Section[] = [
+	{ path: "/recruiter", name: "company", icon: MdWorkOutline },
+	{
+		path: "/recruiter/summary",
+		name: "summary",
+		icon: IoDocumentTextOutline,
+	},
+	{ path: "/recruiter/settings", name: "settings", icon: IoSettingsOutline },
 ];

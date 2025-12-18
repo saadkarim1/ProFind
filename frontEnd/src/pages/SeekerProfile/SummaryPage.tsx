@@ -73,6 +73,15 @@ const SummaryPage = () => {
 						className='focus:outline-none bg-[#f5f5f5] block py-2 px-3 w-full rounded-xl'
 					/>
 				</div>
+				<div className='col-span-2'>
+					<label htmlFor='aboutMe' className='text-[#878787] text-[15px]'>
+						About me
+					</label>
+					<textarea
+						id='aboutMe'
+						className='focus:outline-none bg-[#f5f5f5] block py-2 px-3 w-full rounded-xl'
+					/>
+				</div>
 				<div>
 					<button className='w-full h-fit py-2 cursor-pointer border-2 rounded-xl border-[#0082FA]'>
 						Discard Changes

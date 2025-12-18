@@ -1,16 +1,11 @@
-import { type ReactNode } from "react";
-import { Link, useLocation } from "react-router";
+import { Link, Outlet, useLocation } from "react-router";
 import { TbLogout } from "react-icons/tb";
-import { ProfileList } from "@/models/model";
+import { UserProfileList } from "@/models/model";
 
-type ProfileLayoutProps = {
-	children: ReactNode;
-};
-
-const ProfileLayout = ({ children }: ProfileLayoutProps) => {
+const SeekerProfileLayout = () => {
 	const { pathname } = useLocation();
 	return (
-		<section className='relative mx-auto w-[80%] pt-30 flex justify-between'>
+		<section className='relative mx-auto w-[80%] flex justify-between'>
 			<div className='w-[25%] sticky top-30  border-2 border-[#e9e9e9] h-fit bg-white rounded-3xl flex flex-col items-center py-10 space-y-4'>
 				{/* <div className='w-20 h-20 rounded-full border-2 border-[#0082FA] flex items-center justify-center font-bold text-3xl'>
 					SK
@@ -26,7 +21,7 @@ const ProfileLayout = ({ children }: ProfileLayoutProps) => {
 					<h3 className='text-xl font-medium text-[#878787]'>Developer</h3>
 				</div>
 				<ul className='w-[80%] mx-auto space-y-5 font-medium px-4 text-[16px] my-4'>
-					{ProfileList.map((section) => (
+					{UserProfileList.map((section) => (
 						<Link
 							key={section.name}
 							to={section.path}
@@ -50,9 +45,9 @@ const ProfileLayout = ({ children }: ProfileLayoutProps) => {
 					</li>
 				</ul>
 			</div>
-			{children}
+			<Outlet />
 		</section>
 	);
 };
 
-export default ProfileLayout;
+export default SeekerProfileLayout;
