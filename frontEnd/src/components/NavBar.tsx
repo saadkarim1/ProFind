@@ -15,11 +15,11 @@ const links: Link[] = [
 	},
 	{
 		path: "/jobs",
-		path_name: "Jobs",
+		path_name: "Find Job",
 	},
 	{
 		path: "/offers",
-		path_name: "Offers",
+		path_name: "Find Talent",
 	},
 	{
 		path: "/about",
@@ -37,12 +37,12 @@ const NavBar = () => {
 	return (
 		<nav className='z-999 fixed w-[80%] mx-auto inset-x-0 pt-3'>
 			<div className='navbar drop-shadow-[0_0px_2px_rgba(0,0,0,0.25)] rounded-2xl flex items-center p-3'>
-				<Link to={"/"} className='flex items-center space-x-0.5 w-[33%]'>
+				<Link to={"/"} className='flex items-center space-x-0.5 w-[25%]'>
 					<img src='/src/assets/logo.svg' width={30} alt='' />
 					<h1 className='text-3xl font-bold'>ProFind.</h1>
 				</Link>
 
-				<ul className='flex items-center justify-center font-medium space-x-10 text-[18px] w-[33%]'>
+				<ul className='flex items-center justify-center font-medium space-x-10 text-[18px] w-[50%]'>
 					{links.map((link) => {
 						if (link.path_name) {
 							return (
@@ -59,7 +59,7 @@ const NavBar = () => {
 						}
 					})}
 				</ul>
-				<div className='w-[33%] flex items-center justify-end'>
+				<div className='w-[25%] flex items-center justify-end'>
 					<Activity mode={isAuthenticated ? "hidden" : "visible"}>
 						<LoginPopup
 							showLoginPopup={showLoginPopup}

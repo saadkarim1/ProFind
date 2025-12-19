@@ -9,7 +9,7 @@ const Layout = () => {
 	return (
 		<div>
 			<NavBar />
-			<main className={`${pathname !== "/" && "pt-30"} `}>
+			<main className={`${pathname !== "/" && "pt-30 w-[80%] mx-auto"} `}>
 				<Outlet />
 			</main>
 			<Activity

@@ -92,3 +92,12 @@ html {
 	-webkit-backdrop-filter: blur(8px);
 	border: 1px solid rgba(255, 255, 255, 1);
 }
+
+/* .applicants {
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+} */
+
+.applicants::-webkit-scrollbar {
+	display: none;
+}

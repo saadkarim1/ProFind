@@ -37,7 +37,7 @@ const ProfilePopup = ({
 				>
 					<IoMenu className='' />
 				</div>
-				<Activity mode={isJobSeeker ? "visible" : "hidden"}>
+				<Activity mode={isJobSeeker ? "hidden" : "visible"}>
 					<ul
 						className={`absolute  bg-white text-black  w-[14vw] top-full right-0 rounded-xl text-lg text-center space-y-2 p-3 mt-3 shadow-md ${
 							showProfilePopup ? "scale-100 opacity-100" : "scale-0 opacity-0"
@@ -56,7 +56,7 @@ const ProfilePopup = ({
 						))}
 					</ul>
 				</Activity>
-				<Activity mode={isJobSeeker ? "hidden" : "visible"}>
+				<Activity mode={isJobSeeker ? "visible" : "hidden"}>
 					<ul
 						className={`absolute  bg-white text-black  w-[14vw] top-full right-0 rounded-xl text-lg text-center space-y-2 p-3 mt-3 shadow-md ${
 							showProfilePopup ? "scale-100 opacity-100" : "scale-0 opacity-0"

@@ -3,7 +3,7 @@ import SearchBar from "@/components/jobs/SearchBar";
 
 const Jobs: React.FC = () => {
 	return (
-		<div className='w-[80%] mx-auto'>
+		<section>
 			<SearchBar />
 			<div className='flex justify-between'>
 				<div className='w-[49%] grid grid-cols-2 gap-4 '>
@@ -90,7 +90,7 @@ const Jobs: React.FC = () => {
 					</div>
 				</div>
 			</div>
-		</div>
+		</section>
 	);
 };
 

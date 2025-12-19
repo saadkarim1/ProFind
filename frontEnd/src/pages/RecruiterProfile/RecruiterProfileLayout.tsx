@@ -5,7 +5,7 @@ import { Link, Outlet, useLocation } from "react-router";
 const RecruiterProfileLayout = () => {
 	const { pathname } = useLocation();
 	return (
-		<section className='relative mx-auto w-[80%] flex justify-between'>
+		<section className='relative flex justify-between'>
 			<div className='w-[25%] sticky top-30  border-2 border-[#e9e9e9] h-fit bg-white rounded-3xl flex flex-col items-center py-10 space-y-4'>
 				<div className='bg-sky-100 p-5 rounded-full'>
 					<svg

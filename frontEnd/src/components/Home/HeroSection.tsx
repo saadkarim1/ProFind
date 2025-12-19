@@ -24,7 +24,7 @@ const HeroSection: React.FC<Props> = ({ scrollToFeaturedJobs }) => {
 					Discover Better Opportunities. Build Your{" "}
 					<span className='rounded-full text-[46px]  px-3 py-0 bg-[#E2EFFF] border-2 border-[#D1E2F5] '>
 						<span className='bg-linear-to-r from-[#2C8EFF] from-0% via-[#005FCC] via-50% to-[#2C8EFF] to-100% bg-clip-text text-transparent'>
-							Career
+							Career.
 						</span>
 					</span>
 					<p className='text-center text-[#616161] text-[18px] font-medium leading-normal'>
@@ -44,15 +44,25 @@ const HeroSection: React.FC<Props> = ({ scrollToFeaturedJobs }) => {
 						<IoMdArrowRoundForward className='group-hover:rotate-90 transition-transform duration-400 ease-in-out' />
 					</span>
 				</button>
-				<div className='flex items-center justify-center space-x-5 '>
-					<img src='src/assets/Deloitte.svg' alt='' className='max-w-35' />
-					<img src='src/assets/Capgemini.svg' alt='' className='max-w-35' />
-					<img src='src/assets/sofac.svg' alt='' className='max-w-35' />
-					<img src='src/assets/Atos.svg' alt='' className='max-w-35' />
-					<img src='src/assets/Globant.svg' alt='' className='max-w-35' />
-					<img src='src/assets/inwi.svg' alt='' className='max-w-35' />
-					<img src='src/assets/marocTelecom.svg' alt='' className='max-w-35' />
-					<img src='src/assets/cih.svg' alt='' className='max-w-35' />
+				<div className='mt-2'>
+					<p className='text-center font-medium text-2xl'>
+						Trusted <span className='text-[#0082FA]'>100+</span> company find
+						jobseeker
+					</p>
+					<div className='flex items-center justify-center space-x-5 '>
+						<img src='src/assets/Deloitte.svg' alt='' className='max-w-35' />
+						<img src='src/assets/Capgemini.svg' alt='' className='max-w-35' />
+						<img src='src/assets/sofac.svg' alt='' className='max-w-35' />
+						<img src='src/assets/Atos.svg' alt='' className='max-w-35' />
+						<img src='src/assets/Globant.svg' alt='' className='max-w-35' />
+						<img src='src/assets/inwi.svg' alt='' className='max-w-35' />
+						<img
+							src='src/assets/marocTelecom.svg'
+							alt=''
+							className='max-w-35'
+						/>
+						<img src='src/assets/cih.svg' alt='' className='max-w-35' />
+					</div>
 				</div>
 			</div>
 		</section>

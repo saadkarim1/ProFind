@@ -18,6 +18,8 @@ import RecruiterProfilePage from "./pages/RecruiterProfile/RecruiterProfilePage"
 import CompanySummary from "./pages/RecruiterProfile/CompanySummary";
 import CompanySettings from "./pages/RecruiterProfile/CompanySettings";
 import OffersPage from "./pages/OffersPage";
+import CreateOfferPage from "./pages/CreateOfferPage";
+import ApplicantsPage from "./pages/ApplicantsPage";
 
 function App() {
 	return (
@@ -49,7 +51,16 @@ function App() {
 						<Route path='summary' element={<CompanySummary />}></Route>
 						<Route path='settings' element={<CompanySettings />}></Route>
 					</Route>
+
 					<Route path='offers' element={<OffersPage />}></Route>
+					<Route
+						path='offers/create-offer'
+						element={<CreateOfferPage />}
+					></Route>
+					<Route
+						path='offers/:id/applicants'
+						element={<ApplicantsPage />}
+					></Route>
 				</Route>
 			</Routes>
 		</>
