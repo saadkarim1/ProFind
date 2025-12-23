@@ -11,7 +11,7 @@ type JobCardTwoProps = {
 	job: JobType
 }
 
-const JobCardTwo = ({ job }: JobCardTwoProps) => {
+const JobCardTwo = () => {
 	const [postInteractions, setPostInteractions] = useState<PostInteractions>({
 		up: false,
 		save: false,

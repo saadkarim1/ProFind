@@ -1,32 +1,36 @@
 import JobCardTwo from "@/components/JobCardTwo";
 import SearchBar from "@/components/jobs/SearchBar";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useState } from "react";
 import type { JobType } from "@/models/job";
+import { useGetAllOffersQuery } from "@/features/offers/offersApi";
 
 const Jobs: React.FC = () => {
 	const [jobs, setJobs] = useState<JobType[] | null>([]);
-	useEffect(() => {
-		(async () => {
-			const res = await axios.get("http://127.0.0.1:8000/api/v1/offers");
-			setJobs(res.data.data.data_offers);
-			console.log(res.data.data.data_offers);
-		})();
-	}, []);
+
+	// const { data } = useGetAllOffersQuery();
+	const { data } = useGetAllOffersQuery();
+	console.log(data);
+	// useEffect(() => {
+	// 	(async () => {
+	// 		const res = await axios.get("http://127.0.0.1:8000/api/v1/offers");
+	// 		setJobs(res.data.data.data_offers);
+	// 		console.log(res.data.data.data_offers);
+	// 	})();
+	// }, []);
 	return (
 		<section>
 			<SearchBar />
 			<div className='flex justify-between'>
 				<div className='w-[49%] grid grid-cols-2 gap-4 '>
-					{jobs?.map((job) => (
+					{/* {jobs?.map((job) => (
 						<JobCardTwo key={job.company_id} job={job} />
-					))}
-					{/* {[
+					))} */}
+					{[
 						1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
 						20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
 					].map((_, index) => (
 						<JobCardTwo key={index} />
-					))} */}
+					))}
 				</div>
 				<div className='w-[49%] h-fit sticky top-30 space-y-4 rounded-4xl p-10 border-2 border-[#e9e9e9] bg-white'>
 					<div className='flex space-x-3'>
@@ -38,9 +42,9 @@ const Jobs: React.FC = () => {
 								viewBox='0 0 24 24'
 								fill='none'
 								stroke='#0082FA'
-								stroke-width='2'
-								stroke-linecap='round'
-								stroke-linejoin='round'
+								strokeWidth='2'
+								strokeLinecap='round'
+								strokeLinejoin='round'
 								className='lucide lucide-building2-icon lucide-building-2'
 							>
 								<path d='M10 12h4' />
