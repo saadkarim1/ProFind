@@ -1,5 +1,87 @@
+import { RiRobot2Fill } from "react-icons/ri";
+import { IoSearch } from "react-icons/io5";
+import { IoMdArrowRoundForward } from "react-icons/io";
+import { BsLightningFill } from "react-icons/bs";
+
 const About = () => {
-	return <div className='h-screen'>About</div>;
+	return (
+		<section className='relative'>
+			<div className='secondaryContainer'>
+				<div></div>
+				<div></div>
+				<div></div>
+			</div>
+			<div className='absolute w-[80%] mx-auto top-[60%] left-[50%] transform -translate-[50%]'>
+				<div className='flex'>
+					<div className='w-[50%] space-y-6'>
+						<h2 className='font-medium w-fit py-1 px-3 rounded-full bg-[#cae4fd]'>
+							About ProFind
+						</h2>
+						<h1 className='capitalize font-medium text-4xl w-[80%]'>
+							a smarter way to connect{" "}
+							<span className='text-[#0082FA]'>Talent</span> and{" "}
+							<span className='text-[#0082FA]'>Opportunity</span>
+						</h1>
+						<p className='font-medium text-lg'>
+							ProFind is a modern job discovery platform designed to simplify
+							how jobseekers and recruiters connect. We help professionals find
+							opportunities that truly match their skills, while enabling
+							companies to discover talent faster and smarter.
+						</p>
+						<br />
+						<p className='font-medium text-lg'>
+							With intelligent matching, a clean user experience, and powerful
+							tools for both sides, ProFind reduces friction in the hiring
+							process and turns job searching into a seamless experience
+						</p>
+					</div>
+					<div className='w-[50%] flex justify-center items-start'>
+						<img src='/src/assets/Hiring.svg' alt='' />
+					</div>
+				</div>
+				<div className='flex items-center justify-evenly bg-red-100 h-fit'>
+					<div className='w-[25%] rounded-xl space-x-2 h-full  p-6 bg-white flex'>
+						<div className='p-2 rounded-full text-xl text-[#117dda] bg-[#EBF5FF] h-fit'>
+							<IoSearch />
+						</div>
+						<div>
+							<h2 className='font-medium'>Smart Job Discovery</h2>
+							<p className='text-[15px]'>
+								Find relevant jobs based on your skills, goals, and preferences.
+							</p>
+						</div>
+					</div>
+					<div className='w-[25%] rounded-xl space-x-2 h-full  p-6 bg-white flex'>
+						<div className='p-2 rounded-full text-xl text-[#117dda] bg-[#EBF5FF] h-fit'>
+							<BsLightningFill />
+						</div>
+						<div>
+							<h2 className='font-medium'>Fast & Simple Hiring</h2>
+							<p className='text-[15px]'>
+								Recruiters can create and manage job offers in minutes.
+							</p>
+						</div>
+					</div>
+					<div className='w-[25%] rounded-xl space-x-2 h-full  p-6 bg-white flex'>
+						<div className='p-2 rounded-full text-xl text-[#117dda] bg-[#EBF5FF] h-fit'>
+							<RiRobot2Fill />
+						</div>
+						<div>
+							<h2 className='font-medium'>
+								AI-Powered Matching{" "}
+								<span className='text-[#117dda]'>(Coming Soon)</span>
+							</h2>
+							<p className='text-[15px]'>
+								{" "}
+								Our AI agent will help match the right candidate to the right
+								role.
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	);
 };
 
 export default About;

@@ -10,7 +10,7 @@ const CompanySummary = () => {
 					<input
 						type='text'
 						id='companyName'
-						className='focus:outline-none bg-[#f5f5f5] block py-2 px-3 w-full rounded-xl'
+						className='focus:outline-none bg-[#f5f5f5] border-[1.5px] border-[#e9e9e9] block py-2 px-3 w-full rounded-xl'
 					/>
 				</div>
 				<div>
@@ -20,7 +20,7 @@ const CompanySummary = () => {
 					<select
 						name='sector'
 						id='sector'
-						className='focus:outline-none bg-[#f5f5f5] block py-2 px-3 w-full rounded-xl'
+						className='focus:outline-none bg-[#f5f5f5] border-[1.5px] border-[#e9e9e9] block py-2 px-3 w-full rounded-xl'
 					>
 						<option disabled={true}>Select a sector</option>
 						<hr />
@@ -36,7 +36,7 @@ const CompanySummary = () => {
 					<input
 						type='text'
 						id='email'
-						className='focus:outline-none bg-[#f5f5f5] block py-2 px-3 w-full rounded-xl'
+						className='focus:outline-none bg-[#f5f5f5] border-[1.5px] border-[#e9e9e9] block py-2 px-3 w-full rounded-xl'
 					/>
 				</div>
 				<div className='col-span-2'>
@@ -46,7 +46,7 @@ const CompanySummary = () => {
 					<input
 						type='text'
 						id='adress'
-						className='focus:outline-none bg-[#f5f5f5] block py-2 px-3 w-full rounded-xl'
+						className='focus:outline-none bg-[#f5f5f5] border-[1.5px] border-[#e9e9e9] block py-2 px-3 w-full rounded-xl'
 					/>
 				</div>
 				<div className='col-span-2'>
@@ -56,7 +56,7 @@ const CompanySummary = () => {
 					<input
 						type='text'
 						id='link'
-						className='focus:outline-none bg-[#f5f5f5] block py-2 px-3 w-full rounded-xl'
+						className='focus:outline-none bg-[#f5f5f5] border-[1.5px] border-[#e9e9e9] block py-2 px-3 w-full rounded-xl'
 					/>
 				</div>
 				<div className='col-span-2'>
@@ -65,7 +65,7 @@ const CompanySummary = () => {
 					</label>
 					<textarea
 						id='aboutMe'
-						className='focus:outline-none bg-[#f5f5f5] block py-2 px-3 w-full rounded-xl'
+						className='focus:outline-none bg-[#f5f5f5] border-[1.5px] border-[#e9e9e9] block py-2 px-3 w-full rounded-xl'
 					/>
 				</div>
 				<div>

@@ -1,9 +1,7 @@
-import DropDownList from "@/components/DropDownList";
+import CaondidateStatuesDropDownList from "@/components/CaondidateStatuesDropDownList";
 import { HiOutlineMail } from "react-icons/hi";
 import { LuUser } from "react-icons/lu";
 import { MdOutlinePhoneAndroid, MdWorkOutline } from "react-icons/md";
-import { RiEditFill } from "react-icons/ri";
-import { Link } from "react-router";
 
 const ApplicantsPage = () => {
 	return (
@@ -11,7 +9,7 @@ const ApplicantsPage = () => {
 			<div className='w-[49%]  h-screen border-2 border-[#e9e9e9] bg-white rounded-4xl overflow-scroll applicants'>
 				<div className='flex items-center justify-between bg-white px-8 py-4 sticky top-0 border-b-2 border-[#e9e9e9]'>
 					<h1 className='font-medium text-xl'>Applicants</h1>
-					<DropDownList />
+					<CaondidateStatuesDropDownList />
 				</div>
 				<div className='space-y-2 p-8'>
 					{[

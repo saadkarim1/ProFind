@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('user_offer_save', function (Blueprint $table) {
             $table->id();
-            $table->foreignUlid("user_id")->constrained()->onDelete('cascade');
-            $table->foreignUlid("offer_id")->constrained()->onDelete('cascade');
+            $table->foreignUuid("user_id")->constrained()->onDelete('cascade');
+            $table->foreignUuid("offer_id")->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

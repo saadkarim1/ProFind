@@ -1,13 +1,7 @@
 import JobCardTwo from "@/components/JobCardTwo";
-import { useState } from "react";
 import { Link } from "react-router";
 
 const OffersPage = () => {
-	const [showPopUp, setShowLPopIp] = useState<boolean>(true);
-	const handlePopUp = () => {
-		// console.log(first);
-		setShowLPopIp((prev) => !prev);
-	};
 	return (
 		<section className='relative'>
 			<div className='bg-white  flex items-center justify-evenly border-2 border-[#e9e9e9] rounded-3xl my-10 px-2 py-3'>

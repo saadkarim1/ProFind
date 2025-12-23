@@ -1,3 +1,4 @@
+import type { JobType } from "@/models/job";
 import { useState } from "react";
 
 type PostInteractions = {
@@ -5,7 +6,12 @@ type PostInteractions = {
 	save: boolean;
 	share: boolean;
 };
-const JobCardTwo = () => {
+
+type JobCardTwoProps = {
+	job: JobType
+}
+
+const JobCardTwo = ({ job }: JobCardTwoProps) => {
 	const [postInteractions, setPostInteractions] = useState<PostInteractions>({
 		up: false,
 		save: false,

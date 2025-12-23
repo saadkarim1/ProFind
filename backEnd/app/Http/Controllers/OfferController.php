@@ -8,7 +8,6 @@ use App\Jobs\testTask;
 use App\Models\Offer;
 use App\Traits\ApiResponse;
 use Exception;
-use Illuminate\Container\Attributes\Auth;
 use Illuminate\Http\Request;
 
 class OfferController extends Controller
@@ -18,7 +17,7 @@ class OfferController extends Controller
     public function index()
     {
         try {
-            $offers = Offer::paginate(10);
+            $offers = Offer::all();
             return $this->successResponse(data: OfferCollection::make($offers));
         } catch (Exception $e) {
             return response()->json($e->getMessage());
@@ -28,7 +27,8 @@ class OfferController extends Controller
     {
         try {
             $offer = Offer::create($request->all());
-            return response()->json($offer, 201);
+            // return response()->json($offer, 201);
+            return $this->successResponse(data: new OfferResource($offer), status: 201);
         } catch (Exception $e) {
             return response()->json($e->getMessage());
         }
@@ -38,7 +38,8 @@ class OfferController extends Controller
     {
         try {
             $offer = Offer::findOrFail($offerId);
-            return response()->json($offer, 200);
+            // return response()->json($offer, 200);
+            return $this->successResponse(data: new OfferResource($offer));
         } catch (Exception $e) {
             return response()->json($e->getMessage());
         }
@@ -48,15 +49,17 @@ class OfferController extends Controller
     {
         $offer = Offer::findOrFail($offerId);
         // Auth::user()->id
-        $offer->users()->syncWithoutDetaching("01kbg95d0p1wk6bh43mvhmqacq");
+        $offer->users()->syncWithoutDetaching("019b459e-16ff-73c7-8e5a-429ec885579e");
 
-        return response()->json($offer, 200);
+        // return response()->json($offer, 200);
+        return $this->successResponse(data: new OfferResource($offer));
     }
 
     public function saveOffer($offerId)
     {
         $offer = Offer::findOrFail($offerId);
-        $offer->saversusers()->syncWithoutDetaching("01kbg95d0p1wk6bh43mvhmqacq");
-        return response()->json($offer, 200);
+        $offer->saversusers()->syncWithoutDetaching("019b459e-16ff-73c7-8e5a-429ec885579e");
+        return $this->successResponse(data: new OfferResource($offer));
+        // return response()->json($offer, 200);
     }
 }

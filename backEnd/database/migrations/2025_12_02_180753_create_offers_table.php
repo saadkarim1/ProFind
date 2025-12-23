@@ -13,13 +13,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('offers', function (Blueprint $table) {
-            $table->ulid("id")->primary();
+            $table->uuid("id")->primary();
             $table->string("title");
             $table->text("description");
             $table->string("location");
             $table->integer("duration");
-            $table->foreignUlid("company_id")->constrained('companies', 'id')->onDelete('cascade');
-            $table->string("company_name");
+            $table->foreignUuid("company_id")->constrained('companies', 'id')->onDelete('cascade');
             $table->integer("likes");
             $table->string("image")->nullable();
             $table->timestamps();

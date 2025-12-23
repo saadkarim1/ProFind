@@ -9,12 +9,20 @@ const Layout = () => {
 	return (
 		<div>
 			<NavBar />
-			<main className={`${pathname !== "/" && "pt-30 w-[80%] mx-auto"} `}>
+			<main
+				className={`${
+					pathname !== "/" && pathname !== "/about" && "pt-30 w-[80%] mx-auto"
+				} `}
+			>
 				<Outlet />
 			</main>
 			<Activity
 				mode={
-					pathname == "/login" || pathname == "/register" ? "hidden" : "visible"
+					pathname == "/login" ||
+					pathname == "/register" ||
+					pathname === "/recruiter/login"
+						? "hidden"
+						: "visible"
 				}
 			>
 				<Footer />

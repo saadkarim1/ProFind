@@ -23,7 +23,6 @@ class OfferFactory extends Factory
             "location" => fake()->randomElement(['casablanca', 'rabat', 'agadir', 'safi']),
             "duration" => fake()->numberBetween(5, 10),
             "company_id" => Company::all(['id'])->random(),
-            "company_name" => fake()->company(),
             "likes" => fake()->numberBetween(20, 40),
         ];
     }

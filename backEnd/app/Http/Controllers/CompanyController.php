@@ -13,6 +13,6 @@ class CompanyController extends Controller
     public function index()
     {
         $companies = Company::all();
-        return $this->successResponse(data: CompanyResource::collection($companies));
+        return $this->successResponse(CompanyResource::collection($companies));
     }
 }

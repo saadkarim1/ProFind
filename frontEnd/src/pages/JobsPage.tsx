@@ -1,18 +1,32 @@
 import JobCardTwo from "@/components/JobCardTwo";
 import SearchBar from "@/components/jobs/SearchBar";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import type { JobType } from "@/models/job";
 
 const Jobs: React.FC = () => {
+	const [jobs, setJobs] = useState<JobType[] | null>([]);
+	useEffect(() => {
+		(async () => {
+			const res = await axios.get("http://127.0.0.1:8000/api/v1/offers");
+			setJobs(res.data.data.data_offers);
+			console.log(res.data.data.data_offers);
+		})();
+	}, []);
 	return (
 		<section>
 			<SearchBar />
 			<div className='flex justify-between'>
 				<div className='w-[49%] grid grid-cols-2 gap-4 '>
-					{[
+					{jobs?.map((job) => (
+						<JobCardTwo key={job.company_id} job={job} />
+					))}
+					{/* {[
 						1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
 						20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
 					].map((_, index) => (
 						<JobCardTwo key={index} />
-					))}
+					))} */}
 				</div>
 				<div className='w-[49%] h-fit sticky top-30 space-y-4 rounded-4xl p-10 border-2 border-[#e9e9e9] bg-white'>
 					<div className='flex space-x-3'>

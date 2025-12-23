@@ -1,30 +1,27 @@
 import { useState } from "react";
 
-const DropDownList = () => {
-	const [isOpen, setIsOpen] = useState(false);
-	const [selected, setSelected] = useState("all");
-	const options = ["all", "pending", "accepted", "rejected"];
+const options: string[] = [
+	"UI designer",
+	"UX designer",
+	"Web design",
+	"fullstack developpement",
+];
 
-	const getStatusColor = (status: string) => {
-		switch (status) {
-			case "accepted":
-				return "text-green-600 bg-green-50";
-			case "rejected":
-				return "text-red-600 bg-red-50";
-			case "pending":
-				return "text-yellow-600 bg-yellow-50";
-			default:
-				return "text-blue-600 bg-blue-50";
-		}
-	};
-
+const JobCategoriesDropDownList = () => {
+	const [isOpen, setIsOpen] = useState<boolean>(false);
+	const [selected, setSelected] = useState("Select Category");
 	return (
-		<div className='relative inline-block text-left w-30 font-medium'>
-			<button
+		<button
+			type='button'
+			onBlur={() => setIsOpen(false)}
+			className='cursor-pointer relative inline-block w-full text-left font-medium'
+		>
+			<div
 				onClick={() => setIsOpen(!isOpen)}
-				className={` rounded-full w-full px-4 py-2 text-sm font-medium border-2 shadow-sm flex justify-between items-center capitalize ${getStatusColor(
-					selected
-				)}`}
+				// className={` rounded-full w-full px-4 py-2 text-sm font-medium border-2 shadow-sm flex justify-between items-center capitalize ${getStatusColor(
+				// 	selected
+				// )}`}
+				className='rounded-xl border-[1.5px] border-[#e9e9e9] px-4 py-3 text-sm font-medium flex justify-between items-center capitalize'
 			>
 				{selected}
 				<svg
@@ -40,14 +37,14 @@ const DropDownList = () => {
 						d='M19 9l-7 7-7-7'
 					/>
 				</svg>
-			</button>
+			</div>
 
 			{isOpen && (
 				<div className='absolute z-10 mt-2 w-full bg-white border border-gray-200 rounded-xl shadow-lg'>
 					<ul className='py-1'>
 						{options.map((option) => (
 							<li key={option}>
-								<button
+								<div
 									onClick={() => {
 										setSelected(option);
 										setIsOpen(false);
@@ -55,14 +52,14 @@ const DropDownList = () => {
 									className='block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 text-left capitalize'
 								>
 									{option}
-								</button>
+								</div>
 							</li>
 						))}
 					</ul>
 				</div>
 			)}
-		</div>
+		</button>
 	);
 };
 
-export default DropDownList;
+export default JobCategoriesDropDownList;

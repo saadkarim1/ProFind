@@ -11,31 +11,6 @@ import { CgSoftwareDownload } from "react-icons/cg";
 const SeekerProfilePage = () => {
 	return (
 		<div className='h-fit grid w-[74%] grid-cols-2 gap-4'>
-			<div className='col-span-2 h-fit rounded-3xl border-2 border-[#e9e9e9] bg-white'>
-				<div className='p-6 text-[14px] font-normal w-[80%]'>
-					<h2 className='font-medium text-lg'>About me</h2>
-					<p>
-						quos quae recusandae facere odit quo error eligendi nulla veritatis
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-						Accusantium neque sapiente iusto aliquid nobis, eaque asperiores at
-						ad rerum ex.
-					</p>
-				</div>
-				<div className='rounded-b-3xl border-2  border-transparent flex items-center justify-evenly  bg-[#f1f1f1] w-full py-2'>
-					<div className='flex items-center space-x-2 text-[#878787] w-[33.33%] justify-center'>
-						<SlLocationPin className='text-xl' />
-						<p>Casablanca settat, Morocco</p>
-					</div>
-					<div className='flex items-center space-x-2 text-[#878787] w-[33.33%] justify-center'>
-						<RiGraduationCapLine className='text-xl' />
-						<p>Fullstack developer</p>
-					</div>
-					<div className='flex items-center space-x-2 text-[#878787] w-[33.33%] justify-center'>
-						<MdWorkOutline className='text-xl' />
-						<p>student</p>
-					</div>
-				</div>
-			</div>
 			<div className='p-6 col-span-2 h-fit rounded-3xl border-2 border-[#e9e9e9] bg-white'>
 				<div className='text-[14px] font-normal w-full flex items-center justify-between'>
 					<h2 className='font-medium text-lg'>All Personal Information</h2>
@@ -66,6 +41,36 @@ const SeekerProfilePage = () => {
 							<p className='text-[#878787] text-[14px]'>Phone Number</p>
 						</div>
 					</div>
+					<div className='flex items-center space-x-2'>
+						<div className='flex items-center justify-center rounded-lg bg-[#e9e9e9] text-[#878787] p-1.5 text-2xl'>
+							<SlLocationPin strokeWidth='8' />
+						</div>
+						<div className='-space-y-1'>
+							<h3>Casablanca settat, Morocco</h3>
+
+							<p className='text-[#878787] text-[14px]'>Location</p>
+						</div>
+					</div>
+					<div className='flex items-center space-x-2'>
+						<div className='flex items-center justify-center rounded-lg bg-[#e9e9e9] text-[#878787] p-1.5 text-2xl'>
+							<MdWorkOutline />
+						</div>
+						<div className='-space-y-1'>
+							<h3>Developer</h3>
+							<p className='text-[#878787] text-[14px]'>Job</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div className='col-span-2 h-fit rounded-3xl border-2 border-[#e9e9e9] bg-white'>
+				<div className='p-6 text-[16px] font-normal w-[80%]'>
+					<h2 className='font-medium text-lg'>About me</h2>
+					<p>
+						quos quae recusandae facere odit quo error eligendi nulla veritatis
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+						Accusantium neque sapiente iusto aliquid nobis, eaque asperiores at
+						ad rerum ex.
+					</p>
 				</div>
 			</div>
 			<div className='p-6 col-span-2 h-fit rounded-3xl border-2 border-[#e9e9e9] bg-white'>
