@@ -23,7 +23,6 @@ import CompanySettings from "./pages/RecruiterProfile/CompanySettings";
 import OffersPage from "./pages/OffersPage";
 import CreateOfferPage from "./pages/CreateOfferPage";
 import ApplicantsPage from "./pages/ApplicantsPage";
-import { useGetUserQuery } from "./app/services/authApi";
 
 const router = createBrowserRouter([
 	{
@@ -71,10 +70,6 @@ const router = createBrowserRouter([
 	},
 ]);
 function App() {
-	const { data: authenticatedUser } = useGetUserQuery();
-
-	// console.log("user", user);
-	// console.log("isAuthenticated", isAuthenticated);
 	return <RouterProvider router={router} />;
 }
 

@@ -4,6 +4,7 @@ import LoginPopup from "./LoginPopup";
 import ProfilePopup from "./ProfilePopup";
 import { useSelector } from "react-redux";
 import type { RooteState } from "@/app/store";
+import { useGetUserQuery } from "@/app/services/authApi";
 
 type Link = {
 	path: string;
@@ -31,12 +32,13 @@ const links: Link[] = [
 
 const NavBar = () => {
 	const { pathname } = useLocation();
-	const { user, isAuthenticated } = useSelector(
-		(state: RooteState) => state.auth
-	);
+	const { data: authenticatedUser } = useGetUserQuery();
+
+	// const { user, isAuthenticated } = useSelector(
+	// 	(state: RooteState) => state.auth
+	// );
 	const [showProfilePopup, setShowProfilePopup] = useState<boolean>(false);
 	const [showLoginPopup, setShowLoginPopup] = useState<boolean>(false);
-	// const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 
 	return (
 		<nav className='z-999 fixed w-[80%] mx-auto inset-x-0 pt-3'>
@@ -64,7 +66,18 @@ const NavBar = () => {
 					})}
 				</ul>
 				<div className='w-[25%] flex items-center justify-end'>
-					<Activity mode={isAuthenticated ? "hidden" : "visible"}>
+					{authenticatedUser ? (
+						<ProfilePopup
+							showProfilePopup={showProfilePopup}
+							setShowProfilePopup={setShowProfilePopup}
+						/>
+					) : (
+						<LoginPopup
+							showLoginPopup={showLoginPopup}
+							setShowLoginPopup={setShowLoginPopup}
+						/>
+					)}
+					{/* <Activity mode={isAuthenticated ? "hidden" : "visible"}>
 						<LoginPopup
 							showLoginPopup={showLoginPopup}
 							setShowLoginPopup={setShowLoginPopup}
@@ -75,7 +88,7 @@ const NavBar = () => {
 							showProfilePopup={showProfilePopup}
 							setShowProfilePopup={setShowProfilePopup}
 						/>
-					</Activity>
+					</Activity> */}
 				</div>
 			</div>
 		</nav>

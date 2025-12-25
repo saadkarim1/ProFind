@@ -41,7 +41,7 @@ export const authApi = apiSlice.injectEndpoints({
 
 		getUser: builder.query<SeekerType, void>({
 			query: () => "api/user",
-			
+			providesTags: ["User"],
 		}),
 	}),
 });
