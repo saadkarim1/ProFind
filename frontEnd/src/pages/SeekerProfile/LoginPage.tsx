@@ -27,10 +27,6 @@ const Login = () => {
 		e.preventDefault();
 		const res = await getCSRF();
 		console.log(res);
-		// console.log({
-		// 	...inputsValues,
-		// 	password_confirmation: inputsValues.password,
-		// });
 		const res1 = await login({
 			...inputsValues,
 			password_confirmation: inputsValues.password,

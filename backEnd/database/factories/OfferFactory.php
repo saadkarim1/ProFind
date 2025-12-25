@@ -24,7 +24,6 @@ class OfferFactory extends Factory
             "duration" => fake()->randomElement(["1-3 months", "3-6 months", "6+ months"]),
             "offer_type" => fake()->randomElement(["remote", "freelance", "part_time", 'full_time']),
             "company_id" => Company::all(['id'])->random(),
-            "likes" => fake()->numberBetween(20, 40),
         ];
     }
 }

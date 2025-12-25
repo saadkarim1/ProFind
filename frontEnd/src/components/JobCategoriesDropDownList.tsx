@@ -6,10 +6,15 @@ const options: string[] = [
 	"Web design",
 	"fullstack developpement",
 ];
-
-const JobCategoriesDropDownList = () => {
+type JobCategoriesDropDownListProps = {
+	selectedCategory: string;
+	setSelectedCategory: React.Dispatch<React.SetStateAction<string>>;
+};
+const JobCategoriesDropDownList = ({
+	selectedCategory,
+	setSelectedCategory,
+}: JobCategoriesDropDownListProps) => {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
-	const [selected, setSelected] = useState("Select Category");
 	return (
 		<button
 			type='button'
@@ -18,12 +23,9 @@ const JobCategoriesDropDownList = () => {
 		>
 			<div
 				onClick={() => setIsOpen(!isOpen)}
-				// className={` rounded-full w-full px-4 py-2 text-sm font-medium border-2 shadow-sm flex justify-between items-center capitalize ${getStatusColor(
-				// 	selected
-				// )}`}
 				className='rounded-xl border-[1.5px] border-[#e9e9e9] px-4 py-3 text-sm font-medium flex justify-between items-center capitalize'
 			>
-				{selected}
+				{selectedCategory}
 				<svg
 					className='w-4 h-4 ml-2'
 					fill='none'
@@ -46,7 +48,7 @@ const JobCategoriesDropDownList = () => {
 							<li key={option}>
 								<div
 									onClick={() => {
-										setSelected(option);
+										setSelectedCategory(option);
 										setIsOpen(false);
 									}}
 									className='block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 text-left capitalize'

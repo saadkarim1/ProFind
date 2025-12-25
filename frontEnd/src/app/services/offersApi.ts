@@ -5,7 +5,15 @@ export const offersApi = apiSlice.injectEndpoints({
 		getAllOffers: builder.query({
 			query: () => "api/v1/offers",
 		}),
+
+		addOffer: builder.mutation({
+			query: (payload) => ({
+				url: "api/v1/offers",
+				method: "Post",
+				body: payload,
+			}),
+		}),
 	}),
 });
 
-export const { useGetAllOffersQuery } = offersApi;
+export const { useGetAllOffersQuery, useAddOfferMutation } = offersApi;

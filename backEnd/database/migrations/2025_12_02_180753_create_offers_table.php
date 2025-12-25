@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string("duration");
             $table->enum("offer_type", ["remote", "freelance", "part_time", 'full_time']);
             $table->foreignUuid("company_id")->constrained('companies', 'id')->onDelete('cascade');
-            $table->integer("likes");
             $table->timestamps();
         });
     }

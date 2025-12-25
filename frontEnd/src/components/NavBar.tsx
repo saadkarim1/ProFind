@@ -66,7 +66,7 @@ const NavBar = () => {
 					})}
 				</ul>
 				<div className='w-[25%] flex items-center justify-end'>
-					{authenticatedUser ? (
+					{/* {authenticatedUser ? (
 						<ProfilePopup
 							showProfilePopup={showProfilePopup}
 							setShowProfilePopup={setShowProfilePopup}
@@ -76,19 +76,19 @@ const NavBar = () => {
 							showLoginPopup={showLoginPopup}
 							setShowLoginPopup={setShowLoginPopup}
 						/>
-					)}
-					{/* <Activity mode={isAuthenticated ? "hidden" : "visible"}>
+					)} */}
+					<Activity mode={authenticatedUser ? "hidden" : "visible"}>
 						<LoginPopup
 							showLoginPopup={showLoginPopup}
 							setShowLoginPopup={setShowLoginPopup}
 						/>
 					</Activity>
-					<Activity mode={isAuthenticated ? "visible" : "hidden"}>
+					<Activity mode={authenticatedUser ? "visible" : "hidden"}>
 						<ProfilePopup
 							showProfilePopup={showProfilePopup}
 							setShowProfilePopup={setShowProfilePopup}
 						/>
-					</Activity> */}
+					</Activity>
 				</div>
 			</div>
 		</nav>

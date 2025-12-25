@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreOfferRequest;
 use App\Http\Resources\OfferCollection;
 use App\Http\Resources\OfferResource;
 use App\Jobs\testTask;
@@ -9,6 +10,7 @@ use App\Models\Offer;
 use App\Traits\ApiResponse;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OfferController extends Controller
 {
@@ -23,12 +25,20 @@ class OfferController extends Controller
             return response()->json($e->getMessage());
         }
     }
-    public function store(Request $request)
+    public function store(StoreOfferRequest $request)
     {
         try {
-            $offer = Offer::create($request->all());
-            // return response()->json($offer, 201);
-            return $this->successResponse(data: new OfferResource($offer), status: 201);
+            $request->validated();
+            $offer = Offer::create([
+                "title" => $request->title,
+                "description" => $request->description,
+                "location" => $request->location,
+                "duration" => $request->duration,
+                "offer_type" => $request->offer_type,
+                "company_id" => Auth::user()->id,
+            ]);
+            return $offer;
+            // return $this->successResponse(data: new OfferResource($offer), status: 201);
         } catch (Exception $e) {
             return response()->json($e->getMessage());
         }

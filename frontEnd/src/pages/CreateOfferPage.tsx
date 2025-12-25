@@ -1,11 +1,48 @@
+import { useAddOfferMutation } from "@/app/services/offersApi";
 import JobCategoriesDropDownList from "@/components/JobCategoriesDropDownList";
 import JobTypesDropDownList from "@/components/JobTypesDropDownList";
+import { useState } from "react";
 import { IoArrowBack } from "react-icons/io5";
 import { Link } from "react-router";
 
 const CreateOfferPage = () => {
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+	const [addOffer] = useAddOfferMutation();
+	const [selectedCategory, setSelectedCategory] =
+		useState<string>("Select Category");
+	const [selectedJobType, setSelectedJobType] =
+		useState<string>("Select Job Type");
+	const [textareaValue, setTextareaValue] = useState();
+	const [dataFrom, setDataForm] = useState({
+		title: "",
+		description: "",
+		location: "",
+		duration: "",
+		offer_type: "",
+		category: "",
+	});
+
+	const handleInputsfields = (
+		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+	) => {
+		setDataForm({
+			...dataFrom,
+			[e.currentTarget.name]: e.currentTarget.value,
+		});
+	};
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
+		console.log({
+			...dataFrom,
+			offer_type: selectedJobType,
+			category: selectedCategory,
+		});
+
+		const res = await addOffer({
+			...dataFrom,
+			offer_type: selectedJobType,
+			// category: selectedCategory,
+		});
+		console.log(res);
 	};
 	return (
 		<section className='flex'>
@@ -25,14 +62,8 @@ const CreateOfferPage = () => {
 							Fill int the details to create your job listing
 						</p>
 					</div>
-					{/* <div className='space-y-1'>
-						<p className='text-[#bbbac0] text-[13px]'>Step 1/2</p>
-						<div className='w-full h-1 rounded-full bg-[#eeeef0]'>
-							<div className='w-[60%] h-full rounded-full bg-[#0082FA]'></div>
-						</div>
-					</div> */}
 					<div className='grid grid-cols-2 gap-4'>
-						<div>
+						<div className='col-span-2'>
 							<label
 								htmlFor='jobTitle'
 								className='formField text-[#878787] text-[15px] after:text-red-600'
@@ -42,19 +73,8 @@ const CreateOfferPage = () => {
 							<input
 								type='text'
 								id='jobTitle'
-								className='focus:outline-none bg-[#f5f5f5] border-[1.5px] border-[#e9e9e9] block py-2 px-3 w-full rounded-xl'
-							/>
-						</div>
-						<div>
-							<label
-								htmlFor='companyName'
-								className='formField text-[#878787] text-[15px] after:text-red-600'
-							>
-								Company Name
-							</label>
-							<input
-								type='text'
-								id='companyName'
+								name='title'
+								onChange={handleInputsfields}
 								className='focus:outline-none bg-[#f5f5f5] border-[1.5px] border-[#e9e9e9] block py-2 px-3 w-full rounded-xl'
 							/>
 						</div>
@@ -65,7 +85,10 @@ const CreateOfferPage = () => {
 							>
 								Category
 							</label>
-							<JobCategoriesDropDownList />
+							<JobCategoriesDropDownList
+								selectedCategory={selectedCategory}
+								setSelectedCategory={setSelectedCategory}
+							/>
 						</div>
 						<div>
 							<label
@@ -74,19 +97,24 @@ const CreateOfferPage = () => {
 							>
 								Job Type
 							</label>
-							<JobTypesDropDownList />
+							<JobTypesDropDownList
+								selectedJobType={selectedJobType}
+								setSelectedJobType={setSelectedJobType}
+							/>
 						</div>
 						<div className='col-span-2'>
 							<label
 								htmlFor='location'
 								className='formField text-[#878787] text-[15px] after:text-red-600'
 							>
-								Job Type
+								Location
 							</label>
 							<input
 								placeholder='e.g...Casablanca'
 								type='text'
 								id='location'
+								name='location'
+								onChange={handleInputsfields}
 								className='focus:outline-none bg-[#f5f5f5] border-[1.5px] border-[#e9e9e9] block py-2 px-3 w-full rounded-xl'
 							/>
 						</div>
@@ -114,6 +142,8 @@ const CreateOfferPage = () => {
 								rows={6}
 								maxLength={400}
 								id='Description'
+								name='description'
+								onChange={handleInputsfields}
 								className='focus:outline-none bg-[#f5f5f5] border-[1.5px] border-[#e9e9e9] block py-2 px-3 w-full rounded-xl'
 							/>
 						</div>
@@ -123,15 +153,33 @@ const CreateOfferPage = () => {
 							</label>
 							<div className='flex justify-evenly mt-2'>
 								<div className='rounded-lg bg-sky-100 p-2.5'>
-									<input type='radio' id='3' name='duration' />{" "}
-									<label htmlFor='3'>3 to 6 months</label>
-								</div>
-								<div className='rounded-lg bg-sky-100 p-2.5'>
-									<input type='radio' id='1' name='duration' />{" "}
+									<input
+										type='radio'
+										id='1'
+										name='duration'
+										value={"1-3 months"}
+										onChange={handleInputsfields}
+									/>{" "}
 									<label htmlFor='1'>1 to 3 months</label>
 								</div>
 								<div className='rounded-lg bg-sky-100 p-2.5'>
-									<input type='radio' id='6' name='duration' />{" "}
+									<input
+										type='radio'
+										id='3'
+										name='duration'
+										value={"3-6 months"}
+										onChange={handleInputsfields}
+									/>{" "}
+									<label htmlFor='3'>3 to 6 months</label>
+								</div>
+								<div className='rounded-lg bg-sky-100 p-2.5'>
+									<input
+										type='radio'
+										id='6'
+										name='duration'
+										value={"6+ months"}
+										onChange={handleInputsfields}
+									/>{" "}
 									<label htmlFor='6'>More than 6 months</label>
 								</div>
 							</div>

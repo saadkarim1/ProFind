@@ -22,7 +22,6 @@ class OfferResource extends JsonResource
             "location" => $this->location,
             "duration" => $this->duration,
             "company_id" => $this->company_id,
-            "likes" => $this->likes,
             "offer_type" => $this->offer_type,
             "company" => $this->company,
             "created_at" => $this->created_at,
