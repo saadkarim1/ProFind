@@ -2,7 +2,7 @@ import { useGetAllOffersQuery } from "@/app/services/offersApi";
 import JobCardTwo from "@/components/JobCardTwo";
 import SearchBar from "@/components/offers/SearchBar";
 import type { OfferType } from "@/models/offer";
-import { OfferTypeStyle } from "@/utils/offerCardUtils";
+import { GetOfferType } from "@/utils/GetOfferType";
 import { useEffect, useState } from "react";
 
 const Jobs: React.FC = () => {
@@ -33,7 +33,7 @@ const Jobs: React.FC = () => {
 						<JobCardTwo key={index} />
 					))} */}
 				</div>
-				<div className='w-[49%] h-fit sticky top-30 space-y-4 rounded-4xl p-10 border-2 border-[#e9e9e9] bg-white'>
+				<div className='w-[49%] h-fit sticky top-30 space-y-4 rounded-4xl p-10 border-4 border-[#e9e9e9] bg-white'>
 					<div className='flex space-x-3'>
 						<div className='bg-sky-100 p-2.5 rounded-2xl w-fit h-fit'>
 							<svg
@@ -58,7 +58,7 @@ const Jobs: React.FC = () => {
 						<div className='flex flex-col space-y-2 w-full'>
 							<div className='flex items-center justify-between w-full'>
 								<h1 className='font-medium text-3xl'>{selectedOffer?.title}</h1>
-								{OfferTypeStyle(selectedOffer?.offer_type)}
+								{GetOfferType(selectedOffer?.offer_type)}
 							</div>
 							<p className='font-medium text-[#878787] text-[18px]'>
 								{selectedOffer?.company.title}

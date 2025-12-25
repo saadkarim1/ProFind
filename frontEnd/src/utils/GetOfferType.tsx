@@ -1,4 +1,4 @@
-export const OfferTypeStyle = (offer_type: string | undefined) => {
+export const GetOfferType = (offer_type: string | undefined) => {
 	switch (offer_type) {
 		case "part_time":
 			return (

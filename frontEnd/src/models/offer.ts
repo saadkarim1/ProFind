@@ -20,6 +20,7 @@ export type OfferType = {
 	offer_type: string;
 	likes: number;
 	company: CompanyType;
+	created_at: string;
 };
 
 city: "safi";
