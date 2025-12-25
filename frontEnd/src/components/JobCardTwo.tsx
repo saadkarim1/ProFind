@@ -1,4 +1,5 @@
-import type { JobType } from "@/models/job";
+import type { OfferType } from "@/models/offer";
+import { OfferTypeStyle } from "@/utils/offerCardUtils";
 import { useState } from "react";
 
 type PostInteractions = {
@@ -8,30 +9,35 @@ type PostInteractions = {
 };
 
 type JobCardTwoProps = {
-	job: JobType
-}
+	offer: OfferType;
+	selectedOffer: OfferType | null;
+	setSelectedOffer: React.Dispatch<React.SetStateAction<OfferType | null>>;
+};
 
-const JobCardTwo = () => {
+const JobCardTwo = ({
+	offer,
+	setSelectedOffer,
+	selectedOffer,
+}: JobCardTwoProps) => {
 	const [postInteractions, setPostInteractions] = useState<PostInteractions>({
 		up: false,
 		save: false,
 		share: false,
 	});
-	const [isSelected, setIsSelected] = useState<boolean>(false);
 	return (
 		<div
-			onClick={() => setIsSelected((prev) => !prev)}
+			onClick={() => setSelectedOffer(offer)}
 			className={`rounded-4xl p-1 ${
-				isSelected ? "bg-[#99C3FF]" : "bg-white"
+				selectedOffer?.offer_id === offer.offer_id ? "bg-[#99C3FF]" : "bg-white"
 			} shadow-3xl cursor-pointer transition-colors duration-200 ease-in-out`}
 		>
-			<div className='w-full rounded-[30px] bg-white p-3 flex flex-col justify-between space-y-3'>
+			<div className='w-full rounded-[30px] h-full bg-white p-3 flex flex-col justify-between space-y-3'>
 				<div className='flex items-center space-x-2'>
-					<div className='flex items-center justify-center h-11 w-11  capitalize text-[#0082FA] font-bold text-3xl bg-[#D6E7FF] rounded-full'>
+					<div className='flex items-center justify-center min-h-11 min-w-11  capitalize text-[#0082FA] font-bold text-3xl bg-[#D6E7FF] rounded-full'>
 						c
 					</div>
 					<div className='-space-y-1'>
-						<h1 className='font-medium text-xl'>capgemini</h1>
+						<h1 className='font-medium text-[19px]'>{offer.company.title}</h1>
 						<p className='text-[12px] text-slate-500 flex items-center space-x-1'>
 							<span>Nov 11</span>
 							<span className='h-1 w-1 bg-slate-500 rounded-full'></span>
@@ -40,12 +46,14 @@ const JobCardTwo = () => {
 					</div>
 				</div>
 				<div>
-					<h3 className='font-medium'>Job Title</h3>
-					<p className='text-[12px] text-slate-500'>Casablanca, Morocco</p>
+					<h3 className='font-medium'>{offer.title}</h3>
+					<p className='text-[14px] text-slate-500 capitalize'>
+						{offer.location}
+					</p>
 				</div>
-				<div className='border border-[#0082FA] px-2 py-0.5 font-medium text-[12px]  text-[#0082FA] w-fit rounded-lg'>
-					secteur
-				</div>
+
+				{OfferTypeStyle(offer.offer_type)}
+
 				<div>
 					<hr className='rounded-full text-slate-300 my-1' />
 					<div className='flex items-center '>
@@ -72,7 +80,7 @@ const JobCardTwo = () => {
 									postInteractions.up ? "text-[#0082FA]" : "text-slate-500"
 								} group-hover:text-[#0082FA] transition-all duration-250 ease-in-out`}
 							>
-								23
+								{offer.likes}
 							</p>
 						</div>
 						<div className='group w-[33%] flex justify-center'>

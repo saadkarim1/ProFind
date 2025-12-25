@@ -15,9 +15,9 @@ class Offer extends Model
         "description",
         "location",
         "duration",
+        "job_type",
         "company_id",
         "likes",
-        "image"
     ];
 
     public $incrementing = false;

@@ -7,7 +7,7 @@ const RecruiterLoginPage = () => {
 	const [showPassword, setShowPassword] = useState<boolean>(false);
 	return (
 		<section className='w-full space-y-4 flex items-center flex-col justify-center'>
-			<div className='bg-white w-[30%] rounded-xl flex flex-col items-center justify-center p-8 space-y-4 drop-shadow-[0_5px_8px_rgba(0,0,0,0.25)]'>
+			<div className='bg-white w-[40%] rounded-xl flex flex-col items-center justify-center p-8 space-y-4 drop-shadow-[0_5px_8px_rgba(0,0,0,0.25)]'>
 				<div className='z-10 rounded-xl w-fit h-fit bg-gray-200 text-3xl p-3'>
 					<MdWorkOutline />
 				</div>

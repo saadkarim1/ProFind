@@ -11,7 +11,6 @@ const LoginPopup = ({ showLoginPopup, setShowLoginPopup }: LoginPopupProps) => {
 		<div
 			className='relative'
 			onBlur={(e) => {
-				console.log("first");
 				if (!e.currentTarget.contains(e.relatedTarget)) {
 					setShowLoginPopup(false);
 				}

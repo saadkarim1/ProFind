@@ -21,7 +21,8 @@ class OfferFactory extends Factory
             "title" => fake()->jobTitle(),
             "description" => fake()->paragraph(),
             "location" => fake()->randomElement(['casablanca', 'rabat', 'agadir', 'safi']),
-            "duration" => fake()->numberBetween(5, 10),
+            "duration" => fake()->randomElement(["1-3 months", "3-6 months", "6+ months"]),
+            "offer_type" => fake()->randomElement(["remote", "freelance", "part_time", 'full_time']),
             "company_id" => Company::all(['id'])->random(),
             "likes" => fake()->numberBetween(20, 40),
         ];

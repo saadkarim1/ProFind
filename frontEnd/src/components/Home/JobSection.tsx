@@ -4,6 +4,8 @@ import TabJob from "./TabJob";
 import Cursor from "./Cursor";
 import JobCard from "../JobCard";
 import { Link } from "react-router";
+import { useGetAllOffersQuery } from "@/app/services/offersApi";
+import type { OfferType } from "@/models/offer";
 
 const domaines: string[] = [
 	"Digital Marketing",
@@ -16,7 +18,9 @@ const domaines: string[] = [
 type Props = {
 	featuredJobsRef: React.RefObject<HTMLElement | null>;
 };
+
 const JobsSection: React.FC<Props> = ({ featuredJobsRef }) => {
+	const { data: offers } = useGetAllOffersQuery(undefined);
 	const [selectedDomaine, setSelectedDomaine] =
 		useState<string>("Graphic Designer");
 
@@ -27,6 +31,23 @@ const JobsSection: React.FC<Props> = ({ featuredJobsRef }) => {
 		height: 0,
 	});
 
+	const latestOffers = () => {
+		let leatestOffers1: OfferType[] = [
+			offers?.data.offers[offers?.data.offers.length - 1],
+		];
+
+		for (
+			let i = offers?.data.offers.length - 2;
+			i > offers?.data.offers.length - 9;
+			i--
+		) {
+			leatestOffers1 = [...leatestOffers1, offers?.data.offers[i]];
+		}
+
+		return leatestOffers1;
+	};
+
+	console.log("first", latestOffers());
 	return (
 		<section
 			ref={featuredJobsRef}
@@ -48,8 +69,8 @@ const JobsSection: React.FC<Props> = ({ featuredJobsRef }) => {
 			</ul>
 
 			<div className='grid grid-cols-4 gap-4 w-full'>
-				{[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
-					<JobCard key={item} />
+				{latestOffers()?.map((offer) => (
+					<JobCard key={offer?.offer_id}  offer={offer}/>
 				))}
 			</div>
 			<Link

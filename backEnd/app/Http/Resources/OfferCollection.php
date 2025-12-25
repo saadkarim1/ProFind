@@ -14,6 +14,6 @@ class OfferCollection extends ResourceCollection
      */
     public function toArray(Request $request): array
     {
-        return ["data_offers" => $this->collection];
+        return ["offers" => $this->collection];
     }
 }

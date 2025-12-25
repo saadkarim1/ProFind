@@ -31,8 +31,7 @@ const NavBar = () => {
 	const { pathname } = useLocation();
 	const [showProfilePopup, setShowProfilePopup] = useState<boolean>(false);
 	const [showLoginPopup, setShowLoginPopup] = useState<boolean>(false);
-	const [isAuthenticated, setIsAuthenticated] = useState<boolean>(true);
-	// const [isJobSeeker, setIsJobSeeker] = useState<boolean>(false);
+	const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 
 	return (
 		<nav className='z-999 fixed w-[80%] mx-auto inset-x-0 pt-3'>

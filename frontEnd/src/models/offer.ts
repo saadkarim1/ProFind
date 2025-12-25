@@ -10,13 +10,15 @@ type CompanyType = {
 	updated_at: string;
 };
 
-export type JobType = {
+export type OfferType = {
 	company_id: string;
 	description: string;
 	duration: number;
 	location: string;
 	offer_id: string;
 	title: string;
+	offer_type: string;
+	likes: number;
 	company: CompanyType;
 };
 

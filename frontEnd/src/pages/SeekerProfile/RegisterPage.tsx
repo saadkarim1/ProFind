@@ -3,12 +3,47 @@ import { FiLock, FiUnlock } from "react-icons/fi";
 import { LuMailOpen, LuUser } from "react-icons/lu";
 import { TbLogin } from "react-icons/tb";
 import { Link } from "react-router";
+import {
+	useLazyGetCSRFQuery,
+	useRegisterMutation,
+} from "@/app/services/authApi";
 
 const Register = () => {
 	const [showPassword, setShowPassword] = useState<boolean>(false);
+	const [getCSRF] = useLazyGetCSRFQuery();
+	const [register] = useRegisterMutation();
+	const [inputsValues, setInputsValues] = useState({
+		name: "",
+		email: "",
+		password: "",
+		password_confirmation: "",
+	});
+
+	const handleInputsfields = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setInputsValues({
+			...inputsValues,
+			[e.currentTarget.name]: e.currentTarget.value,
+		});
+	};
+
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+		const res = await getCSRF();
+		console.log(res);
+
+		const res1 = await register({
+			...inputsValues,
+			password_confirmation: inputsValues.password,
+		});
+		console.log(res1);
+	};
+
 	return (
 		<section className='w-full flex flex-col space-y-4 items-center justify-center'>
-			<div className='bg-white w-[30%] rounded-xl flex flex-col items-center justify-center p-8 space-y-4 drop-shadow-[0_5px_8px_rgba(0,0,0,0.25)]'>
+			<form
+				onSubmit={handleSubmit}
+				className='bg-white w-[40%] rounded-xl flex flex-col items-center justify-center p-8 space-y-4 drop-shadow-[0_5px_8px_rgba(0,0,0,0.25)]'
+			>
 				<div className='z-10 rounded-xl w-fit h-fit bg-gray-200 text-3xl p-3'>
 					<TbLogin />
 				</div>
@@ -23,7 +58,9 @@ const Register = () => {
 					<input
 						type='text'
 						placeholder='user name'
+						name='name'
 						className='focus:outline-none rounded-r-full  '
+						onChange={handleInputsfields}
 					/>
 				</div>
 				<div className='flex items-center p-1 rounded-full w-full bg-sky-100 '>
@@ -33,7 +70,9 @@ const Register = () => {
 					<input
 						type='email'
 						placeholder='Email'
+						name='email'
 						className='focus:outline-none rounded-r-full  '
+						onChange={handleInputsfields}
 					/>
 				</div>
 				<div className='flex items-center p-1 rounded-full bg-sky-100 w-full'>
@@ -50,7 +89,9 @@ const Register = () => {
 					<input
 						type={showPassword ? "text" : "password"}
 						placeholder='Password'
+						name='password'
 						className='focus:outline-none  rounded-r-full '
+						onChange={handleInputsfields}
 					/>
 				</div>
 				<button className='w-full cursor-pointer font-normal text-lg rounded-full bg-[#0082FA] text-white p-2'>
@@ -65,7 +106,7 @@ const Register = () => {
 						<img src='/src/assets/github.svg' width={30} alt='' />
 					</div>
 				</div>
-			</div>
+			</form>
 			<p className='text-gray-500'>
 				Don't have an account?{" "}
 				<Link to={"/login"} className='font-medium text-[#0082FA]'>
