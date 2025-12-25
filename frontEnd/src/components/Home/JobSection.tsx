@@ -47,7 +47,6 @@ const JobsSection: React.FC<Props> = ({ featuredJobsRef }) => {
 		return leatestOffers1;
 	};
 
-	console.log("first", latestOffers());
 	return (
 		<section
 			ref={featuredJobsRef}
@@ -70,7 +69,7 @@ const JobsSection: React.FC<Props> = ({ featuredJobsRef }) => {
 
 			<div className='grid grid-cols-4 gap-4 w-full'>
 				{latestOffers()?.map((offer) => (
-					<JobCard key={offer?.offer_id}  offer={offer}/>
+					<JobCard key={offer?.offer_id} offer={offer} />
 				))}
 			</div>
 			<Link

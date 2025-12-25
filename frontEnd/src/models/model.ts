@@ -44,3 +44,14 @@ export const RecruiterProfileList: Section[] = [
 	},
 	{ path: "/recruiter/settings", name: "settings", icon: IoSettingsOutline },
 ];
+
+export type SeekerType = {
+	user_id: string;
+	name: string;
+	about_me: string;
+	phone: string;
+	location: string;
+	email: string;
+	role: string;
+	job: string;
+};

@@ -1,11 +1,11 @@
 import { authApi } from "@/app/services/authApi";
-import type { RooteState } from "@/app/store";
+import type { SeekerType } from "@/models/model";
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
 	isAuthenticated: false,
-	user: "",
-} as { isAuthenticated: boolean; user: string };
+	user: {},
+} as { isAuthenticated: boolean; user: SeekerType };
 
 const slice = createSlice({
 	name: "auth",
@@ -15,23 +15,29 @@ const slice = createSlice({
 	},
 
 	extraReducers: (builder) => {
-		builder.addMatcher(
-			authApi.endpoints.getUser.matchFulfilled,
-			(state, { payload }) => {
-				state.isAuthenticated = true;
-				console.log("payload", payload);
-				state.user = "saad";
-				// if(payload) {
-
-				//     state.user = payload.name;
-				// }
-			}
-		);
+		builder
+			.addMatcher(
+				authApi.endpoints.getUser.matchFulfilled,
+				(state, { payload }) => {
+					console.log(payload.data);
+					state.isAuthenticated = true;
+					state.user = payload.data;
+				}
+			)
+			.addMatcher(authApi.endpoints.logout.matchFulfilled, () => initialState);
+		// .addMatcher(
+		// 	authApi.endpoints.getUser.matchFulfilled,
+		// 	(state, { payload }) => {
+		// 		// console.log(payload);
+		// 		state.isAuthenticated = true;
+		// 		state.user = payload;
+		// 	}
+		// );
 	},
 });
 
 export const { logout } = slice.actions;
 export default slice.reducer;
 
-export const selectIsAuthenticated = (state: RooteState) =>
-	state.auth.isAuthenticated;
+// export const selectIsAuthenticated = (state: RooteState) =>
+// 	state.auth.isAuthenticated;

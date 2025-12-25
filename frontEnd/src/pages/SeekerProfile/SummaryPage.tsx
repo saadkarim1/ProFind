@@ -1,36 +1,22 @@
+import type { RooteState } from "@/app/store";
+import { useSelector } from "react-redux";
+
 const SummaryPage = () => {
+	const { user } = useSelector((state: RooteState) => state.auth);
+
 	return (
 		<div className='p-6 rounded-3xl border-2 border-[#e9e9e9] bg-white w-[74%] space-y-4'>
 			<h1 className='font-semibold text-lg'>Personal Information</h1>
-			<div className='flex items-center space-x-3'>
-				<div className='space-x-2'>
-					<label htmlFor='male'>Male</label>
-					<input type='radio' id='male' name='sexe' />
-				</div>
-				<div className='space-x-2'>
-					<label htmlFor='female'>Female</label>
-					<input type='radio' id='female' name='sexe' />
-				</div>
-			</div>
 			<div className='grid grid-cols-2 gap-8'>
-				<div>
-					<label htmlFor='firstName' className='text-[#878787] text-[15px]'>
+				<div className='col-span-2'>
+					<label htmlFor='name' className='text-[#878787] text-[15px]'>
 						First Name
 					</label>
 					<input
 						type='text'
-						id='firstName'
+						placeholder={user?.name}
+						id='name'
 						className='focus:outline-none border-[1.5px] border-[#e9e9e9] bg-[#f5f5f5] block py-2 px-3 w-full rounded-xl'
-					/>
-				</div>
-				<div>
-					<label htmlFor='lastName' className='text-[#878787] text-[15px]'>
-						Last Name
-					</label>
-					<input
-						type='text'
-						id='lastName'
-						className='focus:outline-none bg-[#f5f5f5] border-[1.5px] border-[#e9e9e9] block py-2 px-3 w-full rounded-xl'
 					/>
 				</div>
 				<div className='col-span-2'>
@@ -40,16 +26,18 @@ const SummaryPage = () => {
 					<input
 						type='text'
 						id='email'
+						placeholder={user?.email}
 						className='focus:outline-none bg-[#f5f5f5] border-[1.5px] border-[#e9e9e9] block py-2 px-3 w-full rounded-xl'
 					/>
 				</div>
-				<div className='col-span-2'>
+				<div>
 					<label htmlFor='adress' className='text-[#878787] text-[15px]'>
 						Adress
 					</label>
 					<input
 						type='text'
 						id='adress'
+						placeholder={user?.location}
 						className='focus:outline-none bg-[#f5f5f5] border-[1.5px] border-[#e9e9e9] block py-2 px-3 w-full rounded-xl'
 					/>
 				</div>
@@ -60,16 +48,7 @@ const SummaryPage = () => {
 					<input
 						type='text'
 						id='phone'
-						className='focus:outline-none bg-[#f5f5f5] border-[1.5px] border-[#e9e9e9] block py-2 px-3 w-full rounded-xl'
-					/>
-				</div>
-				<div>
-					<label htmlFor='adress' className='text-[#878787] text-[15px]'>
-						Adress
-					</label>
-					<input
-						type='text'
-						id='lastName'
+						placeholder={user?.phone}
 						className='focus:outline-none bg-[#f5f5f5] border-[1.5px] border-[#e9e9e9] block py-2 px-3 w-full rounded-xl'
 					/>
 				</div>
@@ -79,6 +58,7 @@ const SummaryPage = () => {
 					</label>
 					<textarea
 						id='aboutMe'
+						placeholder={user?.about_me}
 						className='focus:outline-none bg-[#f5f5f5] border-[1.5px] border-[#e9e9e9] block py-2 px-3 w-full rounded-xl'
 					/>
 				</div>

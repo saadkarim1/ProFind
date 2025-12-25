@@ -1,4 +1,5 @@
 import { apiSlice } from "@/app/services/api";
+import type { SeekerType } from "@/models/model";
 
 // type UserType = {
 // 	id: string;
@@ -22,6 +23,7 @@ export const authApi = apiSlice.injectEndpoints({
 				method: "POST",
 				body: payload,
 			}),
+			invalidatesTags: ["User"],
 		}),
 
 		login: builder.mutation({
@@ -30,10 +32,16 @@ export const authApi = apiSlice.injectEndpoints({
 				method: "Post",
 				body: payload,
 			}),
+			invalidatesTags: ["User"],
 		}),
 
-		getUser: builder.query<void, void>({
-			query: () => "api/v1/user",
+		logout: builder.mutation<void, void>({
+			query: () => ({ url: "v1/logout", method: "Post" }),
+		}),
+
+		getUser: builder.query<SeekerType, void>({
+			query: () => "api/user",
+			
 		}),
 	}),
 });
@@ -42,5 +50,6 @@ export const {
 	useLazyGetCSRFQuery,
 	useRegisterMutation,
 	useLoginMutation,
+	useLogoutMutation,
 	useGetUserQuery,
 } = authApi;

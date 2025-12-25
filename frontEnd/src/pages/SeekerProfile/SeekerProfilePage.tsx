@@ -1,5 +1,4 @@
 import { MdWorkOutline } from "react-icons/md";
-import { RiGraduationCapLine } from "react-icons/ri";
 import { SlLocationPin } from "react-icons/sl";
 import { RiEditFill } from "react-icons/ri";
 import { Link } from "react-router";
@@ -7,8 +6,11 @@ import { HiOutlineMail } from "react-icons/hi";
 import { MdOutlinePhoneAndroid } from "react-icons/md";
 import { TiDocumentText } from "react-icons/ti";
 import { CgSoftwareDownload } from "react-icons/cg";
+import { useSelector } from "react-redux";
+import type { RooteState } from "@/app/store";
 
 const SeekerProfilePage = () => {
+	const { user } = useSelector((state: RooteState) => state.auth);
 	return (
 		<div className='h-fit grid w-[74%] grid-cols-2 gap-4'>
 			<div className='p-6 col-span-2 h-fit rounded-3xl border-2 border-[#e9e9e9] bg-white'>
@@ -28,7 +30,7 @@ const SeekerProfilePage = () => {
 							<HiOutlineMail />
 						</div>
 						<div className='-space-y-1'>
-							<h3>saad@gmail.com</h3>
+							<h3>{user?.email}</h3>
 							<p className='text-[#878787] text-[14px]'>Mail adress</p>
 						</div>
 					</div>
@@ -37,7 +39,7 @@ const SeekerProfilePage = () => {
 							<MdOutlinePhoneAndroid />
 						</div>
 						<div className='-space-y-1'>
-							<h3>+212 784 816 461</h3>
+							<h3>{user?.phone}</h3>
 							<p className='text-[#878787] text-[14px]'>Phone Number</p>
 						</div>
 					</div>
@@ -46,7 +48,7 @@ const SeekerProfilePage = () => {
 							<SlLocationPin strokeWidth='8' />
 						</div>
 						<div className='-space-y-1'>
-							<h3>Casablanca settat, Morocco</h3>
+							<h3>{user?.location}</h3>
 
 							<p className='text-[#878787] text-[14px]'>Location</p>
 						</div>
@@ -56,7 +58,7 @@ const SeekerProfilePage = () => {
 							<MdWorkOutline />
 						</div>
 						<div className='-space-y-1'>
-							<h3>Developer</h3>
+							<h3>{user?.job}</h3>
 							<p className='text-[#878787] text-[14px]'>Job</p>
 						</div>
 					</div>
@@ -65,12 +67,7 @@ const SeekerProfilePage = () => {
 			<div className='col-span-2 h-fit rounded-3xl border-2 border-[#e9e9e9] bg-white'>
 				<div className='p-6 text-[16px] font-normal w-[80%]'>
 					<h2 className='font-medium text-lg'>About me</h2>
-					<p>
-						quos quae recusandae facere odit quo error eligendi nulla veritatis
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-						Accusantium neque sapiente iusto aliquid nobis, eaque asperiores at
-						ad rerum ex.
-					</p>
+					<p>{user?.about_me}</p>
 				</div>
 			</div>
 			<div className='p-6 col-span-2 h-fit rounded-3xl border-2 border-[#e9e9e9] bg-white'>

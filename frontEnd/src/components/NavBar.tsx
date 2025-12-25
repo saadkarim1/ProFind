@@ -2,6 +2,8 @@ import { Activity, useState } from "react";
 import { Link, useLocation } from "react-router";
 import LoginPopup from "./LoginPopup";
 import ProfilePopup from "./ProfilePopup";
+import { useSelector } from "react-redux";
+import type { RooteState } from "@/app/store";
 
 type Link = {
 	path: string;
@@ -29,9 +31,12 @@ const links: Link[] = [
 
 const NavBar = () => {
 	const { pathname } = useLocation();
+	const { user, isAuthenticated } = useSelector(
+		(state: RooteState) => state.auth
+	);
 	const [showProfilePopup, setShowProfilePopup] = useState<boolean>(false);
 	const [showLoginPopup, setShowLoginPopup] = useState<boolean>(false);
-	const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+	// const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 
 	return (
 		<nav className='z-999 fixed w-[80%] mx-auto inset-x-0 pt-3'>

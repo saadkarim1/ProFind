@@ -6,10 +6,10 @@ use App\Http\Controllers\OfferController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+// ->middleware('auth:sanctum')
 
-
+Route::get('/user', [AuthController::class, 'getUser']);
 Route::prefix('v1')->group(function () {
-    Route::get('/user', [AuthController::class, 'getUser'])->middleware('auth:sanctum');
 
     Route::controller(OfferController::class)->group(function () {
 

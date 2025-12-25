@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginAuthRequest;
 use App\Http\Requests\RegisterAuthRequest;
+use App\Http\Resources\AuthResource;
 use App\Models\User;
+use App\Traits\ApiResponse;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,7 +15,7 @@ use Illuminate\Support\Facades\Hash;
 class AuthController extends Controller
 {
 
-
+    use ApiResponse;
 
     public function register(RegisterAuthRequest $request)
     {
@@ -72,6 +74,7 @@ class AuthController extends Controller
     public function getUser(Request $request)
     {
         $user = $request->user();
-        return response()->json($user, 200);
+        return $this->successResponse(data: new AuthResource($user));
+        // return $user;
     }
 }
