@@ -44,6 +44,29 @@ export const authApi = apiSlice.injectEndpoints({
 			query: () => "api/user",
 			providesTags: ["User"],
 		}),
+
+		registerRecruiter: builder.mutation({
+			query: (payload) => ({
+				url: "v1/register/recruiter",
+				method: "Post",
+				body: payload,
+			}),
+			invalidatesTags: ["User"],
+		}),
+
+		loginRecruiter: builder.mutation({
+			query: (payload) => ({
+				url: "v1/login/recruiter",
+				method: "Post",
+				body: payload,
+			}),
+			invalidatesTags: ["User"],
+		}),
+
+		logoutRecruiter: builder.mutation<void, void>({
+			query: () => ({ url: "v1/logout/recruiter", method: "Post" }),
+			invalidatesTags: ["User"],
+		}),
 	}),
 });
 
@@ -53,4 +76,7 @@ export const {
 	useLoginMutation,
 	useLogoutMutation,
 	useGetUserQuery,
+	useLoginRecruiterMutation,
+	useRegisterRecruiterMutation,
+	useLogoutRecruiterMutation,
 } = authApi;

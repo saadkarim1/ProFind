@@ -27,12 +27,7 @@ const Jobs: React.FC = () => {
 							selectedOffer={selectedOffer}
 						/>
 					))}
-					{/* {[
-						1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-						20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
-					].map((_, index) => (
-						<JobCardTwo key={index} />
-					))} */}
+					
 				</div>
 				<div className='w-[49%] h-fit sticky top-30 space-y-4 rounded-4xl p-10 border-4 border-[#e9e9e9] bg-white'>
 					<div className='flex space-x-3'>

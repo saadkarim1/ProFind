@@ -68,7 +68,7 @@ const Register = () => {
 						<LuMailOpen />
 					</div>
 					<input
-						type='email'
+						type='text'
 						placeholder='Email'
 						name='email'
 						className='focus:outline-none rounded-r-full  '

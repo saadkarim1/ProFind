@@ -59,4 +59,15 @@ class RecruiterController extends Controller
             return response()->json(["message" => "somethig went wrong while updating an episode", "error" => $e->getMessage()], 404);
         }
     }
+
+    public function logoutRecruiter(Request $request)
+    {
+        Auth::guard('recruiter')->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerate();
+
+        return response()->json([
+            'message' => 'Logged out successfully'
+        ]);
+    }
 }

@@ -4,6 +4,7 @@ export const offersApi = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({
 		getAllOffers: builder.query({
 			query: () => "api/v1/offers",
+			providesTags: ["Offers"],
 		}),
 
 		addOffer: builder.mutation({
@@ -12,6 +13,7 @@ export const offersApi = apiSlice.injectEndpoints({
 				method: "Post",
 				body: payload,
 			}),
+			invalidatesTags: ["Offers"],
 		}),
 	}),
 });

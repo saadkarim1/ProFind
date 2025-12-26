@@ -1,16 +1,17 @@
 import { useState } from "react";
 import { FiLock, FiUnlock } from "react-icons/fi";
 import { LuMailOpen, LuUser } from "react-icons/lu";
-import { TbLogin } from "react-icons/tb";
 import { Link } from "react-router";
 import {
 	useLazyGetCSRFQuery,
-	useRegisterMutation,
+	useRegisterRecruiterMutation,
 } from "@/app/services/authApi";
+import { MdWorkOutline } from "react-icons/md";
 
 const RecruiterRegisterPage = () => {
 	const [showPassword, setShowPassword] = useState<boolean>(false);
 	const [getCSRF] = useLazyGetCSRFQuery();
+	const [registerRecruiter] = useRegisterRecruiterMutation();
 	const [inputsValues, setInputsValues] = useState({
 		name: "",
 		email: "",
@@ -27,15 +28,14 @@ const RecruiterRegisterPage = () => {
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		// const res = await getCSRF();
-		// console.log(res);
+		const res = await getCSRF();
+		console.log(res);
 
-		// const res1 = await register({
-		// 	...inputsValues,
-		// 	password_confirmation: inputsValues.password,
-		// });
-		// console.log(res1);
-		console.log(inputsValues);
+		const res1 = await registerRecruiter({
+			...inputsValues,
+			password_confirmation: inputsValues.password,
+		});
+		console.log(res1);
 	};
 
 	return (
@@ -45,7 +45,7 @@ const RecruiterRegisterPage = () => {
 				className='bg-white w-[40%] rounded-xl flex flex-col items-center justify-center p-8 space-y-4 drop-shadow-[0_5px_8px_rgba(0,0,0,0.25)]'
 			>
 				<div className='z-10 rounded-xl w-fit h-fit bg-gray-200 text-3xl p-3'>
-					<TbLogin />
+					<MdWorkOutline />
 				</div>
 				<div>
 					<h2 className='tex font-semibold text-2xl'>Register to continue</h2>
@@ -68,7 +68,7 @@ const RecruiterRegisterPage = () => {
 						<LuMailOpen />
 					</div>
 					<input
-						type='email'
+						type='text'
 						placeholder='Email'
 						name='email'
 						className='focus:outline-none rounded-r-full  '

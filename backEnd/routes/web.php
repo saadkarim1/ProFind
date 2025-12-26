@@ -14,6 +14,7 @@ Route::prefix('v1')->group(
         });
         Route::controller(RecruiterController::class)->group(function () {
 
+            Route::post('logout/recruiter', 'logoutRecruiter');
             Route::post('register/recruiter', 'registerRecruiter');
             Route::post('login/recruiter', 'loginRecruiter');
         });

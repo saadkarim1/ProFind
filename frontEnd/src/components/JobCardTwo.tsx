@@ -28,7 +28,6 @@ const JobCardTwo = ({
 		save: false,
 		share: false,
 	});
-	// console.log(new Date(offer.created_at).toUTCString());
 	return (
 		<div
 			onClick={() => setSelectedOffer(offer)}
