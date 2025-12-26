@@ -9,7 +9,7 @@ type Link = {
 	path_name: string;
 };
 
-const links: Link[] = [
+const recruiterLinks: Link[] = [
 	{
 		path: "/",
 		path_name: "Home",
@@ -28,13 +28,30 @@ const links: Link[] = [
 	},
 ];
 
+const normalLinks: Link[] = [
+	{
+		path: "/",
+		path_name: "Home",
+	},
+	{
+		path: "/jobs",
+		path_name: "Find Job",
+	},
+	{
+		path: "/about",
+		path_name: "About",
+	},
+];
+
 const NavBar = () => {
 	const { pathname } = useLocation();
-	const { data: authenticatedUser, isLoading } = useGetUserQuery(undefined);
-	console.log("isLoading", isLoading);
+	const {
+		data: authenticatedUser,
+		isSuccess,
+		isError,
+	} = useGetUserQuery(undefined);
 	const [showProfilePopup, setShowProfilePopup] = useState<boolean>(false);
 	const [showLoginPopup, setShowLoginPopup] = useState<boolean>(false);
-
 	return (
 		<nav className='z-999 fixed w-[80%] mx-auto inset-x-0 pt-3'>
 			<div className='navbar drop-shadow-[0_0px_2px_rgba(0,0,0,0.25)] rounded-2xl flex items-center p-3'>
@@ -44,8 +61,44 @@ const NavBar = () => {
 				</Link>
 
 				<ul className='flex items-center justify-center font-medium space-x-10 text-[18px] w-[50%]'>
-					{links.map((link) => {
-						if (link.path_name) {
+					{/* {authenticatedUser.data.role === "recruiter"
+						? recruiterLinks.map((link) => (
+								<Link
+									key={link.path_name}
+									to={link.path}
+									className={`${
+										pathname === link.path ? "text-[#0082FA]" : "text-black"
+									} `}
+								>
+									{link.path_name}
+								</Link>
+						  ))
+						: normalLinks.map((link) => (
+								<Link
+									key={link.path_name}
+									to={link.path}
+									className={`${
+										pathname === link.path ? "text-[#0082FA]" : "text-black"
+									} `}
+								>
+									{link.path_name}
+								</Link>
+						  ))} */}
+
+					{recruiterLinks.map((link) => {
+						if (link.path !== "/offers") {
+							return (
+								<Link
+									key={link.path_name}
+									to={link.path}
+									className={`${
+										pathname === link.path ? "text-[#0082FA]" : "text-black"
+									} `}
+								>
+									{link.path_name}
+								</Link>
+							);
+						} else if (authenticatedUser?.data.role === "recruiter") {
 							return (
 								<Link
 									key={link.path_name}
@@ -61,22 +114,19 @@ const NavBar = () => {
 					})}
 				</ul>
 				<div className='w-[25%] flex items-center justify-end'>
-					{!isLoading && (
-						<>
-							<Activity mode={authenticatedUser ? "visible" : "hidden"}>
-								<ProfilePopup
-									showProfilePopup={showProfilePopup}
-									setShowProfilePopup={setShowProfilePopup}
-								/>
-							</Activity>
-							<Activity mode={authenticatedUser ? "hidden" : "visible"}>
-								<LoginPopup
-									showLoginPopup={showLoginPopup}
-									setShowLoginPopup={setShowLoginPopup}
-								/>
-							</Activity>
-						</>
-					)}
+					<Activity mode={isSuccess ? "visible" : "hidden"}>
+						<ProfilePopup
+							showProfilePopup={showProfilePopup}
+							setShowProfilePopup={setShowProfilePopup}
+							authenticatedUser={authenticatedUser}
+						/>
+					</Activity>
+					<Activity mode={isError ? "visible" : "hidden"}>
+						<LoginPopup
+							showLoginPopup={showLoginPopup}
+							setShowLoginPopup={setShowLoginPopup}
+						/>
+					</Activity>
 				</div>
 			</div>
 		</nav>

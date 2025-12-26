@@ -2,6 +2,7 @@ import { useState } from "react";
 import { FiLock, FiUnlock } from "react-icons/fi";
 import { LuMailOpen } from "react-icons/lu";
 import { MdWorkOutline } from "react-icons/md";
+import { Link } from "react-router";
 
 const RecruiterLoginPage = () => {
 	const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -46,6 +47,12 @@ const RecruiterLoginPage = () => {
 					Login
 				</button>
 			</div>
+			<p className='text-gray-500'>
+				Already have an account?{" "}
+				<Link to={"/recruiter/register"} className='font-medium text-[#0082FA]'>
+					Sign In
+				</Link>
+			</p>
 		</section>
 	);
 };

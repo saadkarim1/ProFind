@@ -13,7 +13,7 @@ import ApplicationsPage from "./pages/SeekerProfile/ApplicationsPage";
 import SavedPage from "./pages/SeekerProfile/SavedPage";
 import SettingsPage from "./pages/SeekerProfile/SettingsPage";
 import SummaryPage from "./pages/SeekerProfile/SummaryPage";
-import RecruiterLoginPage from "./pages/RecruiterLoginPage";
+import RecruiterLoginPage from "./pages/RecruiterProfile/RecruiterLoginPage";
 import RecruiterProfileLayout from "./pages/RecruiterProfile/RecruiterProfileLayout";
 import SeekerProfileLayout from "./pages/SeekerProfile/SeekerProfileLayout";
 import SeekerProfilePage from "./pages/SeekerProfile/SeekerProfilePage";
@@ -23,6 +23,7 @@ import CompanySettings from "./pages/RecruiterProfile/CompanySettings";
 import OffersPage from "./pages/OffersPage";
 import CreateOfferPage from "./pages/CreateOfferPage";
 import ApplicantsPage from "./pages/ApplicantsPage";
+import RecruiterRegisterPage from "./pages/RecruiterProfile/RecruiterRegisterPage";
 
 const router = createBrowserRouter([
 	{
@@ -39,8 +40,6 @@ const router = createBrowserRouter([
 			{ path: "about", element: <AboutPage /> },
 			{ path: "login", element: <LoginPage /> },
 			{ path: "register", element: <RegisterPage /> },
-			{ path: "recruiter/login", element: <RecruiterLoginPage /> },
-
 			{
 				path: "seeker",
 				element: <SeekerProfileLayout />,
@@ -63,6 +62,8 @@ const router = createBrowserRouter([
 				],
 			},
 
+			{ path: "recruiter/login", element: <RecruiterLoginPage /> },
+			{ path: "recruiter/register", element: <RecruiterRegisterPage /> },
 			{ path: "offers", element: <OffersPage /> },
 			{ path: "offers/create-offer", element: <CreateOfferPage /> },
 			{ path: "offers/:id/applicants", element: <ApplicantsPage /> },

@@ -6,23 +6,19 @@ import { Activity, useState } from "react";
 type ProfilePopupProps = {
 	showProfilePopup: boolean;
 	setShowProfilePopup: React.Dispatch<React.SetStateAction<boolean>>;
+	authenticatedUser: any;
 };
 
 const ProfilePopup = ({
 	showProfilePopup,
 	setShowProfilePopup,
+	authenticatedUser,
 }: ProfilePopupProps) => {
-	const [isJobSeeker, setIsJobSeeker] = useState<boolean>(true);
+	const [isJobSeeker, setIsJobSeeker] = useState<boolean>(
+		authenticatedUser?.data.role === "user"
+	);
 	return (
 		<>
-			{/* <div className='text-[#0082FA] text-3xl px-4'> */}
-			{/* <div className='relative cursor-pointer'>
-					<div className='absolute top-0 right-0 h-3 w-3 text-[9px] font-semibold text-center text-white rounded-full bg-red-400'>
-						1
-					</div>
-					<BsChatDotsFill />
-				</div> */}
-
 			<button
 				className='relative'
 				onBlur={(e) => {
