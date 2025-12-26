@@ -44,7 +44,7 @@ const JobCardTwo = ({
 				</div>
 				<div className='-space-y-1'>
 					<h1 className='font-medium text-[18px]'>
-						{offer?.company.title.length > 17
+						{offer?.company.title?.length > 17
 							? `${offer?.company.title.slice(0, 17)}...`
 							: offer?.company.title}
 					</h1>

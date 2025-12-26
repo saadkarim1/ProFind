@@ -70,7 +70,7 @@ return [
         ],
         'recruiters' => [
             'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', App\Models\Recruiter::class),
+            'model' => App\Models\Recruiter::class,
         ],
 
         // 'users' => [

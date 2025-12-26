@@ -13,12 +13,13 @@ const Jobs: React.FC = () => {
 		setSelectedOffer(offers?.data?.offers[0]);
 	}, [offers]);
 
+	console.log(offers?.data.offers);
 	return (
 		<section>
 			<SearchBar />
 			<div className='flex justify-between'>
 				<div className='w-[49%] grid grid-cols-2 gap-4 '>
-					{offers?.data.offers.map((offer: OfferType) => (
+					{offers?.data.offers?.map((offer: OfferType) => (
 						<JobCardTwo
 							key={offer.offer_id}
 							offer={offer}

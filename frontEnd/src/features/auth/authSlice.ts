@@ -4,8 +4,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
 	isAuthenticated: false,
-	user: {},
-} as { isAuthenticated: boolean; user: SeekerType };
+	user: null,
+} as { isAuthenticated: boolean; user: SeekerType | null };
 
 const slice = createSlice({
 	name: "auth",
@@ -26,7 +26,11 @@ const slice = createSlice({
 			)
 			.addMatcher(authApi.endpoints.getUser.matchPending, () => initialState)
 			.addMatcher(authApi.endpoints.getUser.matchRejected, () => initialState)
-			.addMatcher(authApi.endpoints.logout.matchFulfilled, () => initialState);
+			.addMatcher(authApi.endpoints.logout.matchFulfilled, (state) => {
+				console.log("first");
+				state.isAuthenticated = false;
+				state.user = null;
+			});
 		// .addMatcher(
 		// 	authApi.endpoints.getUser.matchFulfilled,
 		// 	(state, { payload }) => {

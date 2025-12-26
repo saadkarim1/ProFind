@@ -21,6 +21,7 @@ return [
         'v1/login',
         'v1/register',
         'v1/logout',
+        'v1/register/recruiter'
     ],
 
     'allowed_methods' => ['*'],

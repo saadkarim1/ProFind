@@ -2,8 +2,6 @@ import { Activity, useState } from "react";
 import { Link, useLocation } from "react-router";
 import LoginPopup from "./LoginPopup";
 import ProfilePopup from "./ProfilePopup";
-import { useSelector } from "react-redux";
-import type { RooteState } from "@/app/store";
 import { useGetUserQuery } from "@/app/services/authApi";
 
 type Link = {
@@ -32,11 +30,8 @@ const links: Link[] = [
 
 const NavBar = () => {
 	const { pathname } = useLocation();
-	const { data: authenticatedUser } = useGetUserQuery();
-
-	// const { user, isAuthenticated } = useSelector(
-	// 	(state: RooteState) => state.auth
-	// );
+	const { data: authenticatedUser, isLoading } = useGetUserQuery(undefined);
+	console.log("isLoading", isLoading);
 	const [showProfilePopup, setShowProfilePopup] = useState<boolean>(false);
 	const [showLoginPopup, setShowLoginPopup] = useState<boolean>(false);
 
@@ -66,29 +61,22 @@ const NavBar = () => {
 					})}
 				</ul>
 				<div className='w-[25%] flex items-center justify-end'>
-					{/* {authenticatedUser ? (
-						<ProfilePopup
-							showProfilePopup={showProfilePopup}
-							setShowProfilePopup={setShowProfilePopup}
-						/>
-					) : (
-						<LoginPopup
-							showLoginPopup={showLoginPopup}
-							setShowLoginPopup={setShowLoginPopup}
-						/>
-					)} */}
-					<Activity mode={authenticatedUser ? "visible" : "hidden"}>
-						<ProfilePopup
-							showProfilePopup={showProfilePopup}
-							setShowProfilePopup={setShowProfilePopup}
-						/>
-					</Activity>
-					<Activity mode={authenticatedUser ? "hidden" : "visible"}>
-						<LoginPopup
-							showLoginPopup={showLoginPopup}
-							setShowLoginPopup={setShowLoginPopup}
-						/>
-					</Activity>
+					{!isLoading && (
+						<>
+							<Activity mode={authenticatedUser ? "visible" : "hidden"}>
+								<ProfilePopup
+									showProfilePopup={showProfilePopup}
+									setShowProfilePopup={setShowProfilePopup}
+								/>
+							</Activity>
+							<Activity mode={authenticatedUser ? "hidden" : "visible"}>
+								<LoginPopup
+									showLoginPopup={showLoginPopup}
+									setShowLoginPopup={setShowLoginPopup}
+								/>
+							</Activity>
+						</>
+					)}
 				</div>
 			</div>
 		</nav>

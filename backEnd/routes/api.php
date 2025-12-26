@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Route;
 
 // ->middleware('auth:sanctum')
 
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return "dkfhjds";
+// });
 Route::get('/user', [AuthController::class, 'getUser'])->middleware('auth:sanctum');
 Route::prefix('v1')->group(function () {
 
@@ -18,10 +21,5 @@ Route::prefix('v1')->group(function () {
         Route::get('/offers/{offerId}',  'show');
         Route::get('/offers/{offerId}/apply',  'applyOffer');
         Route::get('/offers/{offerId}/save',  'saveOffer');
-    });
-
-    Route::controller(CompanyController::class)->group(function () {
-
-        Route::get('/companies',  'index');
     });
 });

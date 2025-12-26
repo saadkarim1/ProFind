@@ -30,14 +30,13 @@ class OfferController extends Controller
     {
         try {
             $request->validated();
-            // $company_id = Company::where('id', )
             $offer = Offer::create([
                 "title" => $request->title,
                 "description" => $request->description,
                 "location" => $request->location,
                 "duration" => $request->duration,
                 "offer_type" => $request->offer_type,
-                "company_id" => Auth::user()->id,
+                "company_id" => Auth::guard('recruiter')->user()->id,
             ]);
             return $offer;
             // return $this->successResponse(data: new OfferResource($offer), status: 201);

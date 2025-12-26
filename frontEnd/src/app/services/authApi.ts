@@ -37,9 +37,10 @@ export const authApi = apiSlice.injectEndpoints({
 
 		logout: builder.mutation<void, void>({
 			query: () => ({ url: "v1/logout", method: "Post" }),
+			invalidatesTags: ["User"],
 		}),
 
-		getUser: builder.query<SeekerType, void>({
+		getUser: builder.query({
 			query: () => "api/user",
 			providesTags: ["User"],
 		}),

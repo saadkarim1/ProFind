@@ -11,7 +11,6 @@ const CreateOfferPage = () => {
 		useState<string>("Select Category");
 	const [selectedJobType, setSelectedJobType] =
 		useState<string>("Select Job Type");
-	const [textareaValue, setTextareaValue] = useState();
 	const [dataFrom, setDataForm] = useState({
 		title: "",
 		description: "",
@@ -40,7 +39,6 @@ const CreateOfferPage = () => {
 		const res = await addOffer({
 			...dataFrom,
 			offer_type: selectedJobType,
-			// category: selectedCategory,
 		});
 		console.log(res);
 	};

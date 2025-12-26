@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginAuthRequest;
-use App\Http\Requests\RegisterAuthAndRecuiterRequest;
+use App\Http\Requests\RegisterAuthRequest;
 use App\Http\Resources\AuthResource;
 use App\Models\User;
 use App\Traits\ApiResponse;
@@ -16,7 +16,7 @@ class AuthController extends Controller
 
     use ApiResponse;
 
-    public function register(RegisterAuthAndRecuiterRequest $request)
+    public function register(RegisterAuthRequest $request)
     {
         try {
             $request->validated();
@@ -73,7 +73,8 @@ class AuthController extends Controller
 
     public function getUser(Request $request)
     {
-        $user = $request->user();
+        // $user = $request->user();
+        $user = Auth::guard('recruiter')->user() ?? Auth::guard(name: 'web')->user();
         return $this->successResponse(data: new AuthResource($user));
         // return $user;
     }
