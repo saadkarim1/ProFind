@@ -1,0 +1,50 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
+
+class Recruiter extends Model
+{
+    use HasUuids, HasFactory, HasApiTokens, Notifiable;
+
+    protected $fillable = [
+        "name",
+        "email",
+        "password",
+
+        "title",
+        "description",
+        "company_website",
+        "sector",
+        "company_logo",
+        "city",
+    ];
+
+    protected $hidden = ['password', 'remember_token'];
+
+
+    public $incrementing = false;
+    protected $keyType = 'string';
+    public function offers()
+    {
+        return $this->hasMany(Offer::class);
+    }
+
+    // public function owner()
+    // {
+    //     return $this->belongsTo(User::class);
+    // }
+
+    protected function casts(): array
+    {
+        return [
+            'email_verified_at' => 'datetime',
+            'password' => 'hashed',
+        ];
+    }
+}

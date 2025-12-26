@@ -18,8 +18,8 @@ return new class extends Migration
             $table->text("description");
             $table->string("location");
             $table->string("duration");
-            $table->enum("offer_type", ["remote", "freelance", "part_time", 'full_time']);
-            $table->foreignUuid("company_id")->constrained('companies', 'id')->onDelete('cascade');
+            $table->enum("offer_type", ["remote", "freelance", "part time", 'full time']);
+            $table->foreignUuid("company_id")->constrained('recruiters', 'id')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -77,16 +77,16 @@ const NavBar = () => {
 							setShowLoginPopup={setShowLoginPopup}
 						/>
 					)} */}
-					<Activity mode={authenticatedUser ? "hidden" : "visible"}>
-						<LoginPopup
-							showLoginPopup={showLoginPopup}
-							setShowLoginPopup={setShowLoginPopup}
-						/>
-					</Activity>
 					<Activity mode={authenticatedUser ? "visible" : "hidden"}>
 						<ProfilePopup
 							showProfilePopup={showProfilePopup}
 							setShowProfilePopup={setShowProfilePopup}
+						/>
+					</Activity>
+					<Activity mode={authenticatedUser ? "hidden" : "visible"}>
+						<LoginPopup
+							showLoginPopup={showLoginPopup}
+							setShowLoginPopup={setShowLoginPopup}
 						/>
 					</Activity>
 				</div>

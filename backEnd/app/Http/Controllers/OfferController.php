@@ -6,6 +6,7 @@ use App\Http\Requests\StoreOfferRequest;
 use App\Http\Resources\OfferCollection;
 use App\Http\Resources\OfferResource;
 use App\Jobs\testTask;
+use App\Models\Company;
 use App\Models\Offer;
 use App\Traits\ApiResponse;
 use Exception;
@@ -29,6 +30,7 @@ class OfferController extends Controller
     {
         try {
             $request->validated();
+            // $company_id = Company::where('id', )
             $offer = Offer::create([
                 "title" => $request->title,
                 "description" => $request->description,

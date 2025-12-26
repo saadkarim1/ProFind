@@ -29,6 +29,9 @@ class User extends Authenticatable
     public $incrementing = false;
     protected $keyType = 'string';
 
+    // public function company() {
+    //     return $this->hasOne(Company::class);
+    // }
     public function offers()
     {
         return $this->belongsToMany(Offer::class, 'user_offer_apply');
@@ -61,5 +64,4 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-
 }

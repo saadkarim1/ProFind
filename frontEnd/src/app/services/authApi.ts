@@ -20,7 +20,7 @@ export const authApi = apiSlice.injectEndpoints({
 		register: builder.mutation({
 			query: (payload) => ({
 				url: "v1/register",
-				method: "POST",
+				method: "Post",
 				body: payload,
 			}),
 			invalidatesTags: ["User"],

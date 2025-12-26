@@ -12,16 +12,20 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
+            //jobseeker authentication fields
             $table->uuid("id")->primary();
             $table->string('name');
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->timestamp('email_verified_at')->nullable();
+
+
+            //jobseeker fields
             $table->text('about_me')->nullable();
             $table->string('phone')->nullable();
             $table->string('location')->nullable();
             $table->string('job')->nullable();
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->enum('role', ["seeker", "recruiter", "admin"])->default('seeker');
-            $table->string('password');
+
             $table->rememberToken();
             $table->timestamps();
         });

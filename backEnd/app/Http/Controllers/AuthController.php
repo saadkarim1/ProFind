@@ -3,21 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginAuthRequest;
-use App\Http\Requests\RegisterAuthRequest;
+use App\Http\Requests\RegisterAuthAndRecuiterRequest;
 use App\Http\Resources\AuthResource;
 use App\Models\User;
 use App\Traits\ApiResponse;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
 
     use ApiResponse;
 
-    public function register(RegisterAuthRequest $request)
+    public function register(RegisterAuthAndRecuiterRequest $request)
     {
         try {
             $request->validated();
@@ -27,7 +26,8 @@ class AuthController extends Controller
                 'password'  => $request->password,
             ]);
 
-            Auth::login($user);
+            Auth::guard('web')->login($user);
+            $request->session()->regenerate();
 
             return response()->json([
                 'message' => 'Registration successful',

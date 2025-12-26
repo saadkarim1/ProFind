@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 
 // ->middleware('auth:sanctum')
 
-Route::get('/user', [AuthController::class, 'getUser']);
+Route::get('/user', [AuthController::class, 'getUser'])->middleware('auth:sanctum');
 Route::prefix('v1')->group(function () {
 
     Route::controller(OfferController::class)->group(function () {
