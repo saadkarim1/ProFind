@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 import { IoMenu } from "react-icons/io5";
 import { RecruiterProfileList, UserProfileList } from "@/models/model";
-import { Activity, useState } from "react";
+import { Activity, useEffect, useState } from "react";
 
 type ProfilePopupProps = {
 	showProfilePopup: boolean;
@@ -14,9 +14,10 @@ const ProfilePopup = ({
 	setShowProfilePopup,
 	authenticatedUser,
 }: ProfilePopupProps) => {
-	const [isJobSeeker, setIsJobSeeker] = useState<boolean>(
-		authenticatedUser?.data.role === "user"
-	);
+	const [isJobSeeker, setIsJobSeeker] = useState<boolean>(true);
+	useEffect(() => {
+		setIsJobSeeker(authenticatedUser?.data.role === "user");
+	}, [authenticatedUser?.data]);
 	return (
 		<>
 			<button

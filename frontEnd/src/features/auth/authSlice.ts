@@ -24,13 +24,32 @@ const slice = createSlice({
 					state.user = payload.data;
 				}
 			)
+			.addMatcher(authApi.endpoints.login.matchFulfilled, (state) => {
+				state.isAuthenticated = true;
+			})
+			.addMatcher(authApi.endpoints.register.matchFulfilled, (state) => {
+				state.isAuthenticated = true;
+			})
+			.addMatcher(authApi.endpoints.loginRecruiter.matchFulfilled, (state) => {
+				state.isAuthenticated = true;
+			})
+			.addMatcher(
+				authApi.endpoints.registerRecruiter.matchFulfilled,
+				(state) => {
+					state.isAuthenticated = true;
+				}
+			)
 			.addMatcher(authApi.endpoints.getUser.matchPending, () => initialState)
 			.addMatcher(authApi.endpoints.getUser.matchRejected, () => initialState)
 			.addMatcher(authApi.endpoints.logout.matchFulfilled, (state) => {
-				console.log("first");
+				state.isAuthenticated = false;
+				state.user = null;
+			})
+			.addMatcher(authApi.endpoints.loginRecruiter.matchFulfilled, (state) => {
 				state.isAuthenticated = false;
 				state.user = null;
 			});
+
 		// .addMatcher(
 		// 	authApi.endpoints.getUser.matchFulfilled,
 		// 	(state, { payload }) => {

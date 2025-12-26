@@ -85,7 +85,7 @@ const NavBar = () => {
 								</Link>
 						  ))} */}
 
-					{recruiterLinks.map((link) => {
+					{/* {recruiterLinks.map((link) => {
 						if (link.path !== "/offers") {
 							return (
 								<Link
@@ -111,7 +111,48 @@ const NavBar = () => {
 								</Link>
 							);
 						}
-					})}
+					})} */}
+					{authenticatedUser?.data === undefined
+						? normalLinks.map((link) => {
+								return (
+									<Link
+										key={link.path_name}
+										to={link.path}
+										className={`${
+											pathname === link.path ? "text-[#0082FA]" : "text-black"
+										} `}
+									>
+										{link.path_name}
+									</Link>
+								);
+						  })
+						: authenticatedUser?.data.role === "recruiter"
+						? recruiterLinks.map((link) => {
+								return (
+									<Link
+										key={link.path_name}
+										to={link.path}
+										className={`${
+											pathname === link.path ? "text-[#0082FA]" : "text-black"
+										} `}
+									>
+										{link.path_name}
+									</Link>
+								);
+						  })
+						: normalLinks.map((link) => {
+								return (
+									<Link
+										key={link.path_name}
+										to={link.path}
+										className={`${
+											pathname === link.path ? "text-[#0082FA]" : "text-black"
+										} `}
+									>
+										{link.path_name}
+									</Link>
+								);
+						  })}
 				</ul>
 				<div className='w-[25%] flex items-center justify-end'>
 					<Activity mode={isSuccess ? "visible" : "hidden"}>

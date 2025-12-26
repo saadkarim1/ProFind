@@ -24,6 +24,8 @@ import OffersPage from "./pages/OffersPage";
 import CreateOfferPage from "./pages/CreateOfferPage";
 import ApplicantsPage from "./pages/ApplicantsPage";
 import RecruiterRegisterPage from "./pages/RecruiterProfile/RecruiterRegisterPage";
+import ProtectedRouteSeeker from "./components/shared/ProtectedRouteSeeker";
+import PretectedRouteRecruiter from "./components/shared/PretectedRouteRecruiter";
 
 const router = createBrowserRouter([
 	{
@@ -40,30 +42,41 @@ const router = createBrowserRouter([
 			{ path: "about", element: <AboutPage /> },
 			{ path: "login", element: <LoginPage /> },
 			{ path: "register", element: <RegisterPage /> },
-			{
-				path: "seeker",
-				element: <SeekerProfileLayout />,
-				children: [
-					{ index: true, element: <SeekerProfilePage /> },
-					{ path: "career-information", element: <SummaryPage /> },
-					{ path: "my-applications", element: <ApplicationsPage /> },
-					{ path: "saved", element: <SavedPage /> },
-					{ path: "settings", element: <SettingsPage /> },
-				],
-			},
-
-			{
-				path: "recruiter",
-				element: <RecruiterProfileLayout />,
-				children: [
-					{ index: true, element: <RecruiterProfilePage /> },
-					{ path: "summary", element: <CompanySummary /> },
-					{ path: "settings", element: <CompanySettings /> },
-				],
-			},
-
 			{ path: "recruiter/login", element: <RecruiterLoginPage /> },
 			{ path: "recruiter/register", element: <RecruiterRegisterPage /> },
+
+			{
+				element: <ProtectedRouteSeeker />,
+				children: [
+					{
+						path: "seeker",
+						element: <SeekerProfileLayout />,
+						children: [
+							{ index: true, element: <SeekerProfilePage /> },
+							{ path: "career-information", element: <SummaryPage /> },
+							{ path: "my-applications", element: <ApplicationsPage /> },
+							{ path: "saved", element: <SavedPage /> },
+							{ path: "settings", element: <SettingsPage /> },
+						],
+					},
+				],
+			},
+
+			{
+				element: <PretectedRouteRecruiter />,
+				children: [
+					{
+						path: "recruiter",
+						element: <RecruiterProfileLayout />,
+						children: [
+							{ index: true, element: <RecruiterProfilePage /> },
+							{ path: "summary", element: <CompanySummary /> },
+							{ path: "settings", element: <CompanySettings /> },
+						],
+					},
+				],
+			},
+
 			{ path: "offers", element: <OffersPage /> },
 			{ path: "offers/create-offer", element: <CreateOfferPage /> },
 			{ path: "offers/:id/applicants", element: <ApplicantsPage /> },
