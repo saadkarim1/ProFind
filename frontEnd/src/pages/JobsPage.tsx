@@ -10,16 +10,16 @@ const Jobs: React.FC = () => {
 	const [selectedOffer, setSelectedOffer] = useState<OfferType | null>(null);
 
 	useEffect(() => {
-		setSelectedOffer(offers?.data?.offers[0]);
+		if (!offers) return;
+		setSelectedOffer(offers[0]);
 	}, [offers]);
 
-	console.log(offers?.data.offers);
 	return (
 		<section>
 			<SearchBar />
 			<div className='flex justify-between'>
 				<div className='w-[49%] grid grid-cols-2 gap-4 '>
-					{offers?.data.offers?.map((offer: OfferType) => (
+					{offers?.map((offer: OfferType) => (
 						<JobCardTwo
 							key={offer.offer_id}
 							offer={offer}
@@ -27,7 +27,6 @@ const Jobs: React.FC = () => {
 							selectedOffer={selectedOffer}
 						/>
 					))}
-					
 				</div>
 				<div className='w-[49%] h-fit sticky top-30 space-y-4 rounded-4xl p-10 border-4 border-[#e9e9e9] bg-white'>
 					<div className='flex space-x-3'>
@@ -53,11 +52,13 @@ const Jobs: React.FC = () => {
 						</div>
 						<div className='flex flex-col space-y-2 w-full'>
 							<div className='flex items-center justify-between w-full'>
-								<h1 className='font-medium text-3xl'>{selectedOffer?.title}</h1>
+								<h1 className='font-medium text-3xl'>
+									{selectedOffer?.offer_title}
+								</h1>
 								{GetOfferType(selectedOffer?.offer_type)}
 							</div>
 							<p className='font-medium text-[#878787] text-[18px]'>
-								{selectedOffer?.company.title}
+								{selectedOffer?.company.company_name}
 							</p>
 
 							<button className='cursor-pointer w-fit h-fit text-[14px] font-medium py-1.5 px-3 border-2 text-white border-[#0082FA]  rounded-xl bg-[#0082FA]'>
@@ -85,7 +86,7 @@ const Jobs: React.FC = () => {
 					<hr className='text-[#e9e9e9] h-3' />
 					<div>
 						<h1 className='font-medium text-xl'>Description</h1>
-						<p>{selectedOffer?.description}</p>
+						<p>{selectedOffer?.offer_description}</p>
 					</div>
 				</div>
 			</div>

@@ -1,6 +1,6 @@
 import { apiSlice } from "@/app/services/api";
-import type { SeekerType } from "@/models/model";
-
+import type { RecruiterType } from "@/models/recruiter";
+import type { UserType } from "@/models/user";
 // type UserType = {
 // 	id: string;
 // };
@@ -40,8 +40,9 @@ export const authApi = apiSlice.injectEndpoints({
 			invalidatesTags: ["User"],
 		}),
 
-		getUser: builder.query({
-			query: () => "api/user",
+		getUser: builder.query<UserType | RecruiterType, void>({
+			query: () => "api/v1/user",
+			transformResponse: (response: {data: UserType | RecruiterType}) => response.data,
 			providesTags: ["User"],
 		}),
 

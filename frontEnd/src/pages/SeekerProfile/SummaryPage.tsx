@@ -1,8 +1,35 @@
 import type { RooteState } from "@/app/store";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 
 const SummaryPage = () => {
 	const { user } = useSelector((state: RooteState) => state.auth);
+
+	const [inputsValues, setInputsValues] = useState({
+		id: "",
+		company_name: "",
+		company_description: "",
+		company_website: "",
+		location: "",
+	});
+
+	const handleInputsfields = (
+		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+	) => {
+		setInputsValues({
+			...inputsValues,
+			[e.currentTarget.name]: e.currentTarget.value,
+		});
+	};
+
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+		// const res = await getCSRF();
+
+		// const res1 = await updateRecruiter({ ...inputsValues, id: user?.user_id });
+		// console.log(res1);
+		// console.log(inputsValues);
+	};
 
 	return (
 		<div className='p-6 rounded-3xl border-2 border-[#e9e9e9] bg-white w-[74%] space-y-4'>

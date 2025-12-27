@@ -20,7 +20,7 @@ type Props = {
 };
 
 const JobsSection: React.FC<Props> = ({ featuredJobsRef }) => {
-	const { data: offers } = useGetAllOffersQuery(undefined);
+	const { data: offers } = useGetAllOffersQuery();
 	const [selectedDomaine, setSelectedDomaine] =
 		useState<string>("Graphic Designer");
 
@@ -30,18 +30,14 @@ const JobsSection: React.FC<Props> = ({ featuredJobsRef }) => {
 		opacity: 0,
 		height: 0,
 	});
+	console.log(offers);
 
 	const latestOffers = () => {
-		let leatestOffers1: OfferType[] = [
-			offers?.data.offers[offers?.data.offers.length - 1],
-		];
+		if (!offers) return;
+		let leatestOffers1: OfferType[] = [offers[offers?.length - 1]];
 
-		for (
-			let i = offers?.data.offers.length - 2;
-			i > offers?.data.offers.length - 9;
-			i--
-		) {
-			leatestOffers1 = [...leatestOffers1, offers?.data.offers[i]];
+		for (let i = offers.length - 2; i > offers.length - 9; i--) {
+			leatestOffers1 = [...leatestOffers1, offers[i]];
 		}
 
 		return leatestOffers1;
@@ -68,9 +64,10 @@ const JobsSection: React.FC<Props> = ({ featuredJobsRef }) => {
 			</ul>
 
 			<div className='grid grid-cols-4 gap-4 w-full'>
-				{latestOffers()?.map((offer) => (
-					<JobCard key={offer?.offer_id} offer={offer} />
-				))}
+				{latestOffers &&
+					latestOffers()?.map((offer) => (
+						<JobCard key={offer?.offer_id} offer={offer} />
+					))}
 			</div>
 			<Link
 				to={"jobs"}

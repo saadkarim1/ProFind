@@ -44,7 +44,8 @@ const JobCardTwo = ({
 				</div>
 				<div className='-space-y-1'>
 					<h1 className='font-medium text-[18px]'>
-						{offer?.company.company_name?.length > 17
+						{offer?.company.company_name &&
+						offer.company.company_name?.length > 17
 							? `${offer?.company.company_name.slice(0, 17)}...`
 							: offer?.company.company_name}
 					</h1>
@@ -57,9 +58,9 @@ const JobCardTwo = ({
 			</div>
 			<div>
 				<h3 className='font-medium'>
-					{offer?.title.length > 20
-						? `${offer?.title.slice(0, 20)}...`
-						: offer?.title}
+					{offer?.offer_title.length > 20
+						? `${offer?.offer_title.slice(0, 20)}...`
+						: offer?.offer_title}
 				</h3>
 				<p className='text-[14px] font-medium text-[#878787] capitalize'>
 					{offer.location}
@@ -67,7 +68,6 @@ const JobCardTwo = ({
 			</div>
 
 			{GetOfferType(offer.offer_type)}
-			{/* <p>{offer?.created_at}</p> */}
 
 			<div className='flex items-center justify-between'>
 				<div className='flex space-x-2'>

@@ -21,7 +21,7 @@ class OfferController extends Controller
     {
         try {
             $offers = Offer::all();
-            return $this->successResponse(data: OfferCollection::make($offers));
+            return $this->successResponse(data: OfferResource::collection($offers));
         } catch (Exception $e) {
             return response()->json($e->getMessage());
         }

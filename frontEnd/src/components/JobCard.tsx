@@ -14,6 +14,7 @@ const JobCard = ({ offer }: { offer: OfferType }) => {
 		save: false,
 		share: false,
 	});
+
 	return (
 		<div
 			className='w-full rounded-[30px] bg-white hover:border-[#99C3FF]
@@ -25,9 +26,10 @@ border-[#e9e9e9] border-4 p-4 h-full flex flex-col justify-between space-y-3 tra
 				</div>
 				<div className='-space-y-1'>
 					<h1 className='font-medium text-[18px]'>
-						{offer?.company.title?.length > 17
-							? `${offer?.company.title.slice(0, 17)}...`
-							: offer?.company.title}
+						{offer?.company.company_name &&
+						offer.company.company_name.length > 17
+							? `${offer?.company.company_name.slice(0, 17)}...`
+							: offer?.company.company_name}
 					</h1>
 					<p className='text-[12px] text-[#878787] flex items-center space-x-1'>
 						<span>Nov 11</span>
@@ -38,9 +40,9 @@ border-[#e9e9e9] border-4 p-4 h-full flex flex-col justify-between space-y-3 tra
 			</div>
 			<div>
 				<h3 className='font-medium'>
-					{offer?.title.length > 20
-						? `${offer?.title.slice(0, 20)}...`
-						: offer?.title}
+					{offer?.offer_title.length > 20
+						? `${offer?.offer_title.slice(0, 20)}...`
+						: offer?.offer_title}
 				</h3>
 				<p className='text-[14px] font-medium capitalize text-[#878787]'>
 					{offer?.location}

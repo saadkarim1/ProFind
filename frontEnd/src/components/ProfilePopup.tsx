@@ -16,8 +16,8 @@ const ProfilePopup = ({
 }: ProfilePopupProps) => {
 	const [isJobSeeker, setIsJobSeeker] = useState<boolean>(true);
 	useEffect(() => {
-		setIsJobSeeker(authenticatedUser?.data.role === "user");
-	}, [authenticatedUser?.data]);
+		setIsJobSeeker(authenticatedUser?.role === "user");
+	}, [authenticatedUser]);
 	return (
 		<>
 			<button

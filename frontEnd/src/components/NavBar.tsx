@@ -112,7 +112,7 @@ const NavBar = () => {
 							);
 						}
 					})} */}
-					{authenticatedUser?.data === undefined
+					{authenticatedUser === undefined
 						? normalLinks.map((link) => {
 								return (
 									<Link
@@ -126,7 +126,7 @@ const NavBar = () => {
 									</Link>
 								);
 						  })
-						: authenticatedUser?.data.role === "recruiter"
+						: authenticatedUser?.role === "recruiter"
 						? recruiterLinks.map((link) => {
 								return (
 									<Link

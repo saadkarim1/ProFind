@@ -4,7 +4,7 @@ import { Navigate, Outlet } from "react-router";
 const PretectedRouteRecruiter = () => {
 	const { data: authenticatedUser, isError } = useGetUserQuery(undefined);
 
-	if (isError || authenticatedUser?.data.role === "user") {
+	if (isError || authenticatedUser?.role === "user") {
 		return <Navigate to={"/recruiter/login"} />;
 	}
 	return <Outlet />;

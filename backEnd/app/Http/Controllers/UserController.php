@@ -2,21 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\LoginAuthRequest;
-use App\Http\Requests\RegisterAuthRequest;
-use App\Http\Resources\AuthResource;
+use App\Http\Requests\LoginUserRequest;
+use App\Http\Requests\RegisterUserRequest;
+use App\Http\Requests\UpdateUserRequest;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Traits\ApiResponse;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class AuthController extends Controller
+class UserController extends Controller
 {
 
     use ApiResponse;
 
-    public function register(RegisterAuthRequest $request)
+    public function register(RegisterUserRequest $request)
     {
         try {
             $request->validated();
@@ -38,7 +39,7 @@ class AuthController extends Controller
         }
     }
 
-    public function login(LoginAuthRequest $request)
+    public function login(LoginUserRequest $request)
     {
         try {
             $request->validated();
@@ -73,9 +74,16 @@ class AuthController extends Controller
 
     public function getUser(Request $request)
     {
-        // $user = $request->user();
         $user = Auth::guard('recruiter')->user() ?? Auth::guard(name: 'web')->user();
-        return $this->successResponse(data: new AuthResource($user));
-        // return $user;
+        return $this->successResponse(data: new UserResource($user));
+    }
+
+    public function updateUser(UpdateUserRequest $request, $id)
+    {
+
+        // $request->validated();
+        // $recruiter = User::findOrFail($id);
+        // $recruiter->update($request->validated());
+        return response()->json($id, 200);;
     }
 }

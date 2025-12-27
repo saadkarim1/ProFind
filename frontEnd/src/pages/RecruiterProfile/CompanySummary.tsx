@@ -1,4 +1,3 @@
-import { useLazyGetCSRFQuery } from "@/app/services/authApi";
 import { useUpdateRecruiterProfileMutation } from "@/app/services/recruiter";
 import type { RooteState } from "@/app/store";
 import { useState } from "react";
@@ -7,7 +6,6 @@ import { useSelector } from "react-redux";
 const CompanySummary = () => {
 	const user = useSelector((state: RooteState) => state.auth.user);
 	const [updateRecruiter] = useUpdateRecruiterProfileMutation();
-	const [getCSRF] = useLazyGetCSRFQuery();
 
 	const [inputsValues, setInputsValues] = useState({
 		id: "",
@@ -28,11 +26,9 @@ const CompanySummary = () => {
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		// const res = await getCSRF();
 
 		const res1 = await updateRecruiter({ ...inputsValues, id: user?.user_id });
 		console.log(res1);
-		// console.log(inputsValues);
 	};
 
 	return (

@@ -14,7 +14,8 @@ const OffersPage = () => {
 	const user = useSelector((state: RooteState) => state.auth.user);
 
 	useEffect(() => {
-		setSelectedOffer(offers?.data?.offers[0]);
+		if (!offers) return;
+		setSelectedOffer(offers[0]);
 	}, [offers]);
 
 	return (
@@ -35,7 +36,7 @@ const OffersPage = () => {
 			</div>
 			<div className='flex justify-between'>
 				<div className='w-[49%] grid grid-cols-2 gap-4 '>
-					{offers?.data.offers.map((offer: OfferType) => (
+					{offers?.map((offer: OfferType) => (
 						<JobCardTwo
 							key={offer.offer_id}
 							offer={offer}
@@ -68,11 +69,11 @@ const OffersPage = () => {
 						</div>
 						<div className='flex flex-col space-y-2 w-full'>
 							<div className='flex items-center justify-between w-full'>
-								<h1 className='font-medium text-3xl'>{selectedOffer?.title}</h1>
+								<h1 className='font-medium text-3xl'>{selectedOffer?.offer_title}</h1>
 								{GetOfferType(selectedOffer?.offer_type)}
 							</div>
 							<p className='font-medium text-[#878787] text-[18px]'>
-								{selectedOffer?.company.title}
+								{selectedOffer?.company.company_name}
 							</p>
 							<div className='space-x-2'>
 								<Link
@@ -109,7 +110,7 @@ const OffersPage = () => {
 					<hr className='text-[#e9e9e9] h-3' />
 					<div>
 						<h1 className='font-medium text-xl'>Description</h1>
-						<p>{selectedOffer?.description}</p>
+						<p>{selectedOffer?.offer_description}</p>
 					</div>
 				</div>
 			</div>

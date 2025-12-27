@@ -24,6 +24,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'about_me',
+        'phone',
+        'location',
+        'job',
     ];
 
     public $incrementing = false;
