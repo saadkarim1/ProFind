@@ -81,9 +81,9 @@ class UserController extends Controller
     public function updateUser(UpdateUserRequest $request, $id)
     {
 
-        // $request->validated();
-        // $recruiter = User::findOrFail($id);
-        // $recruiter->update($request->validated());
-        return response()->json($id, 200);;
+        $request->validated();
+        $recruiter = User::findOrFail($id);
+        $recruiter->update($request->validated());
+        return response()->json($recruiter, 200);;
     }
 }

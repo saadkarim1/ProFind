@@ -10,6 +10,7 @@ export const recruiterApi = apiSlice.injectEndpoints({
 				method: "PATCH",
 				body: payload,
 			}),
+			invalidatesTags: ["User"],
 		}),
 	}),
 });

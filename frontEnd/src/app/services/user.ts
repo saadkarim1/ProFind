@@ -8,6 +8,9 @@ export const userApi = apiSlice.injectEndpoints({
 				method: "PATCH",
 				body: payload,
 			}),
+			invalidatesTags: ["User"],
 		}),
 	}),
 });
+
+export const { useUpdateUserMutation } = userApi;
