@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LoginRecruiterRequest;
 use App\Http\Requests\RegisterAuthAndRecuiterRequest;
 use App\Http\Requests\RegisterRecruiterRequest;
+use App\Http\Requests\UpdateRecruiterRequest;
 use App\Models\Recruiter;
 use Exception;
 use Illuminate\Http\Request;
@@ -22,11 +23,8 @@ class RecruiterController extends Controller
                 'password'  => $request->password,
             ]);
 
-            // if ($recruiter instanceof Recruiter) {
-
             Auth::guard('recruiter')->login($recruiter);
             $request->session()->regenerate();
-            // }
 
             return response()->json([
                 'message' => 'Registration successful',
@@ -69,5 +67,14 @@ class RecruiterController extends Controller
         return response()->json([
             'message' => 'Logged out successfully'
         ]);
+    }
+
+    public function updateRecruiter(UpdateRecruiterRequest $request, $id)
+    {
+
+        // $request->validated();
+        $recruiter = Recruiter::findOrFail($id);
+        $recruiter->update($request->validated());
+        return response()->json($request, 200);;
     }
 }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\OfferController;
+use App\Http\Controllers\RecruiterController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,5 +22,9 @@ Route::prefix('v1')->group(function () {
         Route::get('/offers/{offerId}',  'show');
         Route::get('/offers/{offerId}/apply',  'applyOffer');
         Route::get('/offers/{offerId}/save',  'saveOffer');
+    });
+
+    Route::controller(RecruiterController::class)->group(function () {
+        Route::patch('/recruiter/{id}', 'updateRecruiter');
     });
 });

@@ -1,12 +1,12 @@
 type CompanyType = {
 	city: string;
 	created_at: string;
-	description: string;
+	company_description: string;
 	id: string;
 	image: string;
 	link: string;
 	sector: string;
-	title: string;
+	company_name: string;
 	updated_at: string;
 };
 

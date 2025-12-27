@@ -23,12 +23,12 @@ return new class extends Migration
 
 
             //company fields
-            $table->string("title")->nullable();
-            $table->text("description")->nullable();
+            $table->string("company_name")->nullable();
+            $table->text("company_description")->nullable();
             $table->string("company_website")->nullable();
             $table->string("sector")->nullable();
             $table->string("company_logo")->nullable();
-            $table->string("city")->nullable();
+            $table->string("location")->nullable();
 
             $table->rememberToken();
             $table->timestamps();

@@ -17,12 +17,12 @@ class Recruiter extends Authenticatable
         "email",
         "password",
 
-        "title",
-        "description",
+        "company_name",
+        "company_description",
         "company_website",
         "sector",
         "company_logo",
-        "city",
+        "location",
     ];
 
     protected $hidden = ['password', 'remember_token'];

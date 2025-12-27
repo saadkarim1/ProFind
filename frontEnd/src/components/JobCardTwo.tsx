@@ -28,6 +28,7 @@ const JobCardTwo = ({
 		save: false,
 		share: false,
 	});
+	console.log(offer);
 	return (
 		<div
 			onClick={() => setSelectedOffer(offer)}
@@ -43,9 +44,9 @@ const JobCardTwo = ({
 				</div>
 				<div className='-space-y-1'>
 					<h1 className='font-medium text-[18px]'>
-						{offer?.company.title?.length > 17
-							? `${offer?.company.title.slice(0, 17)}...`
-							: offer?.company.title}
+						{offer?.company.company_name?.length > 17
+							? `${offer?.company.company_name.slice(0, 17)}...`
+							: offer?.company.company_name}
 					</h1>
 					<p className='text-[12px] text-[#878787] flex items-center space-x-1'>
 						<span>{getCreatedAtOffer(offer?.created_at)}</span>

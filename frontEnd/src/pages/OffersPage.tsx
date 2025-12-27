@@ -1,13 +1,17 @@
 import { useGetAllOffersQuery } from "@/app/services/offersApi";
+import type { RooteState } from "@/app/store";
 import JobCardTwo from "@/components/JobCardTwo";
 import type { OfferType } from "@/models/offer";
 import { GetOfferType } from "@/utils/GetOfferType";
 import { useEffect, useState } from "react";
-import { Link } from "react-router";
+import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router";
 
 const OffersPage = () => {
+	const nabigate = useNavigate();
 	const { data: offers } = useGetAllOffersQuery(undefined);
 	const [selectedOffer, setSelectedOffer] = useState<OfferType | null>(null);
+	const user = useSelector((state: RooteState) => state.auth.user);
 
 	useEffect(() => {
 		setSelectedOffer(offers?.data?.offers[0]);
@@ -19,12 +23,15 @@ const OffersPage = () => {
 				<p className='w-[80%] text-xl font-medium'>
 					Create your job offer and start hiring today!
 				</p>
-				<Link
-					to={"/offers/create-offer"}
+				<button
+					// to={"/offers/create-offer"}
+					onClick={() => {
+						nabigate("/offers/create-offer");
+					}}
 					className='font-medium rounded-full cursor-pointer bg-[#0082FA] text-white py-3 px-5'
 				>
 					Create
-				</Link>
+				</button>
 			</div>
 			<div className='flex justify-between'>
 				<div className='w-[49%] grid grid-cols-2 gap-4 '>
