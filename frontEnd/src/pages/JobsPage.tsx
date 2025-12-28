@@ -1,4 +1,5 @@
-import { useGetAllOffersQuery } from "@/app/services/offersApi";
+import { useApplyToOfferMutation, useGetAllOffersQuery } from "@/app/services/offersApi";
+import type { RooteState } from "@/app/store";
 import JobCardTwo from "@/components/JobCardTwo";
 import SearchBar from "@/components/offers/SearchBar";
 import BookMark from "@/components/shared/BookMark";
@@ -6,15 +7,20 @@ import CopyButton from "@/components/shared/CopyButton";
 import type { OfferType } from "@/models/offer";
 import { GetOfferType } from "@/utils/GetOfferType";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 const Jobs: React.FC = () => {
-	const { data: offers } = useGetAllOffersQuery(undefined);
+	const { data: offers } = useGetAllOffersQuery();
+	const [applytoOffer] = useApplyToOfferMutation();
+	const user = useSelector((state: RooteState) => state.auth.user);
+
 	const [selectedOffer, setSelectedOffer] = useState<OfferType | null>(null);
 
 	useEffect(() => {
 		if (!offers) return;
 		setSelectedOffer(offers[0]);
 	}, [offers]);
+	console.log(offers);
 
 	return (
 		<section>
@@ -63,10 +69,27 @@ const Jobs: React.FC = () => {
 								{selectedOffer?.company.company_name}
 							</p>
 							<div className='flex items-center space-x-2'>
-								<button className='cursor-pointer w-fit h-fit text-[14px] font-medium py-1 px-3 border-2 text-white border-[#0082FA]  rounded-xl bg-[#0082FA]'>
-									Apply Now
-								</button>
-								<BookMark offer_id={selectedOffer?.offer_id} />
+								{selectedOffer?.is_applied ? (
+									<button className='cursor-not-allowed w-fit h-fit text-[16px] font-medium py-1 px-4 border-2 text-[#0082FA] border-[#0082FA]  rounded-xl bg-white'>
+										Already Applied
+									</button>
+								) : (
+									<button
+										onClick={async () => {
+											const res = await applytoOffer(selectedOffer?.offer_id);
+											console.log(res);
+										}}
+										className='cursor-pointer w-fit h-fit text-[16px] font-medium py-1 px-6 border-2 text-white border-[#0082FA]  rounded-xl bg-[#0082FA]'
+									>
+										Apply Now
+									</button>
+								)}
+								{user?.role === "user" && (
+									<BookMark
+										offer_id={selectedOffer?.offer_id}
+										is_saved={selectedOffer?.is_saved}
+									/>
+								)}
 								<CopyButton />
 							</div>
 						</div>

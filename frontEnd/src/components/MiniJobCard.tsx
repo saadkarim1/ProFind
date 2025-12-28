@@ -15,7 +15,7 @@ const MiniJobCard = ({ offer }: { offer: OfferType }) => {
 			className='bg-white rounded-3xl border-2 border-[#e9e9e9]  w-full h-fit py-3 flex items-center justify-between'
 		>
 			<div className='w-[20%] flex items-center justify-evenly'>
-				<BookMark offer_id={offer.offer_id} />
+				<BookMark offer_id={offer.offer_id} is_saved={offer?.is_saved} />
 				<div className='bg-sky-100 p-2.5 rounded-2xl'>
 					<svg
 						xmlns='http://www.w3.org/2000/svg'

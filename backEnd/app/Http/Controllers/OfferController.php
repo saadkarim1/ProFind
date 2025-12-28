@@ -17,10 +17,18 @@ class OfferController extends Controller
 {
     use ApiResponse;
 
+
+
     public function index()
     {
         try {
-            $offers = Offer::all();
+            $userId = auth('web')->id();
+            // $offers = Offer::latest()->when($userId, function ($query) use ($userId) {
+            //     $query->withUserStatus();
+            // })->get();
+
+            $offers = Offer::latest()->withUserStatus($userId)->get();
+
             return $this->successResponse(data: OfferResource::collection($offers));
         } catch (Exception $e) {
             return response()->json($e->getMessage());
@@ -29,14 +37,15 @@ class OfferController extends Controller
 
     public function getAppliedOffers()
     {
-        $offers = Auth::guard('web')->user()->offers;
-        // return  response()->json("dsfsdfsdfd", 200);
+        $user = Auth::guard('web')->user();
+        $offers = $user->offers()->latest()->withUserStatus($user->id)->get();
         return $this->successResponse(data: OfferResource::collection($offers));
     }
 
     public function getSavedOffers()
     {
-        $offers = Auth::guard('web')->user()->savedOffers;
+        $user = Auth::guard('web')->user();
+        $offers = $user->savedOffers()->latest()->withUserStatus($user->id)->get();
         return $this->successResponse(data: OfferResource::collection($offers));
     }
     public function store(StoreOfferRequest $request)
@@ -79,11 +88,11 @@ class OfferController extends Controller
         return $this->successResponse(data: new OfferResource($offer));
     }
 
-    public function saveOffer($offerId)
+    public function toggleSave($offerId)
     {
         $id = Auth::guard('web')->user()->id;
         $offer = Offer::findOrFail($offerId);
-        $offer->saversusers()->syncWithoutDetaching($id);
+        $offer->saversusers()->toggle($id);
         return $this->successResponse(data: new OfferResource($offer));
     }
 }

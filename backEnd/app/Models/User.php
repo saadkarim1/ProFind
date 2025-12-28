@@ -43,7 +43,7 @@ class User extends Authenticatable
 
     public function savedOffers()
     {
-        return $this->belongsToMany(Offer::class, 'user_offer_save');
+        return $this->belongsToMany(Offer::class, 'user_offer_save')->withTimestamps();
     }
 
     /**

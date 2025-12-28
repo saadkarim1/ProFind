@@ -32,17 +32,6 @@ const JobsSection: React.FC<Props> = ({ featuredJobsRef }) => {
 	});
 	console.log(offers);
 
-	const latestOffers = () => {
-		if (!offers) return;
-		let leatestOffers1: OfferType[] = [offers[offers?.length - 1]];
-
-		for (let i = offers.length - 2; i > offers.length - 9; i--) {
-			leatestOffers1 = [...leatestOffers1, offers[i]];
-		}
-
-		return leatestOffers1;
-	};
-
 	return (
 		<section
 			ref={featuredJobsRef}
@@ -64,10 +53,12 @@ const JobsSection: React.FC<Props> = ({ featuredJobsRef }) => {
 			</ul>
 
 			<div className='grid grid-cols-4 gap-4 w-full'>
-				{latestOffers &&
-					latestOffers()?.map((offer) => (
-						<JobCard key={offer?.offer_id} offer={offer} />
-					))}
+				{offers?.map((offer) => {
+					let count = 0;
+					if (count > 8) return;
+					count++;
+					return <JobCard key={offer?.offer_id} offer={offer} />;
+				})}
 			</div>
 			<Link
 				to={"jobs"}

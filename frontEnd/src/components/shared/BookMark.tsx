@@ -1,10 +1,13 @@
 import { useSaveOfferMutation } from "@/app/services/offersApi";
-import { useState } from "react";
 
-const BookMark = ({ offer_id }: { offer_id: string | undefined }) => {
-	const [save, setSave] = useState<boolean>(false);
+const BookMark = ({
+	offer_id,
+	is_saved,
+}: {
+	offer_id: string | undefined;
+	is_saved: boolean | undefined;
+}) => {
 	const [saveOffer] = useSaveOfferMutation();
-
 	return (
 		<div
 			onClick={async () => {
@@ -19,9 +22,8 @@ const BookMark = ({ offer_id }: { offer_id: string | undefined }) => {
 				strokeWidth='2'
 				strokeLinecap='round'
 				strokeLinejoin='round'
-				onClick={() => setSave((prev) => !prev)}
 				className={`lucide lucide-bookmark-icon lucide-bookmark w-6 h-6 ${
-					save
+					is_saved
 						? "fill-[#0082FA] stroke-[#0082FA]"
 						: "fill-none stroke-[#878787]"
 				} hover:stroke-[#0082FA] transition-all duration-200 ease-in-out`}

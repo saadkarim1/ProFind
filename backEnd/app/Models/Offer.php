@@ -29,11 +29,20 @@ class Offer extends Model
 
     public function saversusers()
     {
-        return $this->belongsToMany(User::class, 'user_offer_save');
+        return $this->belongsToMany(User::class, 'user_offer_save')->withTimestamps();
     }
 
     public function company()
     {
         return $this->belongsTo(Recruiter::class);
+    }
+
+    public function scopeWithUserStatus($query, $userId)
+    {
+        return $query->withExists(['saversusers as is_saved' => function ($q) use ($userId) {
+            $q->where('user_id', $userId);
+        }])->withExists(['users as is_applied' => function ($q) use ($userId) {
+            $q->where('user_id', $userId);
+        }]);
     }
 }

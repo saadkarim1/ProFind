@@ -8,6 +8,8 @@ import {
 } from "@/utils/OfferUtils";
 import BookMark from "./shared/BookMark";
 import CopyButton from "./shared/CopyButton";
+import { useSelector } from "react-redux";
+import type { RooteState } from "@/app/store";
 
 type JobCardTwoProps = {
 	offer: OfferType;
@@ -20,9 +22,11 @@ const JobCardTwo = ({
 	setSelectedOffer,
 	selectedOffer,
 }: JobCardTwoProps) => {
+	const user = useSelector((state: RooteState) => state.auth.user);
 	const [applytoOffer] = useApplyToOfferMutation();
 	const days = getHowLongOfferPublishedPerDays(offer?.created_at);
 	const hours = getHowLongOfferPublishedPerHours(offer?.created_at);
+	console.log(offer);
 	return (
 		<div
 			onClick={() => setSelectedOffer(offer)}
@@ -67,18 +71,26 @@ const JobCardTwo = ({
 
 			<div className='flex items-center justify-between'>
 				<div className='flex space-x-2'>
-					<BookMark offer_id={offer.offer_id} />
+					{user?.role === "user" && (
+						<BookMark offer_id={offer?.offer_id} is_saved={offer?.is_saved} />
+					)}
 					<CopyButton />
 				</div>
-				<button
-					onClick={async () => {
-						const res = await applytoOffer(offer?.offer_id);
-						console.log(res);
-					}}
-					className='cursor-pointer w-fit h-fit text-[16px] font-medium py-1 px-6 border-2 text-white border-[#0082FA]  rounded-xl bg-[#0082FA]'
-				>
-					Apply
-				</button>
+				{offer?.is_applied ? (
+					<button className='cursor-not-allowed w-fit h-fit text-[16px] font-medium py-1 px-6 border-2 text-[#0082FA] border-[#0082FA]  rounded-xl bg-white'>
+						Applied
+					</button>
+				) : (
+					<button
+						onClick={async () => {
+							const res = await applytoOffer(offer?.offer_id);
+							console.log(res);
+						}}
+						className='cursor-pointer w-fit h-fit text-[16px] font-medium py-1 px-6 border-2 text-white border-[#0082FA]  rounded-xl bg-[#0082FA]'
+					>
+						Apply
+					</button>
+				)}
 			</div>
 		</div>
 	);

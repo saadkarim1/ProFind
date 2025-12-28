@@ -10,4 +10,6 @@ export type OfferType = {
 	offer_type: string;
 	company: RecruiterType;
 	created_at: string;
+	is_saved: boolean;
+	is_applied: boolean;
 };
