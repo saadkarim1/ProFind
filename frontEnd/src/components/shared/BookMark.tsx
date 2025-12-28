@@ -3,14 +3,17 @@ import { useSaveOfferMutation } from "@/app/services/offersApi";
 const BookMark = ({
 	offer_id,
 	is_saved,
+	isAuthenticated,
 }: {
 	offer_id: string | undefined;
 	is_saved: boolean | undefined;
+	isAuthenticated: boolean;
 }) => {
 	const [saveOffer] = useSaveOfferMutation();
 	return (
 		<div
 			onClick={async () => {
+				if (!isAuthenticated) return;
 				const res = await saveOffer(offer_id);
 				console.log(res);
 			}}

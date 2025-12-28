@@ -71,7 +71,7 @@ class OfferController extends Controller
     {
         try {
             $offer = Offer::findOrFail($offerId);
-            // return response()->json($offer, 200);
+            // return response()->json("sdlfkjsd", 200);
             return $this->successResponse(data: new OfferResource($offer));
         } catch (Exception $e) {
             return response()->json($e->getMessage());

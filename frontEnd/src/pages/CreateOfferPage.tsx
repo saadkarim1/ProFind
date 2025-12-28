@@ -18,6 +18,7 @@ const CreateOfferPage = () => {
 		duration: "",
 		offer_type: "",
 		category: "",
+		salary: "",
 	});
 
 	const handleInputsfields = (
@@ -126,6 +127,17 @@ const CreateOfferPage = () => {
 							<input
 								type='text'
 								id='emailToApply'
+								className='focus:outline-none bg-[#f5f5f5] border-[1.5px] border-[#e9e9e9] block py-2 px-3 w-full rounded-xl'
+							/>
+						</div>
+						<div className='col-span-2'>
+							<label htmlFor='salary' className='text-[#878787] text-[15px]'>
+								Salary (DH)
+							</label>
+							<input
+								type='text'
+								id='salary'
+								name='salary'
 								className='focus:outline-none bg-[#f5f5f5] border-[1.5px] border-[#e9e9e9] block py-2 px-3 w-full rounded-xl'
 							/>
 						</div>

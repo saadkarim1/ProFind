@@ -1,9 +1,11 @@
 import { useState } from "react";
 
-const CopyButton = () => {
+const CopyButton = ({ offerId }: { offerId: string | undefined }) => {
 	const [isCopied, setIsCopied] = useState(false);
 	const handleClick = async () => {
-		await navigator.clipboard.writeText("ssaaad");
+		await navigator.clipboard.writeText(
+			`http://localhost:5173/jobs/${offerId}`
+		);
 		setIsCopied(true);
 		setTimeout(() => setIsCopied(false), 2000);
 	};

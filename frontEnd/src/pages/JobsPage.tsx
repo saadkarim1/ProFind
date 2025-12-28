@@ -1,4 +1,7 @@
-import { useApplyToOfferMutation, useGetAllOffersQuery } from "@/app/services/offersApi";
+import {
+	useApplyToOfferMutation,
+	useGetAllOffersQuery,
+} from "@/app/services/offersApi";
 import type { RooteState } from "@/app/store";
 import JobCardTwo from "@/components/JobCardTwo";
 import SearchBar from "@/components/offers/SearchBar";
@@ -12,7 +15,9 @@ import { useSelector } from "react-redux";
 const Jobs: React.FC = () => {
 	const { data: offers } = useGetAllOffersQuery();
 	const [applytoOffer] = useApplyToOfferMutation();
-	const user = useSelector((state: RooteState) => state.auth.user);
+	const { user, isAuthenticated } = useSelector(
+		(state: RooteState) => state.auth
+	);
 
 	const [selectedOffer, setSelectedOffer] = useState<OfferType | null>(null);
 
@@ -88,9 +93,10 @@ const Jobs: React.FC = () => {
 									<BookMark
 										offer_id={selectedOffer?.offer_id}
 										is_saved={selectedOffer?.is_saved}
+										isAuthenticated={isAuthenticated}
 									/>
 								)}
-								<CopyButton />
+								<CopyButton offerId={selectedOffer?.offer_id} />
 							</div>
 						</div>
 					</div>

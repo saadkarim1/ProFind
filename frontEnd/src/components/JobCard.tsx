@@ -10,9 +10,12 @@ import BookMark from "./shared/BookMark";
 import CopyButton from "./shared/CopyButton";
 import { useSelector } from "react-redux";
 import type { RooteState } from "@/app/store";
+import { Link } from "react-router";
 
 const JobCard = ({ offer }: { offer: OfferType }) => {
-	const user = useSelector((state: RooteState) => state.auth.user);
+	const { user, isAuthenticated } = useSelector(
+		(state: RooteState) => state.auth
+	);
 	const days = getHowLongOfferPublishedPerDays(offer?.created_at);
 	const hours = getHowLongOfferPublishedPerHours(offer?.created_at);
 
@@ -52,12 +55,21 @@ const JobCard = ({ offer }: { offer: OfferType }) => {
 
 			<div className='flex items-center justify-between'>
 				<div className='flex space-x-2'>
-					{user?.role === "user" && <BookMark offer_id={offer?.offer_id} is_saved={offer?.is_saved} />}
-					<CopyButton />
+					{user?.role === "user" && (
+						<BookMark
+							offer_id={offer?.offer_id}
+							is_saved={offer?.is_saved}
+							isAuthenticated={isAuthenticated}
+						/>
+					)}
+					<CopyButton offerId={offer?.offer_id} />
 				</div>
-				<button className='flex space-x-1 items-center cursor-pointer w-fit h-fit text-[16px] font-medium py-1 px-5 border-2 text-white border-[#0082FA]  rounded-xl bg-[#0082FA]'>
+				<Link
+					to={`/jobs/${offer?.offer_id}`}
+					className='flex space-x-1 items-center cursor-pointer w-fit h-fit text-[16px] font-medium py-1 px-5 border-2 text-white border-[#0082FA]  rounded-xl bg-[#0082FA]'
+				>
 					<MdOutlineRemoveRedEye className='text-xl' /> <span>Details</span>
-				</button>
+				</Link>
 			</div>
 		</div>
 	);

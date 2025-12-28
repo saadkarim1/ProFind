@@ -22,7 +22,9 @@ const JobCardTwo = ({
 	setSelectedOffer,
 	selectedOffer,
 }: JobCardTwoProps) => {
-	const user = useSelector((state: RooteState) => state.auth.user);
+	const { user, isAuthenticated } = useSelector(
+		(state: RooteState) => state.auth
+	);
 	const [applytoOffer] = useApplyToOfferMutation();
 	const days = getHowLongOfferPublishedPerDays(offer?.created_at);
 	const hours = getHowLongOfferPublishedPerHours(offer?.created_at);
@@ -72,9 +74,13 @@ const JobCardTwo = ({
 			<div className='flex items-center justify-between'>
 				<div className='flex space-x-2'>
 					{user?.role === "user" && (
-						<BookMark offer_id={offer?.offer_id} is_saved={offer?.is_saved} />
+						<BookMark
+							offer_id={offer?.offer_id}
+							is_saved={offer?.is_saved}
+							isAuthenticated={isAuthenticated}
+						/>
 					)}
-					<CopyButton />
+					<CopyButton offerId={offer?.offer_id} />
 				</div>
 				{offer?.is_applied ? (
 					<button className='cursor-not-allowed w-fit h-fit text-[16px] font-medium py-1 px-6 border-2 text-[#0082FA] border-[#0082FA]  rounded-xl bg-white'>

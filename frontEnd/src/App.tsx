@@ -26,6 +26,7 @@ import ApplicantsPage from "./pages/ApplicantsPage";
 import RecruiterRegisterPage from "./pages/RecruiterProfile/RecruiterRegisterPage";
 import ProtectedRouteSeeker from "./components/shared/ProtectedRouteSeeker";
 import PretectedRouteRecruiter from "./components/shared/PretectedRouteRecruiter";
+import JobDetails from "./pages/JobDetails";
 
 const router = createBrowserRouter([
 	{
@@ -44,6 +45,7 @@ const router = createBrowserRouter([
 			{ path: "register", element: <RegisterPage /> },
 			{ path: "recruiter/login", element: <RecruiterLoginPage /> },
 			{ path: "recruiter/register", element: <RecruiterRegisterPage /> },
+			{ path: "jobs/:id", element: <JobDetails /> },
 
 			{
 				element: <ProtectedRouteSeeker />,

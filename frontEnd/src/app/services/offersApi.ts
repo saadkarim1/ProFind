@@ -45,6 +45,11 @@ export const offersApi = apiSlice.injectEndpoints({
 			}),
 			invalidatesTags: ["Offers"],
 		}),
+
+		getOffer: builder.query<OfferType, string | undefined>({
+			query: (payload) => `api/v1/offers/${payload}`,
+			transformResponse: (response: { data: OfferType }) => response.data,
+		}),
 	}),
 });
 
@@ -55,4 +60,5 @@ export const {
 	useGetAppliedOffersQuery,
 	useSaveOfferMutation,
 	useGetSavedOffersQuery,
+	useGetOfferQuery,
 } = offersApi;
