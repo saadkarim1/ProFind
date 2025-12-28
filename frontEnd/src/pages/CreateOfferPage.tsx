@@ -17,7 +17,7 @@ const CreateOfferPage = () => {
 		location: "",
 		duration: "",
 		offer_type: "",
-		category: "",
+		offer_category: "",
 		salary: "",
 	});
 
@@ -31,17 +31,22 @@ const CreateOfferPage = () => {
 	};
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
+		// console.log({
+		// 	...dataFrom,
+		// 	offer_type: selectedJobType,
+		// 	category: selectedCategory,
+		// });
+
+		// const res = await addOffer({
+		// 	...dataFrom,
+		// 	offer_type: selectedJobType,
+		// });
+		// console.log(res);
 		console.log({
 			...dataFrom,
 			offer_type: selectedJobType,
-			category: selectedCategory,
+			offer_category: selectedCategory,
 		});
-
-		const res = await addOffer({
-			...dataFrom,
-			offer_type: selectedJobType,
-		});
-		console.log(res);
 	};
 	return (
 		<section className='flex'>
@@ -138,6 +143,7 @@ const CreateOfferPage = () => {
 								type='text'
 								id='salary'
 								name='salary'
+								onChange={handleInputsfields}
 								className='focus:outline-none bg-[#f5f5f5] border-[1.5px] border-[#e9e9e9] block py-2 px-3 w-full rounded-xl'
 							/>
 						</div>

@@ -57,7 +57,7 @@ const RecruiterLoginPage = () => {
 						type='text'
 						placeholder='Email'
 						name='email'
-						className='focus:outline-none rounded-r-full  '
+						className='focus:outline-none rounded-r-full w-full '
 						onChange={handleInputsfields}
 					/>
 				</div>
@@ -76,7 +76,7 @@ const RecruiterLoginPage = () => {
 						type={showPassword ? "text" : "password"}
 						placeholder='Password'
 						name='password'
-						className='focus:outline-none  rounded-r-full '
+						className='focus:outline-none rounded-r-full w-full '
 						onChange={handleInputsfields}
 					/>
 				</div>

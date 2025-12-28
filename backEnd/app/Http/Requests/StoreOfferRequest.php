@@ -26,7 +26,10 @@ class StoreOfferRequest extends FormRequest
             "description" => 'required|string|max:400',
             "location" => 'required|string',
             "duration" => "required|string",
-            "offer_type" => "required|string",
+            "offer_type" => "required|string|in:remote,freelance,part time,full time",
+            "offer_category" => "required|string|in:technology,engineering,sales and marketing,full time, finance and legal",
+            "salary" => "sometimes|numeric",
+            "email_to_apply" => "sometimes|string",
 
         ];
     }

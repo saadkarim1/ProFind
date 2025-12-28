@@ -54,7 +54,7 @@ const Login = () => {
 						type='text'
 						placeholder='Email'
 						name='email'
-						className='focus:outline-none rounded-r-full  '
+						className='focus:outline-none rounded-r-full w-full  '
 						onChange={handleInputsfields}
 					/>
 				</div>
@@ -73,7 +73,7 @@ const Login = () => {
 						type={showPassword ? "text" : "password"}
 						placeholder='Password'
 						name='password'
-						className='focus:outline-none  rounded-r-full '
+						className='focus:outline-none w-full rounded-r-full '
 						onChange={handleInputsfields}
 					/>
 				</div>

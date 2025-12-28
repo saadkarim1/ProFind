@@ -17,6 +17,9 @@ class Offer extends Model
         "duration",
         "offer_type",
         "company_id",
+        "offer_category",
+        "salary",
+        "email_to_apply",
     ];
 
     public $incrementing = false;
