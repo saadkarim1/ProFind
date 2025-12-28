@@ -23,7 +23,7 @@ class UpdateUserRequest extends FormRequest
     {
         return [
             "name" => 'sometimes|string|max:40',
-            "email" => 'sometimes|email|unique:users,email',
+            "email" => 'sometimes|email|unique:users,email|string',
             "password" => 'sometimes|string|min:8',
 
             "about_me" => 'sometimes|string|max:400',

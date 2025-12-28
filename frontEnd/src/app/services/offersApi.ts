@@ -18,7 +18,38 @@ export const offersApi = apiSlice.injectEndpoints({
 			}),
 			invalidatesTags: ["Offers"],
 		}),
+
+		applyToOffer: builder.mutation<void, string>({
+			query: (payload) => ({
+				url: `api/v1/offers/${payload}/apply`,
+				method: "POST",
+			}),
+		}),
+
+		getAppliedOffers: builder.query<OfferType[], void>({
+			query: () => "api/v1/offers/applied",
+			transformResponse: (response: { data: OfferType[] }) => response.data,
+		}),
+
+		getSavedOffers: builder.query<OfferType[], void>({
+			query: () => "api/v1/offers/saved",
+			transformResponse: (response: { data: OfferType[] }) => response.data,
+		}),
+
+		saveOffer: builder.mutation({
+			query: (payload) => ({
+				url: `api/v1/offers/${payload}/save`,
+				method: "Post",
+			}),
+		}),
 	}),
 });
 
-export const { useGetAllOffersQuery, useAddOfferMutation } = offersApi;
+export const {
+	useGetAllOffersQuery,
+	useAddOfferMutation,
+	useApplyToOfferMutation,
+	useGetAppliedOffersQuery,
+	useSaveOfferMutation,
+	useGetSavedOffersQuery
+} = offersApi;

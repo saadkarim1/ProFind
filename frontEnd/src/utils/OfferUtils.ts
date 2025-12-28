@@ -4,7 +4,7 @@ export const getCreatedAtOffer = (offerDate: string): string => {
 	return finallyDate;
 };
 
-export const getHowLongOfferPublished = (offerDate: string) => {
+export const getHowLongOfferPublishedPerDays = (offerDate: string) => {
 	const a = new Date(offerDate),
 		b = new Date();
 
@@ -14,4 +14,26 @@ export const getHowLongOfferPublished = (offerDate: string) => {
 	const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
 
 	return Math.floor((utc2 - utc1) / _MS_PER_DAY);
+};
+
+export const getHowLongOfferPublishedPerHours = (offerDate: string) => {
+	const a = new Date(offerDate),
+		b = new Date();
+
+	const _MS_PER_HOUR = 1000 * 60 * 60;
+
+	const utc1 = Date.UTC(
+		a.getFullYear(),
+		a.getMonth(),
+		a.getDate(),
+		a.getHours()
+	);
+	const utc2 = Date.UTC(
+		b.getFullYear(),
+		b.getMonth(),
+		b.getDate(),
+		b.getHours()
+	);
+
+	return Math.floor((utc2 - utc1) / _MS_PER_HOUR);
 };

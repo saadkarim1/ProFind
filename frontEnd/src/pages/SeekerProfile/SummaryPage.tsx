@@ -1,5 +1,6 @@
 import { useUpdateUserMutation } from "@/app/services/user";
 import type { RooteState } from "@/app/store";
+import type { UserType } from "@/models/user";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 
@@ -7,14 +8,8 @@ const SummaryPage = () => {
 	const { user } = useSelector((state: RooteState) => state.auth);
 	const [updateUser] = useUpdateUserMutation();
 
-	const [inputsValues, setInputsValues] = useState({
+	const [inputsValues, setInputsValues] = useState<UserType>({
 		user_id: "",
-		name: "",
-		email: "",
-		location: "",
-		about_me: "",
-		phone: "",
-		job: "",
 	});
 
 	const handleInputsfields = (
@@ -28,14 +23,13 @@ const SummaryPage = () => {
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		// const res = await getCSRF();
 
 		const res1 = await updateUser({
 			...inputsValues,
 			id: user?.user_id,
 		});
 		console.log(res1);
-		// console.log({ ...inputsValues, user_id: user?.user_id });
+		console.log({ ...inputsValues, user_id: user?.user_id });
 	};
 
 	return (

@@ -1,6 +1,8 @@
 import { useGetAllOffersQuery } from "@/app/services/offersApi";
 import JobCardTwo from "@/components/JobCardTwo";
 import SearchBar from "@/components/offers/SearchBar";
+import BookMark from "@/components/shared/BookMark";
+import CopyButton from "@/components/shared/CopyButton";
 import type { OfferType } from "@/models/offer";
 import { GetOfferType } from "@/utils/GetOfferType";
 import { useEffect, useState } from "react";
@@ -60,10 +62,13 @@ const Jobs: React.FC = () => {
 							<p className='font-medium text-[#878787] text-[18px]'>
 								{selectedOffer?.company.company_name}
 							</p>
-
-							<button className='cursor-pointer w-fit h-fit text-[14px] font-medium py-1.5 px-3 border-2 text-white border-[#0082FA]  rounded-xl bg-[#0082FA]'>
-								Apply Now
-							</button>
+							<div className='flex items-center space-x-2'>
+								<button className='cursor-pointer w-fit h-fit text-[14px] font-medium py-1 px-3 border-2 text-white border-[#0082FA]  rounded-xl bg-[#0082FA]'>
+									Apply Now
+								</button>
+								<BookMark offer_id={selectedOffer?.offer_id} />
+								<CopyButton />
+							</div>
 						</div>
 					</div>
 					<hr className='text-[#e9e9e9] h-3' />

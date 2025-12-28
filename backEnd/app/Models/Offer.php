@@ -24,7 +24,7 @@ class Offer extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'user_offer_apply');
+        return $this->belongsToMany(User::class, 'user_offer_apply')->withTimestamps();
     }
 
     public function saversusers()

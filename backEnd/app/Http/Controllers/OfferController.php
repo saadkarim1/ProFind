@@ -26,6 +26,19 @@ class OfferController extends Controller
             return response()->json($e->getMessage());
         }
     }
+
+    public function getAppliedOffers()
+    {
+        $offers = Auth::guard('web')->user()->offers;
+        // return  response()->json("dsfsdfsdfd", 200);
+        return $this->successResponse(data: OfferResource::collection($offers));
+    }
+
+    public function getSavedOffers()
+    {
+        $offers = Auth::guard('web')->user()->savedOffers;
+        return $this->successResponse(data: OfferResource::collection($offers));
+    }
     public function store(StoreOfferRequest $request)
     {
         try {
@@ -56,11 +69,11 @@ class OfferController extends Controller
         }
     }
 
-    public function applyOffer(Request $request, $offerId)
+    public function applyOffer($offerId)
     {
         $offer = Offer::findOrFail($offerId);
-        // Auth::user()->id
-        $offer->users()->syncWithoutDetaching("019b459e-16ff-73c7-8e5a-429ec885579e");
+        $id = Auth::guard('web')->user()->id;
+        $offer->users()->syncWithoutDetaching($id);
 
         // return response()->json($offer, 200);
         return $this->successResponse(data: new OfferResource($offer));
@@ -68,9 +81,9 @@ class OfferController extends Controller
 
     public function saveOffer($offerId)
     {
+        $id = Auth::guard('web')->user()->id;
         $offer = Offer::findOrFail($offerId);
-        $offer->saversusers()->syncWithoutDetaching("019b459e-16ff-73c7-8e5a-429ec885579e");
+        $offer->saversusers()->syncWithoutDetaching($id);
         return $this->successResponse(data: new OfferResource($offer));
-        // return response()->json($offer, 200);
     }
 }

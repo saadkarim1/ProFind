@@ -1,17 +1,14 @@
 import { useGetAllOffersQuery } from "@/app/services/offersApi";
-import type { RooteState } from "@/app/store";
 import JobCardTwo from "@/components/JobCardTwo";
 import type { OfferType } from "@/models/offer";
 import { GetOfferType } from "@/utils/GetOfferType";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router";
 
 const OffersPage = () => {
 	const nabigate = useNavigate();
 	const { data: offers } = useGetAllOffersQuery(undefined);
 	const [selectedOffer, setSelectedOffer] = useState<OfferType | null>(null);
-	const user = useSelector((state: RooteState) => state.auth.user);
 
 	useEffect(() => {
 		if (!offers) return;
@@ -25,7 +22,6 @@ const OffersPage = () => {
 					Create your job offer and start hiring today!
 				</p>
 				<button
-					// to={"/offers/create-offer"}
 					onClick={() => {
 						nabigate("/offers/create-offer");
 					}}
@@ -69,7 +65,9 @@ const OffersPage = () => {
 						</div>
 						<div className='flex flex-col space-y-2 w-full'>
 							<div className='flex items-center justify-between w-full'>
-								<h1 className='font-medium text-3xl'>{selectedOffer?.offer_title}</h1>
+								<h1 className='font-medium text-3xl'>
+									{selectedOffer?.offer_title}
+								</h1>
 								{GetOfferType(selectedOffer?.offer_type)}
 							</div>
 							<p className='font-medium text-[#878787] text-[18px]'>

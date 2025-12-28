@@ -38,7 +38,7 @@ class User extends Authenticatable
     // }
     public function offers()
     {
-        return $this->belongsToMany(Offer::class, 'user_offer_apply');
+        return $this->belongsToMany(Offer::class, 'user_offer_apply')->withTimestamps();;
     }
 
     public function savedOffers()

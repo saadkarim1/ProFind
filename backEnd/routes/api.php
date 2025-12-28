@@ -20,9 +20,11 @@ Route::prefix('v1')->group(function () {
 
         Route::post('/offers', 'store');
         Route::get('/offers',  'index');
+        Route::get('/offers/applied',  'getAppliedOffers');
+        Route::get('/offers/saved',  'getSavedOffers');
         Route::get('/offers/{offerId}',  'show');
-        Route::get('/offers/{offerId}/apply',  'applyOffer');
-        Route::get('/offers/{offerId}/save',  'saveOffer');
+        Route::post('/offers/{offerId}/apply',  'applyOffer');
+        Route::post('/offers/{offerId}/save',  'saveOffer');
     });
 
     Route::controller(RecruiterController::class)->group(function () {

@@ -80,7 +80,6 @@ class UserController extends Controller
 
     public function updateUser(UpdateUserRequest $request, $id)
     {
-
         $request->validated();
         $recruiter = User::findOrFail($id);
         $recruiter->update($request->validated());
