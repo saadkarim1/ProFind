@@ -1,10 +1,14 @@
 import { useLogoutRecruiterMutation } from "@/app/services/authApi";
 import { RecruiterProfileList } from "@/models/model";
 import { TbLogout } from "react-icons/tb";
+import { useSelector } from "react-redux";
+import type { RooteState } from "@/app/store";
+
 import { Link, Outlet, useLocation } from "react-router";
 
 const RecruiterProfileLayout = () => {
 	const { pathname } = useLocation();
+	const user = useSelector((state: RooteState) => state.auth.user);
 	const [logoutRecruiter] = useLogoutRecruiterMutation();
 	return (
 		<section className='relative flex justify-between'>
@@ -30,7 +34,7 @@ const RecruiterProfileLayout = () => {
 					</svg>
 				</div>
 				<div className='text-center'>
-					<h1 className='text-3xl font-semibold'>Capegimini</h1>
+					<h1 className='text-3xl font-semibold'>{user?.company_name}</h1>
 				</div>
 				<ul className='w-[80%] mx-auto space-y-5 font-medium px-4 text-[16px] my-4'>
 					{RecruiterProfileList.map((section) => (

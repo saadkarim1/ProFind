@@ -1,18 +1,23 @@
+import type { RooteState } from "@/app/store";
 import { HiOutlineMail } from "react-icons/hi";
 import { MdOutlinePhoneAndroid } from "react-icons/md";
 import { RiEditFill } from "react-icons/ri";
 import { SlLocationPin } from "react-icons/sl";
+import { useSelector } from "react-redux";
 import { Link } from "react-router";
 
 const RecruiterProfilePage = () => {
+	const user = useSelector((state: RooteState) => state.auth.user);
+	console.log(user);
 	return (
 		<div className='h-fit grid w-[74%] grid-cols-2 gap-4'>
 			<div className='p-6 text-[14px] font-normal col-span-2 h-fit rounded-3xl border-2 border-[#e9e9e9] bg-white'>
 				<h2 className='font-medium text-lg'>Description</h2>
 				<p className='w-[80%]'>
-					quos quae recusandae facere odit quo error eligendi nulla veritatis
+					{/* quos quae recusandae facere odit quo error eligendi nulla veritatis
 					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium
-					neque sapiente iusto aliquid nobis, eaque asperiores at ad rerum ex.
+					neque sapiente iusto aliquid nobis, eaque asperiores at ad rerum ex.{" "} */}
+					{user?.company_description}
 				</p>
 			</div>
 			<div className='p-6 col-span-2 h-fit rounded-3xl border-2 border-[#e9e9e9] bg-white'>
@@ -32,7 +37,7 @@ const RecruiterProfilePage = () => {
 							<HiOutlineMail />
 						</div>
 						<div className='-space-y-1'>
-							<h3>saad@gmail.com</h3>
+							<h3>{user?.email}</h3>
 							<p className='text-[#878787] text-[14px]'>Mail adress</p>
 						</div>
 					</div>
@@ -41,7 +46,7 @@ const RecruiterProfilePage = () => {
 							<MdOutlinePhoneAndroid />
 						</div>
 						<div className='-space-y-1'>
-							<h3>+212 784 816 461</h3>
+							<h3>{user?.phone}</h3>
 							<p className='text-[#878787] text-[14px]'>Phone Number</p>
 						</div>
 					</div>
@@ -60,7 +65,7 @@ const RecruiterProfilePage = () => {
 							</svg>
 						</div>
 						<div className='-space-y-1'>
-							<h3>https://www.capgemini.com</h3>
+							<h3>{user?.company_website}</h3>
 							<p className='text-[#878787] text-[14px]'>Link</p>
 						</div>
 					</div>
@@ -69,7 +74,7 @@ const RecruiterProfilePage = () => {
 							<SlLocationPin />
 						</div>
 						<div className='-space-y-1'>
-							<h3>France</h3>
+							<h3>{user?.location}</h3>
 							<p className='text-[#878787] text-[14px]'>Location</p>
 						</div>
 					</div>

@@ -1,10 +1,11 @@
 import { useState } from "react";
 
 const options: string[] = [
-	"UI designer",
-	"UX designer",
-	"Web design",
-	"fullstack developpement",
+	"engineering",
+	"sales and marketing",
+	"technology",
+	"business",
+	"finance and legal",
 ];
 type JobCategoriesDropDownListProps = {
 	selectedCategory: string;

@@ -42,7 +42,8 @@ export const authApi = apiSlice.injectEndpoints({
 
 		getUser: builder.query<UserType | RecruiterType, void>({
 			query: () => "api/v1/user",
-			transformResponse: (response: {data: UserType | RecruiterType}) => response.data,
+			transformResponse: (response: { data: UserType | RecruiterType }) =>
+				response.data,
 			providesTags: ["User"],
 		}),
 

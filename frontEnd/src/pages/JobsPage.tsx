@@ -104,7 +104,7 @@ const Jobs: React.FC = () => {
 					<div className='flex justify-between w-full h-10 font-semibold text-[15px] text-[#3a4981]'>
 						<div className='w-[33%] h-full flex flex-col items-center '>
 							<h3>SALARY</h3>
-							<p>-----</p>
+							<p>{selectedOffer?.salary ? selectedOffer?.salary : "-----"}</p>
 						</div>
 						<div className='w-[33%] h-full flex flex-col items-center '>
 							<h3>DURATION</h3>
@@ -122,6 +122,15 @@ const Jobs: React.FC = () => {
 						<h1 className='font-medium text-xl'>Description</h1>
 						<p>{selectedOffer?.offer_description}</p>
 					</div>
+					{selectedOffer?.email_to_apply && (
+						<>
+							<hr className='text-[#e9e9e9] h-3' />
+							<div>
+								<h1 className='font-medium text-xl'>Email To Apply</h1>
+								<p>{selectedOffer?.email_to_apply}</p>
+							</div>
+						</>
+					)}
 				</div>
 			</div>
 		</section>

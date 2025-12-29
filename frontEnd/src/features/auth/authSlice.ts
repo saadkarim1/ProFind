@@ -1,11 +1,13 @@
 import { authApi } from "@/app/services/authApi";
+import type { AuthUser } from "@/models/authUser";
+import type { RecruiterType } from "@/models/recruiter";
 import type { UserType } from "@/models/user";
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
 	isAuthenticated: false,
 	user: null,
-} as { isAuthenticated: boolean; user: UserType | null };
+} as { isAuthenticated: boolean; user: AuthUser | null };
 
 const slice = createSlice({
 	name: "auth",

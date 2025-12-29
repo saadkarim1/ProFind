@@ -5,14 +5,13 @@ import Cursor from "./Cursor";
 import JobCard from "../JobCard";
 import { Link } from "react-router";
 import { useGetAllOffersQuery } from "@/app/services/offersApi";
-import type { OfferType } from "@/models/offer";
 
 const domaines: string[] = [
-	"Digital Marketing",
-	"DevOps Engineer",
-	"Graphic Designer",
-	"Full-Stack Developer",
-	"Logistics Coordinator",
+	"engineering",
+	"sales and marketing",
+	"technology",
+	"business",
+	"finance and legal",
 ];
 
 type Props = {
@@ -21,8 +20,7 @@ type Props = {
 
 const JobsSection: React.FC<Props> = ({ featuredJobsRef }) => {
 	const { data: offers } = useGetAllOffersQuery();
-	const [selectedDomaine, setSelectedDomaine] =
-		useState<string>("Graphic Designer");
+	const [selectedDomaine, setSelectedDomaine] = useState<string>("technology");
 
 	const [position, setPosition] = useState<Position>({
 		width: 0,
@@ -30,7 +28,9 @@ const JobsSection: React.FC<Props> = ({ featuredJobsRef }) => {
 		opacity: 0,
 		height: 0,
 	});
-	console.log(offers);
+
+	let filtredOffers = offers?.filter((offer) => offer.offer_category === selectedDomaine)
+	// console.log(offers);
 
 	return (
 		<section
@@ -53,11 +53,13 @@ const JobsSection: React.FC<Props> = ({ featuredJobsRef }) => {
 			</ul>
 
 			<div className='grid grid-cols-4 gap-4 w-full'>
-				{offers?.map((offer) => {
+				{filtredOffers?.map((offer) => {
 					let count = 0;
 					if (count > 8) return;
 					count++;
+					// if (offer.offer_category === selectedDomaine) {
 					return <JobCard key={offer?.offer_id} offer={offer} />;
+					// }
 				})}
 			</div>
 			<Link

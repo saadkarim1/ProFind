@@ -31,22 +31,19 @@ const CreateOfferPage = () => {
 	};
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		// console.log({
-		// 	...dataFrom,
-		// 	offer_type: selectedJobType,
-		// 	category: selectedCategory,
-		// });
 
-		// const res = await addOffer({
-		// 	...dataFrom,
-		// 	offer_type: selectedJobType,
-		// });
-		// console.log(res);
-		console.log({
+		const res = await addOffer({
 			...dataFrom,
 			offer_type: selectedJobType,
 			offer_category: selectedCategory,
 		});
+
+		console.log(res);
+		// console.log({
+		// 	...dataFrom,
+		// 	offer_type: selectedJobType,
+		// 	offer_category: selectedCategory,
+		// });
 	};
 	return (
 		<section className='flex'>
@@ -132,6 +129,8 @@ const CreateOfferPage = () => {
 							<input
 								type='text'
 								id='emailToApply'
+								onChange={handleInputsfields}
+								name='email_to_apply'
 								className='focus:outline-none bg-[#f5f5f5] border-[1.5px] border-[#e9e9e9] block py-2 px-3 w-full rounded-xl'
 							/>
 						</div>

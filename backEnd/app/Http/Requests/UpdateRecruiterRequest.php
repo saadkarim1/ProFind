@@ -22,16 +22,16 @@ class UpdateRecruiterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "name" => 'sometimes|string|max:40',
-            "email" => 'sometimes|email|unique:recruiters,email',
-            "password" => 'sometimes|string|min:8',
+            "name" => 'sometimes|nullable|string|max:40',
+            "email" => 'sometimes|nullable|email|unique:recruiters,email',
+            "password" => 'sometimes|nullable|string|min:8',
 
-            "company_name" => 'sometimes|string|max:40',
-            "company_description" => 'sometimes|string|max:400',
-            "company_website" => 'sometimes|string',
-            "sector" => 'sometimes|',
-            "company_logo" => 'sometimes|',
-            "location" => 'sometimes|string',
+            "company_name" => 'sometimes|nullable|string|max:40',
+            "company_description" => 'sometimes|nullable|string|max:400',
+            "company_website" => 'sometimes|nullable|string',
+            "sector" => 'sometimes||nullable',
+            "company_logo" => 'sometimes||nullable',
+            "location" => 'sometimes|nullable|string',
         ];
     }
 }

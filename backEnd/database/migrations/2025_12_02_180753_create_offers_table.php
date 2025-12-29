@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string("location");
             $table->string("duration");
             $table->enum("offer_type", ["remote", "freelance", "part time", 'full time']);
-            $table->enum("offer_category", ["technology", "engineering", "sales and marketing", "finance and legal"]);
+            $table->enum("offer_category", ["technology", "engineering", "sales and marketing", "business", "finance and legal"]);
             $table->foreignUuid("company_id")->constrained('recruiters', 'id')->onDelete('cascade');
             $table->integer("salary")->nullable();
             $table->string("email_to_apply")->nullable();

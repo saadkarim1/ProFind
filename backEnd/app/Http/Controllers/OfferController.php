@@ -51,15 +51,19 @@ class OfferController extends Controller
     public function store(StoreOfferRequest $request)
     {
         try {
-            $request->validated();
-            $offer = Offer::create([
-                "title" => $request->title,
-                "description" => $request->description,
-                "location" => $request->location,
-                "duration" => $request->duration,
-                "offer_type" => $request->offer_type,
-                "company_id" => Auth::guard('recruiter')->user()->id,
-            ]);
+            $validated = $request->validated();
+            $validated['company_id'] = Auth::guard('recruiter')->id();
+
+            // "title" => $request->title,
+            //                 "description" => $request->description,
+            //                 "location" => $request->location,
+            //                 "duration" => $request->duration,
+            //                 "offer_type" => $request->offer_type,
+            //                 "offer_category" => $request->offer_category,
+            //                 "salary" => $request->salary,
+            //                 "email_to_apply" => $request->email_to_apply,
+            //                 "company_id" => Auth::guard('recruiter')->user()->id,
+            $offer = Offer::create($validated);
             return $offer;
             // return $this->successResponse(data: new OfferResource($offer), status: 201);
         } catch (Exception $e) {

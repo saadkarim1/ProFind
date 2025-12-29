@@ -12,4 +12,7 @@ export type OfferType = {
 	created_at: string;
 	is_saved: boolean;
 	is_applied: boolean;
+	salary?: number;
+	offer_category: string;
+	email_to_apply?: string;
 };

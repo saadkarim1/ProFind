@@ -14,6 +14,20 @@ class UserResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        if ($this->role === 'recruiter') {
+            return [
+                "user_id" => $this->id,
+                "name" => $this->name,
+                "email" => $this->email,
+                "role" => $this->role,
+                "company_name" => $this->company_name,
+                "company_description" => $this->company_description,
+                "company_website" => $this->company_website,
+                "company_logo" => $this->company_logo,
+                "location" => $this->location,
+                "sector" => $this->sector,
+            ];
+        }
         return [
             "user_id" => $this->id,
             "name" => $this->name,

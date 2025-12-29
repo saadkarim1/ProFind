@@ -28,7 +28,7 @@ const TabJob = ({
 
 	return (
 		<li
-			className={`cursor-pointer py-1.5 px-4 rounded-full z-10 text-lg font-medium transition duration-300 ease-in-out ${
+			className={`cursor-pointer py-1.5 px-4 capitalize rounded-full z-10 text-lg font-medium transition duration-300 ease-in-out ${
 				selectedDomaine == item ? "font-bold text-black" : "text-gray-500"
 			}`}
 			onClick={() => {
