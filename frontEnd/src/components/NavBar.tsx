@@ -48,7 +48,7 @@ const NavBar = () => {
 	const { data: authenticatedUser, isSuccess, isError } = useGetUserQuery();
 	const [showProfilePopup, setShowProfilePopup] = useState<boolean>(false);
 	const [showLoginPopup, setShowLoginPopup] = useState<boolean>(false);
-	console.log(authenticatedUser);
+	// console.log(authenticatedUser);
 	return (
 		<nav className='z-999 fixed w-[80%] mx-auto inset-x-0 pt-3'>
 			<div className='navbar drop-shadow-[0_0px_2px_rgba(0,0,0,0.25)] rounded-2xl flex items-center p-3'>

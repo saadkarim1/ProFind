@@ -10,6 +10,8 @@ import BookMark from "./shared/BookMark";
 import CopyButton from "./shared/CopyButton";
 import { useSelector } from "react-redux";
 import type { RooteState } from "@/app/store";
+import { Link } from "react-router";
+import { MdOutlineRemoveRedEye } from "react-icons/md";
 
 type JobCardTwoProps = {
 	offer: OfferType;
@@ -28,7 +30,6 @@ const JobCardTwo = ({
 	const [applytoOffer] = useApplyToOfferMutation();
 	const days = getHowLongOfferPublishedPerDays(offer?.created_at);
 	const hours = getHowLongOfferPublishedPerHours(offer?.created_at);
-	console.log(offer);
 	return (
 		<div
 			onClick={() => setSelectedOffer(offer)}
@@ -82,20 +83,29 @@ const JobCardTwo = ({
 					)}
 					<CopyButton offerId={offer?.offer_id} />
 				</div>
-				{offer?.is_applied ? (
-					<button className='cursor-not-allowed w-fit h-fit text-[16px] font-medium py-1 px-6 border-2 text-[#0082FA] border-[#0082FA]  rounded-xl bg-white'>
-						Applied
-					</button>
+				{user?.role === "user" ? (
+					offer?.is_applied ? (
+						<button className='cursor-not-allowed w-fit h-fit text-[16px] font-medium py-1 px-6 border-2 text-[#0082FA] border-[#0082FA]  rounded-xl bg-white'>
+							Applied
+						</button>
+					) : (
+						<button
+							onClick={async () => {
+								const res = await applytoOffer(offer?.offer_id);
+								console.log(res);
+							}}
+							className='cursor-pointer w-fit h-fit text-[16px] font-medium py-1 px-6 border-2 text-white border-[#0082FA]  rounded-xl bg-[#0082FA]'
+						>
+							Apply
+						</button>
+					)
 				) : (
-					<button
-						onClick={async () => {
-							const res = await applytoOffer(offer?.offer_id);
-							console.log(res);
-						}}
-						className='cursor-pointer w-fit h-fit text-[16px] font-medium py-1 px-6 border-2 text-white border-[#0082FA]  rounded-xl bg-[#0082FA]'
+					<Link
+						to={`/jobs/${offer?.offer_id}`}
+						className='flex space-x-1 items-center cursor-pointer w-fit h-fit text-[16px] font-medium py-1 px-5 border-2 text-white border-[#0082FA]  rounded-xl bg-[#0082FA]'
 					>
-						Apply
-					</button>
+						<MdOutlineRemoveRedEye className='text-xl' /> <span>Details</span>
+					</Link>
 				)}
 			</div>
 		</div>

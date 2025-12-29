@@ -1,5 +1,6 @@
 import { useGetAllOffersQuery } from "@/app/services/offersApi";
 import JobCardTwo from "@/components/JobCardTwo";
+import CopyButton from "@/components/shared/CopyButton";
 import type { OfferType } from "@/models/offer";
 import { GetOfferType } from "@/utils/GetOfferType";
 import { useEffect, useState } from "react";
@@ -73,18 +74,19 @@ const OffersPage = () => {
 							<p className='font-medium text-[#878787] text-[18px]'>
 								{selectedOffer?.company.company_name}
 							</p>
-							<div className='space-x-2'>
+							<div className='space-x-2 flex items-center'>
 								<Link
 									to={"/offers/3958732kfhjksf/applicants"}
 									target='_blank'
 									rel='noopener noreferrer'
-									className='cursor-pointer w-fit h-fit text-[14px] font-medium py-2 px-3 border-2 text-white border-[#0082FA]  rounded-xl bg-[#0082FA]'
+									className='cursor-pointer w-fit h-fit text-[14px] font-medium py-1.5 px-3 border-2 text-white border-[#0082FA]  rounded-xl bg-[#0082FA]'
 								>
 									Show Applicants
 								</Link>
 								<button className='cursor-pointer w-fit h-fit text-[14px] font-medium py-1.5 px-3 border-2 text-white border-[#0082FA]  rounded-xl bg-[#0082FA]'>
 									Edit Offer
 								</button>
+								<CopyButton offerId={selectedOffer?.offer_id} />
 							</div>
 						</div>
 					</div>

@@ -29,14 +29,16 @@ const JobsSection: React.FC<Props> = ({ featuredJobsRef }) => {
 		height: 0,
 	});
 
-	let filtredOffers = offers?.filter((offer) => offer.offer_category === selectedDomaine)
-	// console.log(offers);
+	let filtredOffers = offers?.filter(
+		(offer) => offer.offer_category === selectedDomaine
+	);
 
+	if (!filtredOffers) return;
 	return (
 		<section
 			ref={featuredJobsRef}
 			id='featured-jobs'
-			className='w-[80%] mx-auto min-h-screen flex flex-col items-center space-y-10 '
+			className='w-[80%] mx-auto flex flex-col items-center space-y-10 '
 		>
 			<h1 className='text-4xl font-bold'>Featured Job Offers</h1>
 			<ul className='flex items-center rounded-full bg-gray-200 p-1.5 font-medium text-lg'>
@@ -53,18 +55,22 @@ const JobsSection: React.FC<Props> = ({ featuredJobsRef }) => {
 			</ul>
 
 			<div className='grid grid-cols-4 gap-4 w-full'>
-				{filtredOffers?.map((offer) => {
-					let count = 0;
-					if (count > 8) return;
-					count++;
-					// if (offer.offer_category === selectedDomaine) {
-					return <JobCard key={offer?.offer_id} offer={offer} />;
-					// }
-				})}
+				{filtredOffers?.length > 0 ? (
+					filtredOffers?.map((offer) => {
+						let count = 0;
+						if (count > 8) return;
+						count++;
+						return <JobCard key={offer?.offer_id} offer={offer} />;
+					})
+				) : (
+					<p className='text-center font-medium text-xl col-span-4'>
+						oops! No offers for this category
+					</p>
+				)}
 			</div>
 			<Link
 				to={"jobs"}
-				className='cursor-pointer font-normal text-lg rounded-full bg-[#0082FA] text-white py-2.5 px-3'
+				className='cursor-pointer font-normal text-lg rounded-full bg-[#0082FA] text-white py-2.5 px-5'
 			>
 				All job offers
 			</Link>

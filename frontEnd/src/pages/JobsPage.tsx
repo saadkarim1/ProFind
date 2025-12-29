@@ -8,38 +8,75 @@ import SearchBar from "@/components/offers/SearchBar";
 import BookMark from "@/components/shared/BookMark";
 import CopyButton from "@/components/shared/CopyButton";
 import type { OfferType } from "@/models/offer";
+import { filterOffers } from "@/utils/filterOffes";
 import { GetOfferType } from "@/utils/GetOfferType";
 import { useEffect, useState } from "react";
+import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { useSelector } from "react-redux";
+import { Link } from "react-router";
 
 const Jobs: React.FC = () => {
-	const { data: offers } = useGetAllOffersQuery();
+	let { data: offers } = useGetAllOffersQuery();
 	const [applytoOffer] = useApplyToOfferMutation();
 	const { user, isAuthenticated } = useSelector(
 		(state: RooteState) => state.auth
 	);
 
 	const [selectedOffer, setSelectedOffer] = useState<OfferType | null>(null);
-
+	const [filtredOffers, setFiltredOffers] = useState<OfferType[]>();
+	const [inputValues, setInputsValues] = useState<{
+		location: string;
+		keyword: string;
+	}>({
+		location: "",
+		keyword: "",
+	});
 	useEffect(() => {
 		if (!offers) return;
 		setSelectedOffer(offers[0]);
-	}, [offers]);
-	console.log(offers);
+		if (inputValues.keyword) {
+			setFiltredOffers(
+				offers?.filter((offer) => {
+					return (
+						offer?.offer_title
+							.toUpperCase()
+							.includes(inputValues.keyword.toUpperCase()) && offer
+					);
+				})
+			);
+		}
+
+		if (inputValues.location) {
+			offers = offers?.filter(
+				(offer) =>
+					offer?.location.toUpperCase() === inputValues.keyword.toUpperCase() &&
+					offer
+			);
+		}
+	}, [inputValues, offers]);
 
 	return (
 		<section>
-			<SearchBar />
+			<SearchBar setInputsValues={setInputsValues} />
 			<div className='flex justify-between'>
 				<div className='w-[49%] grid grid-cols-2 gap-4 '>
-					{offers?.map((offer: OfferType) => (
-						<JobCardTwo
-							key={offer.offer_id}
-							offer={offer}
-							setSelectedOffer={setSelectedOffer}
-							selectedOffer={selectedOffer}
-						/>
-					))}
+					{filtredOffers
+						? filtredOffers?.map((offer: OfferType) => (
+								<JobCardTwo
+									key={offer?.offer_id}
+									offer={offer}
+									setSelectedOffer={setSelectedOffer}
+									selectedOffer={selectedOffer}
+								/>
+						  ))
+						: offers?.map((offer: OfferType) => (
+								<JobCardTwo
+									key={offer?.offer_id}
+									offer={offer}
+									setSelectedOffer={setSelectedOffer}
+									selectedOffer={selectedOffer}
+								/>
+						  ))}
 				</div>
 				<div className='w-[49%] h-fit sticky top-30 space-y-4 rounded-4xl p-10 border-4 border-[#e9e9e9] bg-white'>
 					<div className='flex space-x-3'>
@@ -74,20 +111,30 @@ const Jobs: React.FC = () => {
 								{selectedOffer?.company.company_name}
 							</p>
 							<div className='flex items-center space-x-2'>
-								{selectedOffer?.is_applied ? (
-									<button className='cursor-not-allowed w-fit h-fit text-[16px] font-medium py-1 px-4 border-2 text-[#0082FA] border-[#0082FA]  rounded-xl bg-white'>
-										Already Applied
-									</button>
+								{user?.role === "user" ? (
+									selectedOffer?.is_applied ? (
+										<button className='cursor-not-allowed w-fit h-fit text-[16px] font-medium py-1 px-6 border-2 text-[#0082FA] border-[#0082FA]  rounded-xl bg-white'>
+											Applied
+										</button>
+									) : (
+										<button
+											onClick={async () => {
+												const res = await applytoOffer(selectedOffer?.offer_id);
+												console.log(res);
+											}}
+											className='cursor-pointer w-fit h-fit text-[16px] font-medium py-1 px-6 border-2 text-white border-[#0082FA]  rounded-xl bg-[#0082FA]'
+										>
+											Apply
+										</button>
+									)
 								) : (
-									<button
-										onClick={async () => {
-											const res = await applytoOffer(selectedOffer?.offer_id);
-											console.log(res);
-										}}
-										className='cursor-pointer w-fit h-fit text-[16px] font-medium py-1 px-6 border-2 text-white border-[#0082FA]  rounded-xl bg-[#0082FA]'
+									<Link
+										to={`/jobs/${selectedOffer?.offer_id}`}
+										className='flex space-x-1 items-center cursor-pointer w-fit h-fit text-[16px] font-medium py-1 px-5 border-2 text-white border-[#0082FA]  rounded-xl bg-[#0082FA]'
 									>
-										Apply Now
-									</button>
+										<MdOutlineRemoveRedEye className='text-xl' />{" "}
+										<span>Details</span>
+									</Link>
 								)}
 								{user?.role === "user" && (
 									<BookMark

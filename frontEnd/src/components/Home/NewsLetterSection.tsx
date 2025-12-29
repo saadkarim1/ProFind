@@ -2,7 +2,7 @@ import { LuMailOpen } from "react-icons/lu";
 
 const NewsLetterSection = () => {
   return (
-		<section className='w-[80%] mx-auto flex items-center bg-white rounded-4xl p-6 border-2 border-[#e9e9e9] my-10'>
+		<section className='w-[80%] mx-auto flex items-center bg-white rounded-4xl p-6 border-2 border-[#e9e9e9] mt-16 mb-10'>
 			<div className='w-[50%] space-y-4'>
 				<div className='rounded-full w-fit h-fit bg-[#0082fa] p-3 text-xl text-white'>
 					<LuMailOpen />
