@@ -18,7 +18,7 @@ export const offersApi = apiSlice.injectEndpoints({
 			invalidatesTags: ["Offers"],
 		}),
 
-		applyToOffer: builder.mutation<void, string | undefined>({
+		applyToOffer: builder.mutation({
 			query: (payload) => ({
 				url: `api/v1/offers/${payload}/apply`,
 				method: "POST",

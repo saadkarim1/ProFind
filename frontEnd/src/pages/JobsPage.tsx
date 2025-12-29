@@ -10,6 +10,7 @@ import CopyButton from "@/components/shared/CopyButton";
 import type { OfferType } from "@/models/offer";
 import { GetOfferType } from "@/utils/GetOfferType";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { Link } from "react-router";
@@ -33,6 +34,9 @@ const Jobs: React.FC = () => {
 	useEffect(() => {
 		if (!offers) return;
 		setSelectedOffer(offers[0]);
+		if (!inputValues.location && !inputValues.keyword) {
+			setFiltredOffers(undefined);
+		}
 		if (inputValues.keyword) {
 			setFiltredOffers(
 				offers?.filter((offer) => {
@@ -53,7 +57,33 @@ const Jobs: React.FC = () => {
 			);
 		}
 	}, [inputValues, offers]);
-
+	const handleApplyToOffer = async () => {
+		if (!isAuthenticated) {
+			toast("Please log in to apply for this job.", {
+				icon: "👏",
+				position: "bottom-right",
+				style: {
+					border: "2px solid #0082FA",
+					borderRadius: "50px",
+				},
+			});
+			return;
+		}
+		const res = await applytoOffer(selectedOffer?.offer_id).unwrap();
+		if (res.data.is_applied) {
+			toast.success("Application submitted", {
+				position: "bottom-right",
+				style: {
+					border: "2px solid #0082FA",
+					borderRadius: "50px",
+				},
+				iconTheme: {
+					primary: "#0082FA",
+					secondary: "#fff",
+				},
+			});
+		}
+	};
 	return (
 		<section>
 			<SearchBar setInputsValues={setInputsValues} />
@@ -110,23 +140,7 @@ const Jobs: React.FC = () => {
 								{selectedOffer?.company.company_name}
 							</p>
 							<div className='flex items-center space-x-2'>
-								{user?.role === "user" ? (
-									selectedOffer?.is_applied ? (
-										<button className='cursor-not-allowed w-fit h-fit text-[16px] font-medium py-1 px-6 border-2 text-[#0082FA] border-[#0082FA]  rounded-xl bg-white'>
-											Applied
-										</button>
-									) : (
-										<button
-											onClick={async () => {
-												const res = await applytoOffer(selectedOffer?.offer_id);
-												console.log(res);
-											}}
-											className='cursor-pointer w-fit h-fit text-[16px] font-medium py-1 px-6 border-2 text-white border-[#0082FA]  rounded-xl bg-[#0082FA]'
-										>
-											Apply
-										</button>
-									)
-								) : (
+								{user?.role === "recruiter" ? (
 									<Link
 										to={`/jobs/${selectedOffer?.offer_id}`}
 										className='flex space-x-1 items-center cursor-pointer w-fit h-fit text-[16px] font-medium py-1 px-5 border-2 text-white border-[#0082FA]  rounded-xl bg-[#0082FA]'
@@ -134,6 +148,17 @@ const Jobs: React.FC = () => {
 										<MdOutlineRemoveRedEye className='text-xl' />{" "}
 										<span>Details</span>
 									</Link>
+								) : selectedOffer?.is_applied ? (
+									<button className='cursor-not-allowed w-fit h-fit text-[16px] font-medium py-1 px-6 border-2 text-[#0082FA] border-[#0082FA]  rounded-xl bg-white'>
+										Applied
+									</button>
+								) : (
+									<button
+										onClick={handleApplyToOffer}
+										className='cursor-pointer w-fit h-fit text-[16px] font-medium py-1 px-6 border-2 text-white border-[#0082FA]  rounded-xl bg-[#0082FA]'
+									>
+										Apply
+									</button>
 								)}
 								{user?.role === "user" && (
 									<BookMark

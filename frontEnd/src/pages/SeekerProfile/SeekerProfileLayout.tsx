@@ -4,6 +4,7 @@ import { UserProfileList } from "@/models/model";
 import { useSelector } from "react-redux";
 import type { RooteState } from "@/app/store";
 import { useLogoutMutation } from "@/app/services/authApi";
+import toast, { Toaster } from "react-hot-toast";
 
 const SeekerProfileLayout = () => {
 	const { pathname } = useLocation();
@@ -45,7 +46,9 @@ const SeekerProfileLayout = () => {
 						</Link>
 					))}
 					<li
-						onClick={() => logout()}
+						onClick={async () => {
+							await logout();
+						}}
 						className='cursor-pointer flex items-center py-1 px-3 text-[#878787] space-x-2 hover:text-red-500 transition-colors duration-250 ease-in-out'
 					>
 						<TbLogout className='text-2xl' />

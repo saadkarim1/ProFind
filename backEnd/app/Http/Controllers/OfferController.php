@@ -86,7 +86,10 @@ class OfferController extends Controller
     {
         $offer = Offer::findOrFail($offerId);
         $id = Auth::guard('web')->user()->id;
-        $offer->users()->syncWithoutDetaching($id);
+        $result = $offer->users()->syncWithoutDetaching($id);
+        $is_applied = count($result['attached']) > 0;
+        $offer->is_applied = $is_applied;
+
 
         // return response()->json($offer, 200);
         return $this->successResponse(data: new OfferResource($offer));
@@ -96,7 +99,11 @@ class OfferController extends Controller
     {
         $id = Auth::guard('web')->user()->id;
         $offer = Offer::findOrFail($offerId);
-        $offer->saversusers()->toggle($id);
+        $result = $offer->saversusers()->toggle($id);
+        $isSaved = count($result['attached']) > 0;
+
+        $offer->is_saved = $isSaved;
+
         return $this->successResponse(data: new OfferResource($offer));
     }
 }

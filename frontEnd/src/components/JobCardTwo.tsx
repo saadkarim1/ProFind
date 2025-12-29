@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 import type { RooteState } from "@/app/store";
 import { Link } from "react-router";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
+import toast from "react-hot-toast";
 
 type JobCardTwoProps = {
 	offer: OfferType;
@@ -30,6 +31,34 @@ const JobCardTwo = ({
 	const [applytoOffer] = useApplyToOfferMutation();
 	const days = getHowLongOfferPublishedPerDays(offer?.created_at);
 	const hours = getHowLongOfferPublishedPerHours(offer?.created_at);
+
+	const handleApplyToOffer = async () => {
+		if (!isAuthenticated) {
+			toast("Please log in to apply for this job.", {
+				icon: "👏",
+				position: "bottom-right",
+				style: {
+					border: "2px solid #0082FA",
+					borderRadius: "50px",
+				},
+			});
+			return;
+		}
+		const res = await applytoOffer(offer?.offer_id).unwrap();
+		if (res.data.is_applied) {
+			toast.success("Application submitted", {
+				position: "bottom-right",
+				style: {
+					border: "2px solid #0082FA",
+					borderRadius: "50px",
+				},
+				iconTheme: {
+					primary: "#0082FA",
+					secondary: "#fff",
+				},
+			});
+		}
+	};
 	return (
 		<div
 			onClick={() => setSelectedOffer(offer)}
@@ -83,29 +112,24 @@ const JobCardTwo = ({
 					)}
 					<CopyButton offerId={offer?.offer_id} />
 				</div>
-				{user?.role === "user" ? (
-					offer?.is_applied ? (
-						<button className='cursor-not-allowed w-fit h-fit text-[16px] font-medium py-1 px-6 border-2 text-[#0082FA] border-[#0082FA]  rounded-xl bg-white'>
-							Applied
-						</button>
-					) : (
-						<button
-							onClick={async () => {
-								const res = await applytoOffer(offer?.offer_id);
-								console.log(res);
-							}}
-							className='cursor-pointer w-fit h-fit text-[16px] font-medium py-1 px-6 border-2 text-white border-[#0082FA]  rounded-xl bg-[#0082FA]'
-						>
-							Apply
-						</button>
-					)
-				) : (
+				{user?.role === "recruiter" ? (
 					<Link
 						to={`/jobs/${offer?.offer_id}`}
 						className='flex space-x-1 items-center cursor-pointer w-fit h-fit text-[16px] font-medium py-1 px-5 border-2 text-white border-[#0082FA]  rounded-xl bg-[#0082FA]'
 					>
 						<MdOutlineRemoveRedEye className='text-xl' /> <span>Details</span>
 					</Link>
+				) : offer?.is_applied ? (
+					<button className='cursor-not-allowed w-fit h-fit text-[16px] font-medium py-1 px-6 border-2 text-[#0082FA] border-[#0082FA]  rounded-xl bg-white'>
+						Applied
+					</button>
+				) : (
+					<button
+						onClick={handleApplyToOffer}
+						className='cursor-pointer w-fit h-fit text-[16px] font-medium py-1 px-6 border-2 text-white border-[#0082FA]  rounded-xl bg-[#0082FA]'
+					>
+						Apply
+					</button>
 				)}
 			</div>
 		</div>

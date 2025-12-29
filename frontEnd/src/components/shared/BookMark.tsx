@@ -1,4 +1,5 @@
 import { useSaveOfferMutation } from "@/app/services/offersApi";
+import toast from "react-hot-toast";
 
 const BookMark = ({
 	offer_id,
@@ -10,13 +11,41 @@ const BookMark = ({
 	isAuthenticated: boolean;
 }) => {
 	const [saveOffer] = useSaveOfferMutation();
+	const handleSave = async () => {
+		if (!isAuthenticated) return;
+		const res = await saveOffer(offer_id).unwrap();
+		console.log(res);
+		console.log(res.data.is_saved);
+		if (res.data.is_saved) {
+			toast.success("Offer saved successfully", {
+				position: "bottom-right",
+				style: {
+					border: "2px solid #0082FA",
+					borderRadius: "50px",
+				},
+				iconTheme: {
+					primary: "#0082FA",
+					secondary: "#fff",
+				},
+			});
+		}
+		if (!res.data.is_saved) {
+			toast.success("Offer unsaved successfully", {
+				position: "bottom-right",
+				style: {
+					border: "2px solid #0082FA",
+					borderRadius: "50px",
+				},
+				iconTheme: {
+					primary: "#0082FA",
+					secondary: "#fff",
+				},
+			});
+		}
+	};
 	return (
 		<div
-			onClick={async () => {
-				if (!isAuthenticated) return;
-				const res = await saveOffer(offer_id);
-				console.log(res);
-			}}
+			onClick={handleSave}
 			className='border-2 border-[#e9e9e9] cursor-pointer rounded-xl p-1'
 		>
 			<svg

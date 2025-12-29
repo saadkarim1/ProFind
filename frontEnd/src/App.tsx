@@ -27,6 +27,7 @@ import RecruiterRegisterPage from "./pages/RecruiterProfile/RecruiterRegisterPag
 import ProtectedRouteSeeker from "./components/shared/ProtectedRouteSeeker";
 import PretectedRouteRecruiter from "./components/shared/PretectedRouteRecruiter";
 import JobDetails from "./pages/JobDetails";
+import { Toaster } from "react-hot-toast";
 
 const router = createBrowserRouter([
 	{
@@ -86,7 +87,14 @@ const router = createBrowserRouter([
 	},
 ]);
 function App() {
-	return <RouterProvider router={router} />;
+	return (
+		<>
+			<div>
+				<Toaster />
+			</div>
+			<RouterProvider router={router} />;
+		</>
+	);
 }
 
 export default App;
