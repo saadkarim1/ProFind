@@ -27,7 +27,10 @@ const CompanySummary = () => {
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
-		const res1 = await updateRecruiter({ ...inputsValues, id: user?.user_id });
+		const filteredData = Object.fromEntries(
+			Object.entries(inputsValues).filter(([_, value]) => value !== "")
+		);
+		const res1 = await updateRecruiter({ ...filteredData, id: user?.user_id });
 		console.log(res1);
 	};
 

@@ -8,7 +8,6 @@ import SearchBar from "@/components/offers/SearchBar";
 import BookMark from "@/components/shared/BookMark";
 import CopyButton from "@/components/shared/CopyButton";
 import type { OfferType } from "@/models/offer";
-import { filterOffers } from "@/utils/filterOffes";
 import { GetOfferType } from "@/utils/GetOfferType";
 import { useEffect, useState } from "react";
 import { MdOutlineRemoveRedEye } from "react-icons/md";

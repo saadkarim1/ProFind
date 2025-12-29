@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 const SummaryPage = () => {
 	const { user } = useSelector((state: RooteState) => state.auth);
 	const [updateUser] = useUpdateUserMutation();
+	const [formKey, setFormKey] = useState(0);
 
 	const [inputsValues, setInputsValues] = useState<UserType>({
 		user_id: "",
@@ -24,18 +25,26 @@ const SummaryPage = () => {
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
+		const filteredData = Object.fromEntries(
+			Object.entries(inputsValues).filter(([_, value]) => value !== "")
+		);
 		const res1 = await updateUser({
-			...inputsValues,
+			...filteredData,
 			id: user?.user_id,
 		});
+
+		setFormKey((prev) => prev + 1);
 		console.log(res1);
-		console.log({ ...inputsValues, user_id: user?.user_id });
 	};
 
 	return (
 		<div className='p-6 rounded-3xl border-2 border-[#e9e9e9] bg-white w-[74%] space-y-4'>
 			<h1 className='font-semibold text-lg'>Personal Information</h1>
-			<form onSubmit={handleSubmit} className='grid grid-cols-2 gap-8'>
+			<form
+				key={formKey}
+				onSubmit={handleSubmit}
+				className='grid grid-cols-2 gap-8'
+			>
 				<div className='col-span-2'>
 					<label htmlFor='name' className='text-[#878787] text-[15px]'>
 						First Name
