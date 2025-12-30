@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FiLock, FiUnlock } from "react-icons/fi";
 import { LuMailOpen, LuUser } from "react-icons/lu";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import {
 	useLazyGetCSRFQuery,
 	useRegisterRecruiterMutation,
@@ -9,6 +9,7 @@ import {
 import { MdWorkOutline } from "react-icons/md";
 
 const RecruiterRegisterPage = () => {
+	const navigate = useNavigate();
 	const [showPassword, setShowPassword] = useState<boolean>(false);
 	const [getCSRF] = useLazyGetCSRFQuery();
 	const [registerRecruiter] = useRegisterRecruiterMutation();
@@ -28,14 +29,15 @@ const RecruiterRegisterPage = () => {
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		const res = await getCSRF();
-		console.log(res);
+		try {
+			await getCSRF();
 
-		const res1 = await registerRecruiter({
-			...inputsValues,
-			password_confirmation: inputsValues.password,
-		});
-		console.log(res1);
+			const res1 = await registerRecruiter({
+				...inputsValues,
+				password_confirmation: inputsValues.password,
+			});
+			navigate("/");
+		} catch (error) {}
 	};
 
 	return (

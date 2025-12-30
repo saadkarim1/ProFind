@@ -2,13 +2,14 @@ import { useState } from "react";
 import { FiLock, FiUnlock } from "react-icons/fi";
 import { LuMailOpen, LuUser } from "react-icons/lu";
 import { TbLogin } from "react-icons/tb";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import {
 	useLazyGetCSRFQuery,
 	useRegisterMutation,
 } from "@/app/services/authApi";
 
 const Register = () => {
+	const navigate = useNavigate();
 	const [showPassword, setShowPassword] = useState<boolean>(false);
 	const [getCSRF] = useLazyGetCSRFQuery();
 	const [register] = useRegisterMutation();
@@ -28,14 +29,19 @@ const Register = () => {
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		const res = await getCSRF();
-		console.log(res);
+		try {
+			await getCSRF();
 
-		const res1 = await register({
-			...inputsValues,
-			password_confirmation: inputsValues.password,
-		});
-		console.log(res1);
+			const res1 = await register({
+				...inputsValues,
+				password_confirmation: inputsValues.password,
+			}).unwrap();
+			console.log(res1);
+
+			if (res1.status === 200) {
+				navigate("/");
+			}
+		} catch (error) {}
 	};
 
 	return (
@@ -90,7 +96,7 @@ const Register = () => {
 						type={showPassword ? "text" : "password"}
 						placeholder='Password'
 						name='password'
-						className='focus:outline-none  rounded-r-full w-full'
+						className='focus:outline-none rounded-r-full w-full'
 						onChange={handleInputsfields}
 					/>
 				</div>

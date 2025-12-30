@@ -77,7 +77,7 @@ const JobDetails = () => {
 				<div className='flex justify-between w-full h-10 font-semibold text-[15px] text-[#3a4981]'>
 					<div className='w-[33%] h-full flex flex-col items-center '>
 						<h3>SALARY</h3>
-						<p>-----</p>
+						<p>{offer?.salary ? offer?.salary : "-----"}</p>
 					</div>
 					<div className='w-[33%] h-full flex flex-col items-center '>
 						<h3>DURATION</h3>

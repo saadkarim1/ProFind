@@ -12,12 +12,14 @@ use Illuminate\Support\Facades\Route;
 //     return "dkfhjds";
 // });
 Route::prefix('v1')->group(function () {
+
     Route::controller(UserController::class)->group(function () {
         Route::get('/user',  'getUser')->middleware('auth:sanctum');
         Route::patch('/user/{id}', 'updateUser');
     });
-    Route::controller(OfferController::class)->group(function () {
 
+    Route::controller(OfferController::class)->group(function () {
+        Route::get('/offers/saad',  'getRecruiterOffers');
         Route::post('/offers', 'store');
         Route::get('/offers',  'index');
         Route::get('/offers/applied',  'getAppliedOffers');

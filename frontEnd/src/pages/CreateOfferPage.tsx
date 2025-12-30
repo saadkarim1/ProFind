@@ -2,10 +2,12 @@ import { useAddOfferMutation } from "@/app/services/offersApi";
 import JobCategoriesDropDownList from "@/components/JobCategoriesDropDownList";
 import JobTypesDropDownList from "@/components/JobTypesDropDownList";
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { IoArrowBack } from "react-icons/io5";
 import { Link } from "react-router";
 
 const CreateOfferPage = () => {
+	const [formKey, setFormKey] = useState(0);
 	const [addOffer] = useAddOfferMutation();
 	const [selectedCategory, setSelectedCategory] =
 		useState<string>("Select Category");
@@ -31,19 +33,30 @@ const CreateOfferPage = () => {
 	};
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-
-		const res = await addOffer({
-			...dataFrom,
-			offer_type: selectedJobType,
-			offer_category: selectedCategory,
-		});
-
-		console.log(res);
-		// console.log({
-		// 	...dataFrom,
-		// 	offer_type: selectedJobType,
-		// 	offer_category: selectedCategory,
-		// });
+		try {
+			const res = await addOffer({
+				...dataFrom,
+				offer_type: selectedJobType,
+				offer_category: selectedCategory,
+			}).unwrap();
+			console.log(res);
+			if (res.status === 201) {
+				toast.success("Job offer published", {
+					position: "bottom-right",
+					style: {
+						border: "2px solid #05df72",
+						borderRadius: "50px",
+					},
+					iconTheme: {
+						primary: "#05df72",
+						secondary: "#fff",
+					},
+				});
+				setFormKey((key) => key + 1);
+			}
+		} catch (error) {
+			console.log(error);
+		}
 	};
 	return (
 		<section className='flex'>
@@ -54,6 +67,7 @@ const CreateOfferPage = () => {
 			</Link>
 			<div className='w-full'>
 				<form
+					key={formKey}
 					onSubmit={handleSubmit}
 					className='bg-white rounded-4xl border-2 border-[#e9e9e9] w-[60%] mx-auto h-full p-8 space-y-3'
 				>

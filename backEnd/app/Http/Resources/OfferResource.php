@@ -26,7 +26,7 @@ class OfferResource extends JsonResource
             "offer_category" => $this->offer_category,
             "salary" => $this->salary,
             "email_to_apply" => $this->email_to_apply,
-            "company" => $this->company,
+            "company" => $this->recruiter,
             "created_at" => $this->created_at,
             'is_saved' => (bool) ($this->is_saved ?? false),
             'is_applied' => (bool) ($this->is_applied ?? false),

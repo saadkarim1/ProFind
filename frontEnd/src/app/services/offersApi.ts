@@ -6,7 +6,16 @@ export const offersApi = apiSlice.injectEndpoints({
 		getAllOffers: builder.query<OfferType[], void>({
 			query: () => "api/v1/offers",
 			transformResponse: (response: { data: OfferType[] }) => response.data,
-			providesTags: ["Offers"],
+			providesTags: (result) =>
+				result
+					? [
+							...result.map(({ offer_id }) => ({
+								type: "Offers" as const,
+								id: offer_id,
+							})),
+							{ type: "Offers", id: "ALL" },
+					  ]
+					: [{ type: "Offers", id: "ALL" }],
 		}),
 
 		addOffer: builder.mutation({
@@ -15,7 +24,7 @@ export const offersApi = apiSlice.injectEndpoints({
 				method: "Post",
 				body: payload,
 			}),
-			invalidatesTags: ["Offers"],
+			invalidatesTags: [{ type: "Offers", id: "ALL" }],
 		}),
 
 		applyToOffer: builder.mutation({
@@ -23,18 +32,40 @@ export const offersApi = apiSlice.injectEndpoints({
 				url: `api/v1/offers/${payload}/apply`,
 				method: "POST",
 			}),
+			invalidatesTags: (result, error, payload) => [
+				{ type: "Offers", id: payload },
+				{ type: "Offers", id: "APPLIED" },
+			],
 		}),
 
 		getAppliedOffers: builder.query<OfferType[], void>({
 			query: () => "api/v1/offers/applied",
 			transformResponse: (response: { data: OfferType[] }) => response.data,
-			providesTags: ["Offers"],
+			providesTags: (result) =>
+				result
+					? [
+							...result.map(({ offer_id }) => ({
+								type: "Offers" as const,
+								id: offer_id,
+							})),
+							{ type: "Offers", id: "APPLIED" },
+					  ]
+					: [{ type: "Offers", id: "APPLIED" }],
 		}),
 
 		getSavedOffers: builder.query<OfferType[], void>({
 			query: () => "api/v1/offers/saved",
 			transformResponse: (response: { data: OfferType[] }) => response.data,
-			providesTags: ["Offers"],
+			providesTags: (result) =>
+				result
+					? [
+							...result.map(({ offer_id }) => ({
+								type: "Offers" as const,
+								id: offer_id,
+							})),
+							{ type: "Offers", id: "SAVED" },
+					  ]
+					: [{ type: "Offers", id: "SAVED" }],
 		}),
 
 		saveOffer: builder.mutation({
@@ -42,12 +73,20 @@ export const offersApi = apiSlice.injectEndpoints({
 				url: `api/v1/offers/${payload}/save`,
 				method: "Post",
 			}),
-			invalidatesTags: ["Offers"],
+			invalidatesTags: (result, error, payload) => [
+				{ type: "Offers", id: payload },
+				{ type: "Offers", id: "SAVED" },
+			],
 		}),
 
 		getOffer: builder.query<OfferType, string | undefined>({
 			query: (payload) => `api/v1/offers/${payload}`,
 			transformResponse: (response: { data: OfferType }) => response.data,
+		}),
+
+		getRecruiterOffers: builder.query<OfferType[], void>({
+			query: () => "api/v1/offers/saad",
+			transformResponse: (response: { data: OfferType[] }) => response.data,
 		}),
 	}),
 });
@@ -60,4 +99,5 @@ export const {
 	useSaveOfferMutation,
 	useGetSavedOffersQuery,
 	useGetOfferQuery,
+	useGetRecruiterOffersQuery,
 } = offersApi;

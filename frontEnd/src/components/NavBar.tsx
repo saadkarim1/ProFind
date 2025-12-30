@@ -45,10 +45,14 @@ const normalLinks: Link[] = [
 
 const NavBar = () => {
 	const { pathname } = useLocation();
-	const { data: authenticatedUser, isSuccess, isError } = useGetUserQuery();
+	const {
+		data: authenticatedUser,
+		isSuccess,
+		isError,
+		isLoading,
+	} = useGetUserQuery();
 	const [showProfilePopup, setShowProfilePopup] = useState<boolean>(false);
 	const [showLoginPopup, setShowLoginPopup] = useState<boolean>(false);
-	// console.log(authenticatedUser);
 	return (
 		<nav className='z-999 fixed w-[80%] mx-auto inset-x-0 pt-3'>
 			<div className='navbar drop-shadow-[0_0px_2px_rgba(0,0,0,0.25)] rounded-2xl flex items-center p-3'>
@@ -58,57 +62,6 @@ const NavBar = () => {
 				</Link>
 
 				<ul className='flex items-center justify-center font-medium space-x-10 text-[18px] w-[50%]'>
-					{/* {authenticatedUser.data.role === "recruiter"
-						? recruiterLinks.map((link) => (
-								<Link
-									key={link.path_name}
-									to={link.path}
-									className={`${
-										pathname === link.path ? "text-[#0082FA]" : "text-black"
-									} `}
-								>
-									{link.path_name}
-								</Link>
-						  ))
-						: normalLinks.map((link) => (
-								<Link
-									key={link.path_name}
-									to={link.path}
-									className={`${
-										pathname === link.path ? "text-[#0082FA]" : "text-black"
-									} `}
-								>
-									{link.path_name}
-								</Link>
-						  ))} */}
-
-					{/* {recruiterLinks.map((link) => {
-						if (link.path !== "/offers") {
-							return (
-								<Link
-									key={link.path_name}
-									to={link.path}
-									className={`${
-										pathname === link.path ? "text-[#0082FA]" : "text-black"
-									} `}
-								>
-									{link.path_name}
-								</Link>
-							);
-						} else if (authenticatedUser?.data.role === "recruiter") {
-							return (
-								<Link
-									key={link.path_name}
-									to={link.path}
-									className={`${
-										pathname === link.path ? "text-[#0082FA]" : "text-black"
-									} `}
-								>
-									{link.path_name}
-								</Link>
-							);
-						}
-					})} */}
 					{authenticatedUser === undefined
 						? normalLinks.map((link) => {
 								return (
@@ -159,7 +112,7 @@ const NavBar = () => {
 							authenticatedUser={authenticatedUser}
 						/>
 					</Activity>
-					<Activity mode={isError ? "visible" : "hidden"}>
+					<Activity mode={isError || isLoading ? "visible" : "hidden"}>
 						<LoginPopup
 							showLoginPopup={showLoginPopup}
 							setShowLoginPopup={setShowLoginPopup}

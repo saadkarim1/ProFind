@@ -140,7 +140,23 @@ const Jobs: React.FC = () => {
 								{selectedOffer?.company.company_name}
 							</p>
 							<div className='flex items-center space-x-2'>
-								{user?.role === "recruiter" ? (
+								{user?.role === "user" ? (
+									selectedOffer?.is_applied ? (
+										<button className='cursor-not-allowed w-fit h-fit text-[16px] font-medium py-1 px-6 border-2 text-[#0082FA] border-[#0082FA]  rounded-xl bg-white'>
+											Applied
+										</button>
+									) : (
+										<button
+											onClick={handleApplyToOffer}
+											className='cursor-pointer w-fit h-fit text-[16px] font-medium py-1 px-6 border-2 text-white border-[#0082FA]  rounded-xl bg-[#0082FA]'
+										>
+											Apply
+										</button>
+									)
+								) : (
+									""
+								)}
+								{/* {user?.role === "recruiter" ? (
 									<Link
 										to={`/jobs/${selectedOffer?.offer_id}`}
 										className='flex space-x-1 items-center cursor-pointer w-fit h-fit text-[16px] font-medium py-1 px-5 border-2 text-white border-[#0082FA]  rounded-xl bg-[#0082FA]'
@@ -159,7 +175,7 @@ const Jobs: React.FC = () => {
 									>
 										Apply
 									</button>
-								)}
+								)} */}
 								{user?.role === "user" && (
 									<BookMark
 										offer_id={selectedOffer?.offer_id}
@@ -198,7 +214,11 @@ const Jobs: React.FC = () => {
 							<hr className='text-[#e9e9e9] h-3' />
 							<div>
 								<h1 className='font-medium text-xl'>Email To Apply</h1>
-								<p>{selectedOffer?.email_to_apply}</p>
+								<a
+									href={`mailto:${selectedOffer?.email_to_apply}?subject=Condidature au poste de ${selectedOffer?.offer_title}`}
+								>
+									{selectedOffer?.email_to_apply}
+								</a>
 							</div>
 						</>
 					)}

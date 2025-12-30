@@ -59,6 +59,7 @@ const JobCardTwo = ({
 			});
 		}
 	};
+
 	return (
 		<div
 			onClick={() => setSelectedOffer(offer)}

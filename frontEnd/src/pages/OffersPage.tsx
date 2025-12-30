@@ -1,4 +1,4 @@
-import { useGetAllOffersQuery } from "@/app/services/offersApi";
+import { useGetRecruiterOffersQuery } from "@/app/services/offersApi";
 import JobCardTwo from "@/components/JobCardTwo";
 import CopyButton from "@/components/shared/CopyButton";
 import type { OfferType } from "@/models/offer";
@@ -8,7 +8,7 @@ import { Link, useNavigate } from "react-router";
 
 const OffersPage = () => {
 	const nabigate = useNavigate();
-	const { data: offers } = useGetAllOffersQuery(undefined);
+	const { data: offers } = useGetRecruiterOffersQuery();
 	const [selectedOffer, setSelectedOffer] = useState<OfferType | null>(null);
 
 	useEffect(() => {
@@ -94,7 +94,7 @@ const OffersPage = () => {
 					<div className='flex justify-between w-full h-10 font-semibold text-[15px] text-[#3a4981]'>
 						<div className='w-[33%] h-full flex flex-col items-center '>
 							<h3>SALARY</h3>
-							<p>-----</p>
+							<p>{selectedOffer?.salary ? selectedOffer?.salary : "-----"}</p>
 						</div>
 						<div className='w-[33%] h-full flex flex-col items-center '>
 							<h3>DURATION</h3>
@@ -112,6 +112,19 @@ const OffersPage = () => {
 						<h1 className='font-medium text-xl'>Description</h1>
 						<p>{selectedOffer?.offer_description}</p>
 					</div>
+					{selectedOffer?.email_to_apply && (
+						<>
+							<hr className='text-[#e9e9e9] h-3' />
+							<div>
+								<h1 className='font-medium text-xl'>Email To Apply</h1>
+								<a
+									href={`mailto:${selectedOffer?.email_to_apply}?subject=Condidature au poste de ${selectedOffer?.offer_title}`}
+								>
+									{selectedOffer?.email_to_apply}
+								</a>
+							</div>
+						</>
+					)}
 				</div>
 			</div>
 		</section>

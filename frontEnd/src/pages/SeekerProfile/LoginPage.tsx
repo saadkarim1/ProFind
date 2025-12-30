@@ -1,13 +1,14 @@
 import { useLazyGetCSRFQuery, useLoginMutation } from "@/app/services/authApi";
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { FiLock, FiUnlock } from "react-icons/fi";
 import { LuMailOpen } from "react-icons/lu";
 import { TbLogin } from "react-icons/tb";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 const Login = () => {
 	const [showPassword, setShowPassword] = useState<boolean>(false);
-
+	const navigate = useNavigate();
 	const [getCSRF] = useLazyGetCSRFQuery();
 	const [login] = useLoginMutation();
 	const [inputsValues, setInputsValues] = useState({
@@ -25,14 +26,28 @@ const Login = () => {
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		const res = await getCSRF();
-		console.log(res);
-		const res1 = await login({
-			...inputsValues,
-			password_confirmation: inputsValues.password,
-		});
-		console.log(res1);
+		try {
+			await getCSRF();
+			await login({
+				...inputsValues,
+				password_confirmation: inputsValues.password,
+			}).unwrap();
+			navigate("/");
+		} catch (error: any) {
+			toast.error(error?.data?.message, {
+				position: "bottom-right",
+				style: {
+					border: "2px solid #fb2c36",
+					borderRadius: "50px",
+				},
+				iconTheme: {
+					primary: "#fb2c36",
+					secondary: "#fff",
+				},
+			});
+		}
 	};
+
 	return (
 		<section className='w-full space-y-4 flex items-center flex-col justify-center'>
 			<form

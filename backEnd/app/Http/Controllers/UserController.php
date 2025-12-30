@@ -30,10 +30,7 @@ class UserController extends Controller
             Auth::guard('web')->login($user);
             $request->session()->regenerate();
 
-            return response()->json([
-                'message' => 'Registration successful',
-                'user'    => $user
-            ]);
+            return $this->successResponse(data: new UserResource(Auth::guard('web')->user()));
         } catch (Exception $e) {
             return response()->json(["message" => "somethig went wrong while updating an episode", "error" => $e->getMessage()], 404);
         }
@@ -52,10 +49,7 @@ class UserController extends Controller
 
             $request->session()->regenerate();
 
-            return response()->json([
-                'message' => 'Login successful',
-                'user'    => Auth::user()
-            ]);
+            return $this->successResponse(data: new UserResource(Auth::guard('web')->user()));
         } catch (Exception $e) {
             return response()->json(["message" => "somethig went wrong while updating an episode", "error" => $e->getMessage()], 404);
         }

@@ -77,11 +77,11 @@ const router = createBrowserRouter([
 							{ path: "settings", element: <CompanySettings /> },
 						],
 					},
+					{ path: "offers", element: <OffersPage /> },
 					{ path: "offers/create-offer", element: <CreateOfferPage /> },
 				],
 			},
 
-			{ path: "offers", element: <OffersPage /> },
 			{ path: "offers/:id/applicants", element: <ApplicantsPage /> },
 		],
 	},

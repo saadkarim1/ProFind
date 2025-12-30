@@ -6,13 +6,16 @@ use App\Http\Requests\LoginRecruiterRequest;
 use App\Http\Requests\RegisterAuthAndRecuiterRequest;
 use App\Http\Requests\RegisterRecruiterRequest;
 use App\Http\Requests\UpdateRecruiterRequest;
+use App\Http\Resources\UserResource;
 use App\Models\Recruiter;
+use App\Traits\ApiResponse;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class RecruiterController extends Controller
 {
+    use ApiResponse;
     public function registerRecruiter(RegisterRecruiterRequest $request)
     {
         try {
@@ -26,10 +29,7 @@ class RecruiterController extends Controller
             Auth::guard('recruiter')->login($recruiter);
             $request->session()->regenerate();
 
-            return response()->json([
-                'message' => 'Registration successful',
-                'user'    => $recruiter
-            ]);
+            return $this->successResponse(new UserResource($request));
         } catch (Exception $e) {
             return response()->json(["message" => "somethig went wrong while updating an episode", "error" => $e->getMessage()], 404);
         }
@@ -48,11 +48,7 @@ class RecruiterController extends Controller
 
             $request->session()->regenerate();
 
-            return response()->json([
-                'message' => 'Login successful',
-                'user'    => Auth::guard('recruiter')->user(),
-                'type' => 'recruiter'
-            ]);
+            return $this->successResponse(new UserResource($request));
         } catch (Exception $e) {
             return response()->json(["message" => "somethig went wrong while updating an episode", "error" => $e->getMessage()], 404);
         }

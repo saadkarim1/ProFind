@@ -8,17 +8,11 @@ import { Link } from "react-router";
 
 const RecruiterProfilePage = () => {
 	const user = useSelector((state: RooteState) => state.auth.user);
-	console.log(user);
 	return (
 		<div className='h-fit grid w-[74%] grid-cols-2 gap-4'>
 			<div className='p-6 text-[14px] font-normal col-span-2 h-fit rounded-3xl border-2 border-[#e9e9e9] bg-white'>
 				<h2 className='font-medium text-lg'>Description</h2>
-				<p className='w-[80%]'>
-					{/* quos quae recusandae facere odit quo error eligendi nulla veritatis
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium
-					neque sapiente iusto aliquid nobis, eaque asperiores at ad rerum ex.{" "} */}
-					{user?.company_description}
-				</p>
+				<p className='w-[80%]'>{user?.company_description}</p>
 			</div>
 			<div className='p-6 col-span-2 h-fit rounded-3xl border-2 border-[#e9e9e9] bg-white'>
 				<div className='text-[14px] font-normal w-full flex items-center justify-between'>
@@ -80,21 +74,6 @@ const RecruiterProfilePage = () => {
 					</div>
 				</div>
 			</div>
-			{/* <div className='p-6 col-span-2 h-fit rounded-3xl border-2 border-[#e9e9e9] bg-white'>
-				<h2 className='font-medium text-lg'>Resume</h2>
-				<div className='flex items-center justify-between mt-2'>
-					<div className='flex items-center space-x-2'>
-						<div className='flex items-center justify-center rounded-lg bg-[#e9e9e9] text-[#878787] p-1.5 text-2xl'>
-							<TiDocumentText />
-						</div>
-						<h3>resume.pdf</h3>
-					</div>
-					<button className='bg-[#0082FA] text-white rounded-full flex items-center space-x-2 px-3 p-1 cursor-pointer'>
-						<span>Donwload</span>
-						<CgSoftwareDownload />
-					</button>
-				</div>
-			</div> */}
 			<div className='rounded-3xl border-2 border-[#e9e9e9] bg-white p-6'>
 				<h2 className='font-medium text-lg'>Sectors</h2>
 				<div className='flex flex-wrap mt-2 gap-2'>

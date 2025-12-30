@@ -16,7 +16,7 @@ class Offer extends Model
         "location",
         "duration",
         "offer_type",
-        "company_id",
+        "recruiter_id",
         "offer_category",
         "salary",
         "email_to_apply",
@@ -35,7 +35,7 @@ class Offer extends Model
         return $this->belongsToMany(User::class, 'user_offer_save')->withTimestamps();
     }
 
-    public function company()
+    public function recruiter()
     {
         return $this->belongsTo(Recruiter::class);
     }

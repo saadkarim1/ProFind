@@ -23,16 +23,26 @@ class OfferController extends Controller
     {
         try {
             $userId = auth('web')->id();
-            // $offers = Offer::latest()->when($userId, function ($query) use ($userId) {
-            //     $query->withUserStatus();
-            // })->get();
-
             $offers = Offer::latest()->withUserStatus($userId)->get();
 
             return $this->successResponse(data: OfferResource::collection($offers));
         } catch (Exception $e) {
             return response()->json($e->getMessage());
         }
+    }
+
+    public function getRecruiterOffers()
+    {
+        // try {
+        $user = Auth::guard('recruiter')->user();
+        // $offers =  Offer::where('company_id', $user->id)->get();
+        $offers =  $user->offers()->get();
+
+        return $this->successResponse(data: OfferResource::collection($offers));
+        // return "haaanaaawww";
+        // } catch (Exception $e) {
+        // return response()->json($e->getMessage());
+        // }
     }
 
     public function getAppliedOffers()
@@ -52,20 +62,9 @@ class OfferController extends Controller
     {
         try {
             $validated = $request->validated();
-            $validated['company_id'] = Auth::guard('recruiter')->id();
-
-            // "title" => $request->title,
-            //                 "description" => $request->description,
-            //                 "location" => $request->location,
-            //                 "duration" => $request->duration,
-            //                 "offer_type" => $request->offer_type,
-            //                 "offer_category" => $request->offer_category,
-            //                 "salary" => $request->salary,
-            //                 "email_to_apply" => $request->email_to_apply,
-            //                 "company_id" => Auth::guard('recruiter')->user()->id,
+            $validated['recruiter_id'] = Auth::guard('recruiter')->id();
             $offer = Offer::create($validated);
-            return $offer;
-            // return $this->successResponse(data: new OfferResource($offer), status: 201);
+            return $this->successResponse(data: new OfferResource($offer), status: 201);
         } catch (Exception $e) {
             return response()->json($e->getMessage());
         }
