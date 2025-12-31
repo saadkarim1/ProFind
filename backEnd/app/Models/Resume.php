@@ -10,6 +10,7 @@ class Resume extends Model
         'user_id',
         'file_name',
         'cv_url',
+        'preview_url',
         'public_id',
         'is_primary',
     ];

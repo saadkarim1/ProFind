@@ -33,16 +33,14 @@ class OfferController extends Controller
 
     public function getRecruiterOffers()
     {
-        // try {
-        $user = Auth::guard('recruiter')->user();
-        // $offers =  Offer::where('company_id', $user->id)->get();
-        $offers =  $user->offers()->get();
+        try {
+            $user = Auth::guard('recruiter')->user();
+            $offers =  $user->offers()->get();
 
-        return $this->successResponse(data: OfferResource::collection($offers));
-        // return "haaanaaawww";
-        // } catch (Exception $e) {
-        // return response()->json($e->getMessage());
-        // }
+            return $this->successResponse(data: OfferResource::collection($offers));
+        } catch (Exception $e) {
+            return response()->json($e->getMessage());
+        }
     }
 
     public function getAppliedOffers()

@@ -1,15 +1,13 @@
-import { useTestMutation } from "@/app/services/resumeApi";
+import { useUploadResumeMutation } from "@/app/services/resumeApi";
 import { useState } from "react";
 
 const Resume = () => {
 	const [cv_file, setCv_file] = useState<File>();
-	const [uploadCV] = useTestMutation();
+	const [uploadResume] = useUploadResumeMutation();
 
 	const upload = async () => {
 		console.log(cv_file);
-		// const formData = new FormData();
-		// formData.append("cvfile", cv_file);
-		const res = await uploadCV(cv_file);
+		const res = await uploadResume(cv_file);
 		console.log(res);
 	};
 	return (

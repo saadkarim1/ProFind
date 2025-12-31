@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('file_name'); // Original name: "My_Resume.pdf"
             $table->string('cv_url');    // Cloudinary Secure URL
             $table->string('public_id'); // Cloudinary Public ID (for deleting)
+            $table->string('preview_url'); // Cloudinary Public ID (for deleting)
             $table->boolean('is_primary')->default(true);
             $table->timestamps();
         });
