@@ -1,8 +1,17 @@
+import { useTestMutation } from "@/app/services/resumeApi";
 import { useState } from "react";
 
 const Resume = () => {
-	const [file, setFile] = useState<File>();
+	const [cv_file, setCv_file] = useState<File>();
+	const [uploadCV] = useTestMutation();
 
+	const upload = async () => {
+		console.log(cv_file);
+		// const formData = new FormData();
+		// formData.append("cvfile", cv_file);
+		const res = await uploadCV(cv_file);
+		console.log(res);
+	};
 	return (
 		<div className='p-6 rounded-3xl border-2 border-[#e9e9e9] bg-white w-full space-y-4'>
 			<h1 className='font-semibold text-lg'>Resume</h1>
@@ -18,8 +27,8 @@ const Resume = () => {
 					id='fileInput'
 					onChange={(e) => {
 						if (e.currentTarget.files) {
-							setFile(e.currentTarget.files[0]);
-							console.log(file);
+							setCv_file(e.currentTarget.files[0]);
+							// console.log(file);
 						}
 					}}
 				/>
@@ -29,12 +38,13 @@ const Resume = () => {
 				>
 					Choose File
 				</label>
-				<p>{file?.name}</p>
+				<p>{cv_file?.name}</p>
 				<p className='text-xs text-gray-400 mt-2'>PDF up to 10MB</p>
 			</div>
 			<button
 				type='submit'
-				onClick={() => console.log(file)}
+				// onClick={() => console.log(file)}
+				onClick={upload}
 				className='w-full h-fit py-2 cursor-pointer border-2 text-white border-[#0082FA]  rounded-xl bg-[#0082FA]'
 			>
 				Upload{" "}

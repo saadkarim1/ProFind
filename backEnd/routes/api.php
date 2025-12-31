@@ -2,15 +2,12 @@
 
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\RecruiterController;
+use App\Http\Controllers\ResumeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-// ->middleware('auth:sanctum')
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return "dkfhjds";
-// });
 Route::prefix('v1')->group(function () {
 
     Route::controller(UserController::class)->group(function () {
@@ -32,4 +29,6 @@ Route::prefix('v1')->group(function () {
     Route::controller(RecruiterController::class)->group(function () {
         Route::patch('/recruiter/{id}', 'updateRecruiter');
     });
+
+    Route::post('/resume', [ResumeController::class, 'store']);
 });
