@@ -32,4 +32,5 @@ Route::prefix('v1')->group(function () {
 
     Route::post('/resume', [ResumeController::class, 'store']);
     Route::get('/resume', [ResumeController::class, 'getUserResumes']);
+    Route::delete('/resume/{resumeId}', [ResumeController::class, 'deleteResume']);
 });

@@ -48,7 +48,7 @@ class ResumeController extends Controller
                     'preview_url' => $preview_url,
                 ]);
 
-                return response()->json($resume, 200);
+                return $this->successResponse($resume);
             });
         } catch (Exception $e) {
             if ($upload) {
@@ -67,21 +67,24 @@ class ResumeController extends Controller
 
             $resumes = Auth::guard('web')->user()->resumes()->get();
 
-            // $resumes = Resume::all()->map(function ($resume) {
-            // Generate a signed URL specifically for downloading
-            // $resume->cv_url = Cloudinary::image($resume->public_id)
-            //     ->addTransformation('fl_attachment')
-            //     ->signUrl(true)
-            //     ->toUrl();
-
-            // Generate a standard signed URL for previewing
-            // $resume->preview_url = Cloudinary::image($resume->public_id)
-            //     ->signUrl(true)
-            //     ->toUrl();
-
-            // return $resume;
-            // });
             return $this->successResponse($resumes);
+        } catch (Exception $e) {
+            return response()->json($e->getMessage());
+        }
+    }
+
+    public function deleteResume($resumeId)
+    {
+        try {
+            $resume = Resume::findOrFail($resumeId);
+
+            if ($resume) {
+                $resume->delete();
+                Cloudinary::uploadApi()->destroy($resume->public_id);
+            }
+
+            return $this->successResponse(message: "deleted");
+            // return $this->successResponse($resume);
         } catch (Exception $e) {
             return response()->json($e->getMessage());
         }

@@ -10,13 +10,36 @@ export const resumeApi = apiSlice.injectEndpoints({
 				formData.append("cvFile", payload);
 				return { url: "api/v1/resume", method: "POST", body: formData };
 			},
+			invalidatesTags: [{ type: "Resume", id: "LIST" }],
 		}),
 
 		getUserResumes: builder.query<ResumeType[], void>({
 			query: () => "api/v1/resume",
 			transformResponse: (response: { data: ResumeType[] }) => response.data,
+			providesTags: (response) =>
+				response
+					? [
+							...response.map(({ id }) => ({
+								type: "Resume" as const,
+								id,
+							})),
+							{ type: "Resume", id: "LIST" },
+					  ]
+					: [{ type: "Resume", id: "LIST" }],
+		}),
+
+		deleteResume: builder.mutation({
+			query: (payload) => ({
+				url: `api/v1/resume/${payload}`,
+				method: "DELETE",
+			}),
+			invalidatesTags: [{ type: "Resume", id: "LIST" }],
 		}),
 	}),
 });
 
-export const { useUploadResumeMutation, useGetUserResumesQuery } = resumeApi;
+export const {
+	useUploadResumeMutation,
+	useGetUserResumesQuery,
+	useDeleteResumeMutation,
+} = resumeApi;

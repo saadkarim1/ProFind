@@ -4,11 +4,10 @@ import { RiEditFill } from "react-icons/ri";
 import { Link } from "react-router";
 import { HiOutlineMail } from "react-icons/hi";
 import { MdOutlinePhoneAndroid } from "react-icons/md";
-import { TiDocumentText } from "react-icons/ti";
-import { CgSoftwareDownload } from "react-icons/cg";
 import { useSelector } from "react-redux";
 import type { RooteState } from "@/app/store";
 import { useGetUserResumesQuery } from "@/app/services/resumeApi";
+import ResumeCard from "@/components/ResumeCard";
 
 const SeekerProfilePage = () => {
 	const { user } = useSelector((state: RooteState) => state.auth);
@@ -73,39 +72,13 @@ const SeekerProfilePage = () => {
 					<p>{user?.about_me}</p>
 				</div>
 			</div>
-			<div className='p-6 col-span-2 h-fit rounded-3xl border-2 border-[#e9e9e9] bg-white'>
+			<div className='p-6 col-span-2 h-fit rounded-3xl border-2 border-[#e9e9e9] bg-white space-y-2'>
 				<h2 className='font-medium text-lg'>Resume</h2>
-				{resumes?.map((resume) => (
-					<div key={resume.id} className='flex flex-col space-y-2 items-center justify-center'>
-						<div className='flex w-full justify-between items-center'>
-							<div className='flex items-center space-x-2'>
-								<div className='flex items-center justify-center rounded-lg bg-[#e9e9e9] text-[#878787] p-1.5 text-2xl'>
-									<TiDocumentText />
-								</div>
-								<h3>{resume.file_name}</h3>
-							</div>
-
-							<a
-								href={resume.cv_url}
-								download={resume.file_name}
-								className='bg-[#0082FA] text-white rounded-full flex items-center space-x-2 px-3 p-1 cursor-pointer'
-							>
-								<span>Donwload CV</span>
-								<CgSoftwareDownload className='text-xl' />
-							</a>
-						</div>
-
-						<div className='w-[50%] h-[500px] border rounded-lg overflow-hidden'>
-							<iframe
-								src={`${resume?.preview_url}#toolbar=0&view=FitH&view=FitV`}
-								title='CV Preview'
-								width='100%'
-								height='100%'
-								className='border-none'
-							/>
-						</div>
-					</div>
-				))}
+				<div className='space-y-2'>
+					{resumes?.map((resume) => (
+						<ResumeCard key={resume?.public_id} resume={resume} />
+					))}
+				</div>
 			</div>
 			<div className='rounded-3xl border-2 border-[#e9e9e9] bg-white p-6'>
 				<h2 className='font-medium text-lg'>Skills</h2>
