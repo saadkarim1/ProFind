@@ -1,9 +1,15 @@
+import { useGetOfferApplicantsQuery } from "@/app/services/offersApi";
 import CaondidateStatuesDropDownList from "@/components/CaondidateStatuesDropDownList";
+import GetOfferStatus from "@/components/shared/GetOfferStatus";
 import { HiOutlineMail } from "react-icons/hi";
 import { LuUser } from "react-icons/lu";
 import { MdOutlinePhoneAndroid, MdWorkOutline } from "react-icons/md";
+import { useParams } from "react-router";
 
 const ApplicantsPage = () => {
+	const { id } = useParams();
+	const { data: applicants } = useGetOfferApplicantsQuery(id);
+	console.log(applicants);
 	return (
 		<div className='flex justify-between'>
 			<div className='w-[49%]  h-screen border-2 border-[#e9e9e9] bg-white rounded-4xl overflow-scroll applicants'>
@@ -12,30 +18,22 @@ const ApplicantsPage = () => {
 					<CaondidateStatuesDropDownList />
 				</div>
 				<div className='space-y-2 p-8'>
-					{[
-						1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-						20, 21, 22, 23, 24, 25, 26, 27, 28,
-					].map((item) => (
+					{applicants?.map((applicant, index) => (
 						<div
-							key={item}
+							key={applicant.id}
 							className='w-full rounded-2xl p-2 bg-white border-2 border-[#e9e9e9] flex items-center'
 						>
-							<h4 className='w-[10%] text-center font-medium'>{item}</h4>
-							<div className='w-[70%] flex items-center space-x-2'>
-								<img
-									src='/src/assets/profile.jpeg'
-									alt=''
-									className='rounded-full'
-									width={45}
-								/>
-								<h2 className='font-medium text-lg'>saad karim</h2>
+							<h4 className='w-[10%] text-center font-medium'>{index + 1}</h4>
+							<div className='w-[70%] flex items-center space-x-2 capitalize '>
+								<div className='w-11 h-11 bg-sky-100 rounded-full text-[#0082FA] flex items-center justify-center font-bold text-2xl'>
+									{applicant?.name?.slice(0, 1)}
+									{applicant?.name?.split(" ")[1]?.slice(0, 1)}
+								</div>
+								<h2 className='font-medium text-lg'>{applicant.name}</h2>
 							</div>
 							<div className='w-[20%]'>
-								<div
-									className={`text-yellow-600 bg-yellow-50 rounded-full text-center w-full px-3 py-1 text-sm font-medium border-2 `}
-								>
-									pending
-								</div>
+								{/* applicant.pivot.status */}
+								<GetOfferStatus offerStatus={applicant.pivot.status} />
 							</div>
 						</div>
 					))}

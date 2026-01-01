@@ -24,6 +24,7 @@ Route::prefix('v1')->group(function () {
         Route::get('/offers/{offerId}',  'show');
         Route::post('/offers/{offerId}/apply',  'applyOffer');
         Route::post('/offers/{offerId}/save',  'toggleSave');
+        Route::get('/offers/{offerId}/applicants',  'getOfferApplicatns');
     });
 
     Route::controller(RecruiterController::class)->group(function () {

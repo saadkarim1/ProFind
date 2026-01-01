@@ -8,12 +8,10 @@ import SearchBar from "@/components/offers/SearchBar";
 import BookMark from "@/components/shared/BookMark";
 import CopyButton from "@/components/shared/CopyButton";
 import type { OfferType } from "@/models/offer";
-import { GetOfferType } from "@/utils/GetOfferType";
+import { GetOfferType } from "@/components/shared/GetOfferType";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { useSelector } from "react-redux";
-import { Link } from "react-router";
 
 const Jobs: React.FC = () => {
 	let { data: offers } = useGetAllOffersQuery();
@@ -84,6 +82,8 @@ const Jobs: React.FC = () => {
 			});
 		}
 	};
+
+	console.log(user);
 	return (
 		<section>
 			<SearchBar setInputsValues={setInputsValues} />
@@ -156,26 +156,6 @@ const Jobs: React.FC = () => {
 								) : (
 									""
 								)}
-								{/* {user?.role === "recruiter" ? (
-									<Link
-										to={`/jobs/${selectedOffer?.offer_id}`}
-										className='flex space-x-1 items-center cursor-pointer w-fit h-fit text-[16px] font-medium py-1 px-5 border-2 text-white border-[#0082FA]  rounded-xl bg-[#0082FA]'
-									>
-										<MdOutlineRemoveRedEye className='text-xl' />{" "}
-										<span>Details</span>
-									</Link>
-								) : selectedOffer?.is_applied ? (
-									<button className='cursor-not-allowed w-fit h-fit text-[16px] font-medium py-1 px-6 border-2 text-[#0082FA] border-[#0082FA]  rounded-xl bg-white'>
-										Applied
-									</button>
-								) : (
-									<button
-										onClick={handleApplyToOffer}
-										className='cursor-pointer w-fit h-fit text-[16px] font-medium py-1 px-6 border-2 text-white border-[#0082FA]  rounded-xl bg-[#0082FA]'
-									>
-										Apply
-									</button>
-								)} */}
 								{user?.role === "user" && (
 									<BookMark
 										offer_id={selectedOffer?.offer_id}

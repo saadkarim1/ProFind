@@ -35,7 +35,7 @@ class OfferController extends Controller
     {
         try {
             $user = Auth::guard('recruiter')->user();
-            $offers =  $user->offers()->get();
+            $offers =  $user->offers()->latest()->get();
 
             return $this->successResponse(data: OfferResource::collection($offers));
         } catch (Exception $e) {
@@ -105,5 +105,13 @@ class OfferController extends Controller
         $offer->is_saved = $isSaved;
 
         return $this->successResponse(data: new OfferResource($offer));
+    }
+
+    public function getOfferApplicatns($offerId)
+    {
+        $offer = Offer::findOrFail($offerId);
+        $applicatns = $offer->users;
+
+        return response()->json($applicatns, 200);
     }
 }

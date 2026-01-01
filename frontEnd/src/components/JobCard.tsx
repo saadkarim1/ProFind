@@ -1,5 +1,5 @@
 import type { OfferType } from "@/models/offer";
-import { GetOfferType } from "@/utils/GetOfferType";
+import { GetOfferType } from "@/components/shared/GetOfferType";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import {
 	getCreatedAtOffer,

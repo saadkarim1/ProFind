@@ -3,7 +3,7 @@ import type { RooteState } from "@/app/store";
 import JobCardTwo from "@/components/JobCardTwo";
 import CopyButton from "@/components/shared/CopyButton";
 import type { OfferType } from "@/models/offer";
-import { GetOfferType } from "@/utils/GetOfferType";
+import { GetOfferType } from "@/components/shared/GetOfferType";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router";
@@ -91,7 +91,7 @@ const OffersPage = () => {
 								</p>
 								<div className='space-x-2 flex items-center'>
 									<Link
-										to={"/offers/3958732kfhjksf/applicants"}
+										to={`/offers/${selectedOffer?.offer_id}/applicants`}
 										target='_blank'
 										rel='noopener noreferrer'
 										className='cursor-pointer w-fit h-fit text-[14px] font-medium py-1.5 px-3 border-2 text-white border-[#0082FA]  rounded-xl bg-[#0082FA]'
@@ -143,7 +143,7 @@ const OffersPage = () => {
 					</div>
 				</div>
 			) : (
-				<div>
+				<div className='w-full text-center font-medium'>
 					No job offers available. Create your first job offer to start
 					receiving applications
 				</div>

@@ -2,7 +2,7 @@ import { useGetOfferQuery } from "@/app/services/offersApi";
 import type { RooteState } from "@/app/store";
 import BookMark from "@/components/shared/BookMark";
 import CopyButton from "@/components/shared/CopyButton";
-import { GetOfferType } from "@/utils/GetOfferType";
+import { GetOfferType } from "@/components/shared/GetOfferType";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router";
 

@@ -1,6 +1,6 @@
 import { useApplyToOfferMutation } from "@/app/services/offersApi";
 import type { OfferType } from "@/models/offer";
-import { GetOfferType } from "@/utils/GetOfferType";
+import { GetOfferType } from "@/components/shared/GetOfferType";
 import {
 	getCreatedAtOffer,
 	getHowLongOfferPublishedPerDays,

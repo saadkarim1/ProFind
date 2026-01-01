@@ -7,10 +7,10 @@ import { Activity } from "react";
 const Layout = () => {
 	const { pathname } = useLocation();
 	return (
-		<div className='flex flex-col '>
+		<div className='flex flex-col min-h-screen'>
 			<NavBar />
 			<main
-				className={`${
+				className={`grow ${
 					pathname !== "/" && pathname !== "/about" && "pt-30 w-[80%] mx-auto"
 				} `}
 			>

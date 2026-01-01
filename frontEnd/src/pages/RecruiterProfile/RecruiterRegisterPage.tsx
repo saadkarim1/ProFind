@@ -32,12 +32,16 @@ const RecruiterRegisterPage = () => {
 		try {
 			await getCSRF();
 
-			const res1 = await registerRecruiter({
+			const res = await registerRecruiter({
 				...inputsValues,
 				password_confirmation: inputsValues.password,
 			});
-			navigate("/");
-		} catch (error) {}
+			if (res.data.status === 200) {
+				navigate("/");
+			}
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	return (

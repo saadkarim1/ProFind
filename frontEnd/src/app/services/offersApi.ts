@@ -24,7 +24,10 @@ export const offersApi = apiSlice.injectEndpoints({
 				method: "Post",
 				body: payload,
 			}),
-			invalidatesTags: [{ type: "Offers", id: "ALL" }],
+			invalidatesTags: [
+				{ type: "Offers", id: "ALL" },
+				{ type: "Offers", id: "RECRUITER" },
+			],
 		}),
 
 		applyToOffer: builder.mutation({
@@ -87,6 +90,10 @@ export const offersApi = apiSlice.injectEndpoints({
 		getRecruiterOffers: builder.query<OfferType[], void>({
 			query: () => "api/v1/offers/saad",
 			transformResponse: (response: { data: OfferType[] }) => response.data,
+			providesTags: [{ type: "Offers", id: "RECRUITER" }],
+		}),
+		getOfferApplicants: builder.query({
+			query: (payload) => `api/v1/offers/${payload}/applicants`,
 		}),
 	}),
 });
@@ -100,4 +107,5 @@ export const {
 	useGetSavedOffersQuery,
 	useGetOfferQuery,
 	useGetRecruiterOffersQuery,
+	useGetOfferApplicantsQuery,
 } = offersApi;
