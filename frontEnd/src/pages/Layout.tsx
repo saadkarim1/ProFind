@@ -7,7 +7,7 @@ import { Activity } from "react";
 const Layout = () => {
 	const { pathname } = useLocation();
 	return (
-		<div>
+		<div className='flex flex-col '>
 			<NavBar />
 			<main
 				className={`${

@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 const CompanySummary = () => {
 	const user = useSelector((state: RooteState) => state.auth.user);
 	const [updateRecruiter] = useUpdateRecruiterProfileMutation();
+	const [formKey, setFormKey] = useState(0);
 
 	const [inputsValues, setInputsValues] = useState({
 		id: "",
@@ -31,13 +32,18 @@ const CompanySummary = () => {
 			Object.entries(inputsValues).filter(([_, value]) => value !== "")
 		);
 		const res1 = await updateRecruiter({ ...filteredData, id: user?.user_id });
+		setFormKey((prev) => prev + 1);
 		console.log(res1);
 	};
 
 	return (
 		<div className='p-6 rounded-3xl border-2 border-[#e9e9e9] bg-white w-[74%] space-y-4'>
 			<h1 className='font-semibold text-lg'>Company Information</h1>
-			<form onSubmit={handleSubmit} className='grid grid-cols-2 gap-8'>
+			<form
+				key={formKey}
+				onSubmit={handleSubmit}
+				className='grid grid-cols-2 gap-8'
+			>
 				<div>
 					<label htmlFor='company_name' className='text-[#878787] text-[15px]'>
 						Company Name
@@ -45,6 +51,7 @@ const CompanySummary = () => {
 					<input
 						type='text'
 						id='title'
+						placeholder={user?.company_name}
 						name='company_name'
 						onChange={handleInputsfields}
 						className='focus:outline-none bg-[#f5f5f5] border-[1.5px] border-[#e9e9e9] block py-2 px-3 w-full rounded-xl'
@@ -72,6 +79,7 @@ const CompanySummary = () => {
 					<input
 						type='text'
 						id='email'
+						placeholder={user?.email}
 						className='focus:outline-none bg-[#f5f5f5] border-[1.5px] border-[#e9e9e9] block py-2 px-3 w-full rounded-xl'
 					/>
 				</div>
@@ -83,6 +91,7 @@ const CompanySummary = () => {
 						type='text'
 						id='adress'
 						name='location'
+						placeholder={user?.location}
 						onChange={handleInputsfields}
 						className='focus:outline-none bg-[#f5f5f5] border-[1.5px] border-[#e9e9e9] block py-2 px-3 w-full rounded-xl'
 					/>
@@ -95,6 +104,7 @@ const CompanySummary = () => {
 						type='text'
 						id='link'
 						name='company_website'
+						placeholder={user?.company_website}
 						onChange={handleInputsfields}
 						className='focus:outline-none bg-[#f5f5f5] border-[1.5px] border-[#e9e9e9] block py-2 px-3 w-full rounded-xl'
 					/>
@@ -110,6 +120,7 @@ const CompanySummary = () => {
 						id='aboutMe'
 						onChange={handleInputsfields}
 						name='company_description'
+						placeholder={user?.company_description}
 						className='focus:outline-none bg-[#f5f5f5] border-[1.5px] border-[#e9e9e9] block py-2 px-3 w-full rounded-xl'
 					/>
 				</div>

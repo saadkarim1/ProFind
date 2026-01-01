@@ -10,10 +10,6 @@ const RecruiterProfilePage = () => {
 	const user = useSelector((state: RooteState) => state.auth.user);
 	return (
 		<div className='h-fit grid w-[74%] grid-cols-2 gap-4'>
-			<div className='p-6 text-[14px] font-normal col-span-2 h-fit rounded-3xl border-2 border-[#e9e9e9] bg-white'>
-				<h2 className='font-medium text-lg'>Description</h2>
-				<p className='w-[80%]'>{user?.company_description}</p>
-			</div>
 			<div className='p-6 col-span-2 h-fit rounded-3xl border-2 border-[#e9e9e9] bg-white'>
 				<div className='text-[14px] font-normal w-full flex items-center justify-between'>
 					<h2 className='font-medium text-lg'>All Information</h2>
@@ -74,6 +70,11 @@ const RecruiterProfilePage = () => {
 					</div>
 				</div>
 			</div>
+			<div className='p-6 text-[14px] font-normal col-span-2 h-fit rounded-3xl border-2 border-[#e9e9e9] bg-white'>
+				<h2 className='font-medium text-lg'>Description</h2>
+				<p className='w-[80%]'>{user?.company_description}</p>
+			</div>
+
 			<div className='rounded-3xl border-2 border-[#e9e9e9] bg-white p-6'>
 				<h2 className='font-medium text-lg'>Sectors</h2>
 				<div className='flex flex-wrap mt-2 gap-2'>

@@ -49,28 +49,13 @@ const RecruiterLoginPage = () => {
 				},
 			});
 		}
-
-		// console.log(res1.status);
-		// if (res1.status !== 200) {
-		// 	toast.error(res?.error?.message, {
-		// 		position: "bottom-right",
-		// 		style: {
-		// 			border: "2px solid #0082FA",
-		// 			borderRadius: "50px",
-		// 		},
-		// 		iconTheme: {
-		// 			primary: "#0082FA",
-		// 			secondary: "#fff",
-		// 		},
-		// 	});
-		// }
 	};
 
 	return (
 		<section className='w-full space-y-4 flex items-center flex-col justify-center'>
 			<form
 				onSubmit={handleSubmit}
-				className='bg-white w-[40%] rounded-xl flex flex-col items-center justify-center p-8 space-y-4 drop-shadow-[0_5px_8px_rgba(0,0,0,0.25)]'
+				className='bg-white w-[40%] rounded-4xl border-4 border-[#99C3FF] flex flex-col items-center justify-center p-8 space-y-4'
 			>
 				<div className='z-10 rounded-xl w-fit h-fit bg-gray-200 text-3xl p-3'>
 					<MdWorkOutline />

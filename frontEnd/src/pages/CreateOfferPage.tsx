@@ -1,12 +1,16 @@
 import { useAddOfferMutation } from "@/app/services/offersApi";
+import type { RooteState } from "@/app/store";
 import JobCategoriesDropDownList from "@/components/JobCategoriesDropDownList";
 import JobTypesDropDownList from "@/components/JobTypesDropDownList";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { IoArrowBack } from "react-icons/io5";
-import { Link } from "react-router";
+import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router";
 
 const CreateOfferPage = () => {
+	const { user } = useSelector((state: RooteState) => state.auth);
+	const navigate = useNavigate();
 	const [formKey, setFormKey] = useState(0);
 	const [addOffer] = useAddOfferMutation();
 	const [selectedCategory, setSelectedCategory] =
@@ -22,6 +26,8 @@ const CreateOfferPage = () => {
 		offer_category: "",
 		salary: "",
 	});
+
+	if (!user?.company_name) navigate("/offers");
 
 	const handleInputsfields = (
 		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>

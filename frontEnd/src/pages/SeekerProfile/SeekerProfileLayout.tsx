@@ -11,19 +11,14 @@ const SeekerProfileLayout = () => {
 	const [logout] = useLogoutMutation();
 	const dispatch = useDispatch();
 	return (
-		<section className='relative flex justify-between'>
-			<div className='w-[25%] sticky top-30  border-2 border-[#e9e9e9] h-fit bg-white rounded-3xl flex flex-col items-center py-10 space-y-4'>
-				{/* <div className='w-20 h-20 rounded-full border-2 border-[#0082FA] flex items-center justify-center font-bold text-3xl'>
-					SK
-				</div> */}
-				<img
-					src='/src/assets/profile.jpeg'
-					alt=''
-					className='rounded-full'
-					width={110}
-				/>
+		<section className='relative flex justify-between '>
+			<div className='w-[25%] capitalize sticky top-30  border-2 border-[#e9e9e9] h-fit bg-white rounded-3xl flex flex-col items-center py-10 space-y-4'>
+				<div className='w-20 h-20 bg-sky-100 rounded-full text-[#0082FA] flex items-center justify-center font-bold text-4xl'>
+					{user?.name?.slice(0, 1)}
+					{user?.name?.split(" ")[1]?.slice(0, 1)}
+				</div>
 				<div className='text-center'>
-					<h1 className='text-3xl font-semibold'>{user?.name}</h1>
+					<h1 className='text-3xl font-semibold '>{user?.name}</h1>
 					<h3 className='text-xl font-medium text-[#878787]'>{user?.job}</h3>
 				</div>
 				<ul className='w-[80%] mx-auto space-y-5 font-medium px-4 text-[16px] my-4'>

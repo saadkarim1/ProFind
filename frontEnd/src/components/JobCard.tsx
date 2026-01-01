@@ -18,19 +18,18 @@ const JobCard = ({ offer }: { offer: OfferType }) => {
 	);
 	const days = getHowLongOfferPublishedPerDays(offer?.created_at);
 	const hours = getHowLongOfferPublishedPerHours(offer?.created_at);
-
+	let company_name = offer?.company.company_name;
 	return (
 		<div className='w-full rounded-[30px] bg-white hover:border-[#99C3FF] border-[#e9e9e9] border-4 p-4 h-full flex flex-col justify-between space-y-3 transition-colors duration-200 ease-in-out'>
 			<div className='flex items-center space-x-2'>
 				<div className='flex items-center justify-center h-11 w-11  capitalize text-[#0082FA] font-bold text-3xl bg-[#D6E7FF] rounded-full'>
-					c
+					{company_name && company_name?.slice(0, 1)}
 				</div>
 				<div className='-space-y-1'>
 					<h1 className='font-medium text-[18px]'>
-						{offer?.company.company_name &&
-						offer.company.company_name.length > 17
-							? `${offer?.company.company_name.slice(0, 17)}...`
-							: offer?.company.company_name}
+						{company_name && company_name.length > 17
+							? `${company_name.slice(0, 17)}...`
+							: company_name}
 					</h1>
 					<p className='text-[12px] text-[#878787] flex items-center space-x-1'>
 						<span>{getCreatedAtOffer(offer?.created_at)}</span>
