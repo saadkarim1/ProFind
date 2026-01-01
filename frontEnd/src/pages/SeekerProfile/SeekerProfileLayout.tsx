@@ -28,13 +28,13 @@ const SeekerProfileLayout = () => {
 							to={section.path}
 							className={`flex items-center space-x-2 rounded-full py-1.5 px-3 ${
 								section.path === pathname
-									? "text-black bg-sky-100"
+									? "text-white bg-[#0082FA]"
 									: "text-[#878787]"
 							} transition-colors duration-250 ease-in-out`}
 						>
 							<section.icon
 								className={`text-xl ${
-									section.path === pathname ? "text-sky-600" : "text-[#878787]"
+									section.path === pathname ? "text-white" : "text-[#878787]"
 								} `}
 							/>
 							<p className='capitalize'>{section.name}</p>

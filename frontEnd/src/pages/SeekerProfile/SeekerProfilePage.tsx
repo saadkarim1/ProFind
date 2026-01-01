@@ -8,13 +8,79 @@ import { useSelector } from "react-redux";
 import type { RooteState } from "@/app/store";
 import { useGetUserResumesQuery } from "@/app/services/resumeApi";
 import ResumeCard from "@/components/ResumeCard";
+import { IoDocumentTextOutline } from "react-icons/io5";
+import { TiDocumentText } from "react-icons/ti";
 
 const SeekerProfilePage = () => {
 	const { user } = useSelector((state: RooteState) => state.auth);
 	const { data: resumes } = useGetUserResumesQuery();
 	console.log(resumes);
+
+	const isCompletProfile = () => {
+		if (
+			user?.about_me ||
+			user?.job ||
+			user?.phone ||
+			user?.location ||
+			!resumes ||
+			resumes?.length === 0
+		) {
+			return true;
+		}
+		return true;
+	};
 	return (
 		<div className='h-fit grid w-[74%] grid-cols-2 gap-4'>
+			{isCompletProfile() && (
+				<div className='p-6 col-span-2 h-fit max-w-full w-fit rounded-3xl border-2 border-[#e9e9e9] space-y-2 bg-white'>
+					<h2 className='font-medium text-lg'>Suggested for you</h2>
+					<div className='flex items-center space-x-2 text-center'>
+						{!resumes || resumes?.length === 0 ? (
+							<div className='p-4 items-center flex flex-col space-y-2 rounded-3xl border-2 w-fit  border-[#e9e9e9] bg-white'>
+								<div className='flex items-center justify-center w-fit  rounded-lg bg-[#e9e9e9] text-[#878787] p-1.5 text-2xl'>
+									<TiDocumentText />
+								</div>
+								<h3>Upload Resume</h3>
+							</div>
+						) : (
+							""
+						)}
+						{!user?.job && (
+							<div className='p-4 items-center flex flex-col space-y-2 rounded-3xl border-2 w-fit  border-[#e9e9e9] bg-white'>
+								<div className='flex items-center justify-center w-fit  rounded-lg bg-[#e9e9e9] text-[#878787] p-1.5 text-2xl'>
+									<MdWorkOutline />
+								</div>
+								<h3>Add Job Information</h3>
+							</div>
+						)}
+						{!user?.phone && (
+							<div className='p-4 items-center flex flex-col space-y-2 rounded-3xl border-2 w-fit  border-[#e9e9e9] bg-white'>
+								<div className='flex items-center justify-center w-fit  rounded-lg bg-[#e9e9e9] text-[#878787] p-1.5 text-2xl'>
+									<MdOutlinePhoneAndroid />
+								</div>
+								<h3>Add Phone Number</h3>
+							</div>
+						)}
+						{!user?.about_me && (
+							<div className='p-4 items-center flex flex-col space-y-2 rounded-3xl border-2 w-fit  border-[#e9e9e9] bg-white'>
+								<div className='flex items-center justify-center w-fit  rounded-lg bg-[#e9e9e9] text-[#878787] p-1.5 text-2xl'>
+									<IoDocumentTextOutline />
+								</div>
+								<h3>Add About Me</h3>
+							</div>
+						)}
+						{!user?.location && (
+							<div className='p-4 items-center flex flex-col space-y-2 rounded-3xl border-2 w-fit  border-[#e9e9e9] bg-white'>
+								<div className='flex items-center justify-center w-fit  rounded-lg bg-[#e9e9e9] text-[#878787] p-1.5 text-2xl'>
+									<SlLocationPin />
+								</div>
+								<h3>Add Location</h3>
+							</div>
+						)}
+					</div>
+				</div>
+			)}
+
 			<div className='p-6 col-span-2 h-fit rounded-3xl border-2 border-[#e9e9e9] bg-white'>
 				<div className='text-[14px] font-normal w-full flex items-center justify-between'>
 					<h2 className='font-medium text-lg'>All Personal Information</h2>
@@ -32,7 +98,7 @@ const SeekerProfilePage = () => {
 							<HiOutlineMail />
 						</div>
 						<div className='-space-y-1'>
-							<h3>{user?.email}</h3>
+							<h2 className='font-medium text-lg'>{user?.email}</h2>
 							<p className='text-[#878787] text-[14px]'>Mail adress</p>
 						</div>
 					</div>

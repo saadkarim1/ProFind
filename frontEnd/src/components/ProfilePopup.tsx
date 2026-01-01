@@ -45,9 +45,9 @@ const ProfilePopup = ({
 								key={item.name}
 								to={item.path}
 								onClick={() => setShowProfilePopup(false)}
-								className='group hover:bg-sky-100 hover:text-black text-[#878787] flex items-center space-x-2 p-1.5 rounded-full'
+								className='group hover:bg-[#0082FA] hover:text-white text-[#878787] flex items-center space-x-2 py-1.5 px-3 text-[16px] capitalize rounded-full'
 							>
-								<item.icon className='text-xl group-hover:text-sky-600' />
+								<item.icon className='text-xl group-hover:text-white' />
 								<p className=''>{item.name}</p>
 							</Link>
 						))}
@@ -64,9 +64,9 @@ const ProfilePopup = ({
 								key={item.name}
 								to={item.path}
 								onClick={() => setShowProfilePopup(false)}
-								className='group hover:bg-sky-100 hover:text-black text-[#878787] flex items-center space-x-2 p-1.5 rounded-full'
+								className='group hover:bg-[#0082FA] hover:text-white text-[#878787] flex items-center space-x-2 py-1.5 px-3 text-[16px] capitalize rounded-full'
 							>
-								<item.icon className='text-xl group-hover:text-sky-600' />
+								<item.icon className='text-xl group-hover:text-white ' />
 								<p className=''>{item.name}</p>
 							</Link>
 						))}
