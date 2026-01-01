@@ -71,8 +71,11 @@ class OfferController extends Controller
     public function show($offerId)
     {
         try {
-            $offer = Offer::findOrFail($offerId);
-            // return response()->json("sdlfkjsd", 200);
+            $userId = Auth::guard('web')->user()->id;
+            $offer = Offer::when($userId, function ($query) use ($userId) {
+                $query->withUserStatus($userId);
+            })->findOrFail($offerId);
+
             return $this->successResponse(data: new OfferResource($offer));
         } catch (Exception $e) {
             return response()->json($e->getMessage());

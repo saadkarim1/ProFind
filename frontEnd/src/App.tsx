@@ -92,7 +92,7 @@ function App() {
 			<div>
 				<Toaster />
 			</div>
-			<RouterProvider router={router} />;
+			<RouterProvider router={router} />
 		</>
 	);
 }
