@@ -31,6 +31,7 @@ class OfferResource extends JsonResource
             "created_at" => $this->created_at,
             'is_saved' => (bool) ($this->is_saved ?? false),
             'is_applied' => (bool) ($this->is_applied ?? false),
+            'application_status' => $this->pivot ? $this->pivot->status : null,
         ];
     }
 }

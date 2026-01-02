@@ -3,6 +3,7 @@ import type { RooteState } from "@/app/store";
 import Resume from "@/components/Resume";
 import type { UserType } from "@/models/user";
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 
 const SummaryPage = () => {
@@ -29,13 +30,27 @@ const SummaryPage = () => {
 		const filteredData = Object.fromEntries(
 			Object.entries(inputsValues).filter(([_, value]) => value !== "")
 		);
-		const res1 = await updateUser({
+		const res = await updateUser({
 			...filteredData,
 			id: user?.user_id,
 		});
 
+		if(res.data.status === 200) {
+			toast.success("Profile updated successfully", {
+				position: "bottom-right",
+				style: {
+					border: "2px solid #0082FA",
+					borderRadius: "50px",
+				},
+				iconTheme: {
+					primary: "#0082FA",
+					secondary: "#fff",
+				},
+			});
+		}
+
 		setFormKey((prev) => prev + 1);
-		console.log(res1);
+		console.log(res);
 	};
 
 	return (

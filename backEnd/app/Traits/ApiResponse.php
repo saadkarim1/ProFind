@@ -11,7 +11,7 @@ trait ApiResponse
     }
 
 
-    public function errorResponse($errors = null, string $message, int $status = 400)
+    public function errorResponse($errors = null, string $message = 'Failed', int $status = 400)
     {
 
         return response()->json(["success" => false, "message" => $message, "errors" => $errors, "status" => $status], $status);

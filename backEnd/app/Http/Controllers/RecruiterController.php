@@ -31,7 +31,7 @@ class RecruiterController extends Controller
 
             return $this->successResponse(new UserResource($request));
         } catch (Exception $e) {
-            return response()->json(["message" => "somethig went wrong while updating an episode", "error" => $e->getMessage()], 404);
+            return $this->errorResponse($e->getMessage(), status: 404);
         }
     }
 
@@ -50,7 +50,7 @@ class RecruiterController extends Controller
 
             return $this->successResponse(new UserResource($request));
         } catch (Exception $e) {
-            return response()->json(["message" => "somethig went wrong while updating an episode", "error" => $e->getMessage()], 404);
+            return $this->errorResponse($e->getMessage(), status: 404);
         }
     }
 
@@ -67,10 +67,12 @@ class RecruiterController extends Controller
 
     public function updateRecruiter(UpdateRecruiterRequest $request, $id)
     {
-
-        // $request->validated();
-        $recruiter = Recruiter::findOrFail($id);
-        $recruiter->update($request->validated());
-        return response()->json($request, 200);;
+        try {
+            $recruiter = Recruiter::findOrFail($id);
+            $recruiter->update($request->validated());
+            return $this->successResponse(data: new UserResource($recruiter));
+        } catch (Exception $e) {
+            return $this->errorResponse($e->getMessage(), status: 404);
+        }
     }
 }

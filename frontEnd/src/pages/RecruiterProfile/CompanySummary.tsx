@@ -1,6 +1,7 @@
 import { useUpdateRecruiterProfileMutation } from "@/app/services/recruiter";
 import type { RooteState } from "@/app/store";
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 
 const CompanySummary = () => {
@@ -31,9 +32,21 @@ const CompanySummary = () => {
 		const filteredData = Object.fromEntries(
 			Object.entries(inputsValues).filter(([_, value]) => value !== "")
 		);
-		const res1 = await updateRecruiter({ ...filteredData, id: user?.user_id });
+		const res = await updateRecruiter({ ...filteredData, id: user?.user_id });
+		if (res.data.status === 200) {
+			toast.success("Profile updated successfully", {
+				position: "bottom-right",
+				style: {
+					border: "2px solid #0082FA",
+					borderRadius: "50px",
+				},
+				iconTheme: {
+					primary: "#0082FA",
+					secondary: "#fff",
+				},
+			});
+		}
 		setFormKey((prev) => prev + 1);
-		console.log(res1);
 	};
 
 	return (

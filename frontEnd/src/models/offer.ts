@@ -13,4 +13,5 @@ export type OfferType = {
 	salary?: number;
 	offer_category: string;
 	email_to_apply?: string;
+	application_status?: string;
 };

@@ -16,12 +16,12 @@ class ResumeController extends Controller
     use ApiResponse;
     public function store(Request $request)
     {
-        $request->validate([
-            'cvFile' => 'required|mimes:pdf|max:2048',
-        ]);
-        $upload = null;
-
         try {
+            $request->validate([
+                'cvFile' => 'required|mimes:pdf|max:2048',
+            ]);
+            $upload = null;
+
             return DB::transaction(function () use ($request, &$upload) {
 
                 $upload = Cloudinary::uploadApi()->upload($request->file('cvFile')->getRealPath(), [
@@ -55,7 +55,7 @@ class ResumeController extends Controller
                 Cloudinary::uploadApi()->destroy($upload['public_id']);
             }
 
-            return response()->json(['error' => $e->getMessage()], 500);
+            return $this->errorResponse($e->getMessage(), status: 500);
         }
     }
 
@@ -63,13 +63,11 @@ class ResumeController extends Controller
     {
         try {
 
-
-
             $resumes = Auth::guard('web')->user()->resumes()->get();
 
             return $this->successResponse($resumes);
         } catch (Exception $e) {
-            return response()->json($e->getMessage());
+            return $this->errorResponse($e->getMessage());
         }
     }
 
@@ -80,19 +78,22 @@ class ResumeController extends Controller
 
             if ($resume) {
                 $resume->delete();
-                // Cloudinary::uploadApi()->destroy($resume->public_id);
             }
 
             return $this->successResponse(message: "deleted");
         } catch (Exception $e) {
-            return response()->json($e->getMessage());
+            return $this->errorResponse($e->getMessage());
         }
     }
 
     public function show($resumeId)
     {
-        $resume = Resume::findOrFail($resumeId);
+        try {
+            $resume = Resume::withTrashed()->findOrFail($resumeId);
 
-        return $this->successResponse($resume);
+            return $this->successResponse($resume);
+        } catch (Exception $e) {
+            return $this->errorResponse($e->getMessage());
+        }
     }
 }

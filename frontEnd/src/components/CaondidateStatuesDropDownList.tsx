@@ -1,6 +1,10 @@
 import { useState } from "react";
 
-const CaondidateStatuesDropDownList = () => {
+const CaondidateStatuesDropDownList = ({
+	setSelectedStatus,
+}: {
+	setSelectedStatus: React.Dispatch<React.SetStateAction<string>>;
+}) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [selected, setSelected] = useState("all");
 	const options = ["all", "pending", "accepted", "rejected"];
@@ -50,6 +54,7 @@ const CaondidateStatuesDropDownList = () => {
 								<button
 									onClick={() => {
 										setSelected(option);
+										setSelectedStatus(option);
 										setIsOpen(false);
 									}}
 									className='block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 text-left capitalize'

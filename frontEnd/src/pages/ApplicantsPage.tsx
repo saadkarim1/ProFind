@@ -1,6 +1,5 @@
 import { useGetOfferApplicantsQuery } from "@/app/services/offersApi";
 import ApplicantInfo from "@/components/ApplicantInfo";
-import CaondidateStatuesDropDownList from "@/components/CaondidateStatuesDropDownList";
 import GetOfferStatus from "@/components/shared/GetOfferStatus";
 import type { applicantType } from "@/models/applicant";
 import { useEffect, useState } from "react";
@@ -10,18 +9,22 @@ const ApplicantsPage = () => {
 	const { id } = useParams();
 	const { data: applicants } = useGetOfferApplicantsQuery(id);
 	const [selectedApplicant, setSelectedApplicant] = useState<applicantType>();
+	// const [selectedStatus, setSelectedStatus] = useState<string>("all");
 
 	useEffect(() => {
 		if (applicants) {
 			setSelectedApplicant(applicants[0]);
 		}
 	}, [applicants]);
+
 	return (
 		<div className='flex justify-between'>
 			<div className='w-[49%]  h-screen border-2 border-[#e9e9e9] bg-white rounded-4xl overflow-scroll applicants'>
 				<div className='flex items-center justify-between bg-white px-8 py-4 sticky top-0 border-b-2 border-[#e9e9e9]'>
 					<h1 className='font-medium text-xl'>Applicants</h1>
-					<CaondidateStatuesDropDownList />
+					{/* <CaondidateStatuesDropDownList
+						setSelectedStatus={setSelectedStatus}
+					/> */}
 				</div>
 				<div className='space-y-2 p-8'>
 					{applicants?.map((applicant, index) => (

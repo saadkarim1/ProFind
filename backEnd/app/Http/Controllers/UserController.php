@@ -32,7 +32,7 @@ class UserController extends Controller
 
             return $this->successResponse(data: new UserResource(Auth::guard('web')->user()));
         } catch (Exception $e) {
-            return response()->json(["message" => "somethig went wrong while updating an episode", "error" => $e->getMessage()], 404);
+            return $this->errorResponse($e->getMessage(), status: 404);
         }
     }
 
@@ -51,7 +51,7 @@ class UserController extends Controller
 
             return $this->successResponse(data: new UserResource(Auth::guard('web')->user()));
         } catch (Exception $e) {
-            return response()->json(["message" => "somethig went wrong while updating an episode", "error" => $e->getMessage()], 404);
+            return $this->errorResponse($e->getMessage(), status: 404);
         }
     }
 
@@ -68,15 +68,23 @@ class UserController extends Controller
 
     public function getUser(Request $request)
     {
-        $user = Auth::guard('recruiter')->user() ?? Auth::guard(name: 'web')->user();
-        return $this->successResponse(data: new UserResource($user));
+        try {
+            $user = Auth::guard('recruiter')->user() ?? Auth::guard(name: 'web')->user();
+            return $this->successResponse(data: new UserResource($user));
+        } catch (Exception $e) {
+            return $this->errorResponse($e->getMessage(), status: 404);
+        }
     }
 
     public function updateUser(UpdateUserRequest $request, $id)
     {
-        $request->validated();
-        $recruiter = User::findOrFail($id);
-        $recruiter->update($request->validated());
-        return response()->json($recruiter, 200);;
+        try {
+            $request->validated();
+            $user = User::findOrFail($id);
+            $user->update($request->validated());
+            return $this->successResponse(data: new UserResource($user));
+        } catch (Exception $e) {
+            return $this->errorResponse($e->getMessage(), status: 404);
+        }
     }
 }

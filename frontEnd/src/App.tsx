@@ -28,9 +28,6 @@ import ProtectedRouteSeeker from "./components/shared/ProtectedRouteSeeker";
 import PretectedRouteRecruiter from "./components/shared/PretectedRouteRecruiter";
 import JobDetails from "./pages/JobDetails";
 import { Toaster } from "react-hot-toast";
-import { useDispatch } from "react-redux";
-import { useEffect } from "react";
-import { checkIsCompletProfile } from "./features/auth/authSlice";
 import ApplyingPage from "./pages/ApplyingPage";
 
 const router = createBrowserRouter([
@@ -84,10 +81,9 @@ const router = createBrowserRouter([
 					},
 					{ path: "offers", element: <OffersPage /> },
 					{ path: "offers/create-offer", element: <CreateOfferPage /> },
+					{ path: "offers/:id/applicants", element: <ApplicantsPage /> },
 				],
 			},
-
-			{ path: "offers/:id/applicants", element: <ApplicantsPage /> },
 		],
 	},
 ]);

@@ -1,12 +1,12 @@
-import type { OfferType } from "@/models/offer";
-import { GetOfferType } from "@/components/shared/GetOfferType";
 import {
 	getHowLongOfferPublishedPerDays,
 	getHowLongOfferPublishedPerHours,
 } from "@/utils/OfferUtils";
 import BookMark from "./shared/BookMark";
+import type { OfferType } from "@/models/offer";
+import GetOfferStatus from "./shared/GetOfferStatus";
 
-const MiniJobCard = ({ offer }: { offer: OfferType }) => {
+const MiniAppliedJobCard = ({ offer }: { offer: OfferType }) => {
 	const days = getHowLongOfferPublishedPerDays(offer?.created_at);
 	const hours = getHowLongOfferPublishedPerHours(offer?.created_at);
 	return (
@@ -17,7 +17,7 @@ const MiniJobCard = ({ offer }: { offer: OfferType }) => {
 			<div className='w-[20%] flex items-center justify-evenly'>
 				<BookMark
 					offer_id={offer.offer_id}
-					is_saved={offer?.is_saved}
+					is_saved={offer.is_saved}
 					isAuthenticated={true}
 				/>
 				<div className='bg-sky-100 p-2.5 rounded-2xl'>
@@ -42,16 +42,14 @@ const MiniJobCard = ({ offer }: { offer: OfferType }) => {
 				</div>
 			</div>
 			<div className='w-[60%] -space-y-1 text-[14px]'>
-				<h1 className='font-medium text-lg'>{offer?.offer_title}</h1>
-				<p className='font-medium text-[#878787]'>
-					{offer?.company?.company_name}
-				</p>
+				<h1 className='font-medium text-lg'>{offer.offer_title}</h1>
+				<p className='font-medium text-[#878787]'>{offer.company_name}</p>
 				<p className='font-medium text-[#878787] capitalize'>
-					{offer?.location}
+					{offer.location}
 				</p>
 			</div>
 			<div className='w-[20%] space-y-1 flex items-center justify-center flex-col'>
-				{GetOfferType(offer?.offer_type)}
+				<GetOfferStatus offerStatus={offer.application_status} />
 				<p className='font-medium text-[#878787] text-[13px]'>
 					{days === 0 ? `${hours} hours ago` : `${days} days ago`}
 				</p>
@@ -60,4 +58,6 @@ const MiniJobCard = ({ offer }: { offer: OfferType }) => {
 	);
 };
 
-export default MiniJobCard;
+export default MiniAppliedJobCard;
+{
+}
