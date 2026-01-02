@@ -66,20 +66,6 @@ const Jobs: React.FC = () => {
 			return;
 		}
 		navigate(`/offers/${selectedOffer?.offer_id}/apply`);
-		// const res = await applytoOffer(selectedOffer?.offer_id).unwrap();
-		// if (res.data.is_applied) {
-		// 	toast.success("Application submitted", {
-		// 		position: "bottom-right",
-		// 		style: {
-		// 			border: "2px solid #0082FA",
-		// 			borderRadius: "50px",
-		// 		},
-		// 		iconTheme: {
-		// 			primary: "#0082FA",
-		// 			secondary: "#fff",
-		// 		},
-		// 	});
-		// }
 	};
 
 	return (

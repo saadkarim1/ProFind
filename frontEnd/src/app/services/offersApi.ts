@@ -98,6 +98,7 @@ export const offersApi = apiSlice.injectEndpoints({
 		}),
 		getOfferApplicants: builder.query<applicantType[], string | undefined>({
 			query: (payload) => `api/v1/offers/${payload}/applicants`,
+			transformResponse: (response: { data: applicantType[] }) => response.data,
 			providesTags: (result) =>
 				result
 					? [
