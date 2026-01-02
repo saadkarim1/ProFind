@@ -2,13 +2,14 @@ import { useGetOfferApplicantsQuery } from "@/app/services/offersApi";
 import ApplicantInfo from "@/components/ApplicantInfo";
 import CaondidateStatuesDropDownList from "@/components/CaondidateStatuesDropDownList";
 import GetOfferStatus from "@/components/shared/GetOfferStatus";
+import type { applicantType } from "@/models/applicant";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 
 const ApplicantsPage = () => {
 	const { id } = useParams();
 	const { data: applicants } = useGetOfferApplicantsQuery(id);
-	const [selectedApplicant, setSelectedApplicant] = useState();
+	const [selectedApplicant, setSelectedApplicant] = useState<applicantType>();
 
 	useEffect(() => {
 		if (applicants) {
@@ -25,9 +26,13 @@ const ApplicantsPage = () => {
 				<div className='space-y-2 p-8'>
 					{applicants?.map((applicant, index) => (
 						<div
-							key={applicant.id}
+							key={applicant.applicant_id}
 							onClick={() => setSelectedApplicant(applicant)}
-							className='w-full rounded-2xl p-2 bg-white border-2 border-[#e9e9e9] flex items-center'
+							className={`w-full rounded-2xl p-2 bg-white border-3 cursor-pointer ${
+								applicant.applicant_id === selectedApplicant?.applicant_id
+									? "border-[#99C3FF]"
+									: "border-[#e9e9e9]"
+							} flex items-center`}
 						>
 							<h4 className='w-[10%] text-center font-medium'>{index + 1}</h4>
 							<div className='w-[70%] flex items-center space-x-2 capitalize '>
@@ -38,13 +43,13 @@ const ApplicantsPage = () => {
 								<h2 className='font-medium text-lg'>{applicant.name}</h2>
 							</div>
 							<div className='w-[20%]'>
-								<GetOfferStatus offerStatus={applicant.pivot.status} />
+								<GetOfferStatus offerStatus={applicant.status} />
 							</div>
 						</div>
 					))}
 				</div>
 			</div>
-			<ApplicantInfo applicant={selectedApplicant} />
+			<ApplicantInfo applicant={selectedApplicant} offerId={id} />
 		</div>
 	);
 };

@@ -28,6 +28,10 @@ import ProtectedRouteSeeker from "./components/shared/ProtectedRouteSeeker";
 import PretectedRouteRecruiter from "./components/shared/PretectedRouteRecruiter";
 import JobDetails from "./pages/JobDetails";
 import { Toaster } from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { checkIsCompletProfile } from "./features/auth/authSlice";
+import ApplyingPage from "./pages/ApplyingPage";
 
 const router = createBrowserRouter([
 	{
@@ -62,6 +66,7 @@ const router = createBrowserRouter([
 							{ path: "settings", element: <SettingsPage /> },
 						],
 					},
+					{ path: "offers/:id/apply", element: <ApplyingPage /> },
 				],
 			},
 

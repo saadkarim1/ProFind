@@ -25,6 +25,8 @@ Route::prefix('v1')->group(function () {
         Route::post('/offers/{offerId}/apply',  'applyOffer');
         Route::post('/offers/{offerId}/save',  'toggleSave');
         Route::get('/offers/{offerId}/applicants',  'getOfferApplicatns');
+        Route::post('/offers/{offerId}/applicants/{userId}/accept',  'acceptApplication');
+        Route::post('/offers/{offerId}/applicants/{userId}/reject',  'rejectedApplication');
     });
 
     Route::controller(RecruiterController::class)->group(function () {
@@ -33,5 +35,6 @@ Route::prefix('v1')->group(function () {
 
     Route::post('/resume', [ResumeController::class, 'store']);
     Route::get('/resume', [ResumeController::class, 'getUserResumes']);
+    Route::get('/resume/{resumeId}', [ResumeController::class, 'show']);
     Route::delete('/resume/{resumeId}', [ResumeController::class, 'deleteResume']);
 });

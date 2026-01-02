@@ -13,6 +13,7 @@ const JobDetails = () => {
 	);
 	const { data: offer } = useGetOfferQuery(id);
 	console.log(offer);
+	console.log(user?.role);
 
 	return (
 		<section>
@@ -44,7 +45,7 @@ const JobDetails = () => {
 							{GetOfferType(offer?.offer_type)}
 						</div>
 						<p className='font-medium text-[#878787] text-[18px]'>
-							{offer?.company.company_name}
+							{offer?.company_name}
 						</p>
 						<div className='flex items-center space-x-2'>
 							{offer?.is_applied ? (

@@ -8,11 +8,12 @@ import {
 } from "@/utils/OfferUtils";
 import BookMark from "./shared/BookMark";
 import CopyButton from "./shared/CopyButton";
-import { useSelector } from "react-redux";
-import type { RooteState } from "@/app/store";
-import { Link } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import type { AppDispatch, RooteState } from "@/app/store";
+import { Link, useNavigate } from "react-router";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import toast from "react-hot-toast";
+import { checkIsCompletProfile } from "@/features/auth/authSlice";
 
 type JobCardTwoProps = {
 	offer: OfferType;
@@ -25,14 +26,17 @@ const JobCardTwo = ({
 	setSelectedOffer,
 	selectedOffer,
 }: JobCardTwoProps) => {
-	const { user, isAuthenticated } = useSelector(
+	const { user, isAuthenticated, isCompletProfile } = useSelector(
 		(state: RooteState) => state.auth
 	);
+	const dispatch = useDispatch<AppDispatch>();
+	const navigate = useNavigate();
 	const [applytoOffer] = useApplyToOfferMutation();
 	const days = getHowLongOfferPublishedPerDays(offer?.created_at);
 	const hours = getHowLongOfferPublishedPerHours(offer?.created_at);
 
 	const handleApplyToOffer = async () => {
+		// try {
 		if (!isAuthenticated) {
 			toast("Please log in to apply for this job.", {
 				icon: "👏",
@@ -44,26 +48,34 @@ const JobCardTwo = ({
 			});
 			return;
 		}
-		const res = await applytoOffer(offer?.offer_id).unwrap();
-		if (res.data.is_applied) {
-			toast.success("Application submitted", {
-				position: "bottom-right",
-				style: {
-					border: "2px solid #0082FA",
-					borderRadius: "50px",
-				},
-				iconTheme: {
-					primary: "#0082FA",
-					secondary: "#fff",
-				},
-			});
-		}
+
+		navigate(`/offers/${offer?.offer_id}/apply`);
+
+		// const res = await applytoOffer(offer?.offer_id).unwrap();
+		// dispatch(checkIsCompletProfile());
+		// console.log(res);
+		// 	if (res.data.is_applied) {
+		// 		toast.success("Application submitted", {
+		// 			position: "bottom-right",
+		// 			style: {
+		// 				border: "2px solid #0082FA",
+		// 				borderRadius: "50px",
+		// 			},
+		// 			iconTheme: {
+		// 				primary: "#0082FA",
+		// 				secondary: "#fff",
+		// 			},
+		// 		});
+		// 	}
+		// } catch (error) {
+		// 	console.log(error);
+		// }
 	};
 
 	return (
 		<div
 			onClick={() => setSelectedOffer(offer)}
-			className={`w-full rounded-[30px] h-full border-4 ${
+			className={`w-full h-fit rounded-[30px] border-4 ${
 				selectedOffer?.offer_id === offer.offer_id
 					? "border-[#99C3FF]"
 					: "border-[#e9e9e9]"
@@ -75,10 +87,9 @@ const JobCardTwo = ({
 				</div>
 				<div className='-space-y-1'>
 					<h1 className='font-medium text-[18px]'>
-						{offer?.company.company_name &&
-						offer.company.company_name?.length > 17
-							? `${offer?.company.company_name.slice(0, 17)}...`
-							: offer?.company.company_name}
+						{offer?.company_name && offer.company_name?.length > 17
+							? `${offer?.company_name.slice(0, 17)}...`
+							: offer?.company_name}
 					</h1>
 					<p className='text-[12px] text-[#878787] flex items-center space-x-1'>
 						<span>{getCreatedAtOffer(offer?.created_at)}</span>

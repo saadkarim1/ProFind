@@ -12,13 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('resumes', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->foreignUuid('user_id')->constrained('users', 'id')->onDelete('cascade');
-            $table->string('file_name'); // Original name: "My_Resume.pdf"
-            $table->string('cv_url');    // Cloudinary Secure URL
-            $table->string('public_id'); // Cloudinary Public ID (for deleting)
-            $table->string('preview_url'); // Cloudinary Public ID (for deleting)
+            $table->string('file_name');
+            $table->string('cv_url');
+            $table->string('public_id');
+            $table->string('preview_url');
             $table->boolean('is_primary')->default(true);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

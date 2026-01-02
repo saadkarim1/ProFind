@@ -35,6 +35,11 @@ export const resumeApi = apiSlice.injectEndpoints({
 			}),
 			invalidatesTags: [{ type: "Resume", id: "LIST" }],
 		}),
+
+		getResume: builder.query<ResumeType, string | undefined>({
+			query: (payload) => `api/v1/resume/${payload}`,
+			transformResponse: (response: { data: ResumeType }) => response.data,
+		}),
 	}),
 });
 
@@ -42,4 +47,5 @@ export const {
 	useUploadResumeMutation,
 	useGetUserResumesQuery,
 	useDeleteResumeMutation,
+	useGetResumeQuery,
 } = resumeApi;

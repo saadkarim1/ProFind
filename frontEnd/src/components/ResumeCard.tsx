@@ -31,10 +31,7 @@ const ResumeCard = ({ resume }: { resume: ResumeType }) => {
 		}
 	};
 	return (
-		<div
-			key={resume.id}
-			className='cursor-pointer flex flex-col items-center justify-center'
-		>
+		<div key={resume.id} className='flex flex-col items-center justify-center'>
 			<div className='flex w-full justify-between items-center'>
 				<div className='flex items-center space-x-2'>
 					<div className='flex items-center justify-center rounded-lg bg-[#e9e9e9] text-[#878787] p-1.5 text-2xl'>
@@ -42,6 +39,7 @@ const ResumeCard = ({ resume }: { resume: ResumeType }) => {
 					</div>
 					<h3>{resume.file_name}</h3>
 				</div>
+
 				<div className='flex items-center space-x-2'>
 					<div
 						onClick={() => setShowResume((prev) => !prev)}
@@ -49,19 +47,19 @@ const ResumeCard = ({ resume }: { resume: ResumeType }) => {
 					>
 						<MdRemoveRedEye />
 					</div>
-					<a
-						href={resume.cv_url}
-						download={resume.file_name}
-						className='bg-[#0082FA] text-white rounded-xl  p-2 cursor-pointer'
-					>
-						<CgSoftwareDownload className='text-xl' />
-					</a>
-					<div
-						onClick={handleDeleteResume}
-						className='text-white  bg-red-500 p-2 rounded-xl  text-lg'
-					>
-						<FaRegTrashAlt />
-					</div>
+							<a
+								href={resume.cv_url}
+								download={resume.file_name}
+								className='bg-[#0082FA] text-white rounded-xl  p-2 cursor-pointer'
+							>
+								<CgSoftwareDownload className='text-xl' />
+							</a>
+							<div
+								onClick={handleDeleteResume}
+								className='text-white  bg-red-500 p-2 rounded-xl  text-lg'
+							>
+								<FaRegTrashAlt />
+							</div>
 				</div>
 			</div>
 

@@ -18,7 +18,7 @@ const JobCard = ({ offer }: { offer: OfferType }) => {
 	);
 	const days = getHowLongOfferPublishedPerDays(offer?.created_at);
 	const hours = getHowLongOfferPublishedPerHours(offer?.created_at);
-	let company_name = offer?.company.company_name;
+	let company_name = offer?.company_name;
 	return (
 		<div className='w-full rounded-[30px] bg-white hover:border-[#99C3FF] border-[#e9e9e9] border-4 p-4 h-full flex flex-col justify-between space-y-3 transition-colors duration-200 ease-in-out'>
 			<div className='flex items-center space-x-2'>

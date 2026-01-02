@@ -1,5 +1,3 @@
-import type { RecruiterType } from "./recruiter";
-
 export type OfferType = {
 	offer_id: string;
 	offer_title: string;
@@ -8,7 +6,7 @@ export type OfferType = {
 	duration: number;
 	company_id: string;
 	offer_type: string;
-	company: RecruiterType;
+	company_name: string;
 	created_at: string;
 	is_saved: boolean;
 	is_applied: boolean;

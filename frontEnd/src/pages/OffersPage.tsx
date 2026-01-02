@@ -45,7 +45,7 @@ const OffersPage = () => {
 					Create
 				</button>
 			</div>
-			{offers?.length > 0 ? (
+			{offers && offers?.length > 0 ? (
 				<div className='flex justify-between'>
 					<div className='w-[49%] grid grid-cols-2 gap-4 '>
 						{offers?.map((offer: OfferType) => (
@@ -87,7 +87,7 @@ const OffersPage = () => {
 									{GetOfferType(selectedOffer?.offer_type)}
 								</div>
 								<p className='font-medium text-[#878787] text-[18px]'>
-									{selectedOffer?.company.company_name}
+									{selectedOffer?.company_name}
 								</p>
 								<div className='space-x-2 flex items-center'>
 									<Link

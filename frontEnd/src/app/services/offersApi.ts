@@ -1,5 +1,6 @@
 import type { OfferType } from "@/models/offer";
 import { apiSlice } from "./api";
+import type { applicantType } from "@/models/applicant";
 
 export const offersApi = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({
@@ -31,12 +32,15 @@ export const offersApi = apiSlice.injectEndpoints({
 		}),
 
 		applyToOffer: builder.mutation({
-			query: (payload) => ({
-				url: `api/v1/offers/${payload}/apply`,
-				method: "POST",
-			}),
+			query: (payload) => {
+				return {
+					url: `api/v1/offers/${payload?.id}/apply`,
+					method: "POST",
+					body: { resume_id: payload?.resume_id },
+				};
+			},
 			invalidatesTags: (result, error, payload) => [
-				{ type: "Offers", id: payload },
+				{ type: "Offers", id: payload?.id },
 				{ type: "Offers", id: "APPLIED" },
 			],
 		}),
@@ -92,8 +96,37 @@ export const offersApi = apiSlice.injectEndpoints({
 			transformResponse: (response: { data: OfferType[] }) => response.data,
 			providesTags: [{ type: "Offers", id: "RECRUITER" }],
 		}),
-		getOfferApplicants: builder.query({
+		getOfferApplicants: builder.query<applicantType[], string | undefined>({
 			query: (payload) => `api/v1/offers/${payload}/applicants`,
+			providesTags: (result) =>
+				result
+					? [
+							...result.map(({ applicant_id }) => ({
+								type: "Offers" as const,
+								id: applicant_id,
+							})),
+							{ type: "Offers", id: "OFFERAPPLICANTS" },
+					  ]
+					: [{ type: "Offers", id: "OFFERAPPLICANTS" }],
+		}),
+
+		accepApplication: builder.mutation({
+			query: (payload) => ({
+				url: `api/v1/offers/${payload.offerId}/applicants/${payload.userId}/accept`,
+				method: "POST",
+			}),
+			invalidatesTags: (result, error, { userId }) => [
+				{ type: "Offers", id: userId },
+			],
+		}),
+		rejectpplication: builder.mutation({
+			query: (payload) => ({
+				url: `api/v1/offers/${payload.offerId}/applicants/${payload.userId}/reject`,
+				method: "POST",
+			}),
+			invalidatesTags: (result, error, { userId }) => [
+				{ type: "Offers", id: userId },
+			],
 		}),
 	}),
 });
@@ -108,4 +141,6 @@ export const {
 	useGetOfferQuery,
 	useGetRecruiterOffersQuery,
 	useGetOfferApplicantsQuery,
+	useAccepApplicationMutation,
+	useRejectpplicationMutation,
 } = offersApi;

@@ -80,13 +80,19 @@ class ResumeController extends Controller
 
             if ($resume) {
                 $resume->delete();
-                Cloudinary::uploadApi()->destroy($resume->public_id);
+                // Cloudinary::uploadApi()->destroy($resume->public_id);
             }
 
             return $this->successResponse(message: "deleted");
-            // return $this->successResponse($resume);
         } catch (Exception $e) {
             return response()->json($e->getMessage());
         }
+    }
+
+    public function show($resumeId)
+    {
+        $resume = Resume::findOrFail($resumeId);
+
+        return $this->successResponse($resume);
     }
 }

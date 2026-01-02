@@ -14,21 +14,21 @@ import { TiDocumentText } from "react-icons/ti";
 const SeekerProfilePage = () => {
 	const { user } = useSelector((state: RooteState) => state.auth);
 	const { data: resumes } = useGetUserResumesQuery();
-	console.log(resumes);
 
 	const isCompletProfile = () => {
 		if (
-			user?.about_me ||
-			user?.job ||
-			user?.phone ||
-			user?.location ||
+			!user?.about_me ||
+			!user?.job ||
+			!user?.phone ||
+			!user?.location ||
 			!resumes ||
 			resumes?.length === 0
 		) {
 			return true;
 		}
-		return true;
+		return false;
 	};
+
 	return (
 		<div className='h-fit grid w-[74%] grid-cols-2 gap-4'>
 			{isCompletProfile() && (
@@ -142,7 +142,10 @@ const SeekerProfilePage = () => {
 				<h2 className='font-medium text-lg'>Resume</h2>
 				<div className='space-y-2'>
 					{resumes?.map((resume) => (
-						<ResumeCard key={resume?.public_id} resume={resume} />
+						<ResumeCard
+							key={resume?.public_id}
+							resume={resume}
+						/>
 					))}
 				</div>
 			</div>

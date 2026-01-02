@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreOfferRequest;
+use App\Http\Resources\ApplicantResource;
 use App\Http\Resources\OfferCollection;
 use App\Http\Resources\OfferResource;
 use App\Jobs\testTask;
 use App\Models\Company;
 use App\Models\Offer;
+use App\Models\Resume;
 use App\Traits\ApiResponse;
 use Exception;
 use Illuminate\Http\Request;
@@ -71,28 +73,36 @@ class OfferController extends Controller
     public function show($offerId)
     {
         try {
-            $userId = Auth::guard('web')->user()->id;
-            $offer = Offer::when($userId, function ($query) use ($userId) {
-                $query->withUserStatus($userId);
-            })->findOrFail($offerId);
+            $user = Auth::guard('web')->user();
+            if ($user) {
 
-            return $this->successResponse(data: new OfferResource($offer));
+                $offer = Offer::when($user, function ($query) use ($user) {
+                    $query->withUserStatus($user->id);
+                })->findOrFail($offerId);
+            } else {
+
+                $offer = Offer::findOrFail($offerId);
+            }
+
+            return $this->successResponse(new OfferResource($offer));
         } catch (Exception $e) {
             return response()->json($e->getMessage());
         }
     }
 
-    public function applyOffer($offerId)
+    public function applyOffer(Request $request, $offerId)
     {
-        $offer = Offer::findOrFail($offerId);
-        $id = Auth::guard('web')->user()->id;
-        $result = $offer->users()->syncWithoutDetaching($id);
-        $is_applied = count($result['attached']) > 0;
-        $offer->is_applied = $is_applied;
-
-
-        // return response()->json($offer, 200);
-        return $this->successResponse(data: new OfferResource($offer));
+        try {
+            $offer = Offer::findOrFail($offerId);
+            $id = Auth::guard('web')->user()->id;
+            $result = $offer->users()->syncWithoutDetaching([$id => ['resume_id' => $request->resume_id, 'message' => $request->message]]);
+            $is_applied = count($result['attached']) > 0;
+            $offer->is_applied = $is_applied;
+            return response()->json($offer, 200);
+            // return $this->successResponse(data: new OfferResource($offer));
+        } catch (Exception $e) {
+            return $this->errorResponse($e->getMessage(), "trat chi hahja");
+        }
     }
 
     public function toggleSave($offerId)
@@ -109,9 +119,23 @@ class OfferController extends Controller
 
     public function getOfferApplicatns($offerId)
     {
-        $offer = Offer::findOrFail($offerId);
-        $applicatns = $offer->users;
+        $offer = Offer::with('users')->find($offerId);
+        $applicants = $offer->users;
+        // return response()->json($applicants, 200);
+        return response()->json(ApplicantResource::collection($applicants), 200);
+    }
 
-        return response()->json($applicatns, 200);
+    public function acceptApplication($offerId, $userId)
+    {
+        $offer = Offer::findOrFail($offerId);
+        $offer->users()->updateExistingPivot($userId, ['status' => 'accepted']);
+        return $this->successResponse(data: $offer, message: 'Applicant accepted');
+    }
+
+    public function rejectedApplication($offerId, $userId)
+    {
+        $offer = Offer::findOrFail($offerId);
+        $offer->users()->updateExistingPivot($userId, ['status' => 'rejected']);
+        return $this->successResponse(message: 'Applicant rejected');
     }
 }

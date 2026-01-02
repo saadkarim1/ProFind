@@ -4,14 +4,28 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
 	isAuthenticated: false,
+	isCompletProfile: false,
 	user: null,
-} as { isAuthenticated: boolean; user: AuthUser | null };
+} as {
+	isAuthenticated: boolean;
+	user: AuthUser | null;
+	isCompletProfile: boolean;
+};
 
-const slice = createSlice({
+const authSlice = createSlice({
 	name: "auth",
 	initialState,
 	reducers: {
 		logout: () => initialState,
+		checkIsCompletProfile: ({ user, isCompletProfile }) => {
+			console.log(user?.name);
+			if (user?.role === "user") {
+				if (!user?.about_me || !user?.job || !user?.phone || !user?.location) {
+					isCompletProfile = true;
+					console.log("second");
+				}
+			}
+		},
 	},
 
 	extraReducers: (builder) => {
@@ -51,5 +65,5 @@ const slice = createSlice({
 	},
 });
 
-export const { logout } = slice.actions;
-export default slice.reducer;
+export const { logout, checkIsCompletProfile } = authSlice.actions;
+export default authSlice.reducer;

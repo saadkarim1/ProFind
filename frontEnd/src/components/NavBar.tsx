@@ -45,14 +45,8 @@ const normalLinks: Link[] = [
 
 const NavBar = () => {
 	const { pathname } = useLocation();
-	const {
-		data: authenticatedUser,
-		isSuccess,
-		isError,
-		isLoading,
-	} = useGetUserQuery();
-	const [showProfilePopup, setShowProfilePopup] = useState<boolean>(false);
-	const [showLoginPopup, setShowLoginPopup] = useState<boolean>(false);
+	const { data: authenticatedUser, isSuccess, isError } = useGetUserQuery();
+	const [showPopup, setShowPopup] = useState<boolean>(false);
 	return (
 		<nav className='z-999 fixed w-[80%] mx-auto inset-x-0 pt-3'>
 			<div className='navbar drop-shadow-[0_0px_2px_rgba(0,0,0,0.25)] rounded-2xl flex items-center p-3'>
@@ -107,15 +101,15 @@ const NavBar = () => {
 				<div className='w-[25%] flex items-center justify-end'>
 					<Activity mode={isSuccess ? "visible" : "hidden"}>
 						<ProfilePopup
-							showProfilePopup={showProfilePopup}
-							setShowProfilePopup={setShowProfilePopup}
+							showProfilePopup={showPopup}
+							setShowProfilePopup={setShowPopup}
 							authenticatedUser={authenticatedUser}
 						/>
 					</Activity>
-					<Activity mode={isError || isLoading ? "visible" : "hidden"}>
+					<Activity mode={isError ? "visible" : "hidden"}>
 						<LoginPopup
-							showLoginPopup={showLoginPopup}
-							setShowLoginPopup={setShowLoginPopup}
+							showLoginPopup={showPopup}
+							setShowLoginPopup={setShowPopup}
 						/>
 					</Activity>
 				</div>

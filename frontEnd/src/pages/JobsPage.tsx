@@ -1,7 +1,4 @@
-import {
-	useApplyToOfferMutation,
-	useGetAllOffersQuery,
-} from "@/app/services/offersApi";
+import { useGetAllOffersQuery } from "@/app/services/offersApi";
 import type { RooteState } from "@/app/store";
 import JobCardTwo from "@/components/JobCardTwo";
 import SearchBar from "@/components/offers/SearchBar";
@@ -12,10 +9,11 @@ import { GetOfferType } from "@/components/shared/GetOfferType";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router";
 
 const Jobs: React.FC = () => {
 	let { data: offers } = useGetAllOffersQuery();
-	const [applytoOffer] = useApplyToOfferMutation();
+	const navigate = useNavigate();
 	const { user, isAuthenticated } = useSelector(
 		(state: RooteState) => state.auth
 	);
@@ -67,23 +65,23 @@ const Jobs: React.FC = () => {
 			});
 			return;
 		}
-		const res = await applytoOffer(selectedOffer?.offer_id).unwrap();
-		if (res.data.is_applied) {
-			toast.success("Application submitted", {
-				position: "bottom-right",
-				style: {
-					border: "2px solid #0082FA",
-					borderRadius: "50px",
-				},
-				iconTheme: {
-					primary: "#0082FA",
-					secondary: "#fff",
-				},
-			});
-		}
+		navigate(`/offers/${selectedOffer?.offer_id}/apply`);
+		// const res = await applytoOffer(selectedOffer?.offer_id).unwrap();
+		// if (res.data.is_applied) {
+		// 	toast.success("Application submitted", {
+		// 		position: "bottom-right",
+		// 		style: {
+		// 			border: "2px solid #0082FA",
+		// 			borderRadius: "50px",
+		// 		},
+		// 		iconTheme: {
+		// 			primary: "#0082FA",
+		// 			secondary: "#fff",
+		// 		},
+		// 	});
+		// }
 	};
 
-	console.log(user);
 	return (
 		<section>
 			<SearchBar setInputsValues={setInputsValues} />
@@ -137,7 +135,7 @@ const Jobs: React.FC = () => {
 								{GetOfferType(selectedOffer?.offer_type)}
 							</div>
 							<p className='font-medium text-[#878787] text-[18px]'>
-								{selectedOffer?.company.company_name}
+								{selectedOffer?.company_name}
 							</p>
 							<div className='flex items-center space-x-2'>
 								{user?.role === "user" ? (

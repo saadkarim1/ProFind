@@ -16,6 +16,8 @@ return new class extends Migration
             $table->foreignUuid("user_id")->constrained()->onDelete('cascade');
             $table->foreignUuid("offer_id")->constrained()->onDelete('cascade');
             $table->enum('status', ['pending', 'accepted', 'Rejected'])->default('pending');
+            $table->foreignUuid('resume_id')->constrained();
+            $table->text('message')->nullable();
             $table->timestamps();
         });
     }

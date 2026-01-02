@@ -27,7 +27,7 @@ class Offer extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'user_offer_apply')->withPivot('status')->withTimestamps();
+        return $this->belongsToMany(User::class, 'user_offer_apply')->withPivot(['status', 'resume_id', 'message'])->withTimestamps();
     }
 
     public function saversusers()
