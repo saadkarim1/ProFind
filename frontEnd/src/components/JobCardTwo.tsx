@@ -75,7 +75,7 @@ const JobCardTwo = ({
 	return (
 		<div
 			onClick={() => setSelectedOffer(offer)}
-			className={`w-full h-fit rounded-[30px] border-4 ${
+			className={`w-full h-fit rounded-[30px] border-4  ${
 				selectedOffer?.offer_id === offer.offer_id
 					? "border-[#99C3FF]"
 					: "border-[#e9e9e9]"
@@ -86,7 +86,7 @@ const JobCardTwo = ({
 					c
 				</div>
 				<div className='-space-y-1'>
-					<h1 className='font-medium text-[18px]'>
+					<h1 className='font-medium text-[18px] capitalize'>
 						{offer?.company_name && offer.company_name?.length > 17
 							? `${offer?.company_name.slice(0, 17)}...`
 							: offer?.company_name}

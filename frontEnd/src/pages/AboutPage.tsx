@@ -11,7 +11,7 @@ const About = () => {
 				<div></div>
 				<div></div>
 			</div>
-			<div className='absolute w-[80%] mx-auto top-[60%] left-[50%] transform -translate-[50%]'>
+			<div className='absolute  w-[80%] mx-auto top-[60%] left-[50%] transform -translate-[50%]'>
 				<div className='flex'>
 					<div className='w-[50%] space-y-6'>
 						<h2 className='font-medium w-fit py-1 px-3 rounded-full bg-[#cae4fd]'>
@@ -37,46 +37,6 @@ const About = () => {
 					</div>
 					<div className='w-[50%] flex justify-center items-start'>
 						<img src='/src/assets/Hiring.svg' alt='' />
-					</div>
-				</div>
-				<div className='flex items-center justify-evenly bg-red-100 h-fit'>
-					<div className='w-[25%] rounded-xl space-x-2 h-full  p-6 bg-white flex'>
-						<div className='p-2 rounded-full text-xl text-[#117dda] bg-[#EBF5FF] h-fit'>
-							<IoSearch />
-						</div>
-						<div>
-							<h2 className='font-medium'>Smart Job Discovery</h2>
-							<p className='text-[15px]'>
-								Find relevant jobs based on your skills, goals, and preferences.
-							</p>
-						</div>
-					</div>
-					<div className='w-[25%] rounded-xl space-x-2 h-full  p-6 bg-white flex'>
-						<div className='p-2 rounded-full text-xl text-[#117dda] bg-[#EBF5FF] h-fit'>
-							<BsLightningFill />
-						</div>
-						<div>
-							<h2 className='font-medium'>Fast & Simple Hiring</h2>
-							<p className='text-[15px]'>
-								Recruiters can create and manage job offers in minutes.
-							</p>
-						</div>
-					</div>
-					<div className='w-[25%] rounded-xl space-x-2 h-full  p-6 bg-white flex'>
-						<div className='p-2 rounded-full text-xl text-[#117dda] bg-[#EBF5FF] h-fit'>
-							<RiRobot2Fill />
-						</div>
-						<div>
-							<h2 className='font-medium'>
-								AI-Powered Matching{" "}
-								<span className='text-[#117dda]'>(Coming Soon)</span>
-							</h2>
-							<p className='text-[15px]'>
-								{" "}
-								Our AI agent will help match the right candidate to the right
-								role.
-							</p>
-						</div>
 					</div>
 				</div>
 			</div>
