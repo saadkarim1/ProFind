@@ -26,7 +26,7 @@ The platform integrates clean UI/UX, efficient search features, authentication
 
 **Database:** MySQL
 
-**Auth:** Passport
+**Auth:** Sanctum
 
 **UI/Design:** Figma
 
@@ -42,8 +42,8 @@ Clone the repository
 Frontend Setup
 ```bash
   cd profindfrontend
-  npm install
-  npm run dev
+  yarn 
+  yarn dev
 ```
 Backend Setup
 ```bash
