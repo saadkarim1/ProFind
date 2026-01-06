@@ -14,13 +14,10 @@ const OffersPage = () => {
 	const { user } = useSelector((state: RooteState) => state.auth);
 	const { data: offers } = useGetRecruiterOffersQuery();
 	const [selectedOffer, setSelectedOffer] = useState<OfferType | null>(null);
-	console.log(user);
 	useEffect(() => {
 		if (!offers) return;
 		setSelectedOffer(offers[0]);
 	}, [offers]);
-
-	console.log(offers);
 
 	return (
 		<section className=''>
@@ -81,12 +78,12 @@ const OffersPage = () => {
 							</div>
 							<div className='flex flex-col space-y-2 w-full'>
 								<div className='flex items-center justify-between w-full'>
-									<h1 className='font-medium text-3xl'>
+									<h1 className='font-medium text-3xl capitalize'>
 										{selectedOffer?.offer_title}
 									</h1>
 									{GetOfferType(selectedOffer?.offer_type)}
 								</div>
-								<p className='font-medium text-[#878787] text-[18px]'>
+								<p className='font-medium text-[#878787] text-[18px] capitalize'>
 									{selectedOffer?.company_name}
 								</p>
 								<div className='space-x-2 flex items-center'>
@@ -106,7 +103,7 @@ const OffersPage = () => {
 							</div>
 						</div>
 						<hr className='text-[#e9e9e9] h-3' />
-						<div className='flex justify-between w-full h-10 font-semibold text-[15px] text-[#3a4981]'>
+						<div className='flex justify-between w-full h-10 font-semibold capitalize text-[15px] text-[#3a4981]'>
 							<div className='w-[33%] h-full flex flex-col items-center '>
 								<h3>SALARY</h3>
 								<p>{selectedOffer?.salary ? selectedOffer?.salary : "-----"}</p>
@@ -117,9 +114,11 @@ const OffersPage = () => {
 									{selectedOffer?.duration ? selectedOffer?.duration : "-----"}
 								</p>
 							</div>
-							<div className='w-[33%] h-full  flex flex-col items-center '>
+							<div className='w-[33%] h-full  flex flex-col items-center'>
 								<h3>LOCATION</h3>
-								<p>{selectedOffer?.location}</p>
+								<p>
+									{selectedOffer?.location ? selectedOffer?.location : "-----"}
+								</p>
 							</div>
 						</div>
 						<hr className='text-[#e9e9e9] h-3' />

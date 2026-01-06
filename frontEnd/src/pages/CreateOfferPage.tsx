@@ -2,50 +2,56 @@ import { useAddOfferMutation } from "@/app/services/offersApi";
 import type { RooteState } from "@/app/store";
 import JobCategoriesDropDownList from "@/components/JobCategoriesDropDownList";
 import JobTypesDropDownList from "@/components/JobTypesDropDownList";
+import { offerSchema, type CreateOfferFieldsType } from "@/schema/offerSchema";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
+import { useForm, type SubmitHandler } from "react-hook-form";
 import toast from "react-hot-toast";
 import { IoArrowBack } from "react-icons/io5";
 import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router";
+import { Link } from "react-router";
 
 const CreateOfferPage = () => {
 	const { user } = useSelector((state: RooteState) => state.auth);
-	const navigate = useNavigate();
 	const [formKey, setFormKey] = useState(0);
 	const [addOffer] = useAddOfferMutation();
 	const [selectedCategory, setSelectedCategory] =
 		useState<string>("Select Category");
 	const [selectedJobType, setSelectedJobType] =
 		useState<string>("Select Job Type");
-	const [dataFrom, setDataForm] = useState({
-		title: "",
-		description: "",
-		location: "",
-		duration: "",
-		offer_type: "",
-		offer_category: "",
-		salary: "",
+	const [myErrors, setMyErrors] = useState({
+		errortype: "",
+		errorCategory: "",
 	});
 
-	if (!user?.company_name) navigate("/offers");
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm<CreateOfferFieldsType>({
+		resolver: zodResolver(offerSchema),
+	});
 
-	const handleInputsfields = (
-		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-	) => {
-		setDataForm({
-			...dataFrom,
-			[e.currentTarget.name]: e.currentTarget.value,
-		});
-	};
-	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
+	const onSubmit: SubmitHandler<CreateOfferFieldsType> = async (data) => {
 		try {
+			if (selectedCategory === "Select Category") {
+				setMyErrors((prev) => ({
+					...prev,
+					errorCategory: "Category is required",
+				}));
+				return;
+			}
+			if (selectedJobType === "Select Job Type") {
+				setMyErrors((prev) => ({ ...prev, errortype: "job type is required" }));
+				return;
+			}
+			// console.log(data);
 			const res = await addOffer({
-				...dataFrom,
+				...data,
 				offer_type: selectedJobType,
 				offer_category: selectedCategory,
 			}).unwrap();
-			console.log(res);
+			// console.log(res);
 			if (res.status === 201) {
 				toast.success("Job offer published", {
 					position: "bottom-right",
@@ -74,7 +80,7 @@ const CreateOfferPage = () => {
 			<div className='w-full'>
 				<form
 					key={formKey}
-					onSubmit={handleSubmit}
+					onSubmit={handleSubmit(onSubmit)}
 					className='bg-white rounded-4xl border-2 border-[#e9e9e9] w-[60%] mx-auto h-full p-8 space-y-3'
 				>
 					<div>
@@ -92,36 +98,39 @@ const CreateOfferPage = () => {
 								Job Title
 							</label>
 							<input
+								{...register("title")}
 								type='text'
 								id='jobTitle'
-								name='title'
-								onChange={handleInputsfields}
 								className='focus:outline-none bg-[#f5f5f5] border-[1.5px] border-[#e9e9e9] block py-2 px-3 w-full rounded-xl'
 							/>
+							<p className='text-red-500 text-[15px]'>
+								{errors.title && errors.title.message}
+							</p>
 						</div>
+
 						<div className=''>
-							<label
-								htmlFor='companyName'
-								className='formField text-[#878787] text-[15px] after:text-red-600'
-							>
+							<label className='formField text-[#878787] text-[15px] after:text-red-600'>
 								Category
 							</label>
 							<JobCategoriesDropDownList
 								selectedCategory={selectedCategory}
 								setSelectedCategory={setSelectedCategory}
 							/>
+							<p className='text-red-500 text-[15px]'>
+								{myErrors.errorCategory && myErrors.errorCategory}
+							</p>
 						</div>
 						<div>
-							<label
-								htmlFor='companyName'
-								className='formField text-[#878787] text-[15px] after:text-red-600'
-							>
+							<label className='formField text-[#878787] text-[15px] after:text-red-600'>
 								Job Type
 							</label>
 							<JobTypesDropDownList
 								selectedJobType={selectedJobType}
 								setSelectedJobType={setSelectedJobType}
 							/>
+							<p className='text-red-500 text-[15px]'>
+								{myErrors.errortype && myErrors.errortype}
+							</p>
 						</div>
 						<div className='col-span-2'>
 							<label
@@ -131,13 +140,15 @@ const CreateOfferPage = () => {
 								Location
 							</label>
 							<input
+								{...register("location")}
 								placeholder='e.g...Casablanca'
 								type='text'
 								id='location'
-								name='location'
-								onChange={handleInputsfields}
 								className='focus:outline-none bg-[#f5f5f5] border-[1.5px] border-[#e9e9e9] block py-2 px-3 w-full rounded-xl'
 							/>
+							<p className='text-red-500 text-[15px]'>
+								{errors.location && errors.location.message}
+							</p>
 						</div>
 						<div className='col-span-2'>
 							<label
@@ -147,24 +158,28 @@ const CreateOfferPage = () => {
 								Email to Apply
 							</label>
 							<input
+								{...register("email_to_apply")}
 								type='text'
 								id='emailToApply'
-								onChange={handleInputsfields}
-								name='email_to_apply'
 								className='focus:outline-none bg-[#f5f5f5] border-[1.5px] border-[#e9e9e9] block py-2 px-3 w-full rounded-xl'
 							/>
+							<p className='text-red-500 text-[15px]'>
+								{errors.email_to_apply && errors.email_to_apply.message}
+							</p>
 						</div>
 						<div className='col-span-2'>
 							<label htmlFor='salary' className='text-[#878787] text-[15px]'>
 								Salary (DH)
 							</label>
 							<input
-								type='text'
+								{...register("salary")}
+								type='number'
 								id='salary'
-								name='salary'
-								onChange={handleInputsfields}
 								className='focus:outline-none bg-[#f5f5f5] border-[1.5px] border-[#e9e9e9] block py-2 px-3 w-full rounded-xl'
 							/>
+							<p className='text-red-500 text-[15px]'>
+								{errors.salary && errors.salary.message}
+							</p>
 						</div>
 						<div className='col-span-2'>
 							<label
@@ -174,49 +189,53 @@ const CreateOfferPage = () => {
 								Description
 							</label>
 							<textarea
+								{...register("description")}
 								rows={6}
 								maxLength={400}
 								id='Description'
-								name='description'
-								onChange={handleInputsfields}
 								className='focus:outline-none bg-[#f5f5f5] border-[1.5px] border-[#e9e9e9] block py-2 px-3 w-full rounded-xl'
 							/>
+							<p className='text-red-500 text-[15px]'>
+								{errors.description && errors.description.message}
+							</p>
 						</div>
 						<div className='col-span-2'>
 							<label className='formField text-[#878787] text-[15px] after:text-red-600'>
 								How long your job will takes
 							</label>
-							<div className='flex justify-evenly mt-2'>
-								<div className='rounded-lg bg-sky-100 p-2.5'>
-									<input
-										type='radio'
-										id='1'
-										name='duration'
-										value={"1-3 months"}
-										onChange={handleInputsfields}
-									/>{" "}
-									<label htmlFor='1'>1 to 3 months</label>
+							<div>
+								<div className='flex justify-evenly mt-2'>
+									<div className='rounded-lg bg-sky-100 p-2.5'>
+										<input
+											type='radio'
+											id='1'
+											value={"1-3 months"}
+											{...register("duration")}
+										/>{" "}
+										<label htmlFor='1'>1 to 3 months</label>
+									</div>
+									<div className='rounded-lg bg-sky-100 p-2.5'>
+										<input
+											type='radio'
+											id='3'
+											{...register("duration")}
+											value={"3-6 months"}
+										/>{" "}
+										<label htmlFor='3'>3 to 6 months</label>
+									</div>
+									<div className='rounded-lg bg-sky-100 p-2.5'>
+										<input
+											type='radio'
+											id='6'
+											{...register("duration")}
+											value={"6+ months"}
+										/>{" "}
+										<label htmlFor='6'>More than 6 months</label>
+									</div>
 								</div>
-								<div className='rounded-lg bg-sky-100 p-2.5'>
-									<input
-										type='radio'
-										id='3'
-										name='duration'
-										value={"3-6 months"}
-										onChange={handleInputsfields}
-									/>{" "}
-									<label htmlFor='3'>3 to 6 months</label>
-								</div>
-								<div className='rounded-lg bg-sky-100 p-2.5'>
-									<input
-										type='radio'
-										id='6'
-										name='duration'
-										value={"6+ months"}
-										onChange={handleInputsfields}
-									/>{" "}
-									<label htmlFor='6'>More than 6 months</label>
-								</div>
+								<p className='text-red-500 text-[15px]'>
+									{errors.duration && errors.duration.message}
+								</p>
 							</div>
 						</div>
 					</div>

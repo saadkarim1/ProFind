@@ -10,31 +10,41 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {
 
-    Route::controller(UserController::class)->group(function () {
-        Route::get('/user',  'getUser')->middleware('auth:sanctum');
-        Route::patch('/user/{id}', 'updateUser');
+    Route::middleware('auth:sanctum')->group(function () {
+
+        Route::controller(UserController::class)->group(function () {
+            Route::get('/user',  'getUser');
+            Route::patch('/user/{id}', 'updateUser');
+        });
+
+        Route::controller(RecruiterController::class)->group(function () {
+            Route::patch('/recruiter/{id}', 'updateRecruiter');
+        });
+
+        Route::controller(ResumeController::class)->group(function () {
+            Route::post('/resume', 'store');
+            Route::get('/resume', 'getUserResumes');
+            Route::get('/resume/{resumeId}',  'show');
+            Route::delete('/resume/{resumeId}', 'deleteResume');
+        });
+
+        Route::controller(OfferController::class)->group(function () {
+            Route::get('/offers/saad',  'getRecruiterOffers');
+            Route::post('/offers', 'store');
+            Route::get('/offers/applied',  'getAppliedOffers');
+            Route::get('/offers/saved',  'getSavedOffers');
+            Route::post('/offers/{offerId}/apply',  'applyOffer');
+            Route::post('/offers/{offerId}/save',  'toggleSave');
+            Route::get('/offers/{offerId}/applicants',  'getOfferApplicatns');
+            Route::post('/offers/{offerId}/applicants/{userId}/accept',  'acceptApplication');
+            Route::post('/offers/{offerId}/applicants/{userId}/reject',  'rejectedApplication');
+        });
     });
+
 
     Route::controller(OfferController::class)->group(function () {
-        Route::get('/offers/saad',  'getRecruiterOffers');
-        Route::post('/offers', 'store');
-        Route::get('/offers',  'index');
-        Route::get('/offers/applied',  'getAppliedOffers');
-        Route::get('/offers/saved',  'getSavedOffers');
+
         Route::get('/offers/{offerId}',  'show');
-        Route::post('/offers/{offerId}/apply',  'applyOffer');
-        Route::post('/offers/{offerId}/save',  'toggleSave');
-        Route::get('/offers/{offerId}/applicants',  'getOfferApplicatns');
-        Route::post('/offers/{offerId}/applicants/{userId}/accept',  'acceptApplication');
-        Route::post('/offers/{offerId}/applicants/{userId}/reject',  'rejectedApplication');
+        Route::get('/offers',  'index');
     });
-
-    Route::controller(RecruiterController::class)->group(function () {
-        Route::patch('/recruiter/{id}', 'updateRecruiter');
-    });
-
-    Route::post('/resume', [ResumeController::class, 'store']);
-    Route::get('/resume', [ResumeController::class, 'getUserResumes']);
-    Route::get('/resume/{resumeId}', [ResumeController::class, 'show']);
-    Route::delete('/resume/{resumeId}', [ResumeController::class, 'deleteResume']);
 });

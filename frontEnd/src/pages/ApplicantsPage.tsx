@@ -7,9 +7,8 @@ import { useParams } from "react-router";
 
 const ApplicantsPage = () => {
 	const { id } = useParams();
-	const { data: applicants } = useGetOfferApplicantsQuery(id);
+	const { data: applicants, isLoading } = useGetOfferApplicantsQuery(id);
 	const [selectedApplicant, setSelectedApplicant] = useState<applicantType>();
-	// const [selectedStatus, setSelectedStatus] = useState<string>("all");
 
 	useEffect(() => {
 		if (applicants) {
@@ -17,14 +16,30 @@ const ApplicantsPage = () => {
 		}
 	}, [applicants]);
 
+	if (isLoading) {
+		return (
+			<div className='w-full h-[80vh] bg-red-50 flex items-center justify-center'>
+				<div className=' w-7 h-7 border-3 animate-spin border-white border-t-transparent rounded-full '></div>
+			</div>
+		);
+	}
+
+	if (applicants?.length === 0) {
+		return (
+			<div className='w-full h-[80vh]  flex items-center justify-center flex-col	space-y-2'>
+				<h1 className='font-medium text-xl'>Not applicants yet!</h1>
+				<button className='w-fit h-fit py-2 px-4 cursor-pointer border-2 text-white border-[#0082FA] flex items-center justify-center rounded-full bg-[#0082FA]'>
+					Back to your offers
+				</button>
+			</div>
+		);
+	}
+
 	return (
 		<div className='flex justify-between'>
 			<div className='w-[49%]  h-screen border-2 border-[#e9e9e9] bg-white rounded-4xl overflow-scroll applicants'>
 				<div className='flex items-center justify-between bg-white px-8 py-4 sticky top-0 border-b-2 border-[#e9e9e9]'>
 					<h1 className='font-medium text-xl'>Applicants</h1>
-					{/* <CaondidateStatuesDropDownList
-						setSelectedStatus={setSelectedStatus}
-					/> */}
 				</div>
 				<div className='space-y-2 p-8'>
 					{applicants?.map((applicant, index) => (

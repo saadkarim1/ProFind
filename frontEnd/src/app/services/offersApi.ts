@@ -33,10 +33,11 @@ export const offersApi = apiSlice.injectEndpoints({
 
 		applyToOffer: builder.mutation({
 			query: (payload) => {
+				console.log(payload)
 				return {
-					url: `api/v1/offers/${payload?.id}/apply`,
+					url: `api/v1/offers/${payload.id}/apply`,
 					method: "POST",
-					body: { resume_id: payload?.resume_id },
+					body: { resume_id: payload.resume_id, message: payload.message },
 				};
 			},
 			invalidatesTags: (result, error, payload) => [

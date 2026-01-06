@@ -26,7 +26,7 @@ const JobCard = ({ offer }: { offer: OfferType }) => {
 					{company_name && company_name?.slice(0, 1)}
 				</div>
 				<div className='-space-y-1'>
-					<h1 className='font-medium text-[18px]'>
+					<h1 className='font-medium text-[18px] capitalize'>
 						{company_name && company_name.length > 17
 							? `${company_name.slice(0, 17)}...`
 							: company_name}

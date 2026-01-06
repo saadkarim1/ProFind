@@ -1,8 +1,10 @@
 import { useUpdateUserMutation } from "@/app/services/user";
 import type { RooteState } from "@/app/store";
 import Resume from "@/components/Resume";
-import type { UserType } from "@/models/user";
+import { userSchema, type UpdateUserFields } from "@/schema/userSchema";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
+import { useForm, type SubmitHandler } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 
@@ -10,8 +12,16 @@ const SummaryPage = () => {
 	const { user } = useSelector((state: RooteState) => state.auth);
 	const [updateUser] = useUpdateUserMutation();
 	const [formKey, setFormKey] = useState(0);
+	const {
+		register,
+		handleSubmit,
+		setError,
+		formState: { errors },
+	} = useForm<UpdateUserFields>({
+		resolver: zodResolver(userSchema),
+	});
 
-	const [inputsValues, setInputsValues] = useState<UserType>({
+	const [inputsValues, setInputsValues] = useState({
 		user_id: "",
 	});
 
@@ -24,18 +34,26 @@ const SummaryPage = () => {
 		});
 	};
 
-	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
-
-		const filteredData = Object.fromEntries(
-			Object.entries(inputsValues).filter(([_, value]) => value !== "")
+	const onSubmit: SubmitHandler<UpdateUserFields> = async (data) => {
+		console.log(data);
+		const updatedFields = Object.fromEntries(
+			Object.entries(data).filter(
+				([_, value]) => value !== "" && value !== null
+			)
 		);
+		if (Object.keys(updatedFields).length === 0) {
+			setError("root", {
+				message: "At least one field must be updated",
+			});
+			return;
+		}
+
 		const res = await updateUser({
-			...filteredData,
+			...updatedFields,
 			id: user?.user_id,
 		});
 
-		if(res.data.status === 200) {
+		if (res.data.status === 200) {
 			toast.success("Profile updated successfully", {
 				position: "bottom-right",
 				style: {
@@ -50,7 +68,6 @@ const SummaryPage = () => {
 		}
 
 		setFormKey((prev) => prev + 1);
-		console.log(res);
 	};
 
 	return (
@@ -59,86 +76,101 @@ const SummaryPage = () => {
 				<h1 className='font-semibold text-lg'>Personal Information</h1>
 				<form
 					key={formKey}
-					onSubmit={handleSubmit}
+					onSubmit={handleSubmit(onSubmit)}
 					className='grid grid-cols-2 gap-8'
 				>
 					<div className='col-span-2'>
 						<label htmlFor='name' className='text-[#878787] text-[15px]'>
-							First Name
+							Name
 						</label>
 						<input
+							{...register("name")}
 							type='text'
 							placeholder={user?.name}
-							name='name'
-							onChange={handleInputsfields}
 							id='name'
 							className='focus:outline-none border-[1.5px] border-[#e9e9e9] bg-[#f5f5f5] block py-2 px-3 w-full rounded-xl'
 						/>
+						<p className='text-red-500 text-[15px]'>
+							{errors.name && errors.name.message}
+						</p>
 					</div>
 					<div className='col-span-2'>
 						<label htmlFor='email' className='text-[#878787] text-[15px]'>
 							Email
 						</label>
 						<input
+							{...register("email")}
 							type='text'
 							id='email'
-							name='email'
-							onChange={handleInputsfields}
 							placeholder={user?.email}
 							className='focus:outline-none bg-[#f5f5f5] border-[1.5px] border-[#e9e9e9] block py-2 px-3 w-full rounded-xl'
 						/>
+						<p className='text-red-500 text-[15px]'>
+							{errors.email && errors.email.message}
+						</p>
 					</div>
 					<div className='col-span-2'>
 						<label htmlFor='job' className='text-[#878787] text-[15px]'>
 							Job
 						</label>
 						<input
+							{...register("job")}
 							type='text'
 							id='job'
-							name='job'
-							onChange={handleInputsfields}
 							placeholder={user?.job}
 							className='focus:outline-none bg-[#f5f5f5] border-[1.5px] border-[#e9e9e9] block py-2 px-3 w-full rounded-xl'
 						/>
+						<p className='text-red-500 text-[15px]'>
+							{errors.job && errors.job.message}
+						</p>
 					</div>
 					<div>
 						<label htmlFor='adress' className='text-[#878787] text-[15px]'>
 							Adress
 						</label>
 						<input
+							{...register("location")}
 							type='text'
 							id='adress'
-							name='location'
-							onChange={handleInputsfields}
 							placeholder={user?.location}
 							className='focus:outline-none bg-[#f5f5f5] border-[1.5px] border-[#e9e9e9] block py-2 px-3 w-full rounded-xl'
 						/>
+						<p className='text-red-500 text-[15px]'>
+							{errors.location && errors.location.message}
+						</p>
 					</div>
 					<div>
 						<label htmlFor='phone' className='text-[#878787] text-[15px]'>
 							Phone Number
 						</label>
 						<input
+							{...register("phone")}
 							type='text'
 							id='phone'
-							name='phone'
-							onChange={handleInputsfields}
 							placeholder={user?.phone}
 							className='focus:outline-none bg-[#f5f5f5] border-[1.5px] border-[#e9e9e9] block py-2 px-3 w-full rounded-xl'
 						/>
+						<p className='text-red-500 text-[15px]'>
+							{errors.phone && errors.phone.message}
+						</p>
 					</div>
 					<div className='col-span-2'>
 						<label htmlFor='aboutMe' className='text-[#878787] text-[15px]'>
 							About me
 						</label>
 						<textarea
+							{...register("about_me")}
 							id='aboutMe'
-							name='about_me'
-							onChange={handleInputsfields}
 							placeholder={user?.about_me}
 							className='focus:outline-none bg-[#f5f5f5] border-[1.5px] border-[#e9e9e9] block py-2 px-3 w-full rounded-xl'
 						/>
+						<p className='text-red-500 text-[15px]'>
+							{errors.about_me && errors.about_me.message}
+						</p>
 					</div>
+					<p className='text-red-500 col-span-2'>
+						{errors.root && errors.root.message}
+					</p>
 					<div>
 						<button
 							type='button'
@@ -160,8 +192,6 @@ const SummaryPage = () => {
 			<Resume />
 		</div>
 	);
-
-	
 };
 
 export default SummaryPage;

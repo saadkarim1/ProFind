@@ -38,7 +38,7 @@ class User extends Authenticatable
     // }
     public function offers()
     {
-        return $this->belongsToMany(Offer::class, 'user_offer_apply')->withPivot('status', 'resume_id', 'message')->withTimestamps();
+        return $this->belongsToMany(Offer::class, 'user_offer_apply')->withPivot(['status', 'resume_id', 'message'])->withTimestamps();
     }
 
     public function savedOffers()

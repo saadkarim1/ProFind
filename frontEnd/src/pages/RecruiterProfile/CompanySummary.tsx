@@ -1,6 +1,12 @@
-import { useUpdateRecruiterProfileMutation } from "@/app/services/recruiter";
+import { useUpdateRecruiterProfileMutation } from "@/app/services/recruiterApi";
 import type { RooteState } from "@/app/store";
+import {
+	companySchema,
+	type UpdateCompanyFields,
+} from "@/schema/companySchema";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
+import { useForm, type SubmitHandler } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 
@@ -8,45 +14,51 @@ const CompanySummary = () => {
 	const user = useSelector((state: RooteState) => state.auth.user);
 	const [updateRecruiter] = useUpdateRecruiterProfileMutation();
 	const [formKey, setFormKey] = useState(0);
-
-	const [inputsValues, setInputsValues] = useState({
-		id: "",
-		company_name: "",
-		company_description: "",
-		company_website: "",
-		location: "",
+	const [thereIsChanges, setThereIsChanges] = useState(false);
+	const {
+		register,
+		handleSubmit,
+		setError,
+		formState: { errors },
+	} = useForm<UpdateCompanyFields>({
+		resolver: zodResolver(companySchema),
 	});
 
-	const handleInputsfields = (
-		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-	) => {
-		setInputsValues({
-			...inputsValues,
-			[e.currentTarget.name]: e.currentTarget.value,
-		});
-	};
-
-	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
-
-		const filteredData = Object.fromEntries(
-			Object.entries(inputsValues).filter(([_, value]) => value !== "")
-		);
-		const res = await updateRecruiter({ ...filteredData, id: user?.user_id });
-		if (res.data.status === 200) {
-			toast.success("Profile updated successfully", {
-				position: "bottom-right",
-				style: {
-					border: "2px solid #0082FA",
-					borderRadius: "50px",
-				},
-				iconTheme: {
-					primary: "#0082FA",
-					secondary: "#fff",
-				},
+	const onSubmit: SubmitHandler<UpdateCompanyFields> = async (data) => {
+		try {
+			const updatedFields = Object.fromEntries(
+				Object.entries(data).filter(
+					([_, value]) => value !== "" && value !== null
+				)
+			);
+			if (Object.keys(updatedFields).length === 0) {
+				setError("root", {
+					message: "At least one field must be updated",
+				});
+				return;
+			}
+			const res = await updateRecruiter({
+				...updatedFields,
+				id: user?.user_id,
 			});
+			console.log(res);
+			if (res.data && res.data.status === 200) {
+				toast.success("Profile updated successfully", {
+					position: "bottom-right",
+					style: {
+						border: "2px solid #0082FA",
+						borderRadius: "50px",
+					},
+					iconTheme: {
+						primary: "#0082FA",
+						secondary: "#fff",
+					},
+				});
+				setFormKey((prev) => prev + 1);
+			}
+		} catch (error) {
+			console.log(error);
 		}
-		setFormKey((prev) => prev + 1);
 	};
 
 	return (
@@ -54,23 +66,25 @@ const CompanySummary = () => {
 			<h1 className='font-semibold text-lg'>Company Information</h1>
 			<form
 				key={formKey}
-				onSubmit={handleSubmit}
+				onSubmit={handleSubmit(onSubmit)}
 				className='grid grid-cols-2 gap-8'
 			>
-				<div>
+				<div className='col-span-2'>
 					<label htmlFor='company_name' className='text-[#878787] text-[15px]'>
 						Company Name
 					</label>
 					<input
+						{...register("company_name")}
 						type='text'
 						id='title'
 						placeholder={user?.company_name}
-						name='company_name'
-						onChange={handleInputsfields}
 						className='focus:outline-none bg-[#f5f5f5] border-[1.5px] border-[#e9e9e9] block py-2 px-3 w-full rounded-xl'
 					/>
+					<p className='text-red-500 text-[15px]'>
+						{errors.company_name && errors.company_name.message}
+					</p>
 				</div>
-				<div>
+				{/* <div>
 					<label htmlFor='sector' className='text-[#878787] text-[15px]'>
 						Sector
 					</label>
@@ -84,43 +98,51 @@ const CompanySummary = () => {
 						<option value='IT'>IT</option>
 						<option value='Finance'>Finance</option>
 					</select>
-				</div>
+				</div> */}
 				<div className='col-span-2'>
 					<label htmlFor='email' className='text-[#878787] text-[15px]'>
 						Email
 					</label>
 					<input
+						{...register("email")}
 						type='text'
 						id='email'
 						placeholder={user?.email}
 						className='focus:outline-none bg-[#f5f5f5] border-[1.5px] border-[#e9e9e9] block py-2 px-3 w-full rounded-xl'
 					/>
+					<p className='text-red-500 text-[15px]'>
+						{errors.email && errors.email.message}
+					</p>
 				</div>
 				<div className='col-span-2'>
 					<label htmlFor='adress' className='text-[#878787] text-[15px]'>
 						Adress
 					</label>
 					<input
+						{...register("location")}
 						type='text'
 						id='adress'
-						name='location'
 						placeholder={user?.location}
-						onChange={handleInputsfields}
 						className='focus:outline-none bg-[#f5f5f5] border-[1.5px] border-[#e9e9e9] block py-2 px-3 w-full rounded-xl'
 					/>
+					<p className='text-red-500 text-[15px]'>
+						{errors.location && errors.location.message}
+					</p>
 				</div>
 				<div className='col-span-2'>
 					<label htmlFor='link' className='text-[#878787] text-[15px]'>
 						Link
 					</label>
 					<input
+						{...register("company_website")}
 						type='text'
 						id='link'
-						name='company_website'
 						placeholder={user?.company_website}
-						onChange={handleInputsfields}
 						className='focus:outline-none bg-[#f5f5f5] border-[1.5px] border-[#e9e9e9] block py-2 px-3 w-full rounded-xl'
 					/>
+					<p className='text-red-500 text-[15px]'>
+						{errors.company_website && errors.company_website.message}
+					</p>
 				</div>
 				<div className='col-span-2'>
 					<label
@@ -130,13 +152,18 @@ const CompanySummary = () => {
 						Description
 					</label>
 					<textarea
+						{...register("company_description")}
 						id='aboutMe'
-						onChange={handleInputsfields}
-						name='company_description'
 						placeholder={user?.company_description}
 						className='focus:outline-none bg-[#f5f5f5] border-[1.5px] border-[#e9e9e9] block py-2 px-3 w-full rounded-xl'
 					/>
+					<p className='text-red-500 text-[15px]'>
+						{errors.company_description && errors.company_description.message}
+					</p>
 				</div>
+				<p className='text-red-500 col-span-2'>
+					{errors.root && errors.root.message}
+				</p>
 				<div>
 					<button
 						type='button'

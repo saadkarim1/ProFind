@@ -51,25 +51,6 @@ const JobCardTwo = ({
 
 		navigate(`/offers/${offer?.offer_id}/apply`);
 
-		// const res = await applytoOffer(offer?.offer_id).unwrap();
-		// dispatch(checkIsCompletProfile());
-		// console.log(res);
-		// 	if (res.data.is_applied) {
-		// 		toast.success("Application submitted", {
-		// 			position: "bottom-right",
-		// 			style: {
-		// 				border: "2px solid #0082FA",
-		// 				borderRadius: "50px",
-		// 			},
-		// 			iconTheme: {
-		// 				primary: "#0082FA",
-		// 				secondary: "#fff",
-		// 			},
-		// 		});
-		// 	}
-		// } catch (error) {
-		// 	console.log(error);
-		// }
 	};
 
 	return (
@@ -101,7 +82,7 @@ const JobCardTwo = ({
 				</div>
 			</div>
 			<div>
-				<h3 className='font-medium'>
+				<h3 className='font-medium capitalize'>
 					{offer?.offer_title.length > 20
 						? `${offer?.offer_title.slice(0, 20)}...`
 						: offer?.offer_title}

@@ -4,9 +4,10 @@ import BookMark from "@/components/shared/BookMark";
 import CopyButton from "@/components/shared/CopyButton";
 import { GetOfferType } from "@/components/shared/GetOfferType";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 
 const JobDetails = () => {
+	const navigate = useNavigate();
 	let { id } = useParams();
 	const { user, isAuthenticated } = useSelector(
 		(state: RooteState) => state.auth
@@ -17,7 +18,7 @@ const JobDetails = () => {
 
 	return (
 		<section>
-			<div className='w-[50%] h-fit mx-auto space-y-4 rounded-4xl p-10 border-4 border-[#e9e9e9] bg-white'>
+			<div className='w-[50%] h-fit mx-auto space-y-4 rounded-4xl p-10 border-4 capitalize border-[#e9e9e9] bg-white'>
 				<div className='flex space-x-3'>
 					<div className='bg-sky-100 p-2.5 rounded-2xl w-fit h-fit'>
 						<svg
@@ -48,20 +49,21 @@ const JobDetails = () => {
 							{offer?.company_name}
 						</p>
 						<div className='flex items-center space-x-2'>
-							{offer?.is_applied ? (
-								<button className='cursor-not-allowed w-fit h-fit text-[16px] font-medium py-1 px-4 border-2 text-[#0082FA] border-[#0082FA]  rounded-xl bg-white'>
-									Already Applied
-								</button>
+							{user?.role === "user" ? (
+								offer?.is_applied ? (
+									<button className='cursor-not-allowed w-fit h-fit text-[16px] font-medium py-1 px-4 border-2 text-[#0082FA] border-[#0082FA]  rounded-xl bg-white'>
+										Already Applied
+									</button>
+								) : (
+									<button
+										onClick={() => navigate(`/offers/${offer?.offer_id}/apply`)}
+										className='cursor-pointer w-fit h-fit text-[16px] font-medium py-1 px-6 border-2 text-white border-[#0082FA]  rounded-xl bg-[#0082FA]'
+									>
+										Apply Now
+									</button>
+								)
 							) : (
-								<button
-									// onClick={async () => {
-									// 	const res = await applytoOffer(offer?.offer_id);
-									// 	console.log(res);
-									// }}
-									className='cursor-pointer w-fit h-fit text-[16px] font-medium py-1 px-6 border-2 text-white border-[#0082FA]  rounded-xl bg-[#0082FA]'
-								>
-									Apply Now
-								</button>
+								""
 							)}
 							{user?.role === "user" && (
 								<BookMark

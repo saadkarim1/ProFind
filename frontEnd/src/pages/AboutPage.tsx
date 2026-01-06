@@ -1,8 +1,3 @@
-import { RiRobot2Fill } from "react-icons/ri";
-import { IoSearch } from "react-icons/io5";
-import { IoMdArrowRoundForward } from "react-icons/io";
-import { BsLightningFill } from "react-icons/bs";
-
 const About = () => {
 	return (
 		<section className='relative'>

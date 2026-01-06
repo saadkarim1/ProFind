@@ -1,7 +1,7 @@
 import { FaCheck } from "react-icons/fa6";
 import { useGetUserResumesQuery } from "@/app/services/resumeApi";
 import { Activity, useState } from "react";
-import { MdRemoveRedEye } from "react-icons/md";
+import { BsFillSendFill } from "react-icons/bs";
 import { TiDocumentText } from "react-icons/ti";
 import { useParams } from "react-router";
 import { useApplyToOfferMutation } from "@/app/services/offersApi";
@@ -9,15 +9,17 @@ import toast from "react-hot-toast";
 
 const ApplyingPage = () => {
 	const { id } = useParams();
-	const [showResume, setShowResume] = useState(false);
+	const [apply, setApply] = useState<boolean>(false);
 	const [showApplyWarning, setShowApplyWarning] = useState(false);
 	const [inputValue, setInputValue] = useState("");
 	const [selectedResume, setSelectedResume] = useState<string>();
 	const { data: resumes } = useGetUserResumesQuery();
 	const [applytoOffer] = useApplyToOfferMutation();
+
 	const handleApply = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		if (resumes && resumes.length > 0) {
+			if (!selectedResume) return;
 			const res = await applytoOffer({
 				id,
 				resume_id: selectedResume,
@@ -25,6 +27,7 @@ const ApplyingPage = () => {
 			}).unwrap();
 			console.log(res);
 			if (res.data.is_applied) {
+				setApply(true);
 				toast.success("Application submitted", {
 					position: "bottom-right",
 					style: {
@@ -38,27 +41,36 @@ const ApplyingPage = () => {
 				});
 			}
 		} else {
-			setShowApplyWarning((prev) => (prev = true));
-			setTimeout(() => setShowApplyWarning((prev) => (prev = false)), 2500);
+			setShowApplyWarning(true);
+			setTimeout(() => setShowApplyWarning(false), 2500);
 		}
 	};
+	if (apply) {
+		return (
+			<section className='min-h-[80vh] flex items-center'>
+				<div className='w-[50%] h-fit flex items-center flex-col mx-auto space-y-4 rounded-4xl p-10 border-2 border-[#e9e9e9] bg-white'>
+					<BsFillSendFill className='text-5xl text-[#0082FA]' />
+					<p className='text-xl'>Your application sent successfully</p>
+				</div>
+			</section>
+		);
+	}
 
 	return (
-		<section className='min-h-[80vh]'>
+		<section className='min-h-[80vh] flex items-center'>
 			<form
 				onSubmit={handleApply}
 				className='w-[50%] h-fit mx-auto space-y-4 rounded-4xl p-10 border-2 border-[#e9e9e9] bg-white'
 			>
 				<h1 className='text-center font-medium text-xl'>Complet To Apply</h1>
 				<div className='col-span-2'>
-					<label htmlFor='aboutMe' className=' text-[15px]'>
+					<label htmlFor='message' className=' text-[15px]'>
 						Insert your cover letter here
 					</label>
 					<textarea
-						id='aboutMe'
-						name='about_me'
+						id='message'
+						name='message'
 						onChange={(e) => setInputValue(e.target.value)}
-						// placeholder={user?.about_me}
 						className='focus:outline-none bg-[#f5f5f5] border-[1.5px] border-[#e9e9e9] block py-2 px-3 w-full rounded-xl'
 					/>
 				</div>
@@ -70,7 +82,7 @@ const ApplyingPage = () => {
 						<div
 							key={resume.id}
 							onClick={() => setSelectedResume(resume?.id)}
-							className='flex flex-col items-center justify-center'
+							className='flex flex-col items-center justify-center cursor-pointer'
 						>
 							<div className='flex w-full justify-between items-center'>
 								<div className='flex items-center space-x-2'>
@@ -87,16 +99,11 @@ const ApplyingPage = () => {
 									</div>
 									<h3>{resume.file_name}</h3>
 								</div>
-
-								<div
-									onClick={() => setShowResume((prev) => !prev)}
-									className='bg-[#ffda0a] text-white p-2 rounded-xl text-lg'
-								>
-									<MdRemoveRedEye />
-								</div>
 							</div>
 
-							<Activity mode={showResume ? "visible" : "hidden"}>
+							<Activity
+								mode={selectedResume === resume?.id ? "visible" : "hidden"}
+							>
 								<div className='w-[50%] h-125 border rounded-lg my-2  overflow-hidden'>
 									<iframe
 										src={`${resume?.preview_url}#toolbar=0&view=FitH&view=FitV`}

@@ -152,7 +152,7 @@ const Jobs: React.FC = () => {
 						</div>
 					</div>
 					<hr className='text-[#e9e9e9] h-3' />
-					<div className='flex justify-between w-full h-10 font-semibold text-[15px] text-[#3a4981]'>
+					<div className='flex justify-between w-full h-10 font-semibold capitalize text-[15px] text-[#3a4981]'>
 						<div className='w-[33%] h-full flex flex-col items-center '>
 							<h3>SALARY</h3>
 							<p>{selectedOffer?.salary ? selectedOffer?.salary : "-----"}</p>
@@ -165,7 +165,7 @@ const Jobs: React.FC = () => {
 						</div>
 						<div className='w-[33%] h-full  flex flex-col items-center '>
 							<h3>LOCATION</h3>
-							<p>{selectedOffer?.location}</p>
+							<p>{selectedOffer?.location ? selectedOffer?.location : "-----"}</p>
 						</div>
 					</div>
 					<hr className='text-[#e9e9e9] h-3' />

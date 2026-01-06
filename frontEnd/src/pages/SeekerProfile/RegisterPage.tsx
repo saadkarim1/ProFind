@@ -7,47 +7,49 @@ import {
 	useLazyGetCSRFQuery,
 	useRegisterMutation,
 } from "@/app/services/authApi";
+import { useForm, type SubmitHandler } from "react-hook-form";
+import {
+	registerSchema,
+	type RegisterFieldstype,
+} from "@/schema/registerSchema";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const Register = () => {
 	const navigate = useNavigate();
 	const [showPassword, setShowPassword] = useState<boolean>(false);
 	const [getCSRF] = useLazyGetCSRFQuery();
-	const [register] = useRegisterMutation();
-	const [inputsValues, setInputsValues] = useState({
-		name: "",
-		email: "",
-		password: "",
-		password_confirmation: "",
+	const [registerUser] = useRegisterMutation();
+	const {
+		register,
+		setError,
+		handleSubmit,
+		formState: { errors },
+	} = useForm<RegisterFieldstype>({
+		resolver: zodResolver(registerSchema),
 	});
 
-	const handleInputsfields = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setInputsValues({
-			...inputsValues,
-			[e.currentTarget.name]: e.currentTarget.value,
-		});
-	};
-
-	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
+	const onSubmit: SubmitHandler<RegisterFieldstype> = async (data) => {
 		try {
+			console.log(data);
 			await getCSRF();
-
-			const res1 = await register({
-				...inputsValues,
-				password_confirmation: inputsValues.password,
+			const res1 = await registerUser({
+				...data,
+				password_confirmation: data.password,
 			}).unwrap();
-			console.log(res1);
-
 			if (res1.status === 200) {
 				navigate("/");
 			}
-		} catch (error) {}
+		} catch (error: any) {
+			setError("root", {
+				message: error.data.message,
+			});
+		}
 	};
 
 	return (
 		<section className='w-full flex flex-col space-y-4 items-center justify-center'>
 			<form
-				onSubmit={handleSubmit}
+				onSubmit={handleSubmit(onSubmit)}
 				className='bg-white w-[40%] rounded-4xl border-4 border-[#99C3FF] flex flex-col items-center justify-center p-8 space-y-4'
 			>
 				<div className='z-10 rounded-xl w-fit h-fit bg-gray-200 text-3xl p-3'>
@@ -57,52 +59,69 @@ const Register = () => {
 					<h2 className='tex font-semibold text-2xl'>Register to continue</h2>
 					<p className='text-gray-500'>Please register to find your job</p>
 				</div>
-				<div className='flex items-center p-1 rounded-full w-full bg-sky-100 '>
-					<div className='rounded-full text-[#0082FA] text-2xl p-2.5'>
-						<LuUser />
+				<div className='w-full'>
+					<div className='flex items-center p-1 rounded-full w-full bg-sky-100 '>
+						<div className='rounded-full text-[#0082FA] text-2xl p-2.5'>
+							<LuUser />
+						</div>
+						<input
+							{...register("name")}
+							type='text'
+							placeholder='user name'
+							className='focus:outline-none rounded-r-full w-full '
+						/>
 					</div>
-					<input
-						type='text'
-						placeholder='user name'
-						name='name'
-						className='focus:outline-none rounded-r-full w-full '
-						onChange={handleInputsfields}
-					/>
+					<p className='text-red-500 text-[15px]'>
+						{errors.name && errors.name.message}
+					</p>
 				</div>
-				<div className='flex items-center p-1 rounded-full w-full bg-sky-100 '>
-					<div className='rounded-full text-[#0082FA] text-2xl p-2.5'>
-						<LuMailOpen />
+				<div className='w-full'>
+					<div className='flex items-center p-1 rounded-full w-full bg-sky-100 '>
+						<div className='rounded-full text-[#0082FA] text-2xl p-2.5'>
+							<LuMailOpen />
+						</div>
+						<input
+							{...register("email")}
+							type='text'
+							placeholder='Email'
+							className='focus:outline-none rounded-r-full w-full '
+						/>
 					</div>
-					<input
-						type='text'
-						placeholder='Email'
-						name='email'
-						className='focus:outline-none rounded-r-full w-full '
-						onChange={handleInputsfields}
-					/>
+					<p className='text-red-500 text-[15px]'>
+						{errors.email && errors.email.message}
+					</p>
 				</div>
-				<div className='flex items-center p-1 rounded-full bg-sky-100 w-full'>
-					<div
-						onClick={() => setShowPassword(!showPassword)}
-						className='rounded-full text-[#0082FA] text-2xl p-2.5'
-					>
-						{showPassword ? (
-							<FiUnlock className='cursor-pointer' />
-						) : (
-							<FiLock className='cursor-pointer' />
-						)}
+				<div className='w-full'>
+					<div className='flex items-center p-1 rounded-full bg-sky-100 w-full'>
+						<div
+							onClick={() => setShowPassword(!showPassword)}
+							className='rounded-full text-[#0082FA] text-2xl p-2.5'
+						>
+							{showPassword ? (
+								<FiUnlock className='cursor-pointer' />
+							) : (
+								<FiLock className='cursor-pointer' />
+							)}
+						</div>
+						<input
+							{...register("password")}
+							type={showPassword ? "text" : "password"}
+							placeholder='Password'
+							className='focus:outline-none rounded-r-full w-full'
+						/>
 					</div>
-					<input
-						type={showPassword ? "text" : "password"}
-						placeholder='Password'
-						name='password'
-						className='focus:outline-none rounded-r-full w-full'
-						onChange={handleInputsfields}
-					/>
+					<p className='text-red-500 text-[15px]'>
+						{errors.password && errors.password.message}
+					</p>
 				</div>
-				<button className='w-full cursor-pointer font-normal text-lg rounded-full bg-[#0082FA] text-white p-2'>
-					Sign in
-				</button>
+				<div className='w-full'>
+					<button className='w-full cursor-pointer font-normal text-lg rounded-full bg-[#0082FA] text-white p-2'>
+						Sign in
+					</button>
+					<p className='text-red-500 text-[15px]'>
+						{errors.root && errors.root.message}
+					</p>
+				</div>
 				<p className='text-gray-500'>Or continue with</p>
 				<div className='flex w-full space-x-2'>
 					<div className='rounded-lg p-1 bg-white border cursor-pointer border-gray-300 w-[50%] flex items-center justify-center'>
