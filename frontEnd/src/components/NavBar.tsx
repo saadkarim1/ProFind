@@ -3,13 +3,16 @@ import { Link, useLocation } from "react-router";
 import LoginPopup from "./LoginPopup";
 import ProfilePopup from "./ProfilePopup";
 import { useGetUserQuery } from "@/app/services/authApi";
+import { GoHome } from "react-icons/go";
+import { MdOutlineWorkOutline } from "react-icons/md";
 
-type Link = {
+
+type LinkType = {
 	path: string;
 	path_name: string;
 };
 
-const recruiterLinks: Link[] = [
+const recruiterLinks: LinkType[] = [
 	{
 		path: "/",
 		path_name: "Home",
@@ -28,7 +31,7 @@ const recruiterLinks: Link[] = [
 	},
 ];
 
-const normalLinks: Link[] = [
+const normalLinks: LinkType[] = [
 	{
 		path: "/",
 		path_name: "Home",
@@ -43,19 +46,37 @@ const normalLinks: Link[] = [
 	},
 ];
 
+const mobileLinks = [
+	{
+		path: "/",
+		path_name: "Home",
+		Icon: GoHome,
+	},
+	{
+		path: "/jobs",
+		path_name: "Find Job",
+		Icon: MdOutlineWorkOutline,
+	},
+	{
+		path: "/about",
+		path_name: "About",
+		Icon: MdOutlineWorkOutline,
+	},
+];
+
 const NavBar = () => {
 	const { pathname } = useLocation();
 	const { data: authenticatedUser, isSuccess, isError } = useGetUserQuery();
 	const [showPopup, setShowPopup] = useState<boolean>(false);
 	return (
-		<nav className='z-999 fixed w-[80%] mx-auto inset-x-0 pt-3'>
-			<div className='navbar drop-shadow-[0_0px_2px_rgba(0,0,0,0.25)] rounded-2xl flex items-center p-3'>
+		<nav className='z-999 fixed w-[95%] md:w-[80%] mx-auto inset-x-0 pt-3'>
+			<div className='navbar drop-shadow-[0_0px_2px_rgba(0,0,0,0.25)] rounded-2xl flex items-center justify-between p-3'>
 				<Link to={"/"} className='flex items-center space-x-0.5 w-[25%]'>
-					<img src='/src/assets/logo.svg' width={30} alt='' />
-					<h1 className='text-3xl font-bold'>ProFind.</h1>
+					<img src='/src/assets/logo.svg' width={38} alt='' />
+					<h1 className='hidden md:block text-3xl font-bold'>ProFind.</h1>
 				</Link>
 
-				<ul className='flex items-center justify-center font-medium space-x-10 text-[18px] w-[50%]'>
+				<ul className='hidden md:flex items-center justify-center font-medium space-x-10 text-[18px] w-[50%]'>
 					{authenticatedUser === undefined
 						? normalLinks.map((link) => {
 								return (
@@ -97,6 +118,22 @@ const NavBar = () => {
 									</Link>
 								);
 						  })}
+				</ul>
+				<ul className='md:hidden flex items-center justify-center font-medium space-x-10 text-[18px] w-[50%]'>
+					{mobileLinks.map((link) => {
+						return (
+							<Link
+								key={link.path_name}
+								to={link.path}
+								className={`${
+									pathname === link.path ? "text-[#0082FA]" : "text-black"
+								} `}
+							>
+
+								<link.Icon className="w-6 h-6"/>
+							</Link>
+						);
+					})}
 				</ul>
 				<div className='w-[25%] flex items-center justify-end'>
 					<Activity mode={isSuccess ? "visible" : "hidden"}>

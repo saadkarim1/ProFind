@@ -18,12 +18,12 @@ const LoginPopup = ({ showLoginPopup, setShowLoginPopup }: LoginPopupProps) => {
 		>
 			<button
 				onClick={() => setShowLoginPopup((prev) => !prev)}
-				className=' hover:bg-[#0069CC] transition  duration-200 ease-in-out relative bg-[#0082FA] text-white rounded-xl px-3.5 py-2 cursor-pointer'
+				className='hover:bg-[#0069CC] transition-colors  duration-200 ease-in-out relative bg-[#0082FA] text-white rounded-xl px-3.5 py-2 cursor-pointer'
 			>
 				Sign up
 			</button>
 			<ul
-				className={`absolute bg-white text-black  w-[14vw] top-full right-0 rounded-xl text-md text-center space-y-2 p-3 mt-3 shadow-md ${
+				className={`absolute bg-white text-black w-[40vw] md:w-[24vw] top-full right-0 rounded-xl text-md text-center space-y-2 p-3 mt-3 shadow-md ${
 					showLoginPopup ? "scale-100 opacity-100" : "scale-0 opacity-0"
 				} transition  duration-200 ease-in-out origin-top `}
 			>
@@ -32,7 +32,7 @@ const LoginPopup = ({ showLoginPopup, setShowLoginPopup }: LoginPopupProps) => {
 					className='group hover:bg-sky-100 hover:text-black text-[#878787] flex items-center space-x-2 p-2 rounded-lg'
 				>
 					<LuUser className='text-xl group-hover:text-sky-600' />
-					<p onClick={() => setShowLoginPopup(false)} className=''>
+					<p onClick={() => setShowLoginPopup(false)} className='text-[15px]'>
 						Candidate area
 					</p>
 				</Link>

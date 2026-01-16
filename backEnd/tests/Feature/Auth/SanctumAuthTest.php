@@ -48,7 +48,6 @@ class SanctumAuthTest extends TestCase
     {
         $user = User::factory()->create();
 
-        // actingAs simulates the session-based login for Sanctum
         $response = $this->actingAs($user)
             ->getJson('/api/v1/user');
 
