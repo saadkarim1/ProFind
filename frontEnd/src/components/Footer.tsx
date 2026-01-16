@@ -5,18 +5,18 @@ import { Link } from "react-router";
 const Footer = () => {
 	return (
 		<footer className='w-full rounded-t-3xl bg-white mt-10'>
-			<div className='w-[80%] mx-auto bg-[white] rounded-2xl  py-8'>
-				<div className='flex items-center justify-between'>
-					<div className='w-[50%] space-y-2'>
-						<Link to={"/"} className='flex items-center space-x-0.5'>
-							<img src='/src/assets/logo.svg' width={30} alt='' />
-							<h1 className='text-3xl font-semibold'>ProFind.</h1>
+			<div className='w-[80%] mx-auto bg-white rounded-2xl  py-8'>
+				<div className='grid md:grid-cols-2 place-items-center-safe  gap-6'>
+					<div className='space-y-2 '>
+						<Link to={"/"} className='flex items-center justify-center lg:justify-start gap-0.5'>
+							<img src='/src/assets/logo.svg' width={45} alt='' />
+							<h1 className='text-6xl font-semibold'>ProFind.</h1>
 						</Link>
-						<p className='text-[13px] max-w-[80%] text-gray-500'>
+						<p className='text-lg max-w-[80%] lg:max-w-full  mx-auto text-gray-500 text-center lg:text-left'>
 							Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facere
 							quia necessitatibus ipsum vero, nam aperiam aliquid magnam?
 						</p>
-						<div className=' flex items-center justify-start text-[16px] :bg-red-400 text-black  '>
+						<div className=' flex items-center justify-center lg:justify-start text-[20px] text-black  '>
 							<div className='group rounded-full hover:bg-[#0082fa]  transition duration-200 ease-in-out p-1.5 mr-1.5'>
 								<FaFacebookF className='group-hover:text-white transition duration-200 ease-in-out' />
 							</div>
@@ -31,29 +31,39 @@ const Footer = () => {
 							</div>
 						</div>
 					</div>
-					<div className=' w-[20%] flex flex-col items-center justify-start'>
-						<h3 className='font-medium text-lg'>Company</h3>
-						<ul className='text-gray-500'>
-							<li>Pricing</li>
-							<li>About us</li>
-							<li>Contact us</li>
-						</ul>
-					</div>
-					<div className=' w-[20%] flex flex-col items-center justify-start'>
-						<h3 className='font-medium text-lg'>Company</h3>
-						<ul className='text-gray-500'>
-							<li>Pricing</li>
-							<li>About us</li>
-							<li>Contact us</li>
-						</ul>
-					</div>
-					<div className=' w-[20%] flex flex-col items-center justify-start'>
-						<h3 className='font-medium text-lg'>Company</h3>
-						<ul className='text-gray-500'>
-							<li>Pricing</li>
-							<li>About us</li>
-							<li>Contact us</li>
-						</ul>
+					<div className='grid sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full'>
+						<div className='flex flex-col items-center justify-center text-center lg:text-left '>
+							<h3 className='font-medium text-xl'>Company</h3>
+							<ul className='text-gray-500 text-lg'>
+								<li>Pricing</li>
+								<li>About us</li>
+								<li>Contact us</li>
+							</ul>
+						</div>
+						<div className='flex flex-col items-center justify-center text-center lg:text-left '>
+							<h3 className='font-medium text-xl'>Company</h3>
+							<ul className='text-gray-500 text-lg'>
+								<li>Pricing</li>
+								<li>About us</li>
+								<li>Contact us</li>
+							</ul>
+						</div>
+						<div className='flex flex-col items-center justify-center text-center lg:text-left '>
+							<h3 className='font-medium text-xl'>Company</h3>
+							<ul className='text-gray-500 text-lg'>
+								<li>Pricing</li>
+								<li>About us</li>
+								<li>Contact us</li>
+							</ul>
+						</div>
+						<div className='flex flex-col items-center justify-center text-center lg:text-left '>
+							<h3 className='font-medium text-xl'>Company</h3>
+							<ul className='text-gray-500 text-lg'>
+								<li>Pricing</li>
+								<li>About us</li>
+								<li>Contact us</li>
+							</ul>
+						</div>
 					</div>
 				</div>
 				<hr className='text-gray-400 my-2' />
