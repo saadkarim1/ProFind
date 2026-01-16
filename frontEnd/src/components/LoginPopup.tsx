@@ -6,10 +6,11 @@ type LoginPopupProps = {
 	showLoginPopup: boolean;
 	setShowLoginPopup: React.Dispatch<React.SetStateAction<boolean>>;
 };
+// w-[40vw] lg:w-[18vw]  xl:w-[14vw] 
 const LoginPopup = ({ showLoginPopup, setShowLoginPopup }: LoginPopupProps) => {
 	return (
 		<div
-			className='relative'
+			className='relative bg-amber-200'
 			onBlur={(e) => {
 				if (!e.currentTarget.contains(e.relatedTarget)) {
 					setShowLoginPopup(false);
@@ -23,7 +24,7 @@ const LoginPopup = ({ showLoginPopup, setShowLoginPopup }: LoginPopupProps) => {
 				Sign up
 			</button>
 			<ul
-				className={`absolute bg-white text-black w-[40vw] md:w-[24vw] top-full right-0 rounded-xl text-md text-center space-y-2 p-3 mt-3 shadow-md ${
+				className={`absolute bg-white text-black top-full right-0 rounded-xl text-md text-center space-y-2 p-3 mt-3 shadow-md ${
 					showLoginPopup ? "scale-100 opacity-100" : "scale-0 opacity-0"
 				} transition  duration-200 ease-in-out origin-top `}
 			>
@@ -33,7 +34,7 @@ const LoginPopup = ({ showLoginPopup, setShowLoginPopup }: LoginPopupProps) => {
 				>
 					<LuUser className='text-xl group-hover:text-sky-600' />
 					<p onClick={() => setShowLoginPopup(false)} className='text-[15px]'>
-						Candidate area
+						Candidate
 					</p>
 				</Link>
 				<Link
@@ -42,7 +43,7 @@ const LoginPopup = ({ showLoginPopup, setShowLoginPopup }: LoginPopupProps) => {
 				>
 					<MdWorkOutline className='text-xl group-hover:text-sky-600' />
 					<p onClick={() => setShowLoginPopup(false)} className=''>
-						Recruiter area
+						Recruiter
 					</p>
 				</Link>
 			</ul>

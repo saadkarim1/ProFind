@@ -11,7 +11,7 @@ const Layout = () => {
 			<NavBar />
 			<main
 				className={`grow ${
-					pathname !== "/" && pathname !== "/about" && "pt-30 w-[80%] mx-auto"
+					pathname !== "/" && pathname !== "/about" && "pt-30 w-[95%] md:w-[80%] mx-auto"
 				} `}
 			>
 				<Outlet />

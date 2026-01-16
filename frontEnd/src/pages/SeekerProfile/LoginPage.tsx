@@ -43,7 +43,7 @@ const Login = () => {
 		<section className='w-full space-y-4 flex items-center flex-col justify-center'>
 			<form
 				onSubmit={handleSubmit(onSubmit)}
-				className='bg-white w-[40%] rounded-4xl border-4 border-[#99C3FF] flex flex-col items-center justify-center p-8 space-y-4'
+				className='bg-white w-102 lg:w-120  rounded-4xl border-4 border-[#99C3FF] flex flex-col items-center justify-center p-8 space-y-4'
 			>
 				<div className='z-10 rounded-xl w-fit h-fit bg-gray-200 text-3xl p-3'>
 					<TbLogin />
