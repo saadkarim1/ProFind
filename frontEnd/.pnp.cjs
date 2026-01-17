@@ -42,7 +42,7 @@ const RAW_RUNTIME_STATE =
           ["eslint-plugin-react-refresh", "virtual:734f81145a17e6d0ba6a099b1e9a8d4b8d57113583696d8b7f649013e161c710043db5f2762e74bf0f9b8b37033c4a61550dc2883ec21fa3b542542838518e81#npm:0.4.26"],\
           ["framer-motion", "virtual:734f81145a17e6d0ba6a099b1e9a8d4b8d57113583696d8b7f649013e161c710043db5f2762e74bf0f9b8b37033c4a61550dc2883ec21fa3b542542838518e81#npm:12.23.26"],\
           ["globals", "npm:16.5.0"],\
-          ["lucide-react", "virtual:734f81145a17e6d0ba6a099b1e9a8d4b8d57113583696d8b7f649013e161c710043db5f2762e74bf0f9b8b37033c4a61550dc2883ec21fa3b542542838518e81#npm:0.556.0"],\
+          ["lucide-react", "virtual:734f81145a17e6d0ba6a099b1e9a8d4b8d57113583696d8b7f649013e161c710043db5f2762e74bf0f9b8b37033c4a61550dc2883ec21fa3b542542838518e81#npm:0.562.0"],\
           ["postcss", "npm:8.5.6"],\
           ["profind-frontend", "workspace:."],\
           ["react", "npm:19.2.3"],\
@@ -3193,18 +3193,18 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["lucide-react", [\
-      ["npm:0.556.0", {\
-        "packageLocation": "../../../../.yarn/berry/cache/lucide-react-npm-0.556.0-5dab55401f-10c0.zip/node_modules/lucide-react/",\
+      ["npm:0.562.0", {\
+        "packageLocation": "../../../../.yarn/berry/cache/lucide-react-npm-0.562.0-76a6aceed5-10c0.zip/node_modules/lucide-react/",\
         "packageDependencies": [\
-          ["lucide-react", "npm:0.556.0"]\
+          ["lucide-react", "npm:0.562.0"]\
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:734f81145a17e6d0ba6a099b1e9a8d4b8d57113583696d8b7f649013e161c710043db5f2762e74bf0f9b8b37033c4a61550dc2883ec21fa3b542542838518e81#npm:0.556.0", {\
-        "packageLocation": "./.yarn/__virtual__/lucide-react-virtual-b3dd78e9ea/5/.yarn/berry/cache/lucide-react-npm-0.556.0-5dab55401f-10c0.zip/node_modules/lucide-react/",\
+      ["virtual:734f81145a17e6d0ba6a099b1e9a8d4b8d57113583696d8b7f649013e161c710043db5f2762e74bf0f9b8b37033c4a61550dc2883ec21fa3b542542838518e81#npm:0.562.0", {\
+        "packageLocation": "./.yarn/__virtual__/lucide-react-virtual-3d2c9ee8e9/5/.yarn/berry/cache/lucide-react-npm-0.562.0-76a6aceed5-10c0.zip/node_modules/lucide-react/",\
         "packageDependencies": [\
           ["@types/react", "npm:19.2.7"],\
-          ["lucide-react", "virtual:734f81145a17e6d0ba6a099b1e9a8d4b8d57113583696d8b7f649013e161c710043db5f2762e74bf0f9b8b37033c4a61550dc2883ec21fa3b542542838518e81#npm:0.556.0"],\
+          ["lucide-react", "virtual:734f81145a17e6d0ba6a099b1e9a8d4b8d57113583696d8b7f649013e161c710043db5f2762e74bf0f9b8b37033c4a61550dc2883ec21fa3b542542838518e81#npm:0.562.0"],\
           ["react", "npm:19.2.3"]\
         ],\
         "packagePeers": [\
@@ -3629,7 +3629,7 @@ const RAW_RUNTIME_STATE =
           ["eslint-plugin-react-refresh", "virtual:734f81145a17e6d0ba6a099b1e9a8d4b8d57113583696d8b7f649013e161c710043db5f2762e74bf0f9b8b37033c4a61550dc2883ec21fa3b542542838518e81#npm:0.4.26"],\
           ["framer-motion", "virtual:734f81145a17e6d0ba6a099b1e9a8d4b8d57113583696d8b7f649013e161c710043db5f2762e74bf0f9b8b37033c4a61550dc2883ec21fa3b542542838518e81#npm:12.23.26"],\
           ["globals", "npm:16.5.0"],\
-          ["lucide-react", "virtual:734f81145a17e6d0ba6a099b1e9a8d4b8d57113583696d8b7f649013e161c710043db5f2762e74bf0f9b8b37033c4a61550dc2883ec21fa3b542542838518e81#npm:0.556.0"],\
+          ["lucide-react", "virtual:734f81145a17e6d0ba6a099b1e9a8d4b8d57113583696d8b7f649013e161c710043db5f2762e74bf0f9b8b37033c4a61550dc2883ec21fa3b542542838518e81#npm:0.562.0"],\
           ["postcss", "npm:8.5.6"],\
           ["profind-frontend", "workspace:."],\
           ["react", "npm:19.2.3"],\

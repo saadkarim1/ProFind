@@ -1,7 +1,7 @@
 import { Link } from "react-router";
-import { IoMenu } from "react-icons/io5";
 import { RecruiterProfileList, UserProfileList } from "@/models/model";
 import { Activity, useEffect, useState } from "react";
+import { ChevronDown, User } from "lucide-react";
 
 type ProfilePopupProps = {
 	showProfilePopup: boolean;
@@ -32,11 +32,18 @@ const ProfilePopup = ({
 					className='cursor-pointer text-4xl text-black '
 					onClick={() => setShowProfilePopup((prev) => !prev)}
 				>
-					<IoMenu className='' />
+					<div className='p-2 bg-sky-100 rounded-full text-[#0082FA] flex items-center justify-center'>
+						<User className='stroke-2' size={26} />
+						<ChevronDown
+							className={`${
+								showProfilePopup && "rotate-180"
+							} transition-transform duration-200 ease-in-out`}
+						/>
+					</div>
 				</div>
 				<Activity mode={isJobSeeker ? "hidden" : "visible"}>
 					<ul
-						className={`absolute  bg-white text-black  w-[14vw] top-full right-0 rounded-xl text-lg text-center space-y-2 p-3 mt-3 shadow-md ${
+						className={`absolute  bg-white text-black top-full right-0 rounded-xl text-lg text-center space-y-2 p-3 mt-3 shadow-md ${
 							showProfilePopup ? "scale-100 opacity-100" : "scale-0 opacity-0"
 						} transition  duration-300 ease-in-out origin-top `}
 					>
@@ -55,7 +62,7 @@ const ProfilePopup = ({
 				</Activity>
 				<Activity mode={isJobSeeker ? "visible" : "hidden"}>
 					<ul
-						className={`absolute  bg-white text-black  w-[14vw] top-full right-0 rounded-xl text-lg text-center space-y-2 p-3 mt-3 shadow-md ${
+						className={`absolute  bg-white text-black top-full right-0 rounded-xl text-lg text-center space-y-2 p-3 mt-3 shadow-md ${
 							showProfilePopup ? "scale-100 opacity-100" : "scale-0 opacity-0"
 						} transition  duration-300 ease-in-out origin-top `}
 					>

@@ -28,7 +28,7 @@ export const UserProfileList: Section[] = [
 	},
 	{
 		path: "/seeker/my-applications",
-		name: "My applications",
+		name: "applications",
 		icon: MdWorkOutline,
 	},
 	{ path: "/seeker/saved", name: "saved", icon: IoBookmarkOutline },

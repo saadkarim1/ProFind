@@ -4,8 +4,8 @@ import LoginPopup from "./LoginPopup";
 import ProfilePopup from "./ProfilePopup";
 import { useGetUserQuery } from "@/app/services/authApi";
 import { GoHome } from "react-icons/go";
+import { BriefcaseBusiness, Building2, House } from "lucide-react";
 import { MdOutlineWorkOutline } from "react-icons/md";
-
 
 type LinkType = {
 	path: string;
@@ -50,17 +50,17 @@ const mobileLinks = [
 	{
 		path: "/",
 		path_name: "Home",
-		Icon: GoHome,
+		Icon: House,
 	},
 	{
 		path: "/jobs",
 		path_name: "Find Job",
-		Icon: MdOutlineWorkOutline,
+		Icon: BriefcaseBusiness,
 	},
 	{
 		path: "/about",
 		path_name: "About",
-		Icon: MdOutlineWorkOutline,
+		Icon: Building2,
 	},
 ];
 
@@ -76,7 +76,7 @@ const NavBar = () => {
 					<h1 className='hidden md:block text-3xl font-bold'>ProFind.</h1>
 				</Link>
 
-				<ul className='hidden md:flex items-center justify-center font-medium space-x-10 text-[18px] w-[50%]'>
+				<ul className='hidden sm:flex items-center justify-center font-medium gap-4 lg:gap-10 text-[18px] w-[50%]'>
 					{authenticatedUser === undefined
 						? normalLinks.map((link) => {
 								return (
@@ -119,7 +119,7 @@ const NavBar = () => {
 								);
 						  })}
 				</ul>
-				<ul className='md:hidden flex items-center justify-center font-medium space-x-10 text-[18px] w-[50%]'>
+				<ul className='sm:hidden flex items-center justify-center font-medium space-x-10 text-[18px] w-[50%]'>
 					{mobileLinks.map((link) => {
 						return (
 							<Link
@@ -129,8 +129,7 @@ const NavBar = () => {
 									pathname === link.path ? "text-[#0082FA]" : "text-black"
 								} `}
 							>
-
-								<link.Icon className="w-6 h-6"/>
+								<link.Icon size={26} />
 							</Link>
 						);
 					})}
