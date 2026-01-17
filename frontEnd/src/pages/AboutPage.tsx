@@ -6,9 +6,9 @@ const About = () => {
 				<div></div>
 				<div></div>
 			</div>
-			<div className='absolute  w-[80%] mx-auto top-[60%] left-[50%] transform -translate-[50%]'>
+			<div className='absolute  w-[95%] md:w-[90%] xl:w-[80%] mx-auto top-[60%] left-[50%] transform -translate-[50%]'>
 				<div className='flex'>
-					<div className='w-[50%] space-y-6'>
+					<div className='w-full lg:w-[50%] space-y-6'>
 						<h2 className='font-medium w-fit py-1 px-3 rounded-full bg-[#cae4fd]'>
 							About ProFind
 						</h2>
@@ -30,7 +30,7 @@ const About = () => {
 							process and turns job searching into a seamless experience
 						</p>
 					</div>
-					<div className='w-[50%] flex justify-center items-start'>
+					<div className='hidden lg:flex w-[50%] justify-center items-start'>
 						<img src='/src/assets/Hiring.svg' alt='' />
 					</div>
 				</div>
