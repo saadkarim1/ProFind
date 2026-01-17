@@ -7,11 +7,12 @@ const Layout = () => {
 	const { pathname } = useLocation();
 	return (
 		<div className='flex flex-col min-h-screen'>
-
 			<NavBar />
 			<main
 				className={`grow ${
-					pathname !== "/" && pathname !== "/about" && "pt-30 w-[80%] mx-auto"
+					pathname !== "/" &&
+					pathname !== "/about" &&
+					"pt-30 w-[95%] md:w-[90%] xl:w-[80%] mx-auto"
 				} `}
 			>
 				<Outlet />

@@ -13,12 +13,10 @@ const JobDetails = () => {
 		(state: RooteState) => state.auth
 	);
 	const { data: offer } = useGetOfferQuery(id);
-	console.log(offer);
-	console.log(user?.role);
 
 	return (
 		<section>
-			<div className='w-[50%] h-fit mx-auto space-y-4 rounded-4xl p-10 border-4 capitalize border-[#e9e9e9] bg-white'>
+			<div className='w-full sm:w-122 lg:w-140 h-fit mx-auto space-y-4 rounded-4xl p-10 border-4 capitalize border-[#e9e9e9]'>
 				<div className='flex space-x-3'>
 					<div className='bg-sky-100 p-2.5 rounded-2xl w-fit h-fit'>
 						<svg
@@ -42,7 +40,7 @@ const JobDetails = () => {
 					</div>
 					<div className='flex flex-col space-y-2 w-full'>
 						<div className='flex items-center justify-between w-full'>
-							<h1 className='font-medium text-3xl'>{offer?.offer_title}</h1>
+							<h1 className='font-medium text-lg sm:text-xl lg:text-3xl'>{offer?.offer_title}</h1>
 							{GetOfferType(offer?.offer_type)}
 						</div>
 						<p className='font-medium text-[#878787] text-[18px]'>
