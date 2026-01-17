@@ -37,26 +37,26 @@ const SearchBar = ({
 	};
 
 	return (
-		<section className='flex items-center space-y-2 flex-col max-w-[80%] mx-auto my-10'>
+		<section className='flex items-center space-y-2 flex-col w-[95%] md:w-[80%] mx-auto my-10'>
 			<form
 				onSubmit={handleSubmit}
-				className='space-x-2 w-full  p-1 border-2 border-gray-300 rounded-full bg-white flex items-center justify-between'
+				className=' w-full p-1 border-2 border-gray-300 rounded-full bg-white flex items-center justify-between'
 			>
 				<input
 					type='text'
 					onChange={handleChange}
 					name='keyword'
-					className='focus:outline-none p-3 border-r-2 border-gray-300 rounded-l-full w-[44%] text-lg'
+					className='focus:outline-none w-[40%] p-3 border-r-2 border-gray-300 rounded-l-full text-[16px] md:text-lg'
 					placeholder='Job title or keyword '
 				/>
-				<div className='w-[40%] flex items-center text-lg'>
+				<div className='flex items-center text-lg'>
 					<TiLocation className='text-gray-500 text-2xl' />
 
 					<select
 						id='optionsList'
 						name='location'
 						onChange={handleChange}
-						className='no-arrow w-full focus:outline-none select-none text-gray-500'
+						className='no-arrow w-full focus:outline-none select-none text-gray-500 text-[16px] md:text-lg'
 					>
 						<option>All locations</option>
 						<hr />
@@ -69,12 +69,12 @@ const SearchBar = ({
 				</div>
 				<button
 					type='submit'
-					className='cursor-pointer font-normal text-lg rounded-full bg-[#0082FA] text-white py-2.5 px-3'
+					className='cursor-pointer font-normal text-[14px] md:text-lg rounded-full bg-[#0082FA] text-white py-3 px-3'
 				>
 					find Job
 				</button>
 			</form>
-			<div className='w-full items-center flex space-x-1.5 justify-center'>
+			<div className='hidden md:flex w-full items-center space-x-1.5 justify-center text-[14px] lg:text-[16px]'>
 				<span className='text-gray-500 font-medium'>Seggustion: </span>
 				{suggestions.map((s) => (
 					<div key={s} className='flex items-center'>

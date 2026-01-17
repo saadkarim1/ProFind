@@ -8,9 +8,12 @@ const Footer = () => {
 			<div className='w-[80%] mx-auto bg-white rounded-2xl  py-8'>
 				<div className='grid md:grid-cols-2 place-items-center-safe  gap-6'>
 					<div className='space-y-2 '>
-						<Link to={"/"} className='flex items-center justify-center lg:justify-start gap-0.5'>
+						<Link
+							to={"/"}
+							className='flex items-center justify-center lg:justify-start gap-0.5'
+						>
 							<img src='/src/assets/logo.svg' width={45} alt='' />
-							<h1 className='text-6xl font-semibold'>ProFind.</h1>
+							<h1 className='text-5xl font-semibold'>ProFind.</h1>
 						</Link>
 						<p className='text-lg max-w-[80%] lg:max-w-full  mx-auto text-gray-500 text-center lg:text-left'>
 							Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facere
@@ -33,32 +36,32 @@ const Footer = () => {
 					</div>
 					<div className='grid sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full'>
 						<div className='flex flex-col items-center justify-center text-center lg:text-left '>
-							<h3 className='font-medium text-xl'>Company</h3>
-							<ul className='text-gray-500 text-lg'>
+							<h3 className='font-medium text-lg'>Company</h3>
+							<ul className='text-gray-500 text-[16px]'>
 								<li>Pricing</li>
 								<li>About us</li>
 								<li>Contact us</li>
 							</ul>
 						</div>
 						<div className='flex flex-col items-center justify-center text-center lg:text-left '>
-							<h3 className='font-medium text-xl'>Company</h3>
-							<ul className='text-gray-500 text-lg'>
+							<h3 className='font-medium text-lg'>Company</h3>
+							<ul className='text-gray-500 text-[16px]'>
 								<li>Pricing</li>
 								<li>About us</li>
 								<li>Contact us</li>
 							</ul>
 						</div>
 						<div className='flex flex-col items-center justify-center text-center lg:text-left '>
-							<h3 className='font-medium text-xl'>Company</h3>
-							<ul className='text-gray-500 text-lg'>
+							<h3 className='font-medium text-lg'>Company</h3>
+							<ul className='text-gray-500 text-[16px]'>
 								<li>Pricing</li>
 								<li>About us</li>
 								<li>Contact us</li>
 							</ul>
 						</div>
 						<div className='flex flex-col items-center justify-center text-center lg:text-left '>
-							<h3 className='font-medium text-xl'>Company</h3>
-							<ul className='text-gray-500 text-lg'>
+							<h3 className='font-medium text-lg'>Company</h3>
+							<ul className='text-gray-500 text-[16px]'>
 								<li>Pricing</li>
 								<li>About us</li>
 								<li>Contact us</li>

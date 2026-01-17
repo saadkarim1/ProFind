@@ -6,11 +6,11 @@ type LoginPopupProps = {
 	showLoginPopup: boolean;
 	setShowLoginPopup: React.Dispatch<React.SetStateAction<boolean>>;
 };
-// w-[40vw] lg:w-[18vw]  xl:w-[14vw] 
+// w-[40vw] lg:w-[18vw]  xl:w-[14vw]
 const LoginPopup = ({ showLoginPopup, setShowLoginPopup }: LoginPopupProps) => {
 	return (
 		<div
-			className='relative bg-amber-200'
+			className='relative '
 			onBlur={(e) => {
 				if (!e.currentTarget.contains(e.relatedTarget)) {
 					setShowLoginPopup(false);

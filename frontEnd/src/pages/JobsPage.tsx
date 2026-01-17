@@ -91,7 +91,7 @@ const Jobs: React.FC = () => {
 								/>
 						  ))}
 				</div>
-				<div className='w-[49%] h-fit sticky top-30 space-y-4 rounded-4xl p-10 border-4 border-[#e9e9e9] bg-white'>
+				<div className='hidden md:block w-[49%] h-fit sticky top-30 space-y-4 rounded-4xl p-10 border-4 border-[#e9e9e9] bg-white'>
 					<div className='flex space-x-3'>
 						<div className='bg-sky-100 p-2.5 rounded-2xl w-fit h-fit'>
 							<svg
