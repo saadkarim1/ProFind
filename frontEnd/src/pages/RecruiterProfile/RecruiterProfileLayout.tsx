@@ -13,7 +13,7 @@ const RecruiterProfileLayout = () => {
 	const dispatch = useDispatch();
 	return (
 		<section className='relative flex justify-between'>
-			<div className='w-[25%] sticky top-30 capitalize  border-2 border-[#e9e9e9] h-fit bg-white rounded-3xl flex flex-col items-center py-10 space-y-4'>
+			<div className='hidden lg:flex w-[25%] sticky top-30 capitalize  border-2 border-[#e9e9e9] h-fit bg-white rounded-3xl flex-col items-center py-10 space-y-4'>
 				<div className='bg-sky-100 p-5 rounded-full'>
 					<svg
 						xmlns='http://www.w3.org/2000/svg'

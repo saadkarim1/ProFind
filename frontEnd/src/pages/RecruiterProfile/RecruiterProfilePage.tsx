@@ -9,7 +9,7 @@ import { Link } from "react-router";
 const RecruiterProfilePage = () => {
 	const user = useSelector((state: RooteState) => state.auth.user);
 	return (
-		<div className='h-fit grid w-[74%] grid-cols-2 gap-4'>
+		<div className='h-fit grid w-full lg:w-[74%] grid-cols-2 gap-4'>
 			<div className='p-6 col-span-2 h-fit rounded-3xl border-2 border-[#e9e9e9] bg-white'>
 				<div className='text-[14px] font-normal w-full flex items-center justify-between'>
 					<h2 className='font-medium text-lg'>All Information</h2>

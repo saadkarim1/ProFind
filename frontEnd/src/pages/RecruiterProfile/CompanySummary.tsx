@@ -14,7 +14,7 @@ const CompanySummary = () => {
 	const user = useSelector((state: RooteState) => state.auth.user);
 	const [updateRecruiter] = useUpdateRecruiterProfileMutation();
 	const [formKey, setFormKey] = useState(0);
-	const [thereIsChanges, setThereIsChanges] = useState(false);
+	// const [thereIsChanges, setThereIsChanges] = useState(false);
 	const {
 		register,
 		handleSubmit,
@@ -62,7 +62,7 @@ const CompanySummary = () => {
 	};
 
 	return (
-		<div className='p-6 rounded-3xl border-2 border-[#e9e9e9] bg-white w-[74%] space-y-4'>
+		<div className='p-6 rounded-3xl border-2 border-[#e9e9e9] bg-white w-full lg:w-[74%] space-y-4'>
 			<h1 className='font-semibold text-lg'>Company Information</h1>
 			<form
 				key={formKey}

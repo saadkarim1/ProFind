@@ -71,7 +71,7 @@ const SummaryPage = () => {
 	};
 
 	return (
-		<div className='w-[74%] space-y-3'>
+		<div className='w-full lg:w-[74%] space-y-3'>
 			<div className='p-6 rounded-3xl border-2 border-[#e9e9e9] bg-white  space-y-4'>
 				<h1 className='font-semibold text-lg'>Personal Information</h1>
 				<form

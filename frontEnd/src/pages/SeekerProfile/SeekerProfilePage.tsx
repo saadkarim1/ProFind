@@ -30,13 +30,13 @@ const SeekerProfilePage = () => {
 	};
 
 	return (
-		<div className='h-fit grid w-[74%] grid-cols-2 gap-4'>
+		<div className='h-fit grid  w-full lg:w-[74%] grid-cols-2 gap-4'>
 			{isCompletProfile() && (
-				<div className='p-6 col-span-2 h-fit max-w-full w-fit rounded-3xl border-2 border-[#e9e9e9] space-y-2 bg-white'>
+				<div className='p-6 col-span-2 h-fit min-w-full w-fit rounded-3xl border-2 border-[#e9e9e9] space-y-2 bg-white'>
 					<h2 className='font-medium text-lg'>Suggested for you</h2>
-					<div className='flex items-center space-x-2 text-center'>
+					<div className='grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-4 text-center'>
 						{!resumes || resumes?.length === 0 ? (
-							<div className='p-4 items-center flex flex-col space-y-2 rounded-3xl border-2 w-fit  border-[#e9e9e9] bg-white'>
+							<div className='p-4 items-center flex flex-col space-y-2 rounded-3xl border-2 w-full  border-[#e9e9e9] bg-white'>
 								<div className='flex items-center justify-center w-fit  rounded-lg bg-[#e9e9e9] text-[#878787] p-1.5 text-2xl'>
 									<TiDocumentText />
 								</div>
@@ -46,7 +46,7 @@ const SeekerProfilePage = () => {
 							""
 						)}
 						{!user?.job && (
-							<div className='p-4 items-center flex flex-col space-y-2 rounded-3xl border-2 w-fit  border-[#e9e9e9] bg-white'>
+							<div className='p-4 items-center flex flex-col space-y-2 rounded-3xl border-2 w-full  border-[#e9e9e9] bg-white'>
 								<div className='flex items-center justify-center w-fit  rounded-lg bg-[#e9e9e9] text-[#878787] p-1.5 text-2xl'>
 									<MdWorkOutline />
 								</div>
@@ -54,7 +54,7 @@ const SeekerProfilePage = () => {
 							</div>
 						)}
 						{!user?.phone && (
-							<div className='p-4 items-center flex flex-col space-y-2 rounded-3xl border-2 w-fit  border-[#e9e9e9] bg-white'>
+							<div className='p-4 items-center flex flex-col space-y-2 rounded-3xl border-2 w-full  border-[#e9e9e9] bg-white'>
 								<div className='flex items-center justify-center w-fit  rounded-lg bg-[#e9e9e9] text-[#878787] p-1.5 text-2xl'>
 									<MdOutlinePhoneAndroid />
 								</div>
@@ -62,7 +62,7 @@ const SeekerProfilePage = () => {
 							</div>
 						)}
 						{!user?.about_me && (
-							<div className='p-4 items-center flex flex-col space-y-2 rounded-3xl border-2 w-fit  border-[#e9e9e9] bg-white'>
+							<div className='p-4 items-center flex flex-col space-y-2 rounded-3xl border-2 w-full  border-[#e9e9e9] bg-white'>
 								<div className='flex items-center justify-center w-fit  rounded-lg bg-[#e9e9e9] text-[#878787] p-1.5 text-2xl'>
 									<IoDocumentTextOutline />
 								</div>
@@ -70,7 +70,7 @@ const SeekerProfilePage = () => {
 							</div>
 						)}
 						{!user?.location && (
-							<div className='p-4 items-center flex flex-col space-y-2 rounded-3xl border-2 w-fit  border-[#e9e9e9] bg-white'>
+							<div className='p-4 items-center flex flex-col space-y-2 rounded-3xl border-2 w-full  border-[#e9e9e9] bg-white'>
 								<div className='flex items-center justify-center w-fit  rounded-lg bg-[#e9e9e9] text-[#878787] p-1.5 text-2xl'>
 									<SlLocationPin />
 								</div>

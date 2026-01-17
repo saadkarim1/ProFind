@@ -12,7 +12,7 @@ const SeekerProfileLayout = () => {
 	const dispatch = useDispatch();
 	return (
 		<section className='relative flex justify-between '>
-			<div className='w-[25%] capitalize sticky top-30  border-2 border-[#e9e9e9] h-fit bg-white rounded-3xl flex flex-col items-center py-10 space-y-4'>
+			<div className='hidden lg:flex w-[25%] capitalize sticky top-30  border-2 border-[#e9e9e9] h-fit bg-white rounded-3xl flex-col items-center py-10 space-y-4'>
 				<div className='w-20 h-20 bg-sky-100 rounded-full text-[#0082FA] flex items-center justify-center font-bold text-4xl'>
 					{user?.name?.slice(0, 1)}
 					{user?.name?.split(" ")[1]?.slice(0, 1)}

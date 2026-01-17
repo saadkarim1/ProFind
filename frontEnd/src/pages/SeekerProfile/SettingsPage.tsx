@@ -1,6 +1,6 @@
 const SettingsPage = () => {
 	return (
-		<div className='h-fit grid w-[74%] gap-4'>
+		<div className='h-fit grid w-full lg:w-[74%] gap-4'>
 			<div className='p-6 h-fit rounded-3xl gap-4 border-2 border-[#e9e9e9] bg-white grid grid-cols-2'>
 				<h2 className='font-medium text-lg col-span-2'>Password</h2>
 				<div>
