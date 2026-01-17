@@ -49,7 +49,7 @@ const HeroSection: React.FC<Props> = ({ scrollToFeaturedJobs }) => {
 						Trusted <span className='text-[#0082FA]'>100+</span> company find
 						jobseeker
 					</p>
-					<div className='w-[95vw] md:w-[80vw] overflow-hidden'>
+					<div className='w-[95vw] md:w-[90vw] xl:w-[80vw] overflow-hidden'>
 					<div className='flex items-center justify-center space-x-5  animate-marquee '>
 						<img
 							src='src/assets/Deloitte.svg'

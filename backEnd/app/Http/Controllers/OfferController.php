@@ -24,10 +24,8 @@ class OfferController extends Controller
     public function index()
     {
         try {
-            // $userId = auth('web')->id();
-            // $offers = Offer::latest()->withUserStatus($userId)->get();
-
-            $offers = Offer::where('salary', '>', 10000)->get();
+            $userId = auth('web')->id();
+            $offers = Offer::latest()->withUserStatus($userId)->get();
 
             return $this->successResponse(data: OfferResource::collection($offers));
         } catch (Exception $e) {

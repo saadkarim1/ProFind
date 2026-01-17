@@ -69,7 +69,7 @@ const NavBar = () => {
 	const { data: authenticatedUser, isSuccess, isError } = useGetUserQuery();
 	const [showPopup, setShowPopup] = useState<boolean>(false);
 	return (
-		<nav className='z-999 fixed w-[95%] md:w-[80%] mx-auto inset-x-0 pt-3'>
+		<nav className='z-999 fixed w-[95%] md:w-[90%] xl:w-[80%] mx-auto inset-x-0 pt-3'>
 			<div className='navbar drop-shadow-[0_0px_2px_rgba(0,0,0,0.25)] rounded-2xl flex items-center justify-between p-3'>
 				<Link to={"/"} className='flex items-center space-x-0.5 w-[25%]'>
 					<img src='/src/assets/logo.svg' width={38} alt='' />

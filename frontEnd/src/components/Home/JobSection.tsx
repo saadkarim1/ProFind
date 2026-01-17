@@ -8,10 +8,10 @@ import { useGetAllOffersQuery } from "@/app/services/offersApi";
 
 const domaines: string[] = [
 	"engineering",
-	"sales and marketing",
+	"marketing",
 	"technology",
 	"business",
-	"finance and legal",
+	"finance",
 ];
 
 type Props = {
@@ -37,10 +37,10 @@ const JobsSection: React.FC<Props> = ({ featuredJobsRef }) => {
 		<section
 			ref={featuredJobsRef}
 			id='featured-jobs'
-			className='w-[80%] mx-auto flex flex-col items-center space-y-10 '
+			className='w-[95%] md:w-[90%] xl:w-[80%] mx-auto flex flex-col items-center space-y-10 '
 		>
 			<h1 className='text-4xl font-bold'>Featured Job Offers</h1>
-			<ul className='flex items-center rounded-full bg-gray-200 p-1.5 font-medium text-lg'>
+			<ul className='flex items-center rounded-full bg-gray-200 p-1.5 font-medium text-[14px] sm:text-lg'>
 				{domaines.map((item) => (
 					<TabJob
 						key={item}
@@ -53,7 +53,7 @@ const JobsSection: React.FC<Props> = ({ featuredJobsRef }) => {
 				<Cursor position={position} />
 			</ul>
 
-			<div className='grid grid-cols-4 gap-4 w-full'>
+			<div className='grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 w-full'>
 				{filtredOffers?.length > 0 ? (
 					filtredOffers?.map((offer) => {
 						let count = 0;
