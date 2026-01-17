@@ -13,7 +13,6 @@ import type { AppDispatch, RooteState } from "@/app/store";
 import { Link, useNavigate } from "react-router";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import toast from "react-hot-toast";
-import { checkIsCompletProfile } from "@/features/auth/authSlice";
 
 type JobCardTwoProps = {
 	offer: OfferType;
@@ -117,12 +116,20 @@ const JobCardTwo = ({
 						Applied
 					</button>
 				) : (
-					<button
-						onClick={handleApplyToOffer}
-						className='cursor-pointer w-fit h-fit text-[16px] font-medium py-1 px-6 border-2 text-white border-[#0082FA]  rounded-xl bg-[#0082FA]'
-					>
-						Apply
-					</button>
+					<>
+						<Link
+							to={`/jobs/${offer?.offer_id}`}
+							className='md:hidden flex space-x-1 items-center cursor-pointer w-fit h-fit text-[16px] font-medium py-1 px-5 border-2 text-white border-[#0082FA]  rounded-xl bg-[#0082FA]'
+						>
+							<MdOutlineRemoveRedEye className='text-xl' /> <span>Details</span>
+						</Link>
+						<button
+							onClick={handleApplyToOffer}
+							className='hidden md:block cursor-pointer w-fit h-fit text-[16px] font-medium py-1 px-6 border-2 text-white border-[#0082FA]  rounded-xl bg-[#0082FA]'
+						>
+							Apply
+						</button>
+					</>
 				)}
 			</div>
 		</div>

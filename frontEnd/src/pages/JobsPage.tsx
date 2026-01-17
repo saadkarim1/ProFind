@@ -72,7 +72,7 @@ const Jobs: React.FC = () => {
 		<section>
 			<SearchBar setInputsValues={setInputsValues} />
 			<div className='flex justify-between'>
-				<div className='w-[49%] grid grid-cols-2 gap-4 '>
+				<div className='w-full md:w-[30%] lg:w-[49%] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-4 '>
 					{filtredOffers
 						? filtredOffers?.map((offer: OfferType) => (
 								<JobCardTwo
@@ -91,7 +91,7 @@ const Jobs: React.FC = () => {
 								/>
 						  ))}
 				</div>
-				<div className='hidden md:block w-[49%] h-fit sticky top-30 space-y-4 rounded-4xl p-10 border-4 border-[#e9e9e9] bg-white'>
+				<div className='hidden md:block w-[68%] lg:w-[49%] h-fit sticky top-30 space-y-4 rounded-4xl p-10 border-4 border-[#e9e9e9] bg-white'>
 					<div className='flex space-x-3'>
 						<div className='bg-sky-100 p-2.5 rounded-2xl w-fit h-fit'>
 							<svg
@@ -115,7 +115,7 @@ const Jobs: React.FC = () => {
 						</div>
 						<div className='flex flex-col space-y-2 w-full'>
 							<div className='flex items-center justify-between w-full '>
-								<h1 className='font-medium text-3xl'>
+								<h1 className='font-medium text-xl lg:text-2xl xl:text-3xl'>
 									{selectedOffer?.offer_title}
 								</h1>
 								{GetOfferType(selectedOffer?.offer_type)}
@@ -165,7 +165,9 @@ const Jobs: React.FC = () => {
 						</div>
 						<div className='w-[33%] h-full  flex flex-col items-center '>
 							<h3>LOCATION</h3>
-							<p>{selectedOffer?.location ? selectedOffer?.location : "-----"}</p>
+							<p>
+								{selectedOffer?.location ? selectedOffer?.location : "-----"}
+							</p>
 						</div>
 					</div>
 					<hr className='text-[#e9e9e9] h-3' />
