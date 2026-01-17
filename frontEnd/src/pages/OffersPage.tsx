@@ -22,7 +22,7 @@ const OffersPage = () => {
 	return (
 		<section className=''>
 			<div className='bg-white  flex items-center justify-evenly border-2 border-[#e9e9e9] rounded-3xl my-10 px-2 py-3'>
-				<p className='w-[80%] text-xl font-medium'>
+				<p className='w-[80%] text-[16px] sm:text-lg'>
 					Create your job offer and start hiring today!
 				</p>
 				<button
@@ -44,7 +44,7 @@ const OffersPage = () => {
 			</div>
 			{offers && offers?.length > 0 ? (
 				<div className='flex justify-between'>
-					<div className='w-[49%] grid grid-cols-2 gap-4 '>
+					<div className='w-full md:w-[30%] lg:w-[49%] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-4 '>
 						{offers?.map((offer: OfferType) => (
 							<JobCardTwo
 								key={offer.offer_id}
@@ -54,7 +54,7 @@ const OffersPage = () => {
 							/>
 						))}
 					</div>
-					<div className='w-[49%] h-fit sticky top-30 space-y-4 rounded-4xl p-10 border-4 border-[#e9e9e9] bg-white'>
+					<div className='hidden md:block w-[68%] lg:w-[49%] h-fit sticky top-30 space-y-4 rounded-4xl p-10 border-4 border-[#e9e9e9] bg-white'>
 						<div className='flex space-x-3'>
 							<div className='bg-sky-100 p-2.5 rounded-2xl w-fit h-fit'>
 								<svg

@@ -76,7 +76,7 @@ const NavBar = () => {
 					<h1 className='hidden md:block text-3xl font-bold'>ProFind.</h1>
 				</Link>
 
-				<ul className='hidden sm:flex items-center justify-center font-medium gap-4 lg:gap-10 text-[18px] w-[50%]'>
+				<ul className='hidden sm:flex items-center justify-center font-medium gap-6 lg:gap-10 text-[15px] lg:text-[18px] w-[50%]'>
 					{authenticatedUser === undefined
 						? normalLinks.map((link) => {
 								return (
