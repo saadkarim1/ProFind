@@ -1,6 +1,6 @@
 import { apiSlice } from "@/app/services/api";
 import type { AuthUser } from "@/models/authUser";
-import type { ErrorResponse, SuccessResponse } from "@/models/response";
+import type { ApiResponse } from "@/models/response";
 import type { LoginFieldsType } from "@/schema/loginSchema";
 import type { RegisterFieldstype } from "@/schema/registerSchema";
 
@@ -10,10 +10,7 @@ export const authApi = apiSlice.injectEndpoints({
 			query: () => "sanctum/csrf-cookie",
 		}),
 
-		register: builder.mutation<
-			SuccessResponse<AuthUser> | ErrorResponse,
-			RegisterFieldstype
-		>({
+		register: builder.mutation<ApiResponse<AuthUser>, RegisterFieldstype>({
 			query: (payload) => ({
 				url: "v1/register",
 				method: "Post",
@@ -22,10 +19,7 @@ export const authApi = apiSlice.injectEndpoints({
 			invalidatesTags: ["User"],
 		}),
 
-		login: builder.mutation<
-			SuccessResponse<AuthUser> | ErrorResponse,
-			LoginFieldsType
-		>({
+		login: builder.mutation<ApiResponse<AuthUser>, LoginFieldsType>({
 			query: (payload) => ({
 				url: "v1/login",
 				method: "Post",
@@ -39,13 +33,14 @@ export const authApi = apiSlice.injectEndpoints({
 			invalidatesTags: ["User"],
 		}),
 
-		getUser: builder.query<AuthUser, void>({
+		getUser: builder.query<ApiResponse<AuthUser>, void>({
 			query: () => "api/v1/user",
-			// transformResponse: (response: { data: AuthUser }) => response.data,
+			transformResponse: (response: { data: ApiResponse<AuthUser> }) =>
+				response.data,
 			providesTags: () => ["User"],
 		}),
 
-		registerRecruiter: builder.mutation({
+		registerRecruiter: builder.mutation<ApiResponse<AuthUser>, void>({
 			query: (payload) => ({
 				url: "v1/register/recruiter",
 				method: "Post",
@@ -54,7 +49,7 @@ export const authApi = apiSlice.injectEndpoints({
 			invalidatesTags: ["User"],
 		}),
 
-		loginRecruiter: builder.mutation({
+		loginRecruiter: builder.mutation<ApiResponse<AuthUser>, void>({
 			query: (payload) => ({
 				url: "v1/login/recruiter",
 				method: "Post",

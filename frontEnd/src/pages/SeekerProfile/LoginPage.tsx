@@ -23,7 +23,6 @@ const Login = () => {
 	const [login] = useLoginMutation();
 
 	const onSubmit: SubmitHandler<LoginFieldsType> = async (data) => {
-		console.log(data);
 		try {
 			await getCSRF();
 			await login({

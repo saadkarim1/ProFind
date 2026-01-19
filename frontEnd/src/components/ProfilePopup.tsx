@@ -71,7 +71,7 @@ const ProfilePopup = ({
 							}}
 							className='cursor-pointer flex items-center py-1 px-3 text-[#878787] space-x-2 hover:text-red-500 transition-colors duration-250 ease-in-out'
 						>
-							<TbLogout className='text-2xl' />
+							<TbLogout className='text-xl' />
 							<p className=''>Logout</p>
 						</li>
 					</ul>
@@ -100,7 +100,7 @@ const ProfilePopup = ({
 							}}
 							className='cursor-pointer flex items-center py-1 px-3 text-[#878787] space-x-2 hover:text-red-500 transition-colors duration-250 ease-in-out'
 						>
-							<TbLogout className='text-2xl' />
+							<TbLogout className='text-xl' />
 							<p className=''>Logout</p>
 						</li>
 					</ul>
