@@ -90,7 +90,7 @@ const NavBar = () => {
 									</Link>
 								);
 						  })
-						: authenticatedUser?.role === "recruiter"
+						: authenticatedUser?.data.role === "recruiter"
 						? recruiterLinks.map((link) => {
 								return (
 									<Link

@@ -1,16 +1,16 @@
 import type { OfferType } from "@/models/offer";
 import { apiSlice } from "./api";
 import type { applicantType } from "@/models/applicant";
+import type { ApiResponse } from "@/models/response";
 
 export const offersApi = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({
-		getAllOffers: builder.query<OfferType[], void>({
+		getAllOffers: builder.query<ApiResponse<OfferType[]>, void>({
 			query: () => "api/v1/offers",
-			transformResponse: (response: { data: OfferType[] }) => response.data,
 			providesTags: (result) =>
 				result
 					? [
-							...result.map(({ offer_id }) => ({
+							...result.data.map(({ offer_id }) => ({
 								type: "Offers" as const,
 								id: offer_id,
 							})),
@@ -33,7 +33,7 @@ export const offersApi = apiSlice.injectEndpoints({
 
 		applyToOffer: builder.mutation({
 			query: (payload) => {
-				console.log(payload)
+				console.log(payload);
 				return {
 					url: `api/v1/offers/${payload.id}/apply`,
 					method: "POST",

@@ -35,8 +35,7 @@ export const authApi = apiSlice.injectEndpoints({
 
 		getUser: builder.query<ApiResponse<AuthUser>, void>({
 			query: () => "api/v1/user",
-			transformResponse: (response: { data: ApiResponse<AuthUser> }) =>
-				response.data,
+			// transformResponse: (response: ApiResponse<AuthUser>) => response.data,
 			providesTags: () => ["User"],
 		}),
 

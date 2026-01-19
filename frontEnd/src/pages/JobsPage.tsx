@@ -29,13 +29,13 @@ const Jobs: React.FC = () => {
 	});
 	useEffect(() => {
 		if (!offers) return;
-		setSelectedOffer(offers[0]);
+		setSelectedOffer(offers.data[0]);
 		if (!inputValues.location && !inputValues.keyword) {
 			setFiltredOffers(undefined);
 		}
 		if (inputValues.keyword) {
 			setFiltredOffers(
-				offers?.filter((offer) => {
+				offers.data?.filter((offer) => {
 					return (
 						offer?.offer_title
 							.toUpperCase()
@@ -46,7 +46,7 @@ const Jobs: React.FC = () => {
 		}
 
 		if (inputValues.location) {
-			offers = offers?.filter(
+			offers.data = offers?.data.filter(
 				(offer) =>
 					offer?.location.toUpperCase() === inputValues.keyword.toUpperCase() &&
 					offer
@@ -82,7 +82,7 @@ const Jobs: React.FC = () => {
 									selectedOffer={selectedOffer}
 								/>
 						  ))
-						: offers?.map((offer: OfferType) => (
+						: offers?.data.map((offer: OfferType) => (
 								<JobCardTwo
 									key={offer?.offer_id}
 									offer={offer}

@@ -29,7 +29,7 @@ const JobsSection: React.FC<Props> = ({ featuredJobsRef }) => {
 		height: 0,
 	});
 
-	let filtredOffers = offers?.filter(
+	let filtredOffers = offers?.data.filter(
 		(offer) => offer.offer_category === selectedDomaine
 	);
 	if (!filtredOffers) return;
