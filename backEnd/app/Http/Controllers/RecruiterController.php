@@ -28,10 +28,9 @@ class RecruiterController extends Controller
 
             Auth::guard('recruiter')->login($recruiter);
             $request->session()->regenerate();
-
-            return $this->successResponse(new UserResource($request));
+            return $this->apiResponse(data: new UserResource($request), message: 'Success');
         } catch (Exception $e) {
-            return $this->errorResponse($e->getMessage(), status: 404);
+            return $this->apiResponse(errors: $e->getMessage(), message: 'Failed', status: 404);
         }
     }
 
@@ -48,9 +47,9 @@ class RecruiterController extends Controller
 
             $request->session()->regenerate();
 
-            return $this->successResponse(new UserResource($request));
+            return $this->apiResponse(data: new UserResource($request), message: 'Success');
         } catch (Exception $e) {
-            return $this->errorResponse($e->getMessage(), status: 404);
+            return $this->apiResponse(errors: $e->getMessage(), message: 'Failed', status: 404);
         }
     }
 
@@ -70,9 +69,9 @@ class RecruiterController extends Controller
         try {
             $recruiter = Recruiter::findOrFail($id);
             $recruiter->update($request->validated());
-            return $this->successResponse(data: new UserResource($recruiter));
+            return $this->apiResponse(data: new UserResource($request), message: 'Success');
         } catch (Exception $e) {
-            return $this->errorResponse($e->getMessage(), status: 404);
+            return $this->apiResponse(errors: $e->getMessage(), message: 'Failed', status: 404);
         }
     }
 }

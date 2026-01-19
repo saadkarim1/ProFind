@@ -15,6 +15,8 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use function Laravel\Prompts\error;
+
 class OfferController extends Controller
 {
     use ApiResponse;
@@ -27,9 +29,9 @@ class OfferController extends Controller
             $userId = auth('web')->id();
             $offers = Offer::latest()->withUserStatus($userId)->get();
 
-            return $this->successResponse(data: OfferResource::collection($offers));
+            return $this->apiResponse(data: OfferResource::collection($offers), message: 'Success');
         } catch (Exception $e) {
-            return response()->json($e->getMessage());
+            return $this->apiResponse(errors: $e->getMessage(), message: 'Failed', status: 404);
         }
     }
 
@@ -39,9 +41,9 @@ class OfferController extends Controller
             $user = Auth::guard('recruiter')->user();
             $offers =  $user->offers()->latest()->get();
 
-            return $this->successResponse(data: OfferResource::collection($offers));
+            return $this->apiResponse(data: OfferResource::collection($offers), message: 'Success');
         } catch (Exception $e) {
-            return $this->errorResponse($e->getMessage());
+            return $this->apiResponse(errors: $e->getMessage(), message: 'Failed');
         }
     }
 
@@ -50,9 +52,9 @@ class OfferController extends Controller
         try {
             $user = Auth::guard('web')->user();
             $offers = $user->offers()->latest()->withUserStatus($user->id)->get();
-            return $this->successResponse(data: OfferResource::collection($offers));
+            return $this->apiResponse(data: OfferResource::collection($offers), message: 'Success');
         } catch (Exception $e) {
-            return $this->errorResponse($e->getMessage());
+            return $this->apiResponse(errors: $e->getMessage(), message: 'Failed', status: 404);
         }
     }
 
@@ -61,9 +63,9 @@ class OfferController extends Controller
         try {
             $user = Auth::guard('web')->user();
             $offers = $user->savedOffers()->latest()->withUserStatus($user->id)->get();
-            return $this->successResponse(data: OfferResource::collection($offers));
+            return $this->apiResponse(data: OfferResource::collection($offers), message: 'Success');
         } catch (Exception $e) {
-            return $this->errorResponse($e->getMessage());
+            return $this->apiResponse(errors: $e->getMessage(), message: 'Failed', status: 404);
         }
     }
     public function store(StoreOfferRequest $request)
@@ -72,9 +74,9 @@ class OfferController extends Controller
             $validated = $request->validated();
             $validated['recruiter_id'] = Auth::guard('recruiter')->id();
             $offer = Offer::create($validated);
-            return $this->successResponse(data: new OfferResource($offer), status: 201);
+            return $this->apiResponse(data: new OfferResource($offer), message: 'Success', status: 201);
         } catch (Exception $e) {
-            return $this->errorResponse($e->getMessage());
+            return $this->apiResponse(errors: $e->getMessage(), message: 'Failed', status: 404);
         }
     }
 
@@ -92,9 +94,9 @@ class OfferController extends Controller
                 $offer = Offer::findOrFail($offerId);
             }
 
-            return $this->successResponse(new OfferResource($offer));
+            return $this->apiResponse(data: new OfferResource($offer), message: 'Success');
         } catch (Exception $e) {
-            return $this->errorResponse($e->getMessage());
+            return $this->apiResponse(errors: $e->getMessage(), message: 'Failed', status: 404);
         }
     }
 
@@ -106,9 +108,9 @@ class OfferController extends Controller
             $result = $offer->users()->syncWithoutDetaching([$id => ['resume_id' => $request->resume_id, 'message' => $request->message]]);
             $is_applied = count($result['attached']) > 0;
             $offer->is_applied = $is_applied;
-            return $this->successResponse(data: new OfferResource($offer));
+            return $this->apiResponse(data: new OfferResource($offer), message: 'Success');
         } catch (Exception $e) {
-            return $this->errorResponse($e->getMessage());
+            return $this->apiResponse(errors: $e->getMessage(), message: 'Failed', status: 404);
         }
     }
 
@@ -122,9 +124,9 @@ class OfferController extends Controller
 
             $offer->is_saved = $isSaved;
 
-            return $this->successResponse(data: new OfferResource($offer));
+            return $this->apiResponse(data: new OfferResource($offer), message: 'Success');
         } catch (Exception $e) {
-            return $this->errorResponse($e->getMessage());
+            return $this->apiResponse(errors: $e->getMessage(), message: 'Failed', status: 404);
         }
     }
 
@@ -133,9 +135,9 @@ class OfferController extends Controller
         try {
             $offer = Offer::with('users')->find($offerId);
             $applicants = $offer->users;
-            return $this->successResponse(ApplicantResource::collection($applicants), 200);
+            return $this->apiResponse(data: ApplicantResource::collection($applicants), message: 'Success');
         } catch (Exception $e) {
-            return $this->errorResponse($e->getMessage());
+            return $this->apiResponse(errors: $e->getMessage(), message: 'Failed', status: 404);
         }
     }
 
@@ -144,9 +146,9 @@ class OfferController extends Controller
         try {
             $offer = Offer::findOrFail($offerId);
             $offer->users()->updateExistingPivot($userId, ['status' => 'accepted']);
-            return $this->successResponse(data: $offer, message: 'Applicant accepted');
+            return $this->apiResponse(data: new OfferResource($offer), message: 'Success');
         } catch (Exception $e) {
-            return $this->errorResponse($e->getMessage());
+            return $this->apiResponse(errors: $e->getMessage(), message: 'Failed', status: 404);
         }
     }
 
@@ -155,9 +157,9 @@ class OfferController extends Controller
         try {
             $offer = Offer::findOrFail($offerId);
             $offer->users()->updateExistingPivot($userId, ['status' => 'rejected']);
-            return $this->successResponse(data: $offer, message: 'Applicant rejected');
+            return $this->apiResponse(data: new OfferResource($offer), message: 'Success');
         } catch (Exception $e) {
-            return $this->errorResponse($e->getMessage());
+            return $this->apiResponse(errors: $e->getMessage(), message: 'Failed', status: 404);
         }
     }
 }

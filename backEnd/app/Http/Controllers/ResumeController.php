@@ -48,14 +48,14 @@ class ResumeController extends Controller
                     'preview_url' => $preview_url,
                 ]);
 
-                return $this->successResponse($resume);
+                return $this->apiResponse(data: $resume, message: 'Success', status: 201);
             });
         } catch (Exception $e) {
             if ($upload) {
                 Cloudinary::uploadApi()->destroy($upload['public_id']);
             }
 
-            return $this->errorResponse($e->getMessage(), status: 500);
+            return $this->apiResponse(errors: $e->getMessage(), message: 'Failed', status: 500);
         }
     }
 
@@ -65,9 +65,9 @@ class ResumeController extends Controller
 
             $resumes = Auth::guard('web')->user()->resumes()->get();
 
-            return $this->successResponse($resumes);
+            return $this->apiResponse(data: $resumes, message: 'Success');
         } catch (Exception $e) {
-            return $this->errorResponse($e->getMessage());
+            return $this->apiResponse(errors: $e->getMessage(), message: 'Failed', status: 404);
         }
     }
 
@@ -80,9 +80,9 @@ class ResumeController extends Controller
                 $resume->delete();
             }
 
-            return $this->successResponse(message: "deleted");
+            return $this->apiResponse(data: $resume, message: 'Success');
         } catch (Exception $e) {
-            return $this->errorResponse($e->getMessage());
+            return $this->apiResponse(errors: $e->getMessage(), message: 'Failed', status: 404);
         }
     }
 
@@ -91,9 +91,9 @@ class ResumeController extends Controller
         try {
             $resume = Resume::withTrashed()->findOrFail($resumeId);
 
-            return $this->successResponse($resume);
+            return $this->apiResponse(data: $resume, message: 'Success');
         } catch (Exception $e) {
-            return $this->errorResponse($e->getMessage());
+            return $this->apiResponse(errors: $e->getMessage(), message: 'Failed', status: 404);
         }
     }
 }

@@ -30,9 +30,9 @@ class UserController extends Controller
             Auth::guard('web')->login($user);
             $request->session()->regenerate();
 
-            return $this->successResponse(data: new UserResource(Auth::guard('web')->user()));
+            return $this->apiResponse(data: new UserResource(Auth::guard('web')->user()), message: 'Success');
         } catch (Exception $e) {
-            return $this->errorResponse($e->getMessage(), status: 404);
+            return $this->apiResponse(errors: $e->getMessage(), message: 'Failed', status: 404);
         }
     }
 
@@ -49,9 +49,9 @@ class UserController extends Controller
 
             $request->session()->regenerate();
 
-            return $this->successResponse(data: new UserResource(Auth::guard('web')->user()));
+            return $this->apiResponse(data: new UserResource(Auth::guard('web')->user()), message: 'Success');
         } catch (Exception $e) {
-            return $this->errorResponse($e->getMessage(), status: 404);
+            return $this->apiResponse(errors: $e->getMessage(), message: 'Failed', status: 404);
         }
     }
 
@@ -70,9 +70,9 @@ class UserController extends Controller
     {
         try {
             $user = Auth::guard('recruiter')->user() ?? Auth::guard(name: 'web')->user();
-            return $this->successResponse(data: new UserResource($user));
+            return $this->apiResponse(data: new UserResource($user), message: 'Success');
         } catch (Exception $e) {
-            return $this->errorResponse($e->getMessage(), status: 404);
+            return $this->apiResponse(errors: $e->getMessage(), message: 'Failed', status: 404);
         }
     }
 
@@ -82,9 +82,9 @@ class UserController extends Controller
             $request->validated();
             $user = User::findOrFail($id);
             $user->update($request->validated());
-            return $this->successResponse(data: new UserResource($user));
+            return $this->apiResponse(data: new UserResource($user), message: 'Success');
         } catch (Exception $e) {
-            return $this->errorResponse($e->getMessage(), status: 404);
+            return $this->apiResponse(errors: $e->getMessage(), message: 'Failed', status: 404);
         }
     }
 }

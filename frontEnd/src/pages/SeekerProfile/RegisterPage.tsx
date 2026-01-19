@@ -30,13 +30,13 @@ const Register = () => {
 
 	const onSubmit: SubmitHandler<RegisterFieldstype> = async (data) => {
 		try {
-			console.log(data);
 			await getCSRF();
-			const res1 = await registerUser({
+			const res = await registerUser({
 				...data,
 				password_confirmation: data.password,
 			}).unwrap();
-			if (res1.status === 200) {
+
+			if (res.status === 200) {
 				navigate("/");
 			}
 		} catch (error: any) {
