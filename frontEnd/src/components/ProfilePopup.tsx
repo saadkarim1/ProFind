@@ -2,6 +2,9 @@ import { Link } from "react-router";
 import { RecruiterProfileList, UserProfileList } from "@/models/model";
 import { Activity, useEffect, useState } from "react";
 import { ChevronDown, User } from "lucide-react";
+import { authApi, useLogoutMutation } from "@/app/services/authApi";
+import { useDispatch } from "react-redux";
+import { TbLogout } from "react-icons/tb";
 
 type ProfilePopupProps = {
 	showProfilePopup: boolean;
@@ -18,6 +21,9 @@ const ProfilePopup = ({
 	useEffect(() => {
 		setIsJobSeeker(authenticatedUser?.role === "user");
 	}, [authenticatedUser]);
+
+	const [logout] = useLogoutMutation();
+	const dispatch = useDispatch();
 	return (
 		<>
 			<button
@@ -58,6 +64,16 @@ const ProfilePopup = ({
 								<p className=''>{item.name}</p>
 							</Link>
 						))}
+						<li
+							onClick={async () => {
+								await logout();
+								dispatch(authApi.util.resetApiState());
+							}}
+							className='cursor-pointer flex items-center py-1 px-3 text-[#878787] space-x-2 hover:text-red-500 transition-colors duration-250 ease-in-out'
+						>
+							<TbLogout className='text-2xl' />
+							<p className=''>Sign out</p>
+						</li>
 					</ul>
 				</Activity>
 				<Activity mode={isJobSeeker ? "visible" : "hidden"}>
@@ -77,6 +93,16 @@ const ProfilePopup = ({
 								<p className=''>{item.name}</p>
 							</Link>
 						))}
+						<li
+							onClick={async () => {
+								await logout();
+								dispatch(authApi.util.resetApiState());
+							}}
+							className='cursor-pointer flex items-center py-1 px-3 text-[#878787] space-x-2 hover:text-red-500 transition-colors duration-250 ease-in-out'
+						>
+							<TbLogout className='text-2xl' />
+							<p className=''>Sign out</p>
+						</li>
 					</ul>
 				</Activity>
 			</button>

@@ -52,7 +52,7 @@ const SeekerProfileLayout = () => {
 					</li>
 				</ul>
 			</div>
-			<Outlet />
+			<Outlet /> 
 		</section>
 	);
 };
