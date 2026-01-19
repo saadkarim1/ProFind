@@ -4,7 +4,7 @@ import BookMark from "@/components/shared/BookMark";
 import CopyButton from "@/components/shared/CopyButton";
 import { GetOfferType } from "@/components/shared/GetOfferType";
 import { useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router";
+import { Link, useNavigate, useParams } from "react-router";
 
 const JobDetails = () => {
 	const navigate = useNavigate();
@@ -16,7 +16,7 @@ const JobDetails = () => {
 
 	return (
 		<section>
-			<div className='w-full sm:w-122 lg:w-140 h-fit mx-auto space-y-4 rounded-4xl p-10 border-4 capitalize border-[#e9e9e9]'>
+			<div className='w-full sm:w-122 lg:w-140 h-fit mx-auto space-y-4 rounded-4xl p-10 border-4 capitalize border-[#e9e9e9] bg-white'>
 				<div className='flex space-x-3'>
 					<div className='bg-sky-100 p-2.5 rounded-2xl w-fit h-fit'>
 						<svg
@@ -40,7 +40,9 @@ const JobDetails = () => {
 					</div>
 					<div className='flex flex-col space-y-2 w-full'>
 						<div className='flex items-center justify-between w-full'>
-							<h1 className='font-medium text-lg sm:text-xl lg:text-3xl'>{offer?.offer_title}</h1>
+							<h1 className='font-medium text-lg sm:text-xl lg:text-3xl'>
+								{offer?.offer_title}
+							</h1>
 							{GetOfferType(offer?.offer_type)}
 						</div>
 						<p className='font-medium text-[#878787] text-[18px]'>
@@ -61,7 +63,19 @@ const JobDetails = () => {
 									</button>
 								)
 							) : (
-								""
+								<>
+									<Link
+										to={`/offers/${offer?.offer_id}/applicants`}
+										target='_blank'
+										rel='noopener noreferrer'
+										className='cursor-pointer text-[11px] sm:text-[14px] w-fit h-fit font-medium py-1.5 px-2 sm:px-3 border-2 text-white border-[#0082FA]  rounded-lg sm:rounded-xl bg-[#0082FA]'
+									>
+										Show Applicants
+									</Link>
+									<button className='cursor-pointer text-[11px] sm:text-[14px] w-fit h-fit font-medium py-1.5 px-2 sm:px-3 border-2 text-white border-[#0082FA]  rounded-lg sm:rounded-xl bg-[#0082FA]'>
+										Edit Offer
+									</button>
+								</>
 							)}
 							{user?.role === "user" && (
 								<BookMark
@@ -72,6 +86,21 @@ const JobDetails = () => {
 							)}
 							<CopyButton offerId={offer?.offer_id} />
 						</div>
+
+						{/* <div className='space-x-2 flex items-center'>
+									<Link
+										to={`/offers/${selectedOffer?.offer_id}/applicants`}
+										target='_blank'
+										rel='noopener noreferrer'
+										className='cursor-pointer w-fit h-fit text-[14px] font-medium py-1.5 px-3 border-2 text-white border-[#0082FA]  rounded-xl bg-[#0082FA]'
+									>
+										Show Applicants
+									</Link>
+									<button className='cursor-pointer w-fit h-fit text-[14px] font-medium py-1.5 px-3 border-2 text-white border-[#0082FA]  rounded-xl bg-[#0082FA]'>
+										Edit Offer
+									</button>
+									<CopyButton offerId={selectedOffer?.offer_id} />
+								</div> */}
 					</div>
 				</div>
 				<hr className='text-[#e9e9e9] h-3' />

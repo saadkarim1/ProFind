@@ -48,11 +48,11 @@ const SeekerProfileLayout = () => {
 						className='cursor-pointer flex items-center py-1 px-3 text-[#878787] space-x-2 hover:text-red-500 transition-colors duration-250 ease-in-out'
 					>
 						<TbLogout className='text-2xl' />
-						<p className=''>Sign out</p>
+						<p className=''>Logout</p>
 					</li>
 				</ul>
 			</div>
-			<Outlet /> 
+			<Outlet />
 		</section>
 	);
 };

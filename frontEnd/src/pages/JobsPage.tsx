@@ -72,7 +72,7 @@ const Jobs: React.FC = () => {
 		<section>
 			<SearchBar setInputsValues={setInputsValues} />
 			<div className='flex justify-between'>
-				<div className='w-full md:w-[30%] lg:w-[49%] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-4 '>
+				<div className='w-full md:w-[30%] lg:w-[49%] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-4 h-fit '>
 					{filtredOffers
 						? filtredOffers?.map((offer: OfferType) => (
 								<JobCardTwo
